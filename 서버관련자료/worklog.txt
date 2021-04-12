@@ -1,0 +1,106 @@
+초기비번 F8GnutDLr+bLr
+
+포트포워딩 106.10.50.197  port 3389
+
+공인아이피 49.50.162.248
+
+3306 마리아디비
+8080 톰캣 서버
+80 톰캣 운영 포트
+443 SSL 톰캣 운영 포트
+
+os root pw - boramjul
+mariaDB pw - boramjul
+
+DB root 접속
+mysql -u root -p
+
+DB 외부접근권한부여
+grant all privileges on*.* to 'root'@'%' identified by 'bormjul';
+flush privileges;
+
+방화벽설정
+systemctl start firewalld
+systemctl enable firewalld
+firewall-cmd --permanent --zone=public --add-port=3306/tcp
+firewall-cmd --reload
+
+HeidiSQL 접속확인
+ip - 49.50.162.248
+port - 3306
+id - root
+pw - boramjul
+
+putty 접속
+ip - 106.10.50.197
+port - 3389
+id - root
+pw - boramjul
+
+java jdk 설치
+ftp로 파일 전송 ( sftp 로 연결)
+ip - 106.10.50.197
+port - 3389
+id - root
+pw - boramjul
+오라클 홈페이지 https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
+Linux x64 RPM 패키지 다운로드
+다운받은 파일 ftp로 전송
+전송한폴더에서 설치
+rpm -ivh jdk-8u281-linux-x64.rpm
+
+자바 설치확인
+alternatives --config java 
+연결하기 1
+javac -version
+
+톰켓설치
+/usr/local 이동
+cd /usr/local
+
+톰켓 다운로드 https://tomcat.apache.org/download-80.cgi
+wget -c https://downloads.apache.org/tomcat/tomcat-8/v8.5.65/bin/apache-tomcat-8.5.65.tar.gz
+
+압축풀기
+tar -zxf apache-tomcat-8.5.65.tar.gz
+
+권한부여
+chown root: /usr/local/apache-tomcat-8.5.65
+
+외부접속권한부여를 위한 방화벽 설정
+firewall-cmd --permanent --zone=public --add-port=8080/tcp
+firewall-cmd --reload
+
+톰켓실행
+/usr/local/apache-tomcat-8.5.65/bin/startup.sh
+
+톰켓 구동확인
+http://49.50.162.248:8080/
+
+파일질라 이용하여
+/usr/local/apache-tomcat-8.5.65/webapps
+경로에 이클립스, 스프링 export 해서 war 파일 전송 후 
+컴파일 확인 후 
+http://49.50.162.248:8080/naverserver1/test/test.jsp
+확인
+
+
+사이트 주소 포트 8080 없애기
+sudo vi /usr/local/apache-tomcat-8.0.53/conf/server.xml
+
+port="8080" -> port="80"
+esc를 누른 후 : 를 누르고 wq
+/usr/local/apache-tomcat-8.5.65/bin/ 폴더로 이동 
+./shutdow.sh
+./startup.sh
+firewall-cmd --permanent --zone=public --add-port=8080/tcp
+firewall-cmd --reload
+
+내도메인.한국
+id - boramjul
+pw - qhfkawnf6^
+kskang.brj@gmail.com
+
+접속주소
+http://www.boramjul.kro.kr/
+boramjul.kro.kr
