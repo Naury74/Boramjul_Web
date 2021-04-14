@@ -104,3 +104,102 @@ kskang.brj@gmail.com
 접속주소
 http://www.boramjul.kro.kr/
 boramjul.kro.kr
+
+-------------------------------------------------------------------------------------
+
+디비작업 
+테스트를 위한 디비 생성
+create database test default character set utf8;
+아이디 생성 및 외부접속
+grant all privileges on test.* to testid@'%' identified by '1234';
+grant all on *.* to web@'%' identified by '1234';
+변경된거 저장
+flush privileges;  
+권한 보기
+SHOW GRANTS FOR testid@'%';
+
+
+테스트 테이블 생성
+create TABLE `board`(
+`num` INT not null, 
+`writer`  VARCHAR(50) not NULL, 
+`subject` VARCHAR(50) not NULL, 
+`passwd`  VARCHAR(50) not NULL, 
+`reg_date` DATETIME DEFAULT CURRENT_TIMESTAMP, 
+`readcount`   INT default 0, 
+`content`     text not NULL, 
+`ref`         INT  not NULL,board
+`re_step`     INT  not NULL,
+`re_level`    INT  not null,
+
+`ip`          VARCHAR(200) not NULL,
+`filename`    VARCHAR(200) DEFAULT '-',
+`filesize`    int default 0,       
+`down`        int DEFAULT 0,
+PRIMARY KEY(`num`)       
+
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+테스트 테이블에 데이터 삽입
+insert INTO board
+(`num`, `writer`, `subject`, `passwd`, `ref`, `re_step`, `re_level`, `content`, `ip`) 
+values ( 
+ (SELECT * FROM (select IFNULL(MAX(num)+1, 1) FROM board) AS temp), 
+ 'kim', '제목', '1234',
+(SELECT * FROM (select IFNULL(MAX(num)+1, 1) FROM board) AS temp), 
+ 1, 0, '내용', '127.0.0.1'
+);
+
+-------------------------------------------------------------------------------------
+
+마이라디비 한글설정
+systemctl stop mariadb; 
+
+vi /etc/my.cnf에 추가
+[client]
+default-character-set = utf8
+
+vi /etc/my.cnf.d/mysql-clients.cnf에 추가
+[mysqldump]
+default-character-set = utf8
+
+vi /etc/my.cnf.d/server.cnf에 추가
+[mysqld]
+collation-server = utf8_unicode_ci
+init-connect = "SET NAMES utf8"
+character-set-server = utf8
+재시작
+service mysql restart
+
+스프링에서 클라우드 디비 연결확인을 위한  xml 설정
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://49.50.162.248:3306/web?useSSL=false&amp;serverTimezone=UTC"></property>
+        <property name="username" value="web"></property>
+        <property name="password" value="1234"></property>
+</bean>	
+	
+	
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"></property>
+</bean>
+
+연결확인
+https://all-record.tistory.com/175 사이트를 참고하여
+
+클라우스 디비 데이터 리스트 띄우기
+https://all-record.tistory.com/176?category=733072  사이트 참고하여 설정
+
+war 파일 export 할때 
+target runtime 설정 안하고 하기
+
+ftp로 파일 전송 후 ROOT.war로 이름 변경 후 확인
+boramjul.kro.kr
+
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
