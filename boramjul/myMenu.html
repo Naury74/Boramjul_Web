@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 메뉴</title>
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    .menu:hover{
+        transform:scale(1.1);
+    }
+
+    #my_line{
+        background-color: #664B8E;
+        height: 195px;
+    }
+
+    #mypage{
+        font-size: 64px;
+        color: whitesmoke;
+        font-weight: bold;
+        margin-left:85px;
+        display: inline-block;
+        margin-top: 80px;
+    }
+
+    #mypage2{
+        font-size: 20px;
+        font-weight: bold;
+        color: whitesmoke;
+        margin-left: 50px;
+    }
+
+    #my_menu{
+        width: 370px;
+        height: 700px;
+        float: left;
+
+
+    }
+
+    #my_menu_list{
+        border-right: solid 1px #A1A1A1;
+        width: 370px;
+        height: 100%;
+
+    }
+
+    #my_menu_list ul li{
+        margin-top: 50px;
+        width:370px;
+    }
+
+    #my_menu_list ul li a{
+        display: list-item;
+        cursor: pointer;
+        color: black;
+        text-decoration:none;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    #my_menu_list ul li:first-child{
+        margin-top: 100px;
+    }
+
+</style>
+
+</head>
+<body>
+<div class="myMenu">
+    
+    <div id="my_line">
+        <span id="mypage">My page</span>
+        <span id="mypage2">조성현님의 마이페이지 입니다.</span>
+    </div>
+
+    <div id="my_menu">
+        <div id="my_menu_list">
+                <ul>
+                    <li><a class="menu" href="#">주문내역 조회</a></li>
+                    <li><a class="menu" href="#">장바구니</a></li>
+                    <li><a class="menu" href="#">나의 등급</a></li>
+                    <li><a class="menu" href="#">나의 후기</a></li>
+                    <li><a class="menu" href="#">회원정보 변경</a></li>
+                </ul>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
