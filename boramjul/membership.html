@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 등급</title>
+
+    <link rel="stylesheet" href="mypage.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script type="text/javascript">   
+
+        $(document).ready( function() {
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+            $("#myMenu").load("myMenu.html");
+        });
+
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <div id="header"></div>
+
+        <div class="box">
+            <div id="myMenu"></div>
+
+            <div class="menu_name">
+                <p>MEMBERSHIP</p>
+            </div>
+
+            <div class="menu_line"></div>
+
+            <div id="info_box" style="border: 0;">
+                <p id="point_system">현재 적립금은 <span id="myPoint">9100P</span> 입니다<br>
+                구매하시는 금액의 <span id="myPoint">1%</span>씩 자동 적립 됩니다.</p>
+
+                <div id="bronze">
+                    <img src="images/브론즈.svg" alt="브론즈">
+                        <p class="point_system">구매 금액: 0~20만원 구간<br>
+                            온라인 구매 5% 할인</p>
+                </div>
+                
+                <div id="silver" >
+                    <img src="images/실버.svg" alt="실버">
+                    
+                    <p class="point_system">구매 금액: 20~50만원 구간<br>
+                            온라인 구매 10% 할인</p>
+                            <p id="myTier">★나의 등급입니다. <br>다음 등급까지 41000원 남았습니다★</p>
+                             
+                            
+                </div>
+
+                <div id="gold">
+                    <img src="images/골드.svg" alt="골드">
+                    <p class="point_system">구매 금액: 50만원 이상 구간<br>
+                        온라인 구매 15% 할인</p>
+                </div>
+                
+            </div>
+
+        </div><!--box-->
+        <div id="footer"></div>
+    </div><!--wrap-->
+</body>
+</html>
