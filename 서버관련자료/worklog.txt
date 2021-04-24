@@ -199,7 +199,24 @@ boramjul.kro.kr
 -------------------------------------------------------------------------------------
 
 
+MySQLNonTransientConnectionException : 너무 많은 연결
+
+몇 가지 옵션은 다음과 같습니다.
+
+일부 연결을 수동으로 종료
+SHOW PROCESSLIST를 사용하여 모든 연결을 확인한 다음 종료하려는 프로세스 ID를 KILL하십시오.
+MySQL 데몬이 비활성 프로세스 자체를 죽 이도록 제한 시간 설정을 편집합니다
+. my.cnf에서 :
+wait_timeout = 28800
+interactive_timeout = 28800
+
+즉 , 연결 수를 올립니다 . my.cnf의 [mysqld] 섹션 :
+max_connections = 100
+사용자 이름 당 연결 수를 제한하십시오
+. my.cnf의 [mysqld] 섹션 :
+max_user_connections = 50
+MySQL 서버 다시 시작
 
 
-
+ jackson-databind 메이븐에서 추가
 
