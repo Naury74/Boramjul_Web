@@ -1,7 +1,59 @@
 @charset "UTF-8";
+
 *{
     margin: 0;
     padding: 0;
+}
+
+@font-face {
+    font-family: "gilroy";
+    src: url("../fonts/gilroy_light.otf");
+}
+
+@font-face {
+    font-family: "gmarket";
+    src: url("../fonts/GmarketSansMedium.otf");
+}
+
+@font-face {
+    font-family: "nanum";
+    src: url("../fonts/nanumbarungothic.ttf");
+}
+
+p{
+    font-family: "nanum";
+}
+
+table{
+    font-family: "nanum";
+}
+
+button{
+    appearance: none;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    font-family: "gmarket";
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+input{
+    text-align: center;
+    border-radius: 10px;
+}
+
+input:focus{
+    outline: none;
+}
+
+a{
+    color: black;
+    text-decoration:none;
 }
 
 .menu:hover{
@@ -26,8 +78,9 @@
 }
 
 .menu_name p{
+    font-family: "gilroy";
     font-weight: bold;
-    font-size: 30px;
+    font-size: 40px;
     margin-bottom: 10px;
     display: inline-block;
 }
@@ -71,45 +124,26 @@
 }
 
 .reviewBtn{
-    appearance: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border: none;
-    border-radius: 10px;
     font-size: 24px;
-    cursor: pointer;
     background: #664B8E;
-    color: aliceblue;
     width: 125px;
     height: 40px;
-    transition: 0.5s;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.reviewBtn:focus{
-    outline:none;
 }
 
 .numBtn{
-    appearance: none;
-    text-decoration: none;
-    border: none;
+    border-radius: 0;
+    color: black;
     width: 25px;
     height: 25px;
-    cursor: pointer;
     font-size: 23px;
+    font-weight: normal;
     float: left;
+    box-shadow: none;
     background-color: rgb(231, 231, 231);
-}
-
-.numBtn:focus{
-    outline: none;
 }
 
 .num_input{
     height: 25px;
-    text-align: center;
     float: left; 
     border: 0;
 }
@@ -138,67 +172,27 @@
 }
 
 #delBtn{
-    appearance: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border: none;
-    border-radius: 10px;
     font-size: 24px;
-    cursor: pointer;
     background: #434CA5;
-    color: aliceblue;
     width: 350px;
     height: 75px;
     font-size: 36px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
 }
 
 #buyBtn{
-    appearance: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border: none;
-    border-radius: 10px;
     font-size: 24px;
-    cursor: pointer;
     background: #664B8E;
-    color: aliceblue;
     width: 350px;
     height: 75px;
     margin-left: 100px;
     font-size: 36px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-#delBtn:focus{
-    outline: none;
-}
-
-#buyBtn:focus{
-    outline: none;
-}
-
-.review{
-    cursor: pointer;
-    color: black;
-    text-decoration:none;
-    display: block;
-}
-
-.review:hover{
-    text-decoration: underline; 
-    color: black;
 }
 
 .star{
     height: 20px;
 }
 
-/*탭*/
 .tabs section {
     display: none;
 }
@@ -252,15 +246,13 @@
     margin-bottom: 35px;
     width: 350px;
     height: 60px;
-    border-radius: 10px;
     font-size: 20px;
     padding-left: 20px;
     border: solid 1px #A8A8A8;
+    text-align: left;
 }
 
-
 #info_table input:focus{
-    outline:none;
     border: solid 3px black;
 }
 
@@ -270,31 +262,16 @@
 }
 
 #infoBtn{
-    appearance: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border: none;
-    border-radius: 10px;
     font-size: 24px;
-    cursor: pointer;
     background: #434CA5;
-    color: aliceblue;
     width: 370px;
     height: 75px;
     font-size: 36px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-#infoBtn:focus{
-    outline: none;
 }
 
 #point_system{
     font-size: 25px;
     display: inline-block;
-
 }
 
 .point_system{
@@ -303,7 +280,6 @@
     font-size: 30px;
     vertical-align: 50px;
 }
-
 
 #myPoint{
     font-style: italic;
@@ -330,9 +306,36 @@
 }
 
 #myTier{
-    font-size: 18px;
+    font-size: 25px;
 }
 
+#event{
+    background-image: url(../images/event.svg);
+    width: 100%;
+    height: 700px;
+    margin-top: 200px;
+}
+
+
+#today{
+    margin-top: 200px;
+}
+
+.today{
+    height: 750px;
+    width: 100%;
+    border: solid 4px black;
+
+}
+
+.today img{
+    height: 750px;
+    width: 100%;
+
+    
+}
+
+/*슬라이더*/
 
 
 

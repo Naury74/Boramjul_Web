@@ -2,19 +2,19 @@
 
 @font-face {
     font-family: "logofont";
-    src: url("/boramjul/fonts/parisienne_regular.ttf");
+    src: url("../fonts/parisienne_regular.ttf");
 }
 @font-face{
     font-family: "mainfont";
-    src: url("/boramjul/fonts/GmarketSansMedium.otf");
+    src: url("../fonts/GmarketSansMedium.otf");
 }
 @font-face {
     font-family: "detailfont";
-    src: url("/boramjul/fonts/GmarketSansLight.otf");
+    src: url("../fonts/GmarketSansLight.otf");
 }
 @font-face{
     font-family: "btn";
-    src:url("/boramjul/fonts/nanumbarungothic.ttf")
+    src:url("../fonts/nanumbarungothic.ttf")
 }
 
 #logohead1{
@@ -44,7 +44,7 @@
 #box1{
     position: absolute;
     width: 700px;
-    height: 700px;
+    height: 750px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -58,7 +58,7 @@
     width: 205px;
     height: 21px;
     top: 250px;
-    left: 110px;
+    left: 80px;
     text-align: center;
 
     font-family:  "detailfont";
@@ -74,10 +74,25 @@
     width: 205px;
     height: 21px;
     left: 130px;
-    top: 370px;
+    top: 350px;
     text-align: center;
 
     font-family:  "detailfont";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+    color: #000000;
+}
+#id{
+    position: absolute;
+    width: 205px;
+    height: 21px;
+    left: 164px;
+    top: 450px;
+
+    font-family: "detailfont";
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
@@ -107,7 +122,7 @@
     width: 500px;
     height: 64px;
     left: 110px;
-    top: 550px;
+    top: 600px;
     font-family: "btn";
 
     background: #664B8E;

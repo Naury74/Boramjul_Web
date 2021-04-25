@@ -2,20 +2,21 @@
 
 @font-face {
     font-family: "logofont";
-    src: url("/boramjul/fonts/parisienne_regular.ttf");
+    src: url("../fonts/parisienne_regular.ttf");
 }
 @font-face{
     font-family: "mainfont";
-    src: url("/boramjul/fonts/GmarketSansMedium.otf");
+    src: url("../fonts/GmarketSansMedium.otf");
 }
 @font-face {
     font-family: "detailfont";
-    src: url("/boramjul/fonts/GmarketSansLight.otf");
+    src: url("../fonts/GmarketSansLight.otf");
 }
 @font-face{
     font-family: "btn";
-    src:url("/boramjul/fonts/nanumbarungothic.ttf")
+    src:url("../fonts/nanumbarungothic.ttf")
 }
+
 
 #logohead1{
     position: absolute;
@@ -44,7 +45,7 @@
 #box1{
     position: absolute;
     width: 700px;
-    height: 750px;
+    height: 700px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -55,21 +56,36 @@
 }
 #name{
     position: absolute;
-    width: 300px;
+    width: 205px;
     height: 21px;
-    top: 350px;
-    left: 210px;
+    top: 250px;
+    left: 80px;
     text-align: center;
 
-    font-family: detailfont;
+    font-family: "detailfont";
     font-style: normal;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 18px;
     line-height: 21px;
     /* identical to box height */
     color: #000000;
 }
+#email{
+    position: absolute;
+    width: 205px;
+    height: 21px;
+    left: 130px;
+    top: 370px;
+    text-align: center;
 
+    font-family: "detailfont";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+    color: #000000;
+}
 #main{
     position: absolute;
     width: 350px;
@@ -89,24 +105,12 @@
 #btn{
     
     position: absolute;
-    width: 200px;
+    width: 500px;
     height: 64px;
-    left: 100px;
-    top: 600px;
+    left: 110px;
+    top: 550px;
     font-family: "btn";
 
     background: #664B8E;
-    border-radius: 10px;
-}
-#btn2{
-    
-    position: absolute;
-    width: 200px;
-    height: 64px;
-    left: 400px;
-    top: 600px;
-    font-family: "btn";
-
-    background: #434CA5;
     border-radius: 10px;
 }
