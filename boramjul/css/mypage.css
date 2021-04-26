@@ -67,7 +67,7 @@ a{
 
 .box{
     width: 100%;
-    height: 3000px;
+    height: 3400px;
 }
 
 .menu_name{
@@ -313,29 +313,116 @@ a{
     background-image: url(../images/event.svg);
     width: 100%;
     height: 700px;
-    margin-top: 200px;
-}
-
-
-#today{
-    margin-top: 200px;
-}
-
-.today{
-    height: 750px;
-    width: 100%;
-    border: solid 4px black;
-
-}
-
-.today img{
-    height: 750px;
-    width: 100%;
-
-    
 }
 
 /*슬라이더*/
+
+.mySlides {
+    display: none;
+}
+
+.mySlides img{
+    vertical-align: middle;
+    width: 100%;
+}
+
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+
+  height: 750px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#dot{
+    text-align:center;
+    margin-top: -5%;
+}
+
+.active {
+  background-color: #664B8E;
+  width:40px;
+  border-radius: 20px;
+}
+/*
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 0.5s;
+  animation-name: fade;
+  animation-duration: 0.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+  
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+*/
+
+@media only screen and (max-width: 300px) {
+    body{
+        width: 40%;
+        font-size: 15px;
+    }
+}
+
+#best-container{
+    margin-top: 200px;
+}
+
+#best-container p, #new-container p:first-child {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#best-container p, #new-container p{
+    text-align: center;
+    color: #202020;
+}
+
+#best-back, #new-back{
+    margin-top: 50px;
+}
+
+#best-back img{
+    width: 100%;
+}
+
+#new-container{
+    margin-top: 200px;
+}
+
+#new-back #bookImg{
+    width: 1280px;
+    margin: 0 auto;
+}
+
+#new-back #bookImg img{
+    width: 250px;
+    height: 350px;
+}
+
+.more{
+    margin-top: 15px;
+    font-weight: bold;
+    color: #202020;
+    font-family: "gilroy";
+    margin-left:48%;
+}
 
 
 
