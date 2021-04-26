@@ -15,6 +15,21 @@
         padding: 0;
     }
 
+    @font-face {
+        font-family: "gilroy";
+        src: url("fonts/gilroy_light.otf");
+    }
+
+    @font-face {
+        font-family: "nanum";
+        src: url("fonts/nanumbarungothic.ttf");
+    }
+
+    @font-face {
+        font-family: "gmarket";
+        src: url("fonts/GmarketSansMedium.otf");
+    }
+
     .menu:hover{
         transform:scale(1.1);
     }
@@ -26,24 +41,26 @@
 
     #mypage{
         font-size: 64px;
-        color: whitesmoke;
+        color: white;
         font-weight: bold;
         margin-left:85px;
         display: inline-block;
         margin-top: 80px;
+        font-family: "gilroy";
     }
 
     #mypage2{
         font-size: 20px;
-        font-weight: bold;
-        color: whitesmoke;
+        color: white;
         margin-left: 50px;
+        font-family: "nanum";
     }
 
     #my_menu{
         width: 300px;
         height: 1000px;
         float: left;
+        font-family: "gmarket";
     }
 
     #my_menu_list{
@@ -73,14 +90,6 @@
     }
 
     #my_menu_list ul li a:hover{
-        border-bottom: solid 10px #E9CD39;
-    }
-
-    #my_menu_list ul li a:focus{
-        border-bottom: solid 10px #E9CD39;
-    }
-
-    #my_menu_list ul li a:visited{
         border-bottom: solid 10px #E9CD39;
     }
 
