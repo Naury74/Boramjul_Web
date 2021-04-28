@@ -67,7 +67,7 @@ a{
 
 .box{
     width: 100%;
-    height: 3000px;
+    height: 3400px;
 }
 
 .menu_name{
@@ -313,29 +313,8 @@ a{
     background-image: url(../images/event.svg);
     width: 100%;
     height: 700px;
-    margin-top: 200px;
 }
 
-
-#today{
-    margin-top: 200px;
-}
-
-.today{
-    height: 750px;
-    width: 100%;
-    border: solid 4px black;
-
-}
-
-.today img{
-    height: 750px;
-    width: 100%;
-
-    
-}
-
-/*슬라이더*/
 
 
 

@@ -1,0 +1,435 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: "gilroy";
+    src: url("../fonts/gilroy_light.otf");
+}
+
+@font-face {
+    font-family: "gmarketM";
+    src: url("../fonts/GmarketSansMedium.otf");
+}
+
+@font-face {
+  font-family: "gmarketL";
+  src: url("../fonts/GmarketSansLight.otf");
+}
+
+@font-face {
+  font-family: "nanum";
+  src: url("../fonts/nanumbarungothic.ttf");
+}
+
+@font-face {
+    font-family: "nanumL";
+    src: url("../fonts/nanumbarungothiclight.ttf");
+}
+p{
+  font-family: "nanumL";
+  font-size: 16px;
+  line-height: 150%;
+}
+.wrap {
+  max-width: 1280px;
+  margin: auto;
+}
+.BP-wrapper {
+  display: grid;
+  grid-template-columns: 450px 2fr;
+}
+.BP-top_left {
+  padding:20px;
+  margin:0px;
+  position: static;
+  width:360px;
+  height:850px;        
+}
+.BP-top_right {
+  padding:0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top:0px;
+  margin-bottom:10px;
+  position: static;
+  box-sizing: border-box; 
+  height: 890px;
+  text-align: left;        
+  }
+.cart_btn {
+  font-size: 25px;
+  font-family: "gmarketM";
+  color: aliceblue;
+  background: #664B8E;
+  cursor: pointer;
+  appearance: none;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 18px;
+  border-radius: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 65px;
+  padding-left: 65px;
+  transition: 0.5s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: static;
+  width: 320px;
+  height: 60px;
+  justify-content: center;                    
+}
+.buy_btn {
+  font-size: 25px;
+  font-family: "gmarketM";
+  color: aliceblue;
+  background: #434CA5;
+  cursor: pointer;
+  appearance: none;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 18px;
+  border-radius: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 92px;
+  padding-left: 92px;
+  transition: 0.5s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: static;
+  width: 320px;
+  height: 60px;
+  justify-content: center;
+}
+#review_btn {
+  font-size: 25px;
+  font-family: "gmarketM";
+  color: aliceblue;
+  background: #434CA5;
+  cursor: pointer;
+  appearance: none;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 0px;
+  border-radius: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 20px;
+  padding-left: 20px;
+  transition: 0.5s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: static;
+  width: 180px;
+  height: 30px;
+  justify-content: center;
+  float: right; 
+  box-sizing: border-box; 
+  
+}
+.num_btn{
+  appearance: none;
+  text-decoration: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 26px;
+  float: left;
+  background-color: rgb(231, 231, 231);
+}
+    .num_btn:focus{
+      outline: none;
+    }
+.num_input{
+  height: 40px;
+  text-align: center;
+  float: left; 
+  border: 0;
+}
+.num{
+  margin-top: 18px;    border: solid 1px rgb(231, 231, 231);
+  border-right: 0;
+  display: inline-block;
+}
+.price {
+  width: 320px;
+  color: rgba(0, 0, 0, 1);
+  letter-spacing: 0%;
+  text-align: left;
+  font-family: gmarketL;
+  font-size: 24px;
+  margin-top: 18px;
+}    
+.price-of-book{
+    font-size: 30px;
+    font-family: gmarketL;
+  }    
+  .shipping {
+      width: 320px;
+      color: rgba(0, 0, 0, 1);
+      letter-spacing: 0%;
+      text-align: left;
+      font-family: gmarketL;
+      font-size: 24px;
+      margin-top: 18px;
+    }
+    .price-of-shipping{
+      font-size: 26px;
+      font-family: gmarketL;
+    }
+    .bookimg{
+      width: 350px;
+      height: 500px;
+    }
+    #BP-h1 {
+      font-family: "gmarketM";
+      font-size:50px;
+      font-weight: 700;
+      margin-left: 25px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding-left:20px;
+      padding-top: 55px;
+      color: white;
+    }
+    #BP-h2 {
+      font-family: "gmarketM";
+      font-size:40px;
+      font-weight: 700;
+      margin-top: 10px;
+      margin-bottom: 25px;
+    }
+    #BP-h3 {
+      font-family: "gmarketM";
+      font-size:35px;
+      font-weight: 500;
+      margin: 18px;
+    }
+    #BP-h4 {
+      font-family: "gmarketM";
+      font-size:30px;
+      font-weight: 400;
+      margin-left: 25px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding:20px;
+      color: white;
+    }
+.book_info {
+  font-family: gmarketL;
+  font-size:20px;
+  margin-bottom: 18px
+}
+
+.book_details{
+  border:3px solid #A1A1A1;
+  padding:10px;
+  margin:0px;
+  position: static;
+}
+.about_book{
+  margin-left: 18px;
+}
+.about_author {
+  margin-left: 18px;
+}
+    .into_the_book {
+      margin-left: 18px;  
+    }
+    .dividing_line{
+      background-color: #664B8E;
+      width: 100%;
+      height: 160px;
+    }
+    #dividing_line{
+        background-color: #434CA5;
+        width: 100%;
+        height: 80px;
+    }
+    .related_books{
+      border:3px solid #A1A1A1;
+      padding-left:10px;
+      padding-right:10px;
+      padding-top:10px;
+      padding-bottom:30px;
+      margin:20px;
+      position: relative;
+    }
+    .book_review{
+      border:3px solid #A1A1A1;
+      padding-left:10px;
+      padding-right:10px;
+      padding-top:10px;
+      padding-bottom:30px;
+      margin:20px;
+      position: relative;
+    }
+    .searched_bookimg{
+      width: 175px;
+      height: 250px;
+      float: left;
+      margin-right: 25px;
+      box-sizing: border-box; 
+    }
+    .searched_books_info {
+      float: left; 
+      width: 50%;
+      height: 250px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 0px;
+      box-sizing: border-box;
+      font-family: gmarketL; 
+}
+.searched_books_review {
+  float: left; 
+  width: 100%;
+  height: 200px;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  box-sizing: border-box;
+  font-family: gmarketL; 
+}
+.searched_books_title {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+.searched_books_review_title {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.searched_books_info_d {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.searched_reviewer_info {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.searched_books_price {
+  margin-bottom: 20px;
+}
+.price-of-searched-books {
+  font-size: 20px;
+}
+.searched_book_reviews {
+  font-size:25px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  font-family: gmarketL;
+}
+.book_reviews {
+  font-size:30px;
+  font-weight: 500;
+  margin-bottom: 18px;
+  font-family: gmarketL;
+}
+.searched_book_scores {
+  margin-bottom: 20px;
+}
+.star{
+  height: 25px;
+}
+.review-img{
+  height: 25px;
+}
+.heart-img {
+  height: 25px;
+}
+.comment-img {
+  height: 25px;
+}
+.divi { 
+  margin-left: 5px;
+  margin-right: 5px;
+}
+    .btn_searched {
+      float: right; 
+      width: 320px;
+      margin-left: 0px;
+      margin-right: 0px;
+      margin-top:14px;
+      margin-bottom:14px;
+      text-align: center;
+      box-sizing: border-box; 
+    }
+.searched_books_margin {
+  margin-bottom: 0px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top:30px;
+  padding-bottom:30px;
+  border-bottom: solid 1px rgb(231, 231, 231);
+}
+.clearBoth {
+  clear: both;
+  }
+.searched_results_wrapper {
+  border:0px;
+  padding:10px;
+  margin:20px;
+  position: relative;
+}
+.book_review_wrapper {
+  border:0px;
+  padding:10px;
+  margin:20px;
+  position: relative;
+}
+.book_review_wrapper li {
+  list-style: none;
+}
+.please_write {
+  font-family: "gmarketM";
+  font-size:30px;
+  font-weight: 400;
+  height: 60px;
+  width: 98%;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top:10px;
+  padding-bottom:10px;
+  vertical-align: middle
+}
+.page-move {
+  text-align: center;
+  padding-top: 25px;
+  font-family: "gmarketL";
+  font-size:20px;
+}
+.page-move a {
+  text-decoration: none;
+  color:black;
+}
+.review_total {
+  text-align: center;
+  font-family: "gmarketM";
+  font-size:35px;
+  font-weight: 400;
+  background-color: #C5B8D1;
+  margin:0px 0px 20px 0px;
+  padding:20px;
+}
+.total_book_scores {
+  margin: 20px 0px 0px 0px;
+}
+#total_star { 
+  height:40px;
+}
+@media(max-width:1250px) {
+  .BP-wrapper {
+  display: block;
+  }
+  .searched_results_wrapper{
+    display: block;
+  }
+}
+
+        
