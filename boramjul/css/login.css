@@ -2,19 +2,19 @@
 
 @font-face {
     font-family: "logofont";
-    src: url("../fonts/parisienne_regular.ttf");
+    src: url("/boramjul/fonts/parisienne_regular.ttf");
 }
 @font-face{
     font-family: "mainfont";
-    src: url("../fonts/GmarketSansMedium.otf");
+    src: url("/boramjul/fonts/GmarketSansMedium.otf");
 }
 @font-face {
     font-family: "detailfont";
-    src: url("../fonts/GmarketSansLight.otf");
+    src: url("/boramjul/fonts/GmarketSansLight.otf");
 }
 @font-face{
     font-family: "btn";
-    src:url("../fonts/nanumbarungothic.ttf")
+    src:url("/boramjul/fonts/nanumbarungothic.ttf")
 }
 
 #box1{
@@ -32,15 +32,15 @@
     position: absolute;
     width: 54px;
     height: 54px;
-    left: 800px;
-    top: 100px;
+    left: 250px;
+    top: 80px;
 }
 #logohead2{
     position: absolute;
     width: 254px;
     height: 70px;
-    left: 800px;
-    top: 98px;
+    left: 260px;
+    top: 80px;
 
     font-family: "logofont";
     font-style: normal;
@@ -56,7 +56,7 @@
     position: absolute;
     width: 205px;
     height: 21px;
-    left: 650px;
+    left: 120px;
     top: 230px;
 
     font-family: "detailfont";
@@ -71,7 +71,7 @@
     position: absolute;
     width: 205px;
     height: 21px;
-    left: 650px;
+    left: 120px;
     top: 350px;
 
     font-family: "detailfont";
@@ -88,7 +88,7 @@
     position: absolute;
     width: 500px;
     height: 64px;
-    left: 650px;
+    left: 120px;
     top: 500px;
 
     background: #664B8E;
@@ -98,7 +98,7 @@
     position: absolute;
     width: 143px;
     height: 28px;
-    left: 630px;
+    left: 100px;
     top: 600px;
 
     font-family: "detailfont";
@@ -114,7 +114,7 @@
     position: absolute;
     width: 143px;
     height: 28px;
-    left: 840px;
+    left: 300px;
     top: 600px;
 
     font-family: "detailfont";
@@ -130,7 +130,7 @@
     position: absolute;
     width: 143px;
     height: 28px;
-    left: 1030px;
+    left: 500px;
     top: 600px;
 
     font-family:"detailfont";
@@ -146,7 +146,7 @@
     position: absolute;
     width: 143px;
     height: 28px;
-    left: 830px;
+    left: 300px;
     top: 680px;
 
     font-family: "detailfont";
@@ -162,20 +162,20 @@
     position: absolute;
     width: 87px;
     height: 86px;
-    left: 740px;
-    top: 750px;
+    left: 220px;
+    top: 730px;
 }
 #naver{
     position: absolute;
     width: 87px;
     height: 86px;
-    left: 860px;
-    top: 750px;
+    left: 330px;
+    top: 730px;
 }
 #google{
     position: absolute;
     width: 87px;
     height: 86px;
-    left: 985px;
-    top: 750px;
+    left: 440px;
+    top: 730px;
 }
