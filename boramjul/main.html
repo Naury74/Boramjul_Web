@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인화면</title>
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mypage.css">
     
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="packed.js"></script>
 
+    
     <script type="text/javascript">
 
         $(document).ready(function() {
@@ -19,7 +19,38 @@
             $("#myMenu").load("myMenu.html");  
         });
 
+
+        //슬라이더
+        var slideIndex = 0;
+
+        $(document).ready(function(){
+            showSlides(slideIndex);
+        });
+
+        function showSlides(n) {
+
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+
+            for (i = 0; i < slides.length; i++){
+            slides[i].style.display = "none";  
+            }
+            slideIndex++;
+
+            if (slideIndex > slides.length) {slideIndex = 1}
+
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+            setTimeout(showSlides, 4000);
+        }
+
     </script>
+
 
 </head>
 <body>
@@ -27,31 +58,28 @@
         <div id="header"></div>
 
         <div class="box">
-            <div id="wrapper">
-                <div>
-                    <div id="slider">
-                        <ul>
-                            <li><img src="images/today1.svg" alt="첫번쨰" /></li>
-                            <li><img src="images/today2.svg" alt="두번째" /></li>
-                            <li><img src="images/today3.svg" alt="세번째" /></li>
-                        </ul>
-                    </div><!--slider-->
-                    
-                    <div class="sliderbutton" id="sliderBtn1">
-                        <img src="images/prev.svg" alt="Previous" onclick="slideshow.move(-1)" />
-                    </div>
 
-                    <div class="sliderbutton" id="sliderBtn2">
-                        <img src="images/next.svg" alt="Next" onclick="slideshow.move(1)" />
-                    </div>
+            <div class="slideshow-container">
+
+                <div class="mySlides">
+                  <img src="images/today1.svg">
                 </div>
-        
-                <ul id="pagination" class="pagination">
-                    <li onclick="slideshow.pos(0)"></li>
-                    <li onclick="slideshow.pos(1)"></li>
-                    <li onclick="slideshow.pos(2)"></li>
-                </ul>
-            </div><!--wrapper-->
+                
+                <div class="mySlides">
+                  <img src="images/today2.svg">
+                </div>
+                
+                <div class="mySlides">
+                  <img src="images/today3.svg">
+                </div>
+                
+                <div id="dot">
+                    <span class="dot"></span> 
+                    <span class="dot"></span> 
+                    <span class="dot"></span> 
+                </div>
+                
+            </div><!--slideshow-containe-->
 
             <div id="best-container">
                 <p>베스트 셀러</p>
@@ -60,7 +88,7 @@
                 <div id="best-back">               
                     <div id="bookImg">
                         <img src="images/bestimg.svg" alt="베스트셀러이미지">
-                        <a class="more" href="BestSellers.html">MORE+</a>
+                        <a class="more" href="#">MORE+</a>
                     </div>
                     
                 </div>
@@ -91,16 +119,6 @@
         </div><!--box-->
         <div id="footer"></div>
     </div><!--wrap-->
-    <script type="text/javascript">
-        var slideshow=new TINY.slider.slide('slideshow',{
-            id:'slider',
-            auto:3,
-            resume:true,
-            vertical:false,
-            navid:'pagination',
-            activeclass:'current',
-            position:0
-        });
-    </script>
+
 </body>
 </html>
