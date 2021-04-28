@@ -1,0 +1,170 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: "gilroy";
+    src: url("../fonts/gilroy_light.otf");
+}
+
+@font-face {
+    font-family: "gmarket";
+    src: url("../fonts/GmarketSansMedium.otf");
+}
+
+@font-face {
+    font-family: "nanum";
+    src: url("../fonts/nanumbarungothic.ttf");
+}
+
+.menu:hover{
+    transform:scale(1.1);
+}
+
+.wrap{
+    width: 100%;
+    position: relative;
+}
+
+.box{
+    width: 100%;
+    height: 3400px;
+}
+
+#wrapper {
+    width:100%;
+    height: 750px;
+    position: relative;
+}
+
+.sliderbutton {
+    /*float:left;*/
+    width:32px;
+    height: 38px;
+}
+
+.sliderbutton img {
+    cursor:pointer
+}
+
+#sliderBtn1{
+    position: absolute;
+    top: 300px;
+    left: 0;
+}
+
+#sliderBtn2{
+    position: absolute;
+    top: 300px;
+    right: 0;
+}
+
+#slider {
+    float:left; 
+    position:relative; 
+    overflow:auto;
+    width:100%; 
+    height:750px; 
+}
+
+#slider ul {
+    position:absolute; 
+    list-style:none; 
+    top:0; left:0
+}
+
+#slider li {
+    float:left;
+    width:1600px; 
+    height:750px; 
+    padding-right:10px;
+}
+
+.pagination {
+    float:left; 
+    list-style:none; 
+    margin-left: 50%;
+    position: absolute;
+    bottom: 20px;
+}
+
+.pagination li {
+    float:left; 
+    cursor:pointer; 
+    border:1px solid white; 
+    background:white;
+    border-radius: 50px;
+    margin-right: 5px;
+    text-align:center;
+    width: 13px;
+    height: 12px;
+}
+
+.pagination li:hover {
+    background:#664B8E; 
+    border:1px solid #664B8E; 
+    color:#664B8E;
+}
+
+li.current {
+    border:1px solid #664B8E; 
+    background:#664B8E;
+    width: 30px;
+}
+/*
+@media only screen and (max-width: 300px) {
+    body{
+        width: 40%;
+        font-size: 15px;
+    }
+}*/
+
+#best-container{
+    margin-top: 200px;
+}
+
+#best-container p, #new-container p:first-child {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: "gmarket";
+}
+
+#best-container p, #new-container p{
+    text-align: center;
+    color: #202020;
+}
+
+#best-back, #new-back{
+    margin-top: 50px;
+}
+
+#best-back img{
+    width: 100%;
+}
+
+#new-container{
+    margin-top: 200px;
+}
+
+#new-back #bookImg{
+    width: 1280px;
+    margin: 0 auto;
+}
+
+#new-back #bookImg img{
+    width: 250px;
+    height: 350px;
+}
+
+.more{
+    margin-top: 15px;
+    font-weight: bold;
+    color: #202020;
+    font-family: "gilroy";
+    margin-left:48%;
+}
+
