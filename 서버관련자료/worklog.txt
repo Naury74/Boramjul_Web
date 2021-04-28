@@ -113,7 +113,6 @@ create database test default character set utf8;
 아이디 생성 및 외부접속
 grant all privileges on test.* to testid@'%' identified by '1234';
 grant all on *.* to web@'%' identified by '1234';
-grant all privileges on boram.* to boram@'%' identified by '1234';
 변경된거 저장
 flush privileges;  
 권한 보기
@@ -220,65 +219,4 @@ MySQL 서버 다시 시작
 
 
  jackson-databind 메이븐에서 추가
-
------------------------------------------------------------------------
-회원 테이블(카카오등 추가)
-아이디, 비번, 이름, 생년월일, 성별, 이메일, 전화(키), 주소, 등급, 구매금액
-
-장바구니 테이블
-장바구니 번호, 아이디, 상품번호, 상품명, 수량, 가격
-
-주문테이블
-주문번호 구매자명 상품번호 주문수량 할인율 총금액 결재방법
-
-주문내역테이블
-주문번호 아이디 상품번호 상품명 수량 할인율 총금액 구매자명 전화번호 주소 주문날자 결재방법 주문상태
-
-리뷰게시판
-번호 제목 아이디 날자 추천 댓글 별점 내용 댓글
-
-게시판
-번호 제목 분류 날자 작성자 비밀번호 조회 답글 조회
-
-공지
-번호 제목 날자 작성자 조회
--------------------------------------------------------------------------------------
-회원 테이블(카카오등 추가)
-아이디, 비번, 이름, 생년월일, 성별, 이메일, 전화(키), 주소, 등급, 구매금액
-
-CREATE TABLE member( 
-	id VARCHAR(20) NOT NULL PRIMARY KEY, 
-	passwd VARCHAR(20) NOT NULL, 
-	name VARCHAR(20) NOT NULL,
-	email VARCHAR(50) NOT NULL,
-	phone varchar(20) not null,
-	sns tinyint default 1,
-	gender tinyint default 1,
-	birth varchar(10),
-	address varchar(50),
-	rank tinyint default 1,
-	totalprice int default 0,
-	joindate DATETIME DEFAULT NOW()
-);
-
-ALTER TABLE `member` COLLATE='utf8mb4_general_ci', CONVERT TO CHARSET utf8mb4;
-
-
-INSERT INTO member 
-(id, passwd, name, email, phone, sns, gender, birth, address, RANK, totalprice) 
-VALUES 
-( 'test','1234', "홍길동", 'test@gamil.com', '01012341234', '1', '1', '19000101', '부산시 서면 중앙대로 오기빌딩', '1', '0');
-
-INSERT INTO member 
-(id, passwd, name, email, phone, sns, gender, birth, address, RANK, totalprice) 
-VALUES 
-( 'test1','1234', '홍길동1', 'test1@gamil.com', '01011111111', '2', '2', '19000202', '부산시 서면 중앙대로 오기빌딩 1층', '1', '0');
-
-
-/usr/local/apache-tomcat-8.5.65/webapps
-
-
-
-
-
 
