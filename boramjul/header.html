@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>header</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <style>
  
         @font-face {
@@ -27,6 +29,48 @@
             src: url("fonts/nanumbarungothic.ttf");
         }
 
+        @media (max-width:900px) {
+            #top_menu ul li a{
+                font-size: 10px;
+            }
+
+            #mid_menu #logo_box{
+                display: block;
+                margin: 0 auto;
+            }
+
+            #mid_menu #logo_box #logo{
+                width: 50px;
+                display: inline-block;
+            }
+
+            #mid_menu #logo_box #logo_text{
+                font-size: 30px;
+            }
+
+            #mid_menu #search_box{
+                display: none;
+            }
+
+            .header #main_menu{
+                height: 40px;
+            }
+
+            #main_menu  ul li:first-child{
+                display: block;
+            }
+       
+            #main_menu ul li a{
+                font-size: 10px;
+            }
+            #main_menu ul li{
+                width: 16%;
+            }
+        
+            .header #header_line{
+                height: 30px;
+            }   
+        }   
         *{
             margin: 0;
             padding: 0;
@@ -54,7 +98,7 @@
             border: 0;
         }
 
-        .menu:hover{
+        .topmenu:hover{
             transform:scale(1.1);
         }
 
@@ -144,22 +188,27 @@
             width: 100%;
             height: 120px;
             font-family: "gilroy";
+            text-align: center;
         }
 
         #main_menu ul{
-            width: 100%;
             margin-top: 3%;
+            width: 100%;
         }
 
         #main_menu li{
             font-size:24px;
             width: 20%;
         }
+        #main_menu li:first-child{
+            display: none;
+        }
     
         #main_menu a{
             font-weight: bold;
             font-size: 24px;
             display: block;
+            text-align: center;
         }
 
         #header_line{
@@ -168,8 +217,66 @@
             height: 75px;
         }
 
+        .menu_bg { 
+            width: 100%; 
+            height: 500px; 
+            top:0px; 
+            left:0px; 
+            overflow:hidden; 
+            display: none; 
+            z-index: 999;
+        }
+		.menu { 
+            position:absolute; 
+            top:143px; left:0px; 
+            width:100%; height: 100%; 
+            background-color:white; 
+        }
+		.menu #exBtn { 
+            font-size: 18px;
+            width: 100%;
+            background-color: #664B8E;
+        }
+        .menu #exBtn div{
+            width: 17px;
+            margin-left: 350px;
+        }
+
+        
 
     </style>
+
+    <script>
+        var giMenuDuration = 700;
+
+        // 전체 메뉴를 오른쪽으로 슬라이드하여서 보여준다.
+        function ShowMenu(){
+            $('.menu_bg' ).css( { 'display' : 'block' } );
+            $('.menu' ).css( { 'left' : '-100%' } );
+            $('.menu' ).animate( { left: '0px' }, { duration: giMenuDuration } );
+        }
+
+        // 전체 메뉴를 왼쪽으로 슬라이드하여서 닫는다.
+        function HideMenu(){
+            $('.menu' ).animate( { left: '-100%' }, { duration: giMenuDuration, complete:function(){ $('.menu_bg' ).css( { 'display' : 'none' } ); } } );
+        }
+
+        // 확장 메뉴를 보여주거나 닫는다.
+        function ShowSubMenu( strId ){
+            var lySubMenu = $( strId );
+
+            if( lySubMenu.first().is( ":hidden" ) ){
+                $( strId ).slideDown( 300 );
+            } else{
+                $( strId ).slideUp( 300 );
+            }
+        }
+
+        $( document ).ready( function()
+            {
+                $('.menu_2' ).hide();
+        });
+    </script>
 
 </head>
 <body>
@@ -178,13 +285,13 @@
 
         <div id="top_menu">
             <ul>
-                <li><a href="login.html" class="menu">로그인</a></li>
-                <li><a href="join.html" class="menu">회원가입</a></li>
-                <li><a href="mycart.html" class="menu">카트</a></li>
-                <li><a href="event.html" class="menu">이벤트</a></li>
-                <li><a href="#" class="menu">고객센터</a></li>
+                <li><a href="login.html" class="topmenu">로그인</a></li>
+                <li><a href="join.html" class="topmenu">회원가입</a></li>
+                <li><a href="mycart.html" class="topmenu">카트</a></li>
+                <li><a href="event.html" class="topmenu">이벤트</a></li>
+                <li><a href="#" class="topmenu">고객센터</a></li>
             </ul>
-        </div>
+        </div><!--top_menu-->
 
         <div id="mid_menu">
             <div id="logo_box">
@@ -201,14 +308,36 @@
         </div><!--mid_menu-->
 
         <div id="main_menu">
+
                 <ul>
-                    <li><a href="BestSellers.html" class="menu">BEST SELLERS</a></li>
-                    <li><a href="#" class="menu">NEW BOOKS</a></li>
-                    <li><a href="#" class="menu">BOOK REVIEWS</a></li>
-                    <li><a href="#" class="menu">BOOK STORES</a></li>
-                    <li><a href="myList.html" class="menu">MEMBERSHIP</a></li>
+                    <li>
+                        <img class="menuBar"src="images/menubar.svg" width="25" height="17" onclick="ShowMenu()">
+                        <div class="menu_bg">
+                            <div class="menu">
+                                <div id="exBtn" onclick="HideMenu()"><div>x</div></div>
+                                <div id="my_menu">
+                                    <div id="my_menu_list">
+                                        <div id="Mdiv"><span id="Mspan">My page</span></div>
+                                            <ul>
+                                                <li><a class="topmenu" href="myList.html">주문내역 조회</a></li>
+                                                <li><a class="topmenu" href="myCart.html">장바구니</a></li>
+                                                <li><a class="topmenu" href="membership.html">나의 등급</a></li>
+                                                <li><a class="topmenu" href="myReview.html">나의 후기</a></li>
+                                                <li><a class="topmenu" href="myInfo.html">회원정보 변경</a></li>
+                                            </ul>
+                                    </div>
+                                </div><!--my_menu-->
+                            </div>
+                            </div>
+                        
+                    </li>
+                    <li><a href="BestSellers.html" class="topmenu">BEST SELLERS</a></li>
+                    <li><a href="#" class="topmenu">NEW BOOKS</a></li>
+                    <li><a href="#" class="topmenu">BOOK REVIEWS</a></li>
+                    <li><a href="#" class="topmenu">BOOK STORES</a></li>
+                    <li><a href="myList.html" class="topmenu">MEMBERSHIP</a></li>
                 </ul>
-        </div>
+        </div><!--main_menu-->
 
         <div id="header_line"></div>
 
