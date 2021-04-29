@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <meta name="viewport" id="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=device-width" />
+    <link rel="stylesheet" href="./css/default.css">
+</head>
+<body>
+<!-- container -->
+        <section id="container">
+            <div class="contents">
+                <section class="order">
+                    <h2>주문과정</h2>
+                    <div class="product_info">
+                        <table>
+                            <colgroup>
+                                <col style="width: 15%;">
+                                <col>
+                                <col style="width: 25%;">
+                                <col style="width: 15%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th colspan="2">상품정보</th>
+                                    <th>판매가</th>
+                                    <th>배송/판매자</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="./img/img_book.jpg" alt=""></td>
+                                    <td>
+                                        <strong class="delivery">무료배송</strong>
+                                        <p>자바 웹을 다루는 기술 -  JSP,서블릿,스프링까지 <br>실무에서 알아야 할 기술은 따로 있다!</p>
+                                    </td>
+                                    <td class="price">45,000원 -> 40,500원<br>(실버등급10%)할인</td>
+                                    <td class="price">보람줄 배송</td>
+                                </tr>
+                            </tbody>
+                        </table>                        
+                    </div>
+
+                    <form action="">
+                        <div class="shipping_address">
+                            <h3>배송지 정보 입력 <strong>(*필수 입력 항목)</strong></h3>
+                            <table>
+                                <colgroup>
+                                    <col style="width: 15%;">
+                                    <col>
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th><strong>*</strong>주문인</th>
+                                        <td><input type="text" placeholder="이름" required></td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>*</strong>받으시는분</th>
+                                        <td><input type="text" placeholder="이름" required></td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>*</strong>주소</th>
+                                        <td>
+                                            <div class="search">
+                                                <input type="text" placeholder="" required>
+                                                <a href="#">주소검색</a><br>
+                                            </div>
+                                            <div class="add_01">
+                                                <input type="text" placeholder="" required style="width: 50%;">
+                                            </div>
+                                            <div class="add_02">
+                                                <input type="text" placeholder="" required style="width: 50%;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>*</strong>휴대전화번호</th>
+                                        <td>
+                                            <input type="number" placeholder="" required> -
+                                            <input type="number" placeholder="" required> -
+                                            <input type="number" placeholder="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>*</strong>요청사항</th>
+                                        <td><input type="text" placeholder="" required></td>
+                                    </tr>
+                                </tbody>
+                            </table>                        
+                        </div>
+
+                        <div class="payment_warp">
+                            <h3>결제수단 선택</h3>
+                            <div class="inner">
+
+                                <div class="select_pay">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" id="card" name="pay_choice">
+                                            <label for="card">신용카드</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="etc" name="pay_choice">
+                                            <label for="etc">다른결제수단</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="kakao" class="kakao" name="pay_choice">
+                                            <img src="./img/ico_kakao.png" alt="">
+                                            <label for="kakao">카카오페이</label>
+                                            <input type="radio" id="naver" class="naver" name="pay_choice">
+                                            <img src="./img/ico_naver.png" alt="">
+                                            <label for="naver">네이버페이</label>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="payment">
+                                    <ul>
+                                        <li>
+                                            <div class="price">
+                                                <dl>
+                                                    <dt>상품금액</dt>
+                                                    <dd>45,000원</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>배송비</dt>
+                                                    <dd>0원</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>할인금액</dt>
+                                                    <dd>4,500원</dd>
+                                                </dl>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="final">
+                                                <dl>
+                                                    <dt>최종 결제 금액</dt>
+                                                    <dd>40,500원</dd>
+                                                </dl>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="agree">
+                                                <input type="checkbox" id="order_agree">
+                                                <label for="order_agree">주문내역확인 동의(필수)</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <button type="submit" class="btn_pay">결제하기</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                
+            </div>
+        </section>
+</section>
+</body>
+</html>
