@@ -2,27 +2,27 @@
 
 @font-face {
     font-family: "logofont";
-    src: url("/boramjul/fonts/parisienne_regular.ttf");
+    src: url("../fonts/parisienne_regular.ttf");
 }
 @font-face{
     font-family: "mainfont";
-    src: url("/boramjul/fonts/GmarketSansMedium.otf");
+    src: url("../fonts/GmarketSansMedium.otf");
 }
 @font-face {
     font-family: "detailfont";
-    src: url("/boramjul/fonts/GmarketSansLight.otf");
+    src: url("../fonts/GmarketSansLight.otf");
 }
 @font-face{
     font-family: "btn";
-    src:url("/boramjul/fonts/nanumbarungothic.ttf")
+    src:url("../fonts/GmarketSansMedium.otf")
 }
-
 #box1{
     position: absolute;
     width: 700px;
     height: 850px;
-    left: 550px;
-    top: 53px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     border: 1px solid #A1A1A1;
     box-sizing: border-box;
