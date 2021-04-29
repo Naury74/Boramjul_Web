@@ -1,0 +1,159 @@
+-- -----------------------------------------------------
+-- Table `boramDB`.`member`     회원정보
+-- -----------------------------------------------------
+CREATE TABLE member( 
+	id VARCHAR(20) NOT NULL PRIMARY KEY, 
+	passwd VARCHAR(20) NOT NULL, 
+	name VARCHAR(20) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	phone varchar(20) not null,
+	sns tinyint default 1,
+	gender tinyint default 1,
+	birth varchar(10),
+	address varchar(50),
+	rank tinyint default 1,
+	totalprice int default 0,
+	joindate DATETIME DEFAULT NOW())
+ENGINE = INNODB
+DEFAULT CHARACTER SET = utf8mb4;;
+
+
+
+-- -----------------------------------------------------
+-- Table `boramDB`.`cart`     장바구니
+-- -----------------------------------------------------
+CREATE TABLE cart (
+  `cartnum` INT NOT NULL,
+  `id` VARCHAR(20) NOT NULL,
+  `prodnum` INT NULL,
+  `quantity` SMALLINT NULL DEFAULT 1,
+  `result` TINYINT(4) NULL DEFAULT 1,
+  `indate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`cartnum`),
+  FOREIGN KEY (prodnum) REFERENCES product (prodnum),  
+  FOREIGN KEY (id) REFERENCES member (id))
+ENGINE = INNODB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `boramDB`.`product`     상품목록
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `boramDB`.`product` (
+  `prodnum` INT NOT NULL,
+  `name` VARCHAR(50) NULL,
+  `kind` SMALLINT NULL,
+  `price` INT NULL,
+  `content` VARCHAR(250) NULL,
+  `image` VARCHAR(50) NULL,
+  `grade` SMALLINT NULL,
+  `result` TINYINT(4) NULL DEFAULT 1,
+  `regdate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`prodnum`))
+ENGINE = INNODB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `boramDB`.`order`          주문게시판
+-- -----------------------------------------------------
+CREATE TABLE `order` (
+  `ordernum` INT NOT NULL,
+  `cartnum` INT NOT NULL,
+  `id` VARCHAR(20) NOT NULL,
+  `prodnum` INT NOT NULL,
+  `quantity` SMALLINT NULL,
+  `price` INT NULL,
+  `result` TINYINT(4) NULL DEFAULT 1,
+  PRIMARY KEY (`ordernum`),
+  FOREIGN KEY (cartnum) REFERENCES cart (cartnum),  
+  FOREIGN KEY (id) REFERENCES member (id),  
+  FOREIGN KEY (prodnum) REFERENCES product (prodnum))
+ENGINE = INNODB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `boramDB`.`order_detail` 주문 상세 내역
+-- -----------------------------------------------------
+CREATE TABLE `order_detail` (
+  `odnum` INT NOT NULL,
+  `ordernum` INT NOT NULL,
+  `cartnum` INT NOT NULL,
+  `id` VARCHAR(20) NOT NULL,
+  `prodnum` INT NOT NULL,
+  `quantity` SMALLINT NULL,
+  `price` INT NULL,
+  `sale` INT NULL,
+  `totprice` INT NULL,
+  `pay` SMALLINT NULL DEFAULT 1,
+  `state` TINYINT(4) NULL DEFAULT 1,
+  `result` TINYINT(4) NULL DEFAULT 1,
+  `orderdate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`odnum`),
+  FOREIGN KEY (ordernum) REFERENCES `order` (ordernum),  
+  FOREIGN KEY (cartnum) REFERENCES cart (cartnum),  
+  FOREIGN KEY (id) REFERENCES member (id),  
+  FOREIGN KEY (prodnum) REFERENCES product (prodnum))
+ENGINE = INNODB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `boramDB`.`review`  리뷰 게시판
+-- -----------------------------------------------------
+CREATE TABLE review (
+  `renum` INT NOT NULL,
+  `id` VARCHAR(20) NOT NULL,
+  `rename` VARCHAR(50) NULL,
+  `content` VARCHAR(250) NULL,
+  `lookup` INT NULL,
+  `recom` INT NULL,
+  `comnum` INT NULL,
+  `grade` SMALLINT NULL,
+  `redate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`renum`),
+  FOREIGN KEY (id) REFERENCES member (id))
+ENGINE = INNODB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `boramDB`.`qna` Q&A 게시판
+-- -----------------------------------------------------
+CREATE TABLE qna (
+	qnanum INT NOT NULL,
+	id VARCHAR(20) NOT NULL,
+	name VARCHAR(50)  NULL,
+	content VARCHAR(250) NULL,
+	reply VARCHAR(250) NULL,
+	rep SMALLINT NULL DEFAULT 1,
+	qnadate DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
+	PRIMARY KEY (qnanum),
+	FOREIGN KEY (id) REFERENCES member (id))
+ENGINE = INNODB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `boramDB`.`adminmember` 관리자 계정관리
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `boramDB`.`adminmember` (
+  `id` VARCHAR(20) NOT NULL,
+  `passwd` VARCHAR(20) NULL,
+  `name` VARCHAR(20) NULL,
+  `email` VARCHAR(50) NULL,
+  `phone` VARCHAR(20) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `boramDB`.`notic` 공지게시판
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `boramDB`.`notic` (
+  `notinum` INT NOT NULL,  
+  `id` VARCHAR(20) NOT NULL,
+  `name` VARCHAR(50) NULL,
+  `content` VARCHAR(250) NULL,
+  `lookup` INT NULL,
+  `notidate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`notinum`),
+  FOREIGN KEY (id) REFERENCES adminmember (id))
+ENGINE = InnoDB;

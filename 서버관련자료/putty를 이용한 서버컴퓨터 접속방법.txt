@@ -1,0 +1,11 @@
+ip 
+106.10.50.197
+
+port 
+3389
+
+id 
+root
+
+pw 
+boramjul
