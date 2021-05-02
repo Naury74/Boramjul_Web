@@ -30,12 +30,49 @@
         src: url("fonts/GmarketSansMedium.otf");
     }
 
+    @media (max-width:900px) {
+
+        #my_menu {
+            height: 300px;
+        }
+        #my_menu #my_menu_list ul{
+            height: 300px;
+        }
+
+        #my_menu #my_menu_list ul li{
+            margin-top: 30px;
+            width: 100%;
+            text-align: left;
+            margin-left: 40px;
+        }
+        #my_menu #my_menu_list ul li .topmenu{
+            font-size: 17px;
+            font-weight: normal;
+
+        }
+        #my_menu #my_menu_list #Mdiv{
+            width: 100%;
+            height: 100px;
+            background-color: #664B8E;
+            position: relative;
+        }
+        #my_menu #my_menu_list #Mdiv #Mspan{
+            color: white;
+            position: absolute;
+            font-size: 35px;
+            left: 20px;
+            top: 40px;
+            font-family: "gilroy";
+            font-weight: bold;
+
+        }
+    }
+
     #my_menu{
         width: 100%;
         height: 1000px;
         font-family: "gmarket";
         border-right: solid 1px #A1A1A1;
-
     }
 
     #my_menu_list{
@@ -60,6 +97,7 @@
         text-decoration:none;
         font-size: 20px;
         text-align: center;
+
     }
 
     #my_menu_list ul li a:visited{
@@ -70,13 +108,14 @@
         border-bottom: solid 10px #E9CD39;
     }
 
-    .menu:hover{
+    .topmenu:hover{
         transform:scale(1.1);
     }
 
     #my_menu_list ul li:first-child{
         margin-top: 50%;
     }
+ 
 
 </style>
 </head>
@@ -86,10 +125,10 @@
 
     <div id="my_menu">
         <div id="my_menu_list">
-                <ul>
-                    <li><a class="menu" href="QnA.html" style="font-family: nanum;">FAQ</a></li>
-                    <li><a class="menu" href="QnA2.html">공지사항</a></li>
-                </ul>
+            <ul>
+                <li><a class="topmenu" href="QnA.html">FNQ</a></li>
+                <li><a class="topmenu" href="QnA2.html">공지사항</a></li>
+            </ul>
         </div>
     </div><!--my_menu-->
 
