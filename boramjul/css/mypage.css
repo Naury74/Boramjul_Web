@@ -354,7 +354,6 @@ a{
 #info_box{
     border: solid 1px #A1A1A1;
     width: 45%;
-    height: 1200px;
     display: inline-block;
     margin: 1% 10%;
 }
@@ -385,6 +384,7 @@ a{
     width: 370px;
     height: 75px;
     font-size: 36px;
+    margin-bottom: 100px;
 }
 #point_system{
     font-size: 25px;

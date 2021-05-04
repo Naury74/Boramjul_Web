@@ -1,0 +1,44 @@
+<product> ********책 재고 항목 추가 바랍니다 디폴트 5권
+prodnum: 동일
+name: 동일
+kind: 동일
+price: 동일
+content: 동일
+image: 동일
+grade: (리뷰점수였어요 ㅋㅋ) 별점 맞춰서 1,2,3,4,5 로 값 설정 좋을듯
+result: 동일
+regdabe: 동일
+
+<cart>
+cartnum: 동일
+member_id: 회원아이디-> member_email로 바꾸면 어떨까
+(간편로그인 3개모두 메일로 받음)
+product_prodnum: 동일
+quantity: 동일
+price: 동일
+indate:동일 
+
+<member>*******포인트 추가해야함(멤버쉽 테이블을 따로 만드는것도 좋을듯)
+id: 프라이머리키 해제해야함 (간편 가입시 null)
+passwd: (간편 가입시 null)
+name: (간편 가입시 null)
+email: 프라이머리키로 하면 좋을듯 (간편가입 3개 모두 이메일 받음)
+phone: 동일
+sns: 동일
+birth: 동일
+address: 디폴트 null (책 구매시 추가)
+rank: 동일
+totalprice: 디폴트0
+joindate: 동일 
+
+
+<order_detail>제 담당은 아닙니다만..
+order_detail에 state랑 result 합쳐도 되지 않나요?
+어짜피 order_detail에 추가되는 데이터들이 다 주문완료인거 아니에여?(잘모름..)
+그리고 '배송 요청사항' 컬럼 추가해야겠습니다
+
+<qna>제 담당은 아닙니다만..
+관리자 게시판 형식으로 테이블 구조 변경 해야 할 것 같습니다
+
+<review> 제담당은 아닙니다만..
+prodnum이나 name은 참조 필요없는가요?
