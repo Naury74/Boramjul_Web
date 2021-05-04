@@ -310,3 +310,16 @@ http://www.boramjul.kro.kr/member/androidsignup.do
 PersonVerifyActivity.java
 doInBackground 함수 try 부분에 추가
 httpURLConnection.setRequestProperty("Content-Type", "application/json");
+-----------------------------------------------------------------------------------------
+멤버테이블 수정
+성별, 주소 삭제
+not null 수정 - 이메일, 폰번호, sns not null 처리
+              - 이름 비밀번호 null처리
+
+
+spring 
+회원정보쪽 성별 주소 삭제
+----------------------------------------------------------------
+
+테이블 구성 엑셀 변경함
+spring 폴더 구조 상의해야함
