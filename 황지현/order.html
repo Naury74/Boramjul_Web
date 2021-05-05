@@ -5,11 +5,13 @@
     <title>index</title>
     <meta name="viewport" id="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=device-width" />
     <link rel="stylesheet" href="./css/default.css">
+    <script src='./js/jquery-3.2.1.min.js'></script>
 </head>
 <body>
-<!-- container -->
+        <!-- container -->
         <section id="container">
             <div class="contents">
+
                 <section class="order">
                     <h2>주문과정</h2>
                     <div class="product_info">
@@ -76,14 +78,38 @@
                                     <tr>
                                         <th><strong>*</strong>휴대전화번호</th>
                                         <td>
-                                            <input type="tel" placeholder="010" required> -
-                                            <input type="tel" placeholder="" required> -
-                                            <input type="tel" placeholder="" required>
+                                            <input type="number" placeholder="010" required> -
+                                            <input type="number" placeholder="" required> -
+                                            <input type="number" placeholder="" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><strong>*</strong>요청사항</th>
-                                        <td><input type="text" placeholder="" required></td>
+                                        <td>
+                                            <div class="inner">
+                                                <div class="choice">
+                                                    <input type="radio" name="request" id="request_01" placeholder="" required>
+                                                    <label for="request_01">경비실</label>
+                                                </div>
+                                                <div class="choice">
+                                                    <input type="radio" name="request" id="request_02" placeholder="" required>
+                                                    <label for="request_02">문앞</label>
+                                                </div>
+                                                <div class="choice">
+                                                    <input type="radio" name="request" id="request_03" placeholder="" required>
+                                                    <label for="request_03">무인택배함</label>
+                                                </div>
+                                                <div class="choice">
+                                                    <input type="radio" name="request" id="request_04" placeholder="" required>
+                                                    <label for="request_04">직접수령</label>
+                                                </div>
+                                                <div class="choice">
+                                                    <input type="radio" name="request" id="request_05" placeholder="" required>
+                                                    <label for="request_05">기타</label>
+                                                    <input type="text" placeholder="" required>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>                        
@@ -103,11 +129,11 @@
                                             <input type="radio" id="etc" name="pay_choice">
                                             <label for="etc">다른결제수단</label>
                                         </li>
-                                        <li>
-                                            <input type="radio" id="kakao" class="kakao" name="pay_choice1">
+                                        <li class="other">
+                                            <input type="radio" id="kakao" class="kakao" name="pay_choice_01">
                                             <img src="./img/ico_kakao.png" alt="">
                                             <label for="kakao">카카오페이</label>
-                                            <input type="radio" id="naver" class="naver" name="pay_choice1">
+                                            <input type="radio" id="naver" class="naver" name="pay_choice_01">
                                             <img src="./img/ico_naver.png" alt="">
                                             <label for="naver">네이버페이</label>
                                         </li>
@@ -120,15 +146,21 @@
                                             <div class="price">
                                                 <dl>
                                                     <dt>상품금액</dt>
-                                                    <dd>45,000원</dd>
+                                                    <dd><span class="pay_product">45,000</span>원</dd>
                                                 </dl>
                                                 <dl>
                                                     <dt>배송비</dt>
-                                                    <dd>0원</dd>
+                                                    <dd><span class="pay_delivery">0</span>원</dd>
                                                 </dl>
                                                 <dl>
                                                     <dt>할인금액</dt>
-                                                    <dd>4,500원</dd>
+                                                    <dd><span class="pay_discount">4,500</span>원</dd>
+                                                </dl>
+                                                <dl>
+                                                    <dt>나의 포인트 사용
+                                                        <input type="checkbox" class="pointChk">
+                                                    </dt>
+                                                    <dd><span class="pay_point">500</span>원</dd>
                                                 </dl>
                                             </div>
                                         </li>
@@ -136,7 +168,7 @@
                                             <div class="final">
                                                 <dl>
                                                     <dt>최종 결제 금액</dt>
-                                                    <dd>40,500원</dd>
+                                                    <dd><span class="pay_total">40,500</span>원</dd>
                                                 </dl>
                                             </div>
                                         </li>
@@ -158,6 +190,12 @@
                 
             </div>
         </section>
+        
+
 </section>
+
+
+<script src="./js/main.js"></script>
+
 </body>
 </html>
