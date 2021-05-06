@@ -3,22 +3,22 @@
 
 @font-face {
     font-family: "parisienne";
-    src: url("fonts/parisienne_regular.ttf");
+    src: url("../fonts/parisienne_regular.ttf");
 }
 
 @font-face {
     font-family: "gilroy";
-    src: url("fonts/gilroy_light.otf");
+    src: url("../fonts/gilroy_light.otf");
 }
 
 @font-face {
     font-family: "gmarket";
-    src: url("fonts/GmarketSansMedium.otf");
+    src: url("../fonts/GmarketSansMedium.otf");
 }
 
 @font-face {
     font-family: "nanum";
-    src: url("fonts/nanumbarungothic.ttf");
+    src: url("../fonts/nanumbarungothic.ttf");
 }
 
 *{
