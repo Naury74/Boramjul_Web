@@ -225,14 +225,20 @@ li.current {
 }
 
 #best-back img{
-    width: 100%;
+    width: 25%;
+}
+#best2{
+    margin-left: 100px;
+}
+#best3{
+    margin-left: 100px;
 }
 
 #new-container{
     position: relative;
 }
 
-#new-back #bookImg img{
+#new-back img{
     width: 17%;
     height: 7%;
 }
