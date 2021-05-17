@@ -1,6 +1,7 @@
 package com.webcrawling.webcrawlingapp.model.book;
 
-public class TravelDTO {
+
+public class BooklistDTO {
 	private String name;
 	private String price;
 	private String content;
@@ -34,4 +35,5 @@ public class TravelDTO {
 	public String getImage() {
 		return image;
 	}
+
 }

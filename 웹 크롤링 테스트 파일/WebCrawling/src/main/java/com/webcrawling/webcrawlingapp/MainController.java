@@ -12,39 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.webcrawling.webcrawlingapp.model.book.NewBooksDTO;
-import com.webcrawling.webcrawlingapp.model.book.ArtDTO;
-import com.webcrawling.webcrawlingapp.model.book.BestSellersDTO;
-import com.webcrawling.webcrawlingapp.model.book.ChildrenCompDTO;
-import com.webcrawling.webcrawlingapp.model.book.ChildrenDTO;
-import com.webcrawling.webcrawlingapp.model.book.ChildrenEngDTO;
-import com.webcrawling.webcrawlingapp.model.book.ComicsDTO;
-import com.webcrawling.webcrawlingapp.model.book.CookingDTO;
-import com.webcrawling.webcrawlingapp.model.book.EconomyDTO;
-import com.webcrawling.webcrawlingapp.model.book.ElementaryDTO;
-import com.webcrawling.webcrawlingapp.model.book.EssayDTO;
-import com.webcrawling.webcrawlingapp.model.book.FamilyDTO;
-import com.webcrawling.webcrawlingapp.model.book.HealthDTO;
-import com.webcrawling.webcrawlingapp.model.book.HistoryDTO;
-import com.webcrawling.webcrawlingapp.model.book.HobbyDTO;
-import com.webcrawling.webcrawlingapp.model.book.HumanitiesDTO;
-import com.webcrawling.webcrawlingapp.model.book.ITDTO;
-import com.webcrawling.webcrawlingapp.model.book.JobDTO;
-import com.webcrawling.webcrawlingapp.model.book.KoreaDTO;
-import com.webcrawling.webcrawlingapp.model.book.LanguageDTO;
-import com.webcrawling.webcrawlingapp.model.book.MagazineDTO;
-import com.webcrawling.webcrawlingapp.model.book.MiddleHighDTO;
-import com.webcrawling.webcrawlingapp.model.book.NovelDTO;
-import com.webcrawling.webcrawlingapp.model.book.OpenUniversityDTO;
-import com.webcrawling.webcrawlingapp.model.book.PoliticsDTO;
-import com.webcrawling.webcrawlingapp.model.book.ReligionDTO;
-import com.webcrawling.webcrawlingapp.model.book.ScienceDTO;
-import com.webcrawling.webcrawlingapp.model.book.SelfHelpDTO;
-import com.webcrawling.webcrawlingapp.model.book.TechnologyDTO;
-import com.webcrawling.webcrawlingapp.model.book.TeenagerDTO;
-import com.webcrawling.webcrawlingapp.model.book.ToddlerDTO;
-import com.webcrawling.webcrawlingapp.model.book.TravelDTO;
-import com.webcrawling.webcrawlingapp.model.book.UniversityDTO;
+import com.webcrawling.webcrawlingapp.model.book.BooklistDTO;
 
 
 @Controller
@@ -55,7 +23,7 @@ public class MainController {
 			
 		String URL = "http://www.kyobobook.co.kr/bestSellerNew/bestseller.laf?mallGb=KOR&linkClass=A&range=1&kind=0&orderClick=DAa";
 		
-		ArrayList<BestSellersDTO> bs_list = new ArrayList<BestSellersDTO>();
+		ArrayList<BooklistDTO> bs_list = new ArrayList<BooklistDTO>();
 		
 		ArrayList<String> imgUrl = new ArrayList<String>();
 		
@@ -76,7 +44,7 @@ public class MainController {
         
         for (int i=0; i<20; i++) {
         	
-        	BestSellersDTO dto = new BestSellersDTO();
+        	BooklistDTO dto = new BooklistDTO();
         	dto.setName(name.get(i).text());
         	dto.setContent(content.get(i).text());
         	dto.setPrice(price.get(i).text());
@@ -106,7 +74,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/newproduct/newProductList.laf?orderClick=Ca1";
 	
-	ArrayList<NewBooksDTO> nb_list = new ArrayList<NewBooksDTO>();
+	ArrayList<BooklistDTO> nb_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -127,7 +95,7 @@ public class MainController {
     
     for (int i=0; i<20; i++) {
     	
-    	NewBooksDTO dto = new NewBooksDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -148,7 +116,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=01&menuCode=002";
 	
-	ArrayList<NovelDTO> novel_list = new ArrayList<NovelDTO>();
+	ArrayList<BooklistDTO> novel_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -169,7 +137,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	NovelDTO dto = new NovelDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -190,7 +158,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=03&menuCode=002";
 	
-	ArrayList<EssayDTO> essay_list = new ArrayList<EssayDTO>();
+	ArrayList<BooklistDTO> essay_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -211,7 +179,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	EssayDTO dto = new EssayDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -233,7 +201,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=13&menuCode=002";
 	
-	ArrayList<EconomyDTO> economy_list = new ArrayList<EconomyDTO>();
+	ArrayList<BooklistDTO> economy_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -254,7 +222,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	EconomyDTO dto = new EconomyDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -275,7 +243,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=15&menuCode=002";
 	
-	ArrayList<SelfHelpDTO> selfhelp_list = new ArrayList<SelfHelpDTO>();
+	ArrayList<BooklistDTO> selfhelp_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -296,7 +264,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	SelfHelpDTO dto = new SelfHelpDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -317,7 +285,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=05&menuCode=002";
 	
-	ArrayList<HumanitiesDTO> humanities_list = new ArrayList<HumanitiesDTO>();
+	ArrayList<BooklistDTO> humanities_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -338,7 +306,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	HumanitiesDTO dto = new HumanitiesDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -359,7 +327,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=19&menuCode=002";
 	
-	ArrayList<HistoryDTO> history_list = new ArrayList<HistoryDTO>();
+	ArrayList<BooklistDTO> history_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -380,7 +348,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	HistoryDTO dto = new HistoryDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -402,7 +370,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=21&menuCode=002";
 	
-	ArrayList<ReligionDTO> religion_list = new ArrayList<ReligionDTO>();
+	ArrayList<BooklistDTO> religion_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -423,7 +391,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ReligionDTO dto = new ReligionDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -445,7 +413,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=17&menuCode=002";
 	
-	ArrayList<PoliticsDTO> politics_list = new ArrayList<PoliticsDTO>();
+	ArrayList<BooklistDTO> politics_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -466,7 +434,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	PoliticsDTO dto = new PoliticsDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -487,7 +455,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=23&menuCode=002";
 	
-	ArrayList<ArtDTO> art_list = new ArrayList<ArtDTO>();
+	ArrayList<BooklistDTO> art_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -508,7 +476,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ArtDTO dto = new ArtDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -530,7 +498,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=29&menuCode=002";
 	
-	ArrayList<ScienceDTO> science_list = new ArrayList<ScienceDTO>();
+	ArrayList<BooklistDTO> science_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -551,7 +519,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ScienceDTO dto = new ScienceDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -572,7 +540,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=26&menuCode=002";
 	
-	ArrayList<TechnologyDTO> technology_list = new ArrayList<TechnologyDTO>();
+	ArrayList<BooklistDTO> technology_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -593,7 +561,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	TechnologyDTO dto = new TechnologyDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -614,7 +582,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=33&menuCode=002";
 	
-	ArrayList<ITDTO> it_list = new ArrayList<ITDTO>();
+	ArrayList<BooklistDTO> it_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -635,7 +603,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ITDTO dto = new ITDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -657,7 +625,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=41&menuCode=002";
 	
-	ArrayList<ToddlerDTO> toddler_list = new ArrayList<ToddlerDTO>();
+	ArrayList<BooklistDTO> toddler_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -678,7 +646,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ToddlerDTO dto = new ToddlerDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -699,7 +667,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=42&menuCode=002";
 	
-	ArrayList<ChildrenDTO> children_list = new ArrayList<ChildrenDTO>();
+	ArrayList<BooklistDTO> children_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -720,7 +688,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ChildrenDTO dto = new ChildrenDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -742,7 +710,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=51&menuCode=002";
 	
-	ArrayList<ChildrenCompDTO> childrencomp_list = new ArrayList<ChildrenCompDTO>();
+	ArrayList<BooklistDTO> childrencomp_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -763,7 +731,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ChildrenCompDTO dto = new ChildrenCompDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -784,7 +752,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=38&menuCode=002";
 	
-	ArrayList<TeenagerDTO> teenager_list = new ArrayList<TeenagerDTO>();
+	ArrayList<BooklistDTO> teenager_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -805,7 +773,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	TeenagerDTO dto = new TeenagerDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -826,7 +794,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=45&menuCode=002";
 	
-	ArrayList<ChildrenEngDTO> childreneng_list = new ArrayList<ChildrenEngDTO>();
+	ArrayList<BooklistDTO> childreneng_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -847,7 +815,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ChildrenEngDTO dto = new ChildrenEngDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -869,7 +837,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=39&menuCode=002";
 	
-	ArrayList<ElementaryDTO> elementary_list = new ArrayList<ElementaryDTO>();
+	ArrayList<BooklistDTO> elementary_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -890,7 +858,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ElementaryDTO dto = new ElementaryDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -911,7 +879,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=25&menuCode=002";
 	
-	ArrayList<MiddleHighDTO> middlehigh_list = new ArrayList<MiddleHighDTO>();
+	ArrayList<BooklistDTO> middlehigh_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -932,7 +900,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	MiddleHighDTO dto = new MiddleHighDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -953,7 +921,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=50&menuCode=001";
 	
-	ArrayList<UniversityDTO> university_list = new ArrayList<UniversityDTO>();
+	ArrayList<BooklistDTO> university_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -974,7 +942,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	UniversityDTO dto = new UniversityDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -995,7 +963,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?pageNumber=1&perPage=20&mallGb=KOR&linkClass=0551&ejkGb=&sortColumn=&menuCode=002";
 	
-	ArrayList<OpenUniversityDTO> openuniversity_list = new ArrayList<OpenUniversityDTO>();
+	ArrayList<BooklistDTO> openuniversity_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1016,7 +984,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	OpenUniversityDTO dto = new OpenUniversityDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1037,7 +1005,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=47&menuCode=002";
 	
-	ArrayList<ComicsDTO> comics_list = new ArrayList<ComicsDTO>();
+	ArrayList<BooklistDTO> comics_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1058,7 +1026,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	ComicsDTO dto = new ComicsDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1079,7 +1047,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=53&menuCode=002";
 	
-	ArrayList<KoreaDTO> korea_list = new ArrayList<KoreaDTO>();
+	ArrayList<BooklistDTO> korea_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1100,7 +1068,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	KoreaDTO dto = new KoreaDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1122,7 +1090,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=31&menuCode=002";
 	
-	ArrayList<JobDTO> job_list = new ArrayList<JobDTO>();
+	ArrayList<BooklistDTO> job_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1143,7 +1111,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	JobDTO dto = new JobDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1165,7 +1133,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=27&menuCode=002";
 	
-	ArrayList<LanguageDTO> language_list = new ArrayList<LanguageDTO>();
+	ArrayList<BooklistDTO> language_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1186,7 +1154,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	LanguageDTO dto = new LanguageDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1207,7 +1175,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=07&menuCode=002";
 	
-	ArrayList<FamilyDTO> family_list = new ArrayList<FamilyDTO>();
+	ArrayList<BooklistDTO> family_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1228,7 +1196,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	FamilyDTO dto = new FamilyDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1249,7 +1217,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=09&menuCode=002";
 	
-	ArrayList<HealthDTO> health_list = new ArrayList<HealthDTO>();
+	ArrayList<BooklistDTO> health_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1270,7 +1238,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	HealthDTO dto = new HealthDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1291,7 +1259,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=32&menuCode=002";
 	
-	ArrayList<TravelDTO> travel_list = new ArrayList<TravelDTO>();
+	ArrayList<BooklistDTO> travel_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1312,7 +1280,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	TravelDTO dto = new TravelDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1333,7 +1301,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=08&menuCode=002";
 	
-	ArrayList<CookingDTO> cooking_list = new ArrayList<CookingDTO>();
+	ArrayList<BooklistDTO> cooking_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1354,7 +1322,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	CookingDTO dto = new CookingDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1375,7 +1343,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=11&menuCode=002";
 	
-	ArrayList<HobbyDTO> hobby_list = new ArrayList<HobbyDTO>();
+	ArrayList<BooklistDTO> hobby_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1396,7 +1364,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	HobbyDTO dto = new HobbyDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
@@ -1417,7 +1385,7 @@ public class MainController {
 		
 	String URL = "http://www.kyobobook.co.kr/categoryRenewal/categoryMain.laf?perPage=20&mallGb=KOR&linkClass=35&menuCode=002";
 	
-	ArrayList<MagazineDTO> magazine_list = new ArrayList<MagazineDTO>();
+	ArrayList<BooklistDTO> magazine_list = new ArrayList<BooklistDTO>();
 	
 	ArrayList<String> imgUrl = new ArrayList<String>();
 	
@@ -1438,7 +1406,7 @@ public class MainController {
     
     for (int i=0; i<20; i+=2) {
     	
-    	MagazineDTO dto = new MagazineDTO();
+    	BooklistDTO dto = new BooklistDTO();
     	dto.setName(name.get(i).text());
     	dto.setContent(content.get(i).text());
     	dto.setPrice(price.get(i).text());
