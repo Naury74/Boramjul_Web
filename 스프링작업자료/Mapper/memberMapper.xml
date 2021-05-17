@@ -12,9 +12,9 @@
    <!-- 회원가입 -->
    <select id="insert">   
       INSERT INTO member 
-      (id, passwd, name, email, phone, sns, birth) 
+      (email, passwd, name, phone, sns, birth) 
       VALUES 
-      (#{id}, #{passwd}, #{name}, #{email}, #{phone}, #{sns}, #{birth})
+      (#{email}, #{passwd}, #{name}, #{phone}, #{sns}, #{birth})
    </select>
    
    <!-- 이메일찾기 -->
@@ -30,7 +30,7 @@
    <!-- 회원정보수정 -->
    <update id="update">
       update member set 
-      name = #{name}, passwd = #{passwd}, id = #{id}, birth = #{birth}, phone = #{phone}, address = #{address}  where email = #{email}
+      name = #{name}, passwd = #{passwd}, birth = #{birth}, phone = #{phone}, address = #{address}  where email = #{email}
    </update>
    
    <!-- 회원정보삭제 -->
