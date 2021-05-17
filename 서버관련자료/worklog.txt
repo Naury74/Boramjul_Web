@@ -1,5 +1,10 @@
 초기비번 F8GnutDLr+bLr
 
+클라우드서버
+id - kskang.brj@gmail.com
+pw - Boramjul1!
+
+
 포트포워딩 106.10.50.197  port 3389
 
 공인아이피 49.50.162.248
@@ -100,6 +105,8 @@ firewall-cmd --reload
 id - boramjul
 pw - qhfkawnf6^
 kskang.brj@gmail.com
+
+
 
 접속주소
 http://www.boramjul.kro.kr/
