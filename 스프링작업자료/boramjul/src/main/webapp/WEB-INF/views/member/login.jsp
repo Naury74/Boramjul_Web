@@ -54,12 +54,20 @@
     </form>
         
      
-     <a href="findID.html" id="findid" style="text-decoration:none;">아이디찾기</a>
-     <a href="findPWD.html" id="findpwd"style="text-decoration:none;">비밀번호찾기</a>
-     <a href="join1.html" id="join" style="text-decoration:none;">회원가입</a>
+     <a href="${path}/member/findemail.do" id="findid" style="text-decoration:none;">이메일찾기</a>
+     <a href="${path}/member/findpwd.do" id="findpwd"style="text-decoration:none;">비밀번호찾기</a>
+     <a href="${path}/member/join1.do" id="join" style="text-decoration:none;">회원가입</a>
      <a id="or">또는</a>
-	 <a id="kakao_id_login" href="javascript:kakaoLogin();"><img src="${path}/images/kakao.png"></a>
-	<div id="naver_id_login"></div>
+	 <a id="kakao_id_login" href="javascript:kakaoLogin();" style="position: absolute;
+															    width: 87px;
+															    height: 86px;
+															    left: 280px;
+															    top: 730px;"><img src="${path}/images/kakao.png"></a>
+	<div id="naver_id_login" style="position: absolute;
+    width: 87px;
+    height: 86px;
+    left: 400px;
+    top: 730px;"></div>
     </div>
     
 

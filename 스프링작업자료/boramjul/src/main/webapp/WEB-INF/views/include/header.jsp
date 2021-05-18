@@ -268,8 +268,8 @@
             <ul>
             	<c:choose>
             		<c:when test="${sessionScope.email == null }">
-            			<li><a href="/member/login.do" class="topmenu">로그인</a></li>
-                		<li><a href="/member/join.do" class="topmenu">회원가입</a></li>
+            			<li><a href="${path }/member/login.do" class="topmenu">로그인</a></li>
+                		<li><a href="${path }/member/join1.do" class="topmenu">회원가입</a></li>
             		</c:when>
             		<c:otherwise>
             			<li><p>${sessionScope.name}님</p></li>

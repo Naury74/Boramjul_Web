@@ -25,19 +25,64 @@ public class MemberController {
 
 	@Inject
 	MemberService memberService;
-		
+	
 	@RequestMapping("join.do")
 	public String join() {	
 		return "member/join";
 	}
 	
+	@RequestMapping("join1.do")
+	public String join1() {	
+		return "member/join1";
+	}
+	
+	@RequestMapping("join1_1.do")
+	public String join1_1() {	
+		return "member/join1_1";
+	}
+	
+	@RequestMapping("join1_2.do")
+	public String join1_2() {	
+		return "member/join1_2";
+	}
+	
+	@RequestMapping("joinok.do")
+	public String joinok(@ModelAttribute MemberDTO dto, Model model) {	
+		model.addAttribute("dto",dto);
+		return "member/joinok";
+	}
+	
+	@RequestMapping("findemail.do")
+	public String findemail() {	
+		return "member/findemail";
+	}
+	
+	@RequestMapping("findemailok.do")
+    public String findemailok(@RequestParam String phone, Model model) {
+        model.addAttribute("dto", memberService.findemail(phone));
+        return "member/findemailok";
+    }
+	
+	@RequestMapping("findpwd.do")
+	public String findpwd() {	
+		return "member/findpwd";
+	}
+	
+	@RequestMapping("findpwdok.do")
+	public String findpwdok(@RequestParam String email, Model model) {	
+		model.addAttribute("dto", memberService.findpwd(email));
+		return "member/findpwdok";
+	}	
+		
 	@RequestMapping("insert.do")
 	public String insert(@ModelAttribute MemberDTO dto) {
-		// dto멤버변수와 매개변수 이름이 같아야 자동으로 맵핑됨
-		System.out.println("insert 실행됨");
-		System.out.println("받아온 내용"+dto);
+		
+		dto.setSns(1);
+		System.out.println("insert 받아온 내용"+dto);
+		
 		memberService.insert(dto);
-		return "redirect:/member/list.do";
+		
+		return "redirect:/member/joinok.do";
 	}
 	
 	////////////////////////////////////////////아래부터 조성현 작업 부분 입니다
@@ -52,10 +97,10 @@ public class MemberController {
 	@RequestMapping("kakao_request.do" )
 	public String kakao_request(@ModelAttribute MemberDTO dto, Model model) {
 		model.addAttribute("dto",dto);
-		System.out.println("dto: "+dto);
+		System.out.println("dto1: "+dto);
 		System.out.println("test kakao request ");
 			
-		return "member/kakao_login";
+		return "redirect:api_login_check.do";
 	}
 	
 	@RequestMapping("naver_request.do" )
@@ -65,21 +110,23 @@ public class MemberController {
 		return "member/naver_login";
 	}
 	
-	@RequestMapping("login_result.do" ) //api용
-	public String login_result(@ModelAttribute MemberDTO dto, Model model) {
+	@RequestMapping("api_login_check.do" ) //api용
+	public ModelAndView login_api(@ModelAttribute MemberDTO dto, HttpSession session) {
 		
-		//회원이면 그대로 로그인, 회원 아니면 간편 회원가입 페이지로 이동하는거 짜야함
-		//model.addAttribute("dto",dto);
-		//System.out.println("dto: "+dto);
+		ModelAndView mav = new ModelAndView();
 		
-		if(dto.getSns()==3) {
-			return "";
-		} else if(dto.getSns()==4) {
-			return "";
+		System.out.println("dto2: "+dto);
+		String name = memberService.apiloginCheck(dto, session);
+		logger.info("name: "+name);
+		if (name != null) {// 로그인 성공시  session값을 생성해서 home페이지로 이동
+			mav.setViewName("main");
 		} else {
-			dto.setSns(1);
-			return "member/loginOk";
+			// 로그인 실패시 에러 메시지와 함께 로그인 페이지로 이동
+			mav.setViewName("member/join");
+			mav.addObject("message","error");
 		}
+		return mav;
+
 	}
 	
 	@RequestMapping("login_check.do")

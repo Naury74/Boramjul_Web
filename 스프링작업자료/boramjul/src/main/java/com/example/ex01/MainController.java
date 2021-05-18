@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.ex01.model.dto.BooksDTO;
+import com.example.ex01.model.dto.ProductDTO;
 
 @Controller
 public class MainController {
@@ -33,7 +33,7 @@ public class MainController {
 		}
 		
 		@RequestMapping("search.do")
-		public String search(@ModelAttribute BooksDTO dto, Model model) {
+		public String search(@ModelAttribute ProductDTO dto, Model model) {
 			
 			System.out.println(dto);
 			model.addAttribute("dto",dto);

@@ -39,10 +39,25 @@ public class MemberServiceImpl implements MemberService {
 	public void update(MemberDTO dto) {
 		memberDao.update(dto);
 	}
+	
+	@Override
+	public MemberDTO findemail(String phone) {
+		return memberDao.findemail(phone);
+	}
+	
+	@Override
+	public MemberDTO findpwd(String email) {
+		return memberDao.findpwd(email);
+	}
 
 	@Override
 	public boolean check_passwd(String email, String passwd) {
 		return memberDao.check_passwd(email, passwd);
+	}
+	
+	@Override
+	public boolean check_api(String email, String name) { //api용
+		return memberDao.check_api(email, name);
 	}
 
 	@Override
@@ -57,6 +72,23 @@ public class MemberServiceImpl implements MemberService {
 		
 			// logger.info("session : "+session.getAttribute("id"));
 			// logger.info("session : " + session.getAttribute("name"));
+			
+		} 
+		return name;
+	}
+	
+	@Override
+	public String apiloginCheck(MemberDTO dto, HttpSession session) {//api용
+		String name = memberDao.apiloginCheck(dto);
+		
+		if (name != null) {
+			
+			//로그인이 성공이면 세션값 생성
+			session.setAttribute("email", dto.getEmail());
+			session.setAttribute("name", name);
+		
+			 logger.info("session : "+session.getAttribute("email"));
+			 logger.info("session : " + session.getAttribute("name"));
 			
 		} 
 		return name;

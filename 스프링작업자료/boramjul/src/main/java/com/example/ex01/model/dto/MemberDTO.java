@@ -16,9 +16,12 @@ public class MemberDTO {
 	private int sns;
 	private String birth;
 	private String address;
-	private int rank;
+	private String rank;
 	private int totalprice;
 	private int reserves;
 	private Date joindate;
+	
+	
+	
 }
 

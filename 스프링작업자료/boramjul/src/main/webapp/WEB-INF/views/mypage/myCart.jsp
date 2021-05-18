@@ -12,13 +12,13 @@
 	
     	//넘버박스 함수
 	    function Count(type, ths){
-	        var $num = $(ths).parents("td").find("input[name='num']");
-	        var count = Number($num.val());
+	        var $num = $(ths).parents("td").find("input[name='quantity']");
+	        var count = Number($quantity.val());
 	
 	        if(type=='p'){
-	            if(count >=0) $num.val(Number(count)+1);
+	            if(count >=0) $quantity.val(Number(count)+1);
 	        }else{
-	            if(count >0) $num.val(Number(count)-1);    
+	            if(count >0) $quantity.val(Number(count)-1);    
 	        }
 	    }
     	
@@ -31,6 +31,19 @@
                     $("input[type=checkbox]").prop("checked",false); } 
             }) 
         }) 
+        
+		$(function(){
+
+			$('#buyBtn').click(function(){
+				document.form1.submit();
+			});
+			
+			$('#delBtn').click(function(){
+				if(confirm("장바구니를 비우겠습니까?")){
+					location.href="${path}/shop/cart/deleteAll.do";
+				} 
+			});					
+		});
 	</script>
 </head>
 <body>
@@ -69,40 +82,13 @@
                     <td>
                         <div class="num">
                             <button  class="numBtn" type="button" onclick="Count('m', this);">-</button>
-                            <input class="num_input" type="text" name="num" value="0" readonly="readonly" size="1"/>
+                            <input class="num_input" type="text" name="quantity" value="1" readonly="readonly" size="1"/>
                             <button class="numBtn" type ="button" onclick="Count('p',this);">+</button>
                         </div>
                     </td>
                     <td><input type="checkbox" name="check" class="check" checked></td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-                    <td>아몽드드</td>
-                    <td>12000원</td>
-                    <td>
-                        <div class="num">
-                            <button  class="numBtn" type="button" onclick="Count('m', this);">-</button>
-                            <input class="num_input" type="text" name="num" value="0" readonly="readonly" size="1"/>
-                            <button class="numBtn" type ="button" onclick="Count('p',this);">+</button>
-                        </div>
-                    </td>
-                    <td><input type="checkbox" name="check" class="check" checked></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-                    <td>아몽드라이기</td>
-                    <td>12000원</td>
-                    <td>
-                        <div class="num">
-                            <button  class="numBtn" type="button" onclick="Count('m', this);">-</button>
-                            <input class="num_input" type="text" name="num" value="0" readonly="readonly" size="1"/>
-                            <button class="numBtn" type ="button" onclick="Count('p',this);">+</button>
-                        </div>
-                    </td>
-                    <td><input type="checkbox" name="check" class="check" checked></td>
-                </tr>
+                
             </table>
         </div><!--table-->
 

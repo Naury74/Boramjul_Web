@@ -43,6 +43,7 @@ public class MypageController {
 	@RequestMapping("membership.do")
 	public String membership(@RequestParam String email, Model model) {
 		model.addAttribute("dto", memberService.myInfo(email));
+		
 		return "mypage/membership";
 	}
 
