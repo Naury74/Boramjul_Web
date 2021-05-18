@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mysqlCart">
+   
+   <!-- 장바구니 조회 -->
+   <select id="cart_list" resultType="cartDTO">
+      select * from cart WHERE email = #{email} AND result &lt; 3
+   </select>
+   
+   <!-- 장바구니 추가  -->
+   <insert id="prod_insert">
+      INSERT INTO cart 
+      (email, prodnum, name, image, price, quantity, totalprice) 
+      VALUES 
+      ("abc3@naver.com", 1,
+      (SELECT `NAME` FROM product WHERE prodnum = 1),
+      (SELECT `image` FROM product WHERE prodnum = 1),
+      (SELECT `price` FROM product WHERE prodnum = 1), 2,
+      2*(SELECT price FROM product WHERE prodnum = 1))
+   </insert>
+
+   <!-- 장바구니 품목 삭제 -->
+   <delete id="cart_delete">   
+       delete from cart where cartnum = #{cartnum}
+   </delete>
+
+   <!-- 장바구니 수량 변경 -->
+   <update id="prod_update">
+      update cart set 
+      quantity = #{quantity}, totalprice = #{quantity}*(SELECT price FROM product WHERE prodnum = #{prodnum}) where cartnum = #{cartnum}
+   </update>
+
+   <!-- 주문 대기 상태로 변경 (1개 이상의 cartnum 선택시 배열으로 받아서 for문 이용하여 1개이상 수정-->
+   <update id="prod_order">
+     UPDATE cart SET result = 2 WHERE cartnum = #{cartnum}
+   </update>
+
+   <!-- 장바구니 결과값 초기화(장바구니 열때마다 실행) -->
+   <update id="prod_resultr">
+     UPDATE cart SET result = 1 WHERE result = #{result}
+   </update>
+
+</mapper>
