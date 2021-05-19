@@ -6,17 +6,17 @@
 }
 @font-face {
     font-family: "gilroy";
-    src: url("../fonts/gilroy_light.otf");
+    src: url("${pageContext.request.contextPath }/fonts/gilroy_light.otf");
 }
 @font-face {
     font-family: "gmarket";
-    src: url("../fonts/GmarketSansMedium.otf");
+    src: url("${pageContext.request.contextPath }/fonts/GmarketSansMedium.otf");
 }
 @font-face {
     font-family: "nanum";
-    src: url("../fonts/nanumbarungothic.ttf");
+    src: url("${pageContext.request.contextPath }/fonts/nanumbarungothic.ttf");
 }
-@media (max-width:900px) {
+/*@media (max-width:900px) {
     .wrap .box .my_line{
         display: none;
     }
@@ -148,7 +148,7 @@
     .wrap .box {
         margin-bottom: 100px;
     }
-}
+}*/
 p{
     font-family: "nanum";
 }
@@ -249,12 +249,15 @@ a{
     font-size: 17px;
 }
 .table tr td:first-child{
-    width: 5%;
+    width: 15%;
 }
 .table tr td:nth-child(2){
-    width: 5%;
+    width: 15%;
 }
 .table tr td:nth-child(3){
+    width: 5%;
+}
+.table tr td:nth-child(4){
     width: 10%;
 }
 .table tr td:last-child{
@@ -308,16 +311,24 @@ a{
 #delBtn{
     font-size: 24px;
     background: #434CA5;
-    width: 350px;
+    width: 250px;
     height: 75px;
     font-size: 36px;
 }
 #buyBtn{
     font-size: 24px;
     background: #664B8E;
-    width: 350px;
+    width: 250px;
     height: 75px;
-    margin-left: 100px;
+    margin-left: 50px;
+    font-size: 36px;
+}
+#updateBtn{
+	font-size: 24px;
+    background: #664B8E;
+    width: 250px;
+    height: 75px;
+    margin-left: 50px;
     font-size: 36px;
 }
 .star{

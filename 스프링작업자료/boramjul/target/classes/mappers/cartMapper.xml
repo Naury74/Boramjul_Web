@@ -5,7 +5,7 @@
 <mapper namespace="mysqlCart">
    
    <!-- 장바구니 조회 -->
-   <select id="cart_list" resultType="CartDTO">
+   <select id="listCart" resultType="CartDTO">
       select * from cart WHERE email = #{email} AND result &lt; 3
    </select>
    
@@ -27,9 +27,13 @@
    </delete>
 
   <!-- 장바구니 수량 변경 -->
-   <update id="prod_update">
-      update cart set 
-      quantity = #{quantity}, totalprice = #{quantity}*(SELECT price FROM product WHERE prodnum = #{prodnum}) where cartnum = #{cartnum}
+   <update id="cart_update">
+   		update cart 
+   		set
+  			quantity = #{quantity},
+  			totalprice = #{totalprice}
+  		where
+  			cartnum = #{cartnum}
    </update>
 
    <!-- 주문 대기 상태로 변경 (1개 이상의 cartnum 선택시 배열으로 받아서 for문 이용하여 1개이상 수정/구매하면 3이되고 취소하면 1이됨-->
@@ -41,5 +45,15 @@
    <update id="prod_resultr">
      UPDATE cart SET result = 1 WHERE result = #{result}
    </update>
+   
+    <!-- 장바구니 합계-->
+  	<select id="cart_tot" resultType="int">
+  		select 
+  			ifnull(sum(price*quantity),0)
+  		from 
+  			cart
+  		where 
+  			email = #{email} AND result &lt; 3
+  	</select> 
 
 </mapper>

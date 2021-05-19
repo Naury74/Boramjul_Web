@@ -12,7 +12,7 @@
 	
     	//넘버박스 함수
 	    function Count(type, ths){
-	        var $num = $(ths).parents("td").find("input[name='quantity']");
+	        var $quantity = $(ths).parents("td").find("input[name='quantity']");
 	        var count = Number($quantity.val());
 	
 	        if(type=='p'){
@@ -23,25 +23,46 @@
 	    }
     	
         //체크박스 함수
-        $(function(){ 
+        $(function(){
             $("#allCheck").click(function(){
-                if($("#allCheck").prop("checked")) { 
-                    $("input[type=checkbox]").prop("checked",true);
-                } else { 
-                    $("input[type=checkbox]").prop("checked",false); } 
-            }) 
-        }) 
-        
-		$(function(){
+            	var allchk = $("#allCheck").prop("checked");
+            	
+                if(allchk) {
+                    $(".check").prop("checked",true);
+                } else {
+                    $(".check").prop("checked",false); 
+                } 
+            });
+        }) ;
 
+		$(function(){
 			$('#buyBtn').click(function(){
-				document.form1.submit();
+				document.form.submit();
+			});
+			
+			$('#updateBtn').click(function(){
+				document.form.submit();
 			});
 			
 			$('#delBtn').click(function(){
-				if(confirm("장바구니를 비우겠습니까?")){
-					location.href="${path}/shop/cart/deleteAll.do";
-				} 
+				var confirm_val = confirm("정말 삭제하시겠습니까?");
+				
+				if(confirm_val){
+					var checkArr = new Array();
+					
+					$("input[class='check']:checked").each(function(){
+						checkArr.push($(this).attr("data-cartnum"));
+					});
+					
+					$.ajax({
+						url:"/mypage/cart_delete.do",
+						type:"post",
+						data:{check:checkArr},
+						success: function(){
+							location.href="${path}/mypage/myCart.do";
+						}//ajax
+					})
+				}//if
 			});					
 		});
 	</script>
@@ -68,38 +89,71 @@
         <div class="table">
             <table>
                 <tr style="height: 40px;">
-                    <td colspan="2"></td>
+                    <td></td>
                     <td>책 제목</td>
                     <td>판매가</td>
                     <td>수량</td>
-                    <td><input type="checkbox" name="check" class="check" id="allCheck" checked ></td>
+                    <td>합계</td>
+                    <td><input type="checkbox" name="allCheck" class="check" id="allCheck" checked ></td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-                    <td>아몽드</td>
-                    <td>12000원</td>
-                    <td>
-                        <div class="num">
-                            <button  class="numBtn" type="button" onclick="Count('m', this);">-</button>
-                            <input class="num_input" type="text" name="quantity" value="1" readonly="readonly" size="1"/>
-                            <button class="numBtn" type ="button" onclick="Count('p',this);">+</button>
-                        </div>
-                    </td>
-                    <td><input type="checkbox" name="check" class="check" checked></td>
-                </tr>
-                
+                <c:choose>
+                    <c:when test="${map.count == 0 }">
+	                	<tr>
+	                		<td colspan="6">장바구니가 비었습니다</td>
+	                	</tr>
+                	</c:when>
+                	
+                	<c:otherwise>
+                		<form name="form" method="post" action="${path}/mypage/cart_update.do">
+	                	<c:forEach var="row" items="${map.list }">
+		                	<tr>
+			                    <td><img src="${row.image}" alt="책 이미지" class="bookimg"></td>
+			                    <td>${row.name }</td>
+			                    <td><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원
+			                    	<input type="hidden" name="price" value="${row.price }"/>
+			                    </td>
+			                    <td>
+			                        <div class="num">
+			                            <button  class="numBtn" type="button" onclick="Count('m', this);">-</button>
+			                            <input class="num_input" type="text" name="quantity" value="<fmt:formatNumber value="${row.quantity}"/>" readonly="readonly" size="1"/>
+			                            <button class="numBtn" type ="button" onclick="Count('p',this);">+</button>
+			                        </div>
+			                    </td>
+			                    <td><fmt:formatNumber value="${row.totalprice }" pattern="#,###,###"/>원</td>
+			                    <td>
+			                    	<input type="checkbox" name="check" class="check" data-cartnum="${row.cartnum }" checked/>
+			                    	<input type="hidden" name="cartnum" value="${row.cartnum }" />
+
+			                    </td>
+		                	</tr>   
+	                	</c:forEach>
+	                	</form>
+                	</c:otherwise>  
+               	</c:choose>       
             </table>
         </div><!--table-->
+		<c:choose>
+			<c:when test="${map.count == 0 }">
+			</c:when>
+			
+			<c:otherwise>
+				<div id="tot"><p>총 합계: <fmt:formatNumber value="${map.cart_tot }" pattern="#,###,###"/>원</p></div>
+		
+		        <div id="cart_btn">
+		            <button id ="delBtn" name="delBtn" type="submit" data-cartnum="${row.cartnum }">선택 삭제</button>
+		            <button id ="updateBtn">수정 하기</button>
+		            <button id="buyBtn" name="buyBtn" type="submit">구매 하기</button>
+		        </div>
+			</c:otherwise>
 
-        <div id="tot"><p>총 합산 금액: <strong>36000</strong>원</p></div>
-
-        <div id="cart_btn">
-            <button id ="delBtn" name="delBtn" type="submit">선택 삭제</button>
-            <button id="buyBtn" name="buyBtn" type="submit">구매 하기</button>
-        </div>
+        </c:choose>	 
+         
 
     </div><!--box-->
+         
+                
+
+
 
     <%@ include file="../include/footer.jsp" %>
 
