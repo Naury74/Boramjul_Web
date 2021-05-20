@@ -226,7 +226,9 @@ li.current {
 }
 
 #best-back img{
-    width: 25%;
+    width: 262px;
+    height: 375px;
+    padding: 10px;
 }
 #best2{
     margin-left: 100px;

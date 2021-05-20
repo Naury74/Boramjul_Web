@@ -48,12 +48,14 @@
             <p>베스트 셀러</p>
             <p style="font-family:gilroy; font-size: 20px; font-weight: bold;">BEST SELLER</p>
 
-            <div id="best-back">               
-                <div id="bookImg"> <!-- 크롤링 돌려야 하는 부분 -->
-                    <img src="${path}/images/아몬드.jpg" alt="베스트셀러이미지">
-                    <img id="best2" src="${path}/images/아몬드.jpg" alt="베스트셀러이미지">
-                    <img id="best3" src="${path}/images/아몬드.jpg" alt="베스트셀러이미지">
-                    <a class="more" href="BestSellers.do">MORE+</a>
+            <div id="best-back">
+            	<c:forEach var="row" items="${mainbslist}" varStatus="status">               
+                <span id="bookImg"> <!-- 크롤링 돌려야 하는 부분 -->
+                    <img src=${row.image } alt="베스트셀러이미지">
+                </span>
+                </c:forEach>
+                <div>
+                	<a class="more" href="BestSellers.do">MORE+</a>
                 </div>
             </div>
         </div><!--best-container-->
@@ -63,17 +65,12 @@
             <p style="font-family:gilroy; font-size: 20px; font-weight: bold;">NEW BOOKS</p>
 
             <div id="new-back">               
-                <div id="bookImg"> <!-- 크롤링 돌려야 하는 부분 -->
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서1">
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서2">
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서3">
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서4">
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서5">
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서6">
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서7">
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서8">
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서9">
-                    <img src="${path}/images/아몬드.jpg" alt="신간도서10">
+                <c:forEach var="row" items="${mainnblist}" varStatus="status">               
+                <span id="bookImg"> <!-- 크롤링 돌려야 하는 부분 -->
+                    <img src=${row.image } alt="베스트셀러이미지">
+                </span>
+                </c:forEach>
+                <div>
                     <a class="more" href="NewBooks.do">MORE+</a>
                 </div>
             </div>
