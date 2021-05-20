@@ -55,9 +55,7 @@
             <beans:ref bean="loggerInterceptor"/>
     	</mvc:interceptor>
     	
-    	
-
-        <mvc:interceptor>
+    	<mvc:interceptor>
             <mvc:mapping path="/mypage/myCart.do"/>
              <mvc:mapping path="/mypage/myList.do"/>
             <beans:ref bean="loginInterceptor"/>
