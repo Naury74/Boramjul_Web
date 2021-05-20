@@ -327,7 +327,7 @@
                     <li><a href="BestSellers.do" class="topmenu">BEST SELLERS</a></li>
                     <li><a href="NewBooks.do" class="topmenu">NEW BOOKS</a></li>
                     <li><a href="ReviewsList.do" class="topmenu">BOOK REVIEWS</a></li>
-                    <li><a href="map.do" class="topmenu">BOOK STORES</a></li>
+                    <li><a href="${path }/map.do" class="topmenu">BOOK STORES</a></li>
                     <li><a href="${path }/mypage/myList.do?email=${sessionScope.email}" class="topmenu">MEMBERSHIP</a></li>
                 </ul>
         </div><!--main_menu-->
