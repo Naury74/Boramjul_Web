@@ -76,10 +76,15 @@
     #my_menu_list ul {
         height: 1000px;
         width: 100%;
+        list-style-type: none;
+        float: left;
+        marker: none;
+        text-align: center;
     }
     #my_menu_list ul li{
         margin-top: 50px;
         float: none;
+
     }
     #my_menu_list ul li a{
         display: inline-block;

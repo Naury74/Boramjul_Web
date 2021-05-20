@@ -249,16 +249,16 @@ a{
     font-size: 17px;
 }
 .table tr td:first-child{
-    width: 15%;
+    width: 18%;
 }
 .table tr td:nth-child(2){
-    width: 15%;
+    width: 18%;
 }
 .table tr td:nth-child(3){
-    width: 5%;
+    width: 18%;
 }
 .table tr td:nth-child(4){
-    width: 10%;
+    width: 18%;
 }
 .table tr td:last-child{
     width: 10%;
@@ -310,7 +310,7 @@ a{
 }
 #delBtn{
     font-size: 24px;
-    background: #434CA5;
+    background: #9b3532;
     width: 250px;
     height: 75px;
     font-size: 36px;
@@ -325,7 +325,7 @@ a{
 }
 #updateBtn{
 	font-size: 24px;
-    background: #664B8E;
+    background: #434CA5;
     width: 250px;
     height: 75px;
     margin-left: 50px;

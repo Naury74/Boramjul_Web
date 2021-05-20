@@ -10,9 +10,9 @@
 	
    <select id="insert">   
       INSERT INTO member 
-      (passwd, name, email, phone, sns, birth) 
+      (email, passwd, name, phone, sns, birth) 
       VALUES 
-      (#{passwd}, #{name}, #{email}, #{phone}, #{sns}, #{birth})
+      (#{email}, #{passwd}, #{name}, #{phone}, #{sns}, #{birth})
     </select>
 		
 	<delete id="delete">
@@ -56,5 +56,9 @@
      <select id="findpwd" resultType="MemberDTO">
      	select * from member where email = #{email}
      </select>
+     
+     <select id="list" resultType="MemberDTO">
+     	select * from member where email = #{email}
+  	 </select>
 	
 </mapper>

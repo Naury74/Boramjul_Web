@@ -5,10 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>메인화면</title>
-<link rel="stylesheet" href="${path}/css/main.css">
-
-<%@ include file="include/include.jsp" %>
-<script type="text/javascript" src="${path}/include/packed.js"></script>
+	<link rel="stylesheet" href="${path}/css/main.css">
+	<%@ include file="include/include.jsp" %>
+	<script type="text/javascript" src="${path}/include/packed.js"></script>
 </head>
 <body>
 

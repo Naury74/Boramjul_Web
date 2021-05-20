@@ -10,10 +10,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청소년 분야 베스트</title>
+<%@ include file="../include/include.jsp" %>
 <link rel="stylesheet" href="${path}/css/PagesForBooks.css">
 </head>
 <body>
 <div class=wrap>
+	<%@ include file="../include/header.jsp" %>
   <div class="dividing_line">
     <h1 id="BP-h1">베스트셀러 - 청소년</h1>
   </div>  

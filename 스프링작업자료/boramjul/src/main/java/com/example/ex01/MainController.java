@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.ex01.model.dto.ProductDTO;
 import com.example.ex01.model.dto.BooklistDTO;
+import com.example.ex01.model.dto.ProductDTO;
 
 @Controller
 public class MainController {
@@ -20,7 +20,8 @@ public class MainController {
 	// URL 맵핑
 		@RequestMapping("/")
 		public String main(Model model) throws IOException {
-
+			System.out.println("요청 승인");
+			
 			String URL = "http://www.kyobobook.co.kr/bestSellerNew/bestseller.laf?mallGb=KOR&linkClass=A&range=1&kind=0&orderClick=DAa";
 			
 			ArrayList<BooklistDTO> mainbs_list = new ArrayList<BooklistDTO>();
@@ -78,9 +79,6 @@ public class MainController {
 		    	model.addAttribute("mainnblist",mainnb_list);
 
 		    }
-		    
-			System.out.println("요청 승인:");
-			
 			// 포워딩 : 접두사: "/WEB-INF/views/"+"main"+ ".jsp"
 			return "main";
 		}
@@ -97,12 +95,13 @@ public class MainController {
 
 			return "etc/QnA";
 		}
-
+		
 		@RequestMapping("QnA2.do")
 		public String QnA2( Model model) {
 
 			return "etc/QnA2";
 		}
+		
 		@RequestMapping("faqbutton.do")
 		public String faqbutton( Model model) {
 
@@ -115,52 +114,52 @@ public class MainController {
 			System.out.println(dto);
 			model.addAttribute("dto",dto);
 		
-			return "webtest/searchedResults";
+			return "books/SearchedResults";
 		}
 		
 		@RequestMapping("BestSellers.do")
 		public String BestSellers( Model model) throws IOException {
 			
-		String URL = "http://www.kyobobook.co.kr/bestSellerNew/bestseller.laf?mallGb=KOR&linkClass=A&range=1&kind=0&orderClick=DAa";
-		
-		ArrayList<BooklistDTO> bs_list = new ArrayList<BooklistDTO>();
-		
-		ArrayList<String> imgUrl = new ArrayList<String>();
-		
-		
-		Document doc = Jsoup.connect(URL).get();		
-		
-		Elements name = doc.select(".title a strong");
-        Elements content = doc.select(".author");
-        Elements price = doc.select(".book_price");
-        Elements image = doc.select(".cover a");
-        
-        for (int i = 0;i<image.size();i++){
-        	String url = image.get(i).select("img").attr("src");
-            if(!url.equals("")){
-                imgUrl.add(url);
-            }
-        }
-        
-        for (int i=0; i<20; i++) {
-        	
-        	BooklistDTO dto = new BooklistDTO();
-        	dto.setName(name.get(i).text());
-        	dto.setContent(content.get(i).text());
-        	dto.setPrice(price.get(i).text());
-        	dto.setImage(imgUrl.get(i));
-        	
-        	bs_list.add(dto);
-        	
-        	model.addAttribute("bslist",bs_list);
+			String URL = "http://www.kyobobook.co.kr/bestSellerNew/bestseller.laf?mallGb=KOR&linkClass=A&range=1&kind=0&orderClick=DAa";
+			
+			ArrayList<BooklistDTO> bs_list = new ArrayList<BooklistDTO>();
+			
+			ArrayList<String> imgUrl = new ArrayList<String>();
+			
+			
+			Document doc = Jsoup.connect(URL).get();		
+			
+			Elements name = doc.select(".title a strong");
+	        Elements content = doc.select(".author");
+	        Elements price = doc.select(".book_price");
+	        Elements image = doc.select(".cover a");
+	        
+	        for (int i = 0;i<image.size();i++){
+	        	String url = image.get(i).select("img").attr("src");
+	            if(!url.equals("")){
+	                imgUrl.add(url);
+	            }
+	        }
+	        
+	        for (int i=0; i<20; i++) {
+	        	
+	        	BooklistDTO dto = new BooklistDTO();
+	        	dto.setName(name.get(i).text());
+	        	dto.setContent(content.get(i).text());
+	        	dto.setPrice(price.get(i).text());
+	        	dto.setImage(imgUrl.get(i));
+	        	
+	        	bs_list.add(dto);
+	        	
+	        	model.addAttribute("bslist",bs_list);
 
-        }
-        	return "books/BestSellers";
-		}
+	        }
+	        	return "books/BestSellers";
+			}
 		
 		@RequestMapping("NewBooks.do")
-		public String NewBooks( Model model) throws IOException {
-			
+		public String NewBooks( Model model)throws IOException  {
+
 			String URL = "http://www.kyobobook.co.kr/newproduct/newProductList.laf?orderClick=Ca1";
 			
 			ArrayList<BooklistDTO> nb_list = new ArrayList<BooklistDTO>();
@@ -183,7 +182,6 @@ public class MainController {
 		    }
 		    
 		    for (int i=0; i<20; i++) {
-		    	
 		    	BooklistDTO dto = new BooklistDTO();
 		    	dto.setName(name.get(i).text());
 		    	dto.setContent(content.get(i).text());
@@ -193,7 +191,6 @@ public class MainController {
 		    	nb_list.add(dto);
 		    	
 		    	model.addAttribute("nblist",nb_list);
-		 
 		    }
 		    
 			return "books/NewBooks";

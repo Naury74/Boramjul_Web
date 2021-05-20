@@ -1,14 +1,17 @@
-<!doctype html>
-<html lang="ko">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>주문완료 페이지</title>
-    <meta name="viewport" id="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=device-width" />
-    <link rel="stylesheet" href="../css/order.css">
+<meta charset="UTF-8">
+<title>주문 완료</title>
+	<%@ include file="../include/include.jsp" %>
+	<link rel="stylesheet" href="${path }/css/order.css">
 </head>
 <body>
     <!-- container -->
     <section id="container">
+    <%@ include file="../include/header.jsp" %>
         <div class="contents">
                 <div class="complete_wrap">
                     <p>주문이 완료 되었습니다.</p>
@@ -42,7 +45,7 @@
                     </div>                     
                 </div>
         </div>
+        <%@ include file="../include/footer.jsp" %>
     </section>
-
 </body>
 </html>

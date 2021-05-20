@@ -28,4 +28,7 @@ public interface CartService {
 //
 	// 장바구니 수정
 	void cart_update(CartDTO dto);
+	
+	//장바구니 초기화
+	void cart_reset(CartDTO dto);
 }

@@ -16,7 +16,11 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Inject
 	SqlSession sqlSession;
-
+	
+	@Override
+	public List<MemberDAO> list() {
+		return sqlSession.selectList("mysqlMember.list");
+	}
 
 	@Override
 	public void insert(MemberDTO dto) {

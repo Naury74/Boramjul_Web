@@ -38,7 +38,7 @@ public class MypageController {
 	}
 	
 	@RequestMapping("myCart.do")
-	public ModelAndView myCart(HttpSession session, ModelAndView mav) {
+	public ModelAndView myCart(HttpSession session, ModelAndView mav, CartDTO dto) {
 		
 		// 장바구니 정보를 저장하기 위한 객체 생성
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -51,6 +51,8 @@ public class MypageController {
 			List<CartDTO> list = cartService.listCart(email);
 			logger.info("이메일: "+email);
 			logger.info("장바구니 목록: "+list.toString());
+			
+			cartService.cart_reset(dto);
 			
 			// 2. 장바구니 총 금액
 			int cart_tot = cartService.cart_tot(email);
@@ -109,7 +111,7 @@ public class MypageController {
 			if (quantity[i] > 0) {
 				CartDTO dto = new CartDTO();
 				
-				dto.setEamil(email);
+				dto.setEmail(email);
 				dto.setCartnum(cartnum[i]);
 				dto.setQuantity(quantity[i]);
 				dto.setPrice(price[i]);

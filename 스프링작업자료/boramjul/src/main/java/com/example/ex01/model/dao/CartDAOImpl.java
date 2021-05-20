@@ -52,6 +52,12 @@ public class CartDAOImpl implements CartDAO{
 	public int cart_tot(String email) {
 		return sqlSession.selectOne("mysqlCart.cart_tot",email);
 	}
+	
+	//장바구니 초기화
+	@Override
+	public void cart_reset(CartDTO dto) {
+		sqlSession.update("mysqlCart.cart_reset", dto);
+	}
 
 //	@Override
 //	public int coutCart(String userid, int product_id) {

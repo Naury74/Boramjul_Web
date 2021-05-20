@@ -1,19 +1,27 @@
 package com.example.ex01.controller;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.ex01.model.dao.MemberDAO;
 import com.example.ex01.model.dto.MemberDTO;
 import com.example.ex01.service.MemberService;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -169,6 +177,47 @@ public class MemberController {
 		return "redirect:/mypage/myInfo.do";
 
 	}
+	
+	//안드로이드 >> json 형식 데이터 전송 >> 서블릿으로 처리 >> db에 insert
+	   @RequestMapping(value = "androidsignup.do", method = {RequestMethod.POST, RequestMethod.GET}, headers="Accept=application/json" )   
+	   public void androidsignup(@RequestBody String resultSet) throws Exception {//RequestBody이용하여 resultset 변수에 전송된값 저장
+	      System.out.println("androidsignup 서블릿");
+	      
+	      JSONParser jsonParser = new JSONParser();
+	      //jsonparser 이용 하여 json 데이터 파싱
+	      JSONObject obj = (JSONObject) jsonParser.parse(resultSet);      
+	            
+	      MemberDTO dto = new MemberDTO();
+	      
+	      //데이터 값 int 형으로 파싱
+	      int snsjson = Integer.parseInt(String.valueOf(obj.get("sns")));
+	      int totalpricejson = Integer.parseInt(String.valueOf(obj.get("totalprice")));
+	      
+	      //데이터 형에 맞추어 MemberDTO에 담기
+	      dto.setPasswd(obj.get("passwd").toString());
+	      dto.setName(obj.get("name").toString());
+	      dto.setEmail(obj.get("email").toString());
+	      dto.setPhone(obj.get("phone").toString());
+	      dto.setSns(snsjson);      
+	      dto.setBirth(obj.get("birth").toString());
+	      dto.setAddress(obj.get("address").toString());   
+	      dto.setRank(obj.get("rank").toString());
+	      dto.setTotalprice(totalpricejson);      
+	      
+	      System.out.println("전송 받은 값 : "+dto);
+	      //MemberDAO 에 있는 insert 함수 실행
+	      memberService.insert(dto);
+	      System.out.println("insert 실행됨");
+	   }   
+	   
+	   //안드로이드 데이터 통신을 위한 회원정보 리스트 json 형식으로 변환 서블릿 
+	   @RequestMapping("memberinfojson.do")
+	   public @ResponseBody List<MemberDAO> jsonTest() { //@ResponseBody를 통해 json형식으로 반환
+	      System.out.println("회원정보 json 서블릿");
+	      List<MemberDAO> list = memberService.list();
+	      System.out.println(list);
+	      return list;
+	   }
 
 }
 

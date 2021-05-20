@@ -9,10 +9,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>New Books</title>
+<%@ include file="../include/include.jsp" %>
 <link rel="stylesheet" href="${path}/css/PagesForBooks.css">
 </head>
 <body>
 <div class=wrap>
+	<%@ include file="../include/header.jsp" %>
   <div class="dividing_line">
     <h1 id="BP-h1">신간 도서</h1>
   </div>  
@@ -185,6 +187,7 @@
     
     </div>  
   </div>
+    <%@ include file="../include/footer.jsp" %>
 </div>
 </body>
 </html>

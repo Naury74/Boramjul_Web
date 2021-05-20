@@ -42,8 +42,8 @@
    </update>
 
    <!-- 장바구니 결과값 초기화(장바구니 열때마다 실행) -->
-   <update id="prod_resultr">
-     UPDATE cart SET result = 1 WHERE result = #{result}
+   <update id="cart_reset">
+     UPDATE cart SET result = 1 WHERE result = 2 AND email = #{email}
    </update>
    
     <!-- 장바구니 합계-->
@@ -53,7 +53,7 @@
   		from 
   			cart
   		where 
-  			email = #{email} AND result &lt; 3
+  			email = #{email} AND result &lt; 2
   	</select> 
 
 </mapper>

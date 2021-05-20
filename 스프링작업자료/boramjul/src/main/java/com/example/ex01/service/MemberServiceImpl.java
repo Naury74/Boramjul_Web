@@ -3,6 +3,8 @@ package com.example.ex01.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -102,6 +104,11 @@ public class MemberServiceImpl implements MemberService {
 		 logger.info("로그아웃 했을 경우 email값 : "+session.getAttribute("email"));
 		 logger.info("로그아웃 했을 경우 name값 : "+session.getAttribute("name"));
 
+	}
+
+	@Override
+	public List<MemberDAO> list() {
+		return memberDao.list();
 	}
 
 }

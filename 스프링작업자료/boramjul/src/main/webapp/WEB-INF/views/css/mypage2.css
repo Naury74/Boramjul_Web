@@ -195,7 +195,13 @@ a{
 #myMenu{
     width: 20%;
     display: inline-block;
-    float: left;
+
+}
+#myMenu ul,li{
+	list-style-type: none;
+	float: left;
+	marker: none;
+	text-align: center;
 }
 #mypage{
     font-size: 64px;

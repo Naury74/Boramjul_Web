@@ -37,7 +37,8 @@
 
 		$(function(){
 			$('#buyBtn').click(function(){
-				document.form.submit();
+				location.href="${path}/etc/order.do";
+				
 			});
 			
 			$('#updateBtn').click(function(){

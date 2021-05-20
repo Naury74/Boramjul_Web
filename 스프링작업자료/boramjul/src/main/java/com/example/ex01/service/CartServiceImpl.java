@@ -54,5 +54,10 @@ public class CartServiceImpl implements CartService{
 	public void cart_update(CartDTO dto) {
 		cartDao.cart_update(dto);
 	}
+	
+	@Override
+	public void cart_reset(CartDTO dto) {
+		cartDao.cart_reset(dto);
+	}
 
 }

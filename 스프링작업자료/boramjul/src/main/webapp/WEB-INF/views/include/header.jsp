@@ -13,19 +13,19 @@
  
         @font-face {
             font-family: "parisienne";
-            src: url("../fonts/parisienne_regular.ttf");
+            src: url("${path}/fonts/parisienne_regular.ttf");
         }
         @font-face {
             font-family: "gilroy";
-            src: url("../fonts/gilroy_light.otf");
+            src: url("${path}/fonts/gilroy_light.otf");
         }
         @font-face {
             font-family: "gmarket";
-            src: url("../fonts/GmarketSansMedium.otf");
+            src: url("${path}/fonts/GmarketSansMedium.otf");
         }
         @font-face {
             font-family: "nanum";
-            src: url("../fonts/nanumbarungothic.ttf");
+            src: url("${path}/fonts/nanumbarungothic.ttf");
         }
         /*
         @media (max-width:900px) {
@@ -68,13 +68,13 @@
             margin: 0;
             padding: 0;
         }
-        ul,li {
+        .header ul, .header li {
             list-style-type: none;
             float: left;
             marker: none;
             text-align: center;
         }
-        a{
+        .header a{
             text-decoration:none;
             color: black;
             text-align: center;
@@ -324,8 +324,8 @@
                             </div>
                     </li>
                      -->
-                    <li><a href="BestSellers.do" class="topmenu">BEST SELLERS</a></li>
-                    <li><a href="NewBooks.do" class="topmenu">NEW BOOKS</a></li>
+                    <li><a href="${path }/BestSellers.do" class="topmenu">BEST SELLERS</a></li>
+                    <li><a href="${path }/NewBooks.do" class="topmenu">NEW BOOKS</a></li>
                     <li><a href="ReviewsList.do" class="topmenu">BOOK REVIEWS</a></li>
                     <li><a href="${path }/map.do" class="topmenu">BOOK STORES</a></li>
                     <li><a href="${path }/mypage/myList.do?email=${sessionScope.email}" class="topmenu">MEMBERSHIP</a></li>
