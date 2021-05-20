@@ -277,8 +277,8 @@
             			<li><a href="${path}/mypage/myCart.do?email=${sessionScope.email}" class="topmenu">카트</a></li>
             		</c:otherwise>
             	</c:choose>
-                <li><a href="event.do" class="topmenu">이벤트</a></li>
-                <li><a href="QnA.do" class="topmenu">고객센터</a></li>
+                <li><a href="/event.do" class="topmenu">이벤트</a></li>
+                <li><a href="/QnA.do" class="topmenu">고객센터</a></li>
             </ul>
         </div><!--top_menu-->
 

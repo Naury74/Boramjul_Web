@@ -97,6 +97,17 @@ public class MainController {
 
 			return "etc/QnA";
 		}
+
+		@RequestMapping("QnA2.do")
+		public String QnA2( Model model) {
+
+			return "etc/QnA2";
+		}
+		@RequestMapping("faqbutton.do")
+		public String faqbutton( Model model) {
+
+			return "etc/faqbutton";
+		}
 		
 		@RequestMapping("search.do")
 		public String search(@ModelAttribute ProductDTO dto, Model model) {
