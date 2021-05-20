@@ -1,5 +1,7 @@
 package com.example.ex01.model.dto;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -14,5 +16,6 @@ public class CartDTO {
 	private int price;
 	private int totalprice;
 	private int cart_tot;
-
+	private int ordernum;
+	private Date regdate;
 }

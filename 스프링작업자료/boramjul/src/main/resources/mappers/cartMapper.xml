@@ -9,6 +9,11 @@
       select * from cart WHERE email = #{email} AND result &lt; 3
    </select>
    
+   <!-- 주문내역 조회 -->
+   <select id="listOrder" resultType="CartDTO">
+      select * from `order` WHERE email = #{email}
+   </select>
+   
    <!-- 장바구니 추가  -->
    <insert id="prod_insert">
       INSERT INTO cart 

@@ -33,8 +33,29 @@ public class MypageController {
 	CartService cartService;
 	
 	@RequestMapping("myList.do")
-	public String myList() {
-		return "mypage/myList";
+	public ModelAndView myList(HttpSession session, ModelAndView mav, CartDTO dto) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String email = (String) session.getAttribute("email");
+		
+		if (email != null) {
+			
+			List<CartDTO> list = cartService.listOrder(email);
+			logger.info("이메일: "+email);
+			logger.info("주문내역: "+list.toString());
+			
+			map.put("list", list);
+			map.put("count", list.size());
+			
+			mav.addObject("map",map);
+			mav.setViewName("/mypage/myList");
+			
+			return mav;
+			
+		} else {
+			return new ModelAndView("/member/login", "",null);
+		}
 	}
 	
 	@RequestMapping("myCart.do")

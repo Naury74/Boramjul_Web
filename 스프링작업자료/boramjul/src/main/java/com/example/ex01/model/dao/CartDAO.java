@@ -31,4 +31,7 @@ public interface CartDAO {
 	
 	//장바구니 초기화
 	void cart_reset(CartDTO dto);
+	
+	//주문내역 조회
+	List<CartDTO> listOrder(String email);
 }

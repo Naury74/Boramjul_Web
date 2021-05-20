@@ -30,50 +30,44 @@
         <div class="table">
             <table>
                 <tr style="height: 40px;">
-                    <td colspan="2"></td>
+                    <td></td>
                     <td>책 제목</td>
-                    <td>판매가/수량</td>
+                    <td>구매 금액/수량</td>
+                    <td>주문번호</td>
                     <td>구매날짜</td>
                     <td>배송상태</td>
                     <td>후기</td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-                    <td>아몽드</td>
-                    <td>12000원<br>1권</td>
-                    <td>2021.04.23</td>
-                    <td>상품 준비중</td>
-                    <td><img src="${path}/images/별점4h.svg" alt="별점" class="star"></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-                    <td>아몬드</td>
-                    <td>12000원<br>1권</td>
-                    <td>1992.12.29</td>
-                    <td>배송중</td>
-                    <td><img src="${path}/images/별점1.svg" alt="별점" class="star"></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-                    <td>아몬드봉봉</td>
-                    <td>12000원<br>1권</td>
-                    <td>2021.04.22</td>
-                    <td>배송완료</td>
-                    <td><button class="reviewBtn" name="reviewBtn" type="submit">후기작성</button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-                    <td>아몬드봉봉</td>
-                    <td>12000원<br>1권</td>
-                    <td>2021.04.22</td>
-                    <td>배송중</td>
-                    <td><button class="reviewBtn">후기작성</button></td>
-                </tr>
+                <c:choose>
+                	<c:when test="${map.count == 0 }">
+		            	<tr>
+		               		<td colspan="7">주문 내역이 아직 없습니다</td>
+		               	</tr>
+	               	</c:when>
 
+	                <c:otherwise>
+	                	<c:forEach var="row" items="${map.list }">
+			                <tr>
+			                    <td><img src="${row.image}" alt="책 이미지" class="bookimg"></td>
+			                    <td>${row.name }</td>
+			                    <td><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원<br>
+			                    	<fmt:formatNumber value="${row.quantity }"/>권</td>
+			                    <td><fmt:formatNumber value="${row.ordernum }"/></td>
+			                    <td>${row.regdate }</td>
+			                    <td>상품 준비중</td>
+			                    <td><img src="${path}/images/별점4h.svg" alt="별점" class="star"></td>
+			                </tr>
+		                </c:forEach>
+		                <tr>
+		                    <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
+		                    <td>참조용 입니다</td>
+		                    <td>12000원<br>1권</td>
+		                    <td>2021.04.22</td>
+		                    <td>배송완료</td>
+		                    <td><button class="reviewBtn" name="reviewBtn" type="submit">후기작성</button></td>
+		                </tr>
+					</c:otherwise>
+				</c:choose>
             </table>
             
         </div> <!--table-->

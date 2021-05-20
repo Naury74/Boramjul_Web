@@ -1,37 +1,12 @@
 package com.example.ex01.model.dto;
 
+import lombok.Data;
+
+@Data
 public class BooklistDTO {
 	private String name;
 	private String price;
 	private String content;
 	private String image;
 
-
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPrice() {
-		return price;
-	}
-	public void setPrice(String price) {
-		this.price = price;
-		
-	}
-	public void setContent(String content) {
-		this.content = content;
-		
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setImage(String image) {
-		this.image = image;
-		
-	}
-	public String getImage() {
-		return image;
-	}
 }

@@ -36,7 +36,7 @@
 	        구매하시는 금액의 <span id="myPoint">1%</span>씩 자동 적립 됩니다</p>
 	        
 	        <p id="myTier">나의 등급은 <span id="myPoint">${dto.rank } </span>입니다<br>
-	          다음 등급까지 <span id="myPoint">41000원</span> 남았습니다</p>
+	          다음 등급까지 <span id="myPoint">원</span> 남았습니다</p>
 	
 		    <div id="bronze">
 		    	<img src="${path}/images/브론즈.svg" alt="브론즈">
