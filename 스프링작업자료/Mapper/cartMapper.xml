@@ -10,15 +10,15 @@
    </select>
    
    <!-- 장바구니 추가  -->
-   <insert id="prod_insert">
+   <insert id="cart_insert">
       INSERT INTO cart 
-      (email, prodnum, name, image, price, quantity, totalprice) 
+      (email, prodnum, name, image, quantity, price, totalprice) 
       VALUES 
-      ("abc3@naver.com", 1,
-      (SELECT `NAME` FROM product WHERE prodnum = 1),
-      (SELECT `image` FROM product WHERE prodnum = 1),
-      (SELECT `price` FROM product WHERE prodnum = 1), 2,
-      2*(SELECT price FROM product WHERE prodnum = 1))
+      (#{email}, #{prodnum},
+      (SELECT `NAME` FROM product WHERE prodnum = #{prodnum}),
+      (SELECT `image` FROM product WHERE prodnum = #{prodnum}), #{quantity},
+      (SELECT `price` FROM product WHERE prodnum = #{prodnum}), 
+      #{quantity}*(SELECT price FROM product WHERE prodnum = #{prodnum}))
    </insert>
 
    <!-- 장바구니 품목 삭제 -->
@@ -39,7 +39,12 @@
 
    <!-- 장바구니 결과값 초기화(장바구니 열때마다 실행) -->
    <update id="prod_resultr">
-     UPDATE cart SET result = 1 WHERE result = #{result}
+     UPDATE cart SET result = 1 WHERE result = 2, email = #{email}
    </update>
+
+    <!-- 장바구니 합계-->
+    <select id="cart_tot" resultType="int">
+      select ifnull(sum(price*quantity),0) from cart where email = #{email} AND result &lt; 3
+    </select> 
 
 </mapper>
