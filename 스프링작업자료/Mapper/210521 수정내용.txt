@@ -1,0 +1,53 @@
+----------------------------------------------------------
+cartmapper 
+장바구니 추가 부분 수정 ( id 변경)
+장바구니 초기화 부분 수정 ( 조건문 email 추가, result(2)로 변경)
+장바구니에서 구매완료 품목 삭제 추가 
+-------------------------------------------------------------
+cartmapper ordermapper 합치기
+cart_tot -> result < 3이하에서 result = 1 변경
+주문대기목록 추가 - oreder_list
+주문품목 삭제 - order_delete
+적립금조회 - reserves_list
+바로구매 - order_now
+주문합게 - order_tot
+-------------------------------------------------------------
+order , order detail 테이블 수정
+detailnum - 주문상세번호 unique key
+cartnum - 장바구니번호 unique key(unique key키끼리는 중복안됨 ex) 1,1  1,2 가능하지만 1,1 1,1 삽입안됨
+prodnum - 상품번호
+name - 상품이름
+image - 상품이미지 url
+quantity - 상품수량
+price - 상품가격
+totalprice - 상품총가격
+review - 리뷰 작성 유무 (작성전 1, 작성완료 2)
+indate 
+--------------------------------------------------
+orderDetailMapper 작업
+주문 상세 내역 추가 - 주문완료 (result = 3) 인 데이터만 삽입
+                         - detailnum, cartnum 키값 두개로 저장됨
+주문 내역 조회 - detailnum 로 조회 같이 결제한 품목 다 반환
+주문 금액 조회 - detailnum 로 조회 품목의 totalprice 합산 가격 반환
+주문 내역 삭제 - detailnum 로 조회하여 삭제
+주문 내역 조회 - detailnum cartnum 로 조회 품목들 수량 변경 가능 ( 관리자만 사용하길 권함)
+----------------------------------------------------------------------------------------------------
+order 테이블 수정
+orderidx	- 주문 인덱스
+detailnum - 주문상세번호(외래키 설정 할지 말지 고민중 사용에 문제없으면 그냥 사용)
+email - 회원 이메일
+orderdate - 주문일자
+deliverydate - 배송일자 (주문일자+3일)
+totalprice - 주문 총 금액
+sale - 할인내역(브론즈:5% 실버:10%, 골드:15%)
+payprice - 할인된 결제 금액
+reserves - 적립금 (payprice 의 1%)
+result - 상품 처리 내역  defalut 3(주문전 : 1, 결제대기: 2, 결제완료 : 3) 필요없으면 삭제 예정
+pay - 결재 방법 defalut 1(카드 계좌이체등 정해야함)
+address - 배송지 주소		
+delivery - 배송상태	 defalut 1(배송전 : 1, 배송중 : 2, 배송완료:3)
+--------------------------------------------------
+orderMapper 작업
+주문 추가 - 복잡해서 추후에 다 작업하고 시간남으면 간추리기
+
+
