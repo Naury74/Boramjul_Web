@@ -6,7 +6,7 @@
    
    <!-- 장바구니 조회 -->
    <select id="listCart" resultType="CartDTO">
-      select * from cart WHERE email = #{email} AND result &lt; 3
+      select * from cart WHERE email = #{email} AND result &lt; 2
    </select>
    
    <!-- 주문내역 조회 -->

@@ -53,19 +53,11 @@
 			                    <td><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원<br>
 			                    	<fmt:formatNumber value="${row.quantity }"/>권</td>
 			                    <td><fmt:formatNumber value="${row.ordernum }"/></td>
-			                    <td>${row.regdate }</td>
+			                    <td><fmt:formatDate value="${row.regdate }" pattern="yyyy.MM.dd"/></td>
 			                    <td>상품 준비중</td>
 			                    <td><img src="${path}/images/별점4h.svg" alt="별점" class="star"></td>
 			                </tr>
 		                </c:forEach>
-		                <tr>
-		                    <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-		                    <td>참조용 입니다</td>
-		                    <td>12000원<br>1권</td>
-		                    <td>2021.04.22</td>
-		                    <td>배송완료</td>
-		                    <td><button class="reviewBtn" name="reviewBtn" type="submit">후기작성</button></td>
-		                </tr>
 					</c:otherwise>
 				</c:choose>
             </table>

@@ -95,7 +95,6 @@
         #top_menu{
             list-style-type: none;
             margin-top: 5%;
-            height: 100%;
             width: 100%;
             display: inline-block;
         }
@@ -267,7 +266,7 @@
         <div id="top_menu">
             <ul>
             	<c:choose>
-            		<c:when test="${sessionScope.email == null }">
+            		<c:when test="${sessionScope.name == null }">
             			<li><a href="${path }/member/login.do" class="topmenu">로그인</a></li>
                 		<li><a href="${path }/member/join1.do" class="topmenu">회원가입</a></li>
             		</c:when>
@@ -277,8 +276,8 @@
             			<li><a href="${path}/mypage/myCart.do?email=${sessionScope.email}" class="topmenu">카트</a></li>
             		</c:otherwise>
             	</c:choose>
-                <li><a href="/event.do" class="topmenu">이벤트</a></li>
-                <li><a href="/QnA.do" class="topmenu">고객센터</a></li>
+                <li><a href="${path}/etc/event.do" class="topmenu">이벤트</a></li>
+                <li><a href="${path}/etc/QnA.do" class="topmenu">고객센터</a></li>
             </ul>
         </div><!--top_menu-->
 
@@ -327,7 +326,7 @@
                     <li><a href="${path }/BestSellers.do" class="topmenu">BEST SELLERS</a></li>
                     <li><a href="${path }/NewBooks.do" class="topmenu">NEW BOOKS</a></li>
                     <li><a href="ReviewsList.do" class="topmenu">BOOK REVIEWS</a></li>
-                    <li><a href="${path }/map.do" class="topmenu">BOOK STORES</a></li>
+                    <li><a href="${path }/etc/map.do" class="topmenu">BOOK STORES</a></li>
                     <li><a href="${path }/mypage/myList.do?email=${sessionScope.email}" class="topmenu">MEMBERSHIP</a></li>
                 </ul>
         </div><!--main_menu-->

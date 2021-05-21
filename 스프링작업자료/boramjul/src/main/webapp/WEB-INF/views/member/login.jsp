@@ -57,6 +57,7 @@
      <a href="${path}/member/findemail.do" id="findid" style="text-decoration:none;">이메일찾기</a>
      <a href="${path}/member/findpwd.do" id="findpwd"style="text-decoration:none;">비밀번호찾기</a>
      <a href="${path}/member/join1.do" id="join" style="text-decoration:none;">회원가입</a>
+     <a href="${path}/admin/login.do" id="admin" style="text-decoration:none;">관리자 로그인</a>
      <a id="or">또는</a>
 	 <a id="kakao_id_login" href="javascript:kakaoLogin();" style="position: absolute;
 															    width: 87px;

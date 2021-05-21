@@ -83,31 +83,6 @@ public class MainController {
 			return "main";
 		}
 		
-		
-		@RequestMapping("event.do")
-		public String event( Model model) {
-
-			return "etc/event";
-		}
-		
-		@RequestMapping("QnA.do")
-		public String QnA( Model model) {
-
-			return "etc/QnA";
-		}
-		
-		@RequestMapping("QnA2.do")
-		public String QnA2( Model model) {
-
-			return "etc/QnA2";
-		}
-		
-		@RequestMapping("faqbutton.do")
-		public String faqbutton( Model model) {
-
-			return "etc/faqbutton";
-		}
-		
 		@RequestMapping("search.do")
 		public String search(@ModelAttribute ProductDTO dto, Model model) {
 			
@@ -202,10 +177,6 @@ public class MainController {
 			return "Books/ReviewsList";
 		}
 		
-		@RequestMapping("map.do")
-		public String map( Model model) {
 
-			return "etc/map";
-		}
 
 }

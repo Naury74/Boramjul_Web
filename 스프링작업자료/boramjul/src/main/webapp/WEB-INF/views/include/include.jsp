@@ -10,4 +10,4 @@
     <c:set var="path" value="${pageContext.request.contextPath }" />
     
     <!-- jQuery 라이브러리 연결  -->
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>

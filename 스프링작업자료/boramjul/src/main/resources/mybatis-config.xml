@@ -8,6 +8,9 @@
 		<typeAlias type="com.example.ex01.model.dto.MemberDTO" alias="memberDTO"/>
 		<typeAlias type="com.example.ex01.model.dto.MemberDTO" alias="ProductDTO"/>
 		<typeAlias type="com.example.ex01.model.dto.CartDTO" alias="CartDTO"/>
+		<typeAlias type="com.example.ex01.model.dto.AdminDTO" alias="AdminDTO"/>
+		<typeAlias type="com.example.ex01.model.dto.BooklistDTO" alias="BooklistDTO"/>
+		<typeAlias type="com.example.ex01.model.dto.QnADTO" alias="QnADTO"/>
 	</typeAliases>
 	
 

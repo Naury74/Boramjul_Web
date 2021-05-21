@@ -114,7 +114,7 @@
     position: absolute;
     width: 143px;
     height: 28px;
-    left: 300px;
+    left: 250px;
     top: 600px;
 
     font-family: "detailfont";
@@ -130,9 +130,24 @@
     position: absolute;
     width: 143px;
     height: 28px;
-    left: 500px;
+    left: 400px;
     top: 600px;
 
+    font-family:"detailfont";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+
+    color: #000000;
+}
+#admin{
+	position: absolute;
+    width: 143px;
+    height: 28px;
+    top: 600px;
+    left:550px;
     font-family:"detailfont";
     font-style: normal;
     font-weight: bold;

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>문의하기</title>
 	<%@ include file="../include/include.jsp" %>
-    <link rel="stylesheet" href="../css/mypage2.css">
+    <link rel="stylesheet" href="${path }/css/mypage2.css">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
@@ -20,9 +20,7 @@
             <div class="my_line">
                 <span id="mypage">고객센터</span>
             </div>
-			 <%@ include file="../include/myMenu2.jsp" %>
             
-
             <div id="myMenu"></div>
 
             <div class="menu_name">

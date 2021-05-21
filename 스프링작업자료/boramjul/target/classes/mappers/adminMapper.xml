@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="mysqlAdmin">
+  
+  	<select id="check_passwd" resultType="int">
+		select count(*) from adminmember where id = #{id} and passwd = #{passwd}
+	</select>
+	
+	<select id="loginCheck" resultType="String">
+	 	select name 
+	 	from 
+	 		adminmember
+	 	where 
+	 		id = #{id} and passwd = #{passwd}
+	 </select>	
+  
+  
+  </mapper>

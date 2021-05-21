@@ -24,7 +24,7 @@ import com.example.ex01.service.CartService;
 @RequestMapping("/mypage/*")
 @Controller
 public class MypageController {
-	private static  final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private static  final Logger logger = LoggerFactory.getLogger(MypageController.class);
 	
 	@Inject
 	MemberService memberService;
