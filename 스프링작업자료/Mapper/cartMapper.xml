@@ -49,7 +49,41 @@
 
     <!-- 장바구니 합계-->
     <select id="cart_tot" resultType="int">
-      select ifnull(sum(price*quantity),0) from cart where email = #{email} AND result &lt; 3
+      select ifnull(sum(price*quantity),0) from cart where email = #{email} AND result = 1
     </select> 
+
+   <!-- 주문 대기 목록 -->
+   <select id="order_list" resultType="cartDTO">
+      SELECT * FROM cart WHERE result = 2, email = #{email}
+   </select>
+
+   <!-- 주문 품목 삭제 -->
+   <!-- 삭제해도 장바구니에는 존재함 -->
+   <update id="order_delete">
+     UPDATE cart SET result = 1 WHERE cartnum = #{cartnum}
+   </update>
+
+   <!-- 적립금 조회 -->
+   <select id="reserves_list" resultType="int">
+      SELECT reserves FROM member WHERE email = #{email}
+   </select>
+	
+   <!-- 바로 구매  -->
+   <insert id="order_now">
+     INSERT INTO cart 
+     (email, prodnum, name, image, price, quantity, totalprice, result) 
+      VALUES 
+      (#{email}, #{prodnum},
+      (SELECT `NAME` FROM product WHERE prodnum = #{prodnum}),
+      (SELECT `image` FROM product WHERE prodnum = #{prodnum}),
+      (SELECT `price` FROM product WHERE prodnum = #{prodnum}), #{quantity},
+      #{quantity}*(SELECT price FROM product WHERE prodnum = #{prodnum}), 2)
+   </insert>
+
+    <!-- 구메 페이지 합계-->
+    <select id="order_tot" resultType="int">
+      select ifnull(sum(price*quantity),0) from cart where email = #{email} AND result = 2
+    </select> 
+	
 
 </mapper>
