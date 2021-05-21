@@ -26,19 +26,24 @@
        delete from cart where cartnum = #{cartnum}
    </delete>
 
+   <!-- 장바구니에서 구매완료 품목 삭제 -->
+   <delete id="cart_redelete">   
+       delete from cart where email = #{email}, result = 3
+   </delete>
+
    <!-- 장바구니 수량 변경 -->
-   <update id="prod_update">
+   <update id="cart_update">
       update cart set 
       quantity = #{quantity}, totalprice = #{quantity}*(SELECT price FROM product WHERE prodnum = #{prodnum}) where cartnum = #{cartnum}
    </update>
 
    <!-- 주문 대기 상태로 변경 (1개 이상의 cartnum 선택시 배열으로 받아서 for문 이용하여 1개이상 수정-->
-   <update id="prod_order">
+   <update id="cart_order">
      UPDATE cart SET result = 2 WHERE cartnum = #{cartnum}
    </update>
 
    <!-- 장바구니 결과값 초기화(장바구니 열때마다 실행) -->
-   <update id="prod_resultr">
+   <update id="cart_result">
      UPDATE cart SET result = 1 WHERE result = 2, email = #{email}
    </update>
 
