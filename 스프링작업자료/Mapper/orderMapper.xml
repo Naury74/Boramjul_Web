@@ -7,75 +7,49 @@
    <!-- 주문 추가  -->
    <insert id="order_insert">
 	INSERT INTO `order` 
-	(detailnum, email, totalprice, sale, saleprice, payprice, reserves, address, pay)
+	(detailnum, email, totalprice, sale, saleprice, usereserves, payprice, addreserves, address, pay)
 	VALUES
 	(#{detailnem}, #{email}, 
 	/* 총 구매금액 total price*/
-	(SELECT sum(totalprice) FROM order_detail WHERE detailnum=#{detailnum}),
+	(SELECT sum(totalprice) FROM order_detail WHERE detailnum=#{detailnem}),
 	/* 이메일로 랭크 별 할인율 sale*/
-	(SELECT case when RANK = "브론즈" then 5 
-                             when RANK = "실버" then 10
-		     when RANK = "골드" then 15
-		     ELSE 1 END FROM member WHERE email = #{email}),
+	(rankfunction(#{email})),
 	/* 할인 금액  saleprice*/			    
-	(SELECT TRUNCATE(sum(totalprice)*
-	(SELECT case when RANK = "브론즈" then 5 
-                             when RANK = "실버" then 10
-		     when RANK = "골드" then 15
-		     ELSE 1 END FROM member WHERE email = #{email})*
-	0.01,0) FROM order_detail WHERE detailnum=#{detailnum}), 
+	(salefunction(#{email},#{detailnem})), #{usereserves}, 
 	/* 결제금액  payprice*/			    
-	(SELECT sum(totalprice)-(SELECT TRUNCATE(sum(totalprice)*
-	(SELECT case when RANK = "브론즈" then 5 
-                             when RANK = "실버" then 10
-		     when RANK = "골드" then 15
-		     ELSE 1 END FROM member WHERE email = #{email})*
-	0.01,0) FROM order_detail WHERE detailnum=#{detailnum}) FROM order_detail WHERE detailnum=#{detailnum}), 
+	(payfunction(#{email},#{detailnem},#{usereserves})), 
 	/* 적립금 reserves */			    
-	(SELECT TRUNCATE((sum(totalprice)-(SELECT TRUNCATE(sum(totalprice)*
-	(SELECT case when RANK = "브론즈" then 5 
-                             when RANK = "실버" then 10
-		     when RANK = "골드" then 15
-		     ELSE 1 END FROM member WHERE email = #{email})*
-	0.01,0) FROM order_detail WHERE detailnum=#{detailnum}))*0.01,0) FROM order_detail WHERE detailnum=#{detailnum}), 
+	(reservesfunction(#{email},#{detailnem},#{usereserves})), 
 	/* 주소 assress */			    
-	(IFNULL((SELECT address FROM member WHERE email = #{email}),#{address}))
+	(IFNULL((SELECT address FROM member WHERE email = #{email}),#{address})),
 	#{pay})
    </insert>
- 
 
-   <!-- 주문 적립금 조회 -->
-   <select id="detail_reserves" resultType="int">
-      SELECT SUM(reserves) FROM order_detail WHERE detailnum = #{detailnum} 
-   </select>
-
-   <!-- 주문 품목 삭제 -->
-   <!-- 삭제해도 장바구니에는 존재함 -->
-   <delete id="order_delete">   
-       delete from order where ordernum = #{ordernum}
-   </delete>
-	
-   <!-- 적립금 조회 -->
-   <select id="reserves_list" resultType="int">
-      SELECT reserves FROM member WHERE email = #{email}
-   </select>
-
-   <!-- 바로 구매 삭제 (초기화) -->
-   <delete id="order_nowdelete">   
-       delete from order where ordernum = #{ordernum}
-   </delete>
-
-   <!-- 장바구니 수량 변경 -->
-   <update id="prod_update">
-      update cart set 
-      quantity = #{quantity}, totalprice = #{quantity}*(SELECT price FROM product WHERE prodnum = #{prodnum}) where cartnum = #{cartnum}
+   <!-- 주문내역수정 기능  -->
+   <update id="order_update">
+	UPDATE `order` SET result = #{result}, pay = #{pay} WHERE email = #{email} AND detailnum = #{detailnum}
    </update>
 
-   <!-- 주문 대기 상태로 변경 (1개 이상의 cartnum 선택시 배열으로 받아서 for문 이용하여 1개이상 수정-->
-   <update id="prod_order">
-     UPDATE cart SET result = 2 WHERE cartnum = #{cartnum}
+   <!-- 적립금추가  -->
+   <update id="reserves_add">
+            UPDATE member SET reserves = (addreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
    </update>
 
+   <!-- 적립금사용  -->
+   <update id="reserves_use">
+	UPDATE member SET reserves = (subreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
+   </update>
+
+   <!-- 주문상세내역조회  -->
+   <select id="order_detail_list">
+	SELECT * FROM `order` WHERE email = #{email} AND detailnum = #{detailnum}
+   </select>
+
+   <!-- 회원주문내역조회 -->
+   <!-- result 값에 따라 1: 배송전, 2: 배송중, 3: 배송완료 -->
+   <update id="order_email_list">
+	SELECT * FROM order_detail WHERE detailnum = (deliveryfunction(#{email},#{result}))
+   </update>
 
 
 </mapper>

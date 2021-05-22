@@ -1,0 +1,92 @@
+qna 게시판 kind 추가 tinyint(4)
+cartmapper
+where 조건문 부분 (,) -> (and) 수정
+참고사항
+cart 테이블 result 값에 따른 페이지
+1	장바구니 리스트 페이지
+2	구매 페이지
+3	구매 내역 페이지
+--------------------------------------------------
+orderMapper 작업
+1. 주문 추가 - 복잡해서 추후에 다 작업하고 시간남으면 간추리기
+코드 단순화를 위해 아래 함수 추가
+rankfunction - 랭크별 할인 비율 계산
+salefunction - 랭크별 할인 금액
+payfunction - 총 결제 금액
+reservesfunction - 적립금 금액
+--------------------------------------------------
+rankfunction - 랭크별 할인 비율 계산
+DECLARE salerank VARCHAR(50) CHARSET utf8;
+DECLARE prosale int;	
+SET prosale = (SELECT case when RANK  = "브론즈" then 5
+	                     	when RANK = "실버" then 10
+                     	   when RANK = "골드" then 15
+                        	END FROM member WHERE email = proemail);	
+	RETURN prosale;
+--------------------------------------------------
+salefunction - 랭크별 할인 금액
+DECLARE saleresult int;
+SET saleresult = (SELECT TRUNCATE(sum(totalprice)*(rankfunction(proemail))*0.01,0) FROM order_detail WHERE detailnum=prodetail);
+RETURN saleresult;
+--------------------------------------------------
+payfunction - 총 결제 금액
+DECLARE payresult INT;
+SET payresult = (SELECT sum(totalprice)-salefunction(proemail,prodetail)-prousereserves FROM order_detail WHERE detailnum=prodetail);
+RETURN payresult;
+--------------------------------------------------
+reservesfunction - 적립금 금액
+DECLARE reserves INT;
+SET reserves = (SELECT TRUNCATE(payfunction(proemail,prodetail,prousereserves)*0.01,0) FROM order_detail WHERE detailnum=prodetail);
+RETURN reserves;
+--------------------------------------------------
+orderMapper 작업
+order 테이블 usereserves 사용 적립금 추가 , addreserves 추가해야할적립금
+
+2. 주문내역수정 기능
+order_update
+검색 email, detailnum
+수정내용 result(상품처리내역), pay(결제방법) - 관리자전용으로 하는게 좋아보임
+
+3. 적립금추가
+reserves_add
+검색 email
+적립금내역 member 테이블에 추가하기
+구매완료시 기능 실행
+--------------------------------------------
+addreservesfunction 적립금 함수 추가
+DECLARE result INT;
+set result = (SELECT m.reserves+o.addreserves FROM member m, `order` o WHERE m.email = f_email AND o.detailnum = f_detailnum);
+RETURN result;
+--------------------------------------------
+
+
+4. 적립금사용
+reserves_use
+검색 email
+적립금사용하여 member 테이블 금액 뺴기
+구매완료시 기능 실행
+--------------------------------------------
+subreservesfunction 적립금 함수 추가
+DECLARE result INT;
+set result = (SELECT m.reserves-o.usereserves FROM member m, `order` o WHERE m.email = f_email AND o.detailnum = f_detailnum);
+RETURN result;
+--------------------------------------------
+
+5. 주문상세내역조회
+order_detail_list
+검색 email, detailnum
+주문 상세 내역 리스트 조회
+
+
+6. 회원주문내역조회
+order_email_list
+검색 email
+회원이 주문한 내력 조회
+result 값에 따라 리스트 보여줌
+1: 배송전, 2: 배송중, 3: 배송완료
+--------------------------------------------
+deliveryfunction 적립금 함수 추가
+DECLARE deliverresult INT;
+SET deliverresult = (SELECT detailnum FROM `order` WHERE email = f_email AND result = f_result);
+RETURN deliverresult;
+--------------------------------------------

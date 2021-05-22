@@ -28,7 +28,7 @@
 
    <!-- 장바구니에서 구매완료 품목 삭제 -->
    <delete id="cart_redelete">   
-       delete from cart where email = #{email}, result = 3
+       delete from cart where email = #{email} AND result = 3
    </delete>
 
    <!-- 장바구니 수량 변경 -->
@@ -44,7 +44,7 @@
 
    <!-- 장바구니 결과값 초기화(장바구니 열때마다 실행) -->
    <update id="cart_result">
-     UPDATE cart SET result = 1 WHERE result = 2, email = #{email}
+     UPDATE cart SET result = 1 WHERE result = 2 AND email = #{email}
    </update>
 
     <!-- 장바구니 합계-->
@@ -54,7 +54,7 @@
 
    <!-- 주문 대기 목록 -->
    <select id="order_list" resultType="cartDTO">
-      SELECT * FROM cart WHERE result = 2, email = #{email}
+      SELECT * FROM cart WHERE result = 2 AND email = #{email}
    </select>
 
    <!-- 주문 품목 삭제 -->
