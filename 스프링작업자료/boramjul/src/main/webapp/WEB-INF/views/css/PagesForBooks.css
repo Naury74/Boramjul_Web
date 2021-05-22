@@ -465,6 +465,7 @@ ul{
       margin:20px;
       position: relative;
     }
+    /*
 #search_text{
   width: 550px;
   height: 60px;
@@ -484,7 +485,7 @@ ul{
   vertical-align: middle;
   border: 0;
   box-shadow: none;
-}
+}*/
 .searched_bookimg{
   width: 175px;
   height: 250px;

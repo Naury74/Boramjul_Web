@@ -54,7 +54,7 @@
                 </span>
                 </c:forEach>
                 <div>
-                	<a class="more" href="BestSellers.do">MORE+</a>
+                	<a class="more" href="/books/BestSellers.do">MORE+</a>
                 </div>
             </div>
         </div><!--best-container-->
@@ -70,7 +70,7 @@
                 </span>
                 </c:forEach>
                 <div>
-                    <a class="more" href="NewBooks.do">MORE+</a>
+                    <a class="more" href="/books/NewBooks.do">MORE+</a>
                 </div>
             </div>
         </div><!--new-container-->

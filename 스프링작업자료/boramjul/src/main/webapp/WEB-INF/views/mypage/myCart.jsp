@@ -149,13 +149,8 @@
 
         </c:choose>	 
          
-
     </div><!--box-->
          
-                
-
-
-
     <%@ include file="../include/footer.jsp" %>
 
 </div><!--wrap-->

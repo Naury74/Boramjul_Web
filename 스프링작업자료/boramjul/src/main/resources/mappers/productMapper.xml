@@ -5,22 +5,22 @@
 <mapper namespace="mysqlProduct">
    
    <!-- 상품 목록 -->
-   <select id="prod_list" resultType="ProductDTO">
+   <select id="prod_list" resultType="BooksDTO">
       select * from product
    </select>
    
    <!-- 상품 조회(이름) -->
-   <select id="name_list" resultType="ProductDTO">   
+   <select id="name_list" resultType="BooksDTO">   
       select * from product WHERE NAME LIKE "%#{name}%"
    </select>
 
    <!-- 상품 조회(kind) -->
-   <select id="kind_list" resultType="ProductDTO">   
+   <select id="kind_list" resultType="BooksDTO">   
       select * from product WHERE kind = #{kind}
    </select>
 
    <!-- 상품 조회(key) -->
-   <select id="prodnum_list" resultType="ProductDTO">   
+   <select id="prodnum_list" resultType="BooksDTO">   
       select * from product WHERE prodnum = #{prodnum}
    </select>
    

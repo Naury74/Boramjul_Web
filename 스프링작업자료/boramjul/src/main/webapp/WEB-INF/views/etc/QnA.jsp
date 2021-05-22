@@ -19,8 +19,7 @@
         <div class="my_line">
             <span id="mypage">공지사항</span>
         </div>
-		<c:choose>
-		<c:when test="'${sessionScope.name}' eq '보람관리자' ">
+		<c:if test="${sessionScope.id == 'boramAdmin' } ">
 		<button style="position: absolute; width: 100px; height: 50px; left:78%; top: 34%; background-color: #664B8E; " type="button"><a style="color: white;
 		            font-family: gmarket;
 		            font-style: normal;
@@ -30,8 +29,8 @@
 		            font-family: mainfont;
 		            text-decoration:none;"
 		            href="${path }/admin/QnA_write.do">글 작성</a></button><br><br> 
-		  </c:when>
-		  <c:otherwise>
+		  </c:if>
+
 		<button style="position: absolute; width: 100px; height: 50px; left:85%; top: 34%; background-color: #434CA5; " type="button"><a style="color: white;
 		            font-family: gmarket;
 		            font-style: normal;
@@ -41,8 +40,7 @@
 		            font-family: mainfont;
 		            text-decoration:none;"
 		            href="${path }/etc/faqbutton.do">문의하기</a></button>
-		    </c:otherwise>
-		    </c:choose><br><br> 
+		    <br><br> 
             <div class="table">
                 <table>
                     <tr style="height: 40px; font-family: nanum;">
@@ -56,7 +54,7 @@
                     <tr>
                         <td>${i }</td>
                         <td>${row.name }</td>
-                        <td>${sessionScope.name}</td>
+                        <td>${sessionScope.id}</td>
                         <td><fmt:formatDate value="${row.qnadate }" pattern="yyyy.MM.dd"/></td>
                     </tr>
                     </c:forEach>

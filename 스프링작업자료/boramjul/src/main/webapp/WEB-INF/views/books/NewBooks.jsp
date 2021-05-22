@@ -6,8 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>New Books</title>
 <%@ include file="../include/include.jsp" %>
 <link rel="stylesheet" href="${path}/css/PagesForBooks.css">
@@ -19,118 +17,7 @@
     <h1 id="BP-h1">신간 도서</h1>
   </div>  
   <div class="List-wrapper"> 
-    <div class="List-left">
-      <h3 id="List-h3">도서 분야</h3>
-      <ul>
-        <li class="">
-          <a href="Category-Novel.do" class="">소설</a>
-        </li>  
-        <li class="">
-          <a href="Category-Essay.do">시/에세이</a>
-        </li>
-        <li class="">
-          <a href="Category-Economy.do">경제/경영</a>
-        </li>
-        <li class="">
-          <a href="Category-SelfHelp.do">자기계발</a>
-        </li>
-      </ul>
-      <ul>
-        <li class="">
-          <a href="Category-Humanities.do">인문</a>
-        </li>
-    
-        <li class="">
-          <a href="Category-History.do">역사/문화</a>
-        </li>
-        <li class="">
-          <a href="Category-Religion.do">종교</a>
-        </li>
-        <li class="">
-          <a href="Category-Politics.do">정치/사회</a> 
-        </li>
-        <li class="">
-          <a href="Category-Art.do">예술/대중문화</a>
-        </li>
-        <li class="">
-          <a href="Category-Science.do">과학</a>
-        </li>
-        <li class="">
-          <a href="Category-Technology.do">기술/공학</a>
-        </li>    
-        <li class="">
-          <a href="Category-IT.do">컴퓨터/IT</a>        
-        </li>
-      </ul>
-      <ul>
-        <li class="">
-          <a href="Category-Toddler.do">유아(0~7세)</a></li>    
-        <li class="">
-          <a href="Category-Children.do">어린이(초등)</a>
-        </li>
-    
-        <li class="">
-          <a href="Category-ChildrenComp.do">어린이전집</a>          
-        </li>
-    
-        <li class="">
-          <a href="Category-ChildrenEng.do" class="">어린이영어</a>          
-        </li>    
-        <li class="">
-          <a href="Category-Teenager.do">청소년</a>          
-        </li>
-      </ul>
-      <ul>
-        <li class="">
-          <a href="Category-Elementary.do" class="">초등참고서</a>          
-        </li>    
-        <li class="">
-          <a href="Category-MiddleHigh.do">중/고등참고서</a>        
-        </li>    
-        <li class="">
-          <a href="Category-University.do">대학교재</a>
-        </li>        
-        <li class="">
-          <a href="Category-OpenUniversity.do">방송통신대교재</a>
-        </li>    
-        <li class="">
-          <a href="Category-Job.do" class="">취업/수험서</a>          
-        </li>    
-        <li class="">
-          <a href="Category-Language.do">외국어</a>          
-        </li>    
-      </ul>
-      <ul>
-        <li class="">
-          <a href="Category-Family.do">가정/육아</a>          
-        </li>    
-        <li class="">
-          <a href="Category-Health.do">건강</a>          
-        </li>    
-        <li class="">
-        <a href="Category-Travel.do">여행</a>          
-        </li>    
-        <li class="">
-          <a href="Category-Cooking.do">요리</a>
-        </li>    
-        <li class="">
-          <a href="Category-Hobby.do">취미/실용/스포츠</a>          
-        </li>
-      </ul>
-      <ul>
-        <li class="">
-          <a href="Category-Magazine.do">잡지</a>          
-        </li>    
-        <li class="">
-          <a href="Category-Comics.do" class="">만화</a>          
-        </li>    
-      </ul>
-      <ul>
-        <li class="">
-          <a href="Category-Korea.do">한국소개도서</a>            
-        </li>    
-      </ul>
-    </div>
+    <%@ include file="../include/booksmenu.jsp" %>
     <div class="List-right">
       <div id="related_books">
         <c:forEach var="row" items="${nblist}" varStatus="status"> 
@@ -187,7 +74,7 @@
     
     </div>  
   </div>
-    <%@ include file="../include/footer.jsp" %>
 </div>
+    <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

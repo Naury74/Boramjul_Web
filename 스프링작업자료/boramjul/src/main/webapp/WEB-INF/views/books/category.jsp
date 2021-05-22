@@ -4,22 +4,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Best Sellers</title>
+<title>카테고리별 도서 목록</title>
 	<%@ include file="../include/include.jsp" %>
 	<link rel="stylesheet" href="${path}/css/PagesForBooks.css">
 </head>
 <body>
 <div class=wrap>
-	<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
+
   <div class="dividing_line">
-    <h1 id="BP-h1">베스트셀러</h1>
+    <h1 id="BP-h1">카테고리별 도서 목록</h1>
   </div>  
-    <div class="List-wrapper"> 
-  	<%@ include file="../include/booksmenu.jsp" %>
+  
+  <div class="List-wrapper"> 
+    <%@ include file="../include/booksmenu.jsp" %>
+    
     <div class="List-right">
       <div id="related_books">
-        <c:forEach var="row" items="${bslist}" varStatus="status"> 
-        <!-- 책1 -->
+        <c:forEach var="row" items="${list}" varStatus="status"> 
+
         <div id="searched_books_margin">   
           <div><img src=${row.image } alt="책 이미지" class="searched_bookimg"></div> 
           <div id="searched_books_info">
@@ -31,8 +34,8 @@
               <span class="price-of-searched-books">${row.price }</span>
             </div>
             <div class="searched_book_reviews">
-              <div class="searched_book_scores"><img src="${path }/images/별점4h.svg" alt="별점" class="star"> 9.1</div>          
-              <img src="${path }/images/review.svg" alt="리뷰" class="review-img">
+              <div class="searched_book_scores"><img src="/resources/images/별점4h.svg" alt="별점" class="star"> 9.1</div>          
+              <img src="resources/images/review.svg" alt="리뷰" class="review-img">
               <span class="number_of_reviews">회원리뷰: 5555건</span>
             </div>
           </div>
@@ -72,7 +75,7 @@
     
     </div>  
   </div>
-  <%@ include file="../include/footer.jsp" %>
+    <%@ include file="../include/footer.jsp" %>
 </div>
 </body>
 </html>

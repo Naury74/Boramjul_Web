@@ -60,11 +60,8 @@ public class EtcController {
 		mav.setViewName("/etc/QnA");
 		
 		return mav;
-
-
 	}
 
-	
 	@RequestMapping("faqbutton.do")
 	public String faqbutton( Model model) {
 
