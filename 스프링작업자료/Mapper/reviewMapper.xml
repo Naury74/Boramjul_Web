@@ -1,0 +1,52 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mysqlReview">
+
+   <!-- 상품별 리뷰 목록 -->
+   <select id="prod_review_list" resultType="reviewDTO">
+      SELECT p.name, r.email, r.rename, r.comscore, r.lookup, r.recom, r.grade FROM review r, product p WHERE p.prodnum = #{prodnum}
+   </select>
+
+   <!-- 회원별 리뷰 목록 -->
+   <select id="email_review_list" resultType="reviewDTO">
+      SELECT p.name, r.email, r.rename, r.comscore, r.lookup, r.recom, r.grade FROM review r, product p WHERE r.email = #{email}
+   </select>
+
+   <!-- 리뷰 조회 -->
+   <!-- renum, rename(대부분 제목클릭) 검색 -> 둘중하나만 매칭되어도 해당 리뷰 조회 -->
+   <select id="review_list" resultType="reviewDTO">
+      SELECT * FROM review WHERE renum = #{renum} OR `RENAME` = #{rename}
+   </select>
+
+   <!-- 리뷰 삭제 -->
+   <delete id="review_delete">
+      delete from review WHERE renum = #{renum}
+   </delete>
+
+   <!-- 리뷰 수정 -->
+   <!-- rename, content, grade 수정  -->
+   <update id="review_update">
+      UPDATE review SET `rename` = #{rename}, content = #{content}, grade = #{grade} where email = #{email} and renum = #{renum}
+   </update>
+
+   <!-- 리뷰 등록 -->
+   <insert id="review_insert">
+      INSERT INTO 
+      review (email, prodnum, `rename`, content, grade) 
+      VALUES 
+      (#{email}, #{prodnum}, #{rename}, #{content}, #{grade})
+   </insert>
+   
+   <!-- 리뷰 수 -->
+   <update id="review_count" resultType="int">
+      UPDATE product SET reviewscore = (SELECT COUNT(*) FROM review WHERE prodnum = #{prodnum})
+   </update>
+   
+   <!-- 리뷰 점수 -->
+   <update id="review_score" resultType="int">
+      update product set review = (SELECT TRUNCATE(AVG(grade),0) FROM review WHERE prodnum = #{prodnum})
+   </update>
+
+</mapper>

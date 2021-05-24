@@ -4,12 +4,12 @@
 
 <mapper namespace="mysqlOrder">
    
-   <!-- 주문 추가  -->
+   <!-- 주문 추가  --!>
    <insert id="order_insert">
 	INSERT INTO `order` 
-	(detailnum, email, totalprice, sale, saleprice, usereserves, payprice, addreserves, address, pay)
+	(detailnum, email, name, phone, totalprice, sale, saleprice, usereserves, payprice, addreserves, address, pay, request)
 	VALUES
-	(#{detailnem}, #{email}, 
+	(#{detailnem}, #{email}, #{name}, #{phone}
 	/* 총 구매금액 total price*/
 	(SELECT sum(totalprice) FROM order_detail WHERE detailnum=#{detailnem}),
 	/* 이메일로 랭크 별 할인율 sale*/
@@ -19,37 +19,46 @@
 	/* 결제금액  payprice*/			    
 	(payfunction(#{email},#{detailnem},#{usereserves})), 
 	/* 적립금 reserves */			    
-	(reservesfunction(#{email},#{detailnem},#{usereserves})), 
-	/* 주소 assress */			    
-	(IFNULL((SELECT address FROM member WHERE email = #{email}),#{address})),
-	#{pay})
+	(reservesfunction(#{email},#{detailnem},#{usereserves})),
+            #{address}, #{pay}, #{request})
    </insert>
 
-   <!-- 주문내역수정 기능  -->
-   <update id="order_update">
-	UPDATE `order` SET result = #{result}, pay = #{pay} WHERE email = #{email} AND detailnum = #{detailnum}
+   <!-- 주문내역관리자수정 --!>
+   <update id="order_update_admin">
+	UPDATE `order` SET result = #{result}, delivery = #{delivery} WHERE email = #{email} AND detailnum = #{detailnum}
    </update>
 
-   <!-- 적립금추가  -->
+   <!-- 주문내역회원수정 --!>
+   <update id="order_update_email">
+	UPDATE `order` SET address = #{address}, request = #{request} WHERE email = #{email} AND detailnum = #{detailnum}
+   </update>
+
+   <!-- 적립금추가 (이벤트시 적립금 선물 등등)  --!>
    <update id="reserves_add">
             UPDATE member SET reserves = (addreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
    </update>
 
-   <!-- 적립금사용  -->
+   <!-- 적립금사용 (회원 욕설등 제제로 인한 포인트 차감 등등) --!>
    <update id="reserves_use">
 	UPDATE member SET reserves = (subreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
    </update>
 
-   <!-- 주문상세내역조회  -->
+   <!-- 주문상세내역조회  --!>
    <select id="order_detail_list">
 	SELECT * FROM `order` WHERE email = #{email} AND detailnum = #{detailnum}
    </select>
 
-   <!-- 회원주문내역조회 -->
+   <!-- 회원주문내역조회 --!>
    <!-- result 값에 따라 1: 배송전, 2: 배송중, 3: 배송완료 -->
    <update id="order_email_list">
 	SELECT * FROM order_detail WHERE detailnum = (deliveryfunction(#{email},#{result}))
    </update>
+   
+   <!-- 총결제금액, 적립금, 랭크변환 실행 주문추가 insert 후 실행 --!>
+   <resultMap id = "order_result_add" type = "hashmap"> </ resultMap>
+   <select id = "order_result_add" statementType = "CALLABLE">
+	{	call orderresultadd(#{email}, #{detailnum})	}
+   </select>
 
 
 </mapper>

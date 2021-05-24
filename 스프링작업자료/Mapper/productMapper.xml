@@ -43,14 +43,5 @@
       delete from product where prodnum = #{prodnum}
    </delete>
    
-   <!-- 리뷰 수 -->
-   <update id="review_count" resultType="int">
-      UPDATE product SET reviewscore = (SELECT COUNT(*) FROM review WHERE prodnum = "#{prodnum}")
-   </update>
-   
-   <!-- 리뷰 점수 -->
-   <update id="review_score" resultType="int">
-      update product set review = (SELECT TRUNCATE(AVG(grade),0) FROM review WHERE prodnum = "#{prodnum}")
-   </update>
 
 </mapper>
