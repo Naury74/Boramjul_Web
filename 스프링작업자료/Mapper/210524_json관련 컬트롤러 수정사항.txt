@@ -1,0 +1,13 @@
+1. memberDTO
+private int totalprice 윗줄에
+아래 내용 추가
+private int reserves; 
+
+<h4><a href="/test/member/list.do">1. DB 회원 정보 연결 (mysql)</a></h4>
+<h4><a href="/test/member/memberinfojson.do">2. 회원 정보 json 형식으로 내보내기</a></h4>
+<h4><a href="/test/member/jsonToParsing.do">3. json 형식으로 받아서 파싱하여 리스트 띄우기</a></h4>
+<h4><a href="/test/member/androidsignup.do">4. 안드로이드에서 회원가입 insert </a></h4>
+<h4><a href="/test/member/join.do">5. 웹 회원가입 jsp 작업</a></h4>
+<h1>현재 작업 중</h1>
+<h4><a href="/test/home">6. 웹 login 작업 </a></h4>
+<h4><a href="/test/home">7. jsoup </a></h4>

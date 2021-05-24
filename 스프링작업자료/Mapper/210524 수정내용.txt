@@ -29,9 +29,10 @@ DECLARE result INT;
 DECLARE payprice INT;
 DECLARE advanresult VARCHAR(50) CHARSET UTF8;
 // 현재적립금 = 보유적립금 - 사용적립금 - 추가적립금
-set result = (SELECT m.reserves-o.usereserves+o.addreserves FROM member m, `order` o WHERE m.email = o.email AND o.detailnum = f_detailnum);
+set result = (SELECT m.reserves-f_usereserves+(SELECT TRUNCATE((ifnull(sum(price*quantity),0)-salefunction(f_email, f_result)-f_usereserves)*0.01,0)) 
+		  FROM member m, cart c WHERE m.email = f_email AND c.result = f_result);
 // 총결제금액 + 현재결제금액
-set payprice = (SELECT m.totalprice+o.payprice FROM member m, `order` o WHERE m.email = o.email and detailnum = f_detailnum);
+set payprice = (SELECT m.totalprice+(ifnull(sum(price*quantity),0)-salefunction(f_email, f_result)-f_usereserves) FROM member m, cart c WHERE m.email = f_email AND c.result = f_result);
 // 총결제금액 수정
 UPDATE member SET totalprice = payprice WHERE email = f_email;
 // 총결제금액별 랭크 반환값
@@ -133,6 +134,8 @@ prodnum
 update product set review = (SELECT TRUNCATE(AVG(grade),0) FROM review WHERE prodnum = "#{prodnum}")
 
 
+-------------------------------------------------------------------------------------------------------------------------
+
 ----------아직 진행 안함
 10. 안드에서 받아서 처리해야 하는 데이터
 이메일 찾기
@@ -141,3 +144,8 @@ update product set review = (SELECT TRUNCATE(AVG(grade),0) FROM review WHERE pro
 구매추가
 
 
+-------------------------------------------------------------------------------------------------------------------------
+장바구니쪽 요청사항 수정
+프로시저, 함수 등 cart 테이블에 대한 조회로 수정
+mapper기능정리 수정
+구매시 실행해야할 리스트 정리

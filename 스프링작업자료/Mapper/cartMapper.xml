@@ -80,10 +80,25 @@
       #{quantity}*(SELECT price FROM product WHERE prodnum = #{prodnum}), 2)
    </insert>
 
-    <!-- 구메 페이지 합계-->
+    <!-- 구매 페이지 합계-->
     <select id="order_tot" resultType="int">
       select ifnull(sum(price*quantity),0) from cart where email = #{email} AND result = 2
     </select> 
-	
+
+    <!-- 조회 시 필요한 데이터 -->
+    <select id="order_list_date" resultType="cartDTO">
+       select ifnull(sum(price*quantity),0) AS totalprice, <!-- 총금액 -->
+               rankfunction(#{email}) AS sale, <!-- 할인율 -->
+               salefunction(#{email}, #{result}) AS saleprice, <!-- 할인금액 -->
+               payfunction(#{email}, #{result}, #{usereserves}) AS payprice, <!-- 결제금액 -->
+               reservesfunction(#{email}, #{result}, #{usereserves}) AS reserves <!-- 적립금 -->
+               from cart where email = #{email} AND result = #{result}
+    </select> 
+
+   <!-- 총결제금액, 적립금, 랭크변환 실행 주문추가 insert 후 실행 --!>
+   <resultMap id = "order_result_add" type = "hashmap"> </ resultMap>
+   <select id = "order_result_add" statementType = "CALLABLE">
+	{	call orderresultadd(#{email}, #{result}, #{usereserves})	}
+   </select>
 
 </mapper>
