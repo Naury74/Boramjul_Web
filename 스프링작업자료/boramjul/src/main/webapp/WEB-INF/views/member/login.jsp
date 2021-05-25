@@ -89,12 +89,12 @@
 			if (email == ""){
 				alert('이메일을 입력하세요.');
 				$('#email').focus();
-				return ;
+				return false;
 			}
 			if (passwd == ""){
 				alert('비밀번호를 입력하세요.');
 				$('#passwd').focus();
-				return ;
+				return false;
 			}
 
 			document.login.action = "/member/login_check.do";

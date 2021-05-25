@@ -65,4 +65,24 @@ public class CartServiceImpl implements CartService{
 		return cartDao.listOrder(email);
 	}
 
+	@Override
+	public void order_insert(CartDTO dto) {
+		cartDao.order_insert(dto);
+	}
+
+	@Override
+	public List<CartDTO> orderCart(String email) {
+		return cartDao.orderCart(email);
+	}
+
+	@Override
+	public int order_tot(String email) {
+		return cartDao.order_tot(email);
+	}
+
+	@Override
+	public void order_result_3(CartDTO dto) {
+		cartDao.order_result_3(dto);
+	}
+
 }

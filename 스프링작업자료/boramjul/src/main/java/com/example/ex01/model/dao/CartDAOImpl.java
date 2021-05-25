@@ -64,6 +64,28 @@ public class CartDAOImpl implements CartDAO{
 		return sqlSession.selectList("mysqlCart.listOrder", email);
 	}
 
+	@Override
+	public void order_insert(CartDTO dto) {
+		sqlSession.update("mysqlCart.cart_order", dto);
+	}
+	
+	@Override
+	public void order_result_3(CartDTO dto) {
+		sqlSession.update("mysqlCart.order_result_3", dto);
+	}
+
+	@Override
+	public List<CartDTO> orderCart(String email) {
+		return sqlSession.selectList("mysqlCart.order_list", email);
+	}
+
+	@Override
+	public int order_tot(String email) {
+		return sqlSession.selectOne("mysqlCart.order_tot",email);
+	}
+
+
+
 //	@Override
 //	public int coutCart(String userid, int product_id) {
 //		

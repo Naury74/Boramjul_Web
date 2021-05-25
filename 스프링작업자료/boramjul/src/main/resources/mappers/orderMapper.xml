@@ -1,0 +1,47 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mysqlOrder">
+   
+	<!-- 주문 추가  -->
+	<insert id="order_insert">
+		INSERT INTO `order` 
+		(detailnum, email, name, phone, totalprice, sale, saleprice, usereserves, payprice, addreserves, address, pay, request)
+		VALUES
+		((SELECT MAX(detailnum) FROM order_detail), #{email}, #{name}, #{phone}, #{totalprice} , #{sale}, #{saleprice},
+		 #{usereserves}, #{payprice}, #{addreserves}, #{address}, #{pay}, #{request})
+	</insert>
+
+	<!-- 주문내역관리자수정 / 보류 -->
+	<update id="order_update_admin">
+		UPDATE `order` SET result = #{result}, delivery = #{delivery} WHERE email = #{email} AND detailnum = #{detailnum}
+	</update>
+
+	<!-- 주문내역회원수정 / 배송상태에 따른 조건값이 필요하지 않나-->
+	<update id="order_update_email">
+		UPDATE `order` SET address = #{address}, request = #{request} WHERE email = #{email} AND detailnum = #{detailnum}
+	</update>
+
+	<!-- 적립금추가 (이벤트시 적립금 선물 등등) / 보류? -->
+	<update id="reserves_add">
+		UPDATE member SET reserves = (addreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
+	</update>
+
+	<!-- 적립금사용 (회원 욕설등 제제로 인한 포인트 차감 등등) / 보류? -->
+	<update id="reserves_use">
+		UPDATE member SET reserves = (subreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
+	</update>
+
+	<!-- 주문상세내역조회  -->
+	<select id="order_detail_list">
+		SELECT * FROM `order` WHERE email = #{email} AND detailnum = #{detailnum}
+	</select>
+
+	<!-- 회원주문내역조회 -->
+	<!-- result 값에 따라 1: 배송전, 2: 배송중, 3: 배송완료 -->
+	<update id="order_email_list">
+		SELECT * FROM order_detail WHERE detailnum = (deliveryfunction(#{email},#{result}))
+	</update> 
+
+</mapper>

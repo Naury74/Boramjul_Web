@@ -37,8 +37,28 @@
 
 		$(function(){
 			$('#buyBtn').click(function(){
-				location.href="${path}/etc/order.do";
+				var confirm_val = confirm("구매하시겠습니까?");
 				
+				if(confirm_val){
+					var checkArr = new Array();
+					
+					$("input[class='check']:checked").each(function(){
+						checkArr.push($(this).attr("data-cartnum"));
+					});
+					
+					$.ajax({
+						url:"/mypage/order_insert.do",
+						type:"post",
+						data:{check:checkArr},
+						success: function(result){
+							if(result == 1){
+								location.href="${path}/mypage/order.do?email=${sessionScope.email}";
+							} else{
+								arlet('구매 실패');
+							}
+						}//ajax
+					})
+				}//if
 			});
 			
 			$('#updateBtn').click(function(){
@@ -59,8 +79,13 @@
 						url:"/mypage/cart_delete.do",
 						type:"post",
 						data:{check:checkArr},
-						success: function(){
-							location.href="${path}/mypage/myCart.do";
+						success: function(result){
+							if(result == 1){
+								location.href="${path}/mypage/myCart.do";
+							} else{
+								arlet('삭제 실패');
+							}
+
 						}//ajax
 					})
 				}//if
@@ -95,7 +120,7 @@
                     <td>판매가</td>
                     <td>수량</td>
                     <td>합계</td>
-                    <td><input type="checkbox" name="allCheck" class="check" id="allCheck" checked ></td>
+                    <td><input type="checkbox" name="allCheck" class="check" id="allCheck" ></td>
                 </tr>
                 <c:choose>
                     <c:when test="${map.count == 0 }">
@@ -122,7 +147,7 @@
 			                    </td>
 			                    <td><fmt:formatNumber value="${row.totalprice }" pattern="#,###,###"/>원</td>
 			                    <td>
-			                    	<input type="checkbox" name="check" class="check" data-cartnum="${row.cartnum }" checked/>
+			                    	<input type="checkbox" name="check" class="check" data-cartnum="${row.cartnum }"/>
 			                    	<input type="hidden" name="cartnum" value="${row.cartnum }" />
 
 			                    </td>
@@ -143,7 +168,7 @@
 		        <div id="cart_btn">
 		            <button id ="delBtn" name="delBtn" type="submit" data-cartnum="${row.cartnum }">선택 삭제</button>
 		            <button id ="updateBtn">수정 하기</button>
-		            <button id="buyBtn" name="buyBtn" type="submit">구매 하기</button>
+		            <button id="buyBtn" name="buyBtn" type="submit" data-cartnum="${row.cartnum }">구매 하기</button>
 		        </div>
 			</c:otherwise>
 

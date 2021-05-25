@@ -51,6 +51,18 @@ li,ol{
     width: 1000px;
     margin: 0 auto;
 }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.payprice, .saleprice{
+	border:none;
+	width:60px;
+	height:40px;
+}
+
 .map{
 	margin-top:100px;
 	margin-bottom:400px;
@@ -130,17 +142,8 @@ li,ol{
     margin: 10px 0;
     width: 50px;
 }
-#address1{
+#address{
     margin: 10px 0;
-    border-bottom: solid 1px rgb(94, 94, 94);
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    width: 130px;
-}
-#address2{
-    margin-top: 0;
-    margin-bottom: 10px;
     border-bottom: solid 1px rgb(94, 94, 94);
     border-top: 0;
     border-left: 0;
@@ -151,20 +154,20 @@ li,ol{
     margin: 10px 0;
     width: 150px;
 }
-.inner{
+.inner, .del_radio{
     margin: 10px 0;
     display: flex;
     font-family: nanum;
 }
-
-.choice {
+.del_radio{
     display: flex;
-    margin-right: 20px;
-}
-.choice label{
-    margin-left: 5px;
+    flex-wrap: wrap;
 }
 
+.del_radio input, .add_radio input{
+	margin-left:20px;
+	margin-right:5px;
+}
 .payment_warp {
     position: relative;
     margin-top: 100px;

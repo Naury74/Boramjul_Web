@@ -1,0 +1,29 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mysqlOrderDetail">
+
+   <!-- 주문 내역 조회 -->
+   <select id="detail_list" resultType="orderDetailDTO">
+      SELECT * FROM order_detail WHERE detailnum = #{detailnum} 
+   </select>
+   
+   <!-- 주문 금액 조회 / 어느 페이지에 쓰면 좋을까요?-->
+   <select id="detail_price" resultType="int">
+      SELECT SUM(totalprice) FROM order_detail WHERE detailnum = #{detailnum} 
+   </select>
+
+   <!-- 주문 내역 삭제 / 회원용인지?-->
+   <delete id="detail_delete">   
+       delete from order_detail where detailnum = #{detailnum}
+   </delete>
+
+   <!-- 주문 내역 수정 (관리자전용) -->
+   <update id="detail_update">
+      update order_detail set 
+      quantity = #{quantity}, totalprice = #{quantity}*price 
+      where detailnum = #{detailnum} and cartnum = #{cartnum}
+   </update>
+
+</mapper>

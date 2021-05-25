@@ -12,8 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.ex01.model.dto.CartDTO;
 import com.example.ex01.model.dto.QnADTO;
 import com.example.ex01.service.EtcService;
 
@@ -25,15 +27,7 @@ public class EtcController {
 	@Inject
 	EtcService etcService;
 	
-	@RequestMapping("order.do")
-	public String order() {
-		return "etc/order";
-	}
-	
-	@RequestMapping("completed.do")
-	public String completed() {
-		return "etc/completed";
-	}
+
 	
 	@RequestMapping("map.do")
 	public String map( Model model) {

@@ -7,10 +7,14 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.ex01.model.dto.CartDTO;
+import com.example.ex01.model.dto.MemberDTO;
+import com.example.ex01.model.dto.OrderDTO;
 import com.example.ex01.service.MemberService;
+import com.example.ex01.service.OrderService;
 import com.example.ex01.service.CartService;
 
 @RequestMapping("/mypage/*")
@@ -31,6 +38,12 @@ public class MypageController {
 	
 	@Inject
 	CartService cartService;
+	
+	@Inject
+	OrderService orderService;
+	
+	@Autowired SqlSessionTemplate mysql;
+
 	
 	@RequestMapping("myList.do")
 	public ModelAndView myList(HttpSession session, ModelAndView mav, CartDTO dto) {
@@ -102,17 +115,16 @@ public class MypageController {
 	
 	@ResponseBody
 	@RequestMapping(value="cart_delete.do", method = RequestMethod.POST)
-	public int cart_delete(HttpSession session, @RequestParam(value="check[]") List<String> chArr, CartDTO dto) {
+	public int cart_delete(HttpSession session, @RequestParam(value="check[]") List<String> checkArr, CartDTO dto) throws Exception {
 		logger.info("장바구니 개별상품 삭제을 요청했습니다.");
 		
-		int cartnum = dto.getCartnum();
-		
+		int cartnum = 0;
 		int result = 0;
+		System.out.println(checkArr);
 		
 		if(dto != null) {
-			dto.setCartnum(cartnum);
-			
-			for(String i : chArr) {
+			for(String i : checkArr) {
+				System.out.println("i:"+i);
 				cartnum = Integer.parseInt(i);
 				dto.setCartnum(cartnum);
 				cartService.cart_delete(dto);
@@ -145,6 +157,98 @@ public class MypageController {
 		}
 		
 		return "redirect:/mypage/myCart.do";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="order_insert.do", method = RequestMethod.POST)
+	public int order_insert(HttpSession session, @RequestParam(value="check[]") List<String> checkArr, CartDTO dto) throws Exception  {
+		logger.info("result값 2로 변경");
+		
+		int cartnum = 0;
+		int result = 0;
+		System.out.println("checkArr: "+checkArr);
+		
+		if(dto != null) {
+			for(String i : checkArr) {
+				System.out.println("i:"+i);
+				cartnum = Integer.parseInt(i);
+				dto.setCartnum(cartnum);
+				cartService.order_insert(dto);
+			}
+			result = 1;
+		}
+		return result;
+	}
+	
+	@RequestMapping("order.do")
+	public ModelAndView order(ModelAndView mav, CartDTO dto, @RequestParam String email, Model model) {
+		
+		model.addAttribute("memberdto", memberService.myInfo(email));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if (email != null) {
+			
+			List<CartDTO> list = cartService.orderCart(email);
+			logger.info("이메일: "+email);
+			logger.info("주문요청 들어온 목록: "+list.toString());
+			
+			int order_tot = cartService.order_tot(email);
+			logger.info("주문요청 총 합계: "+order_tot);
+			
+			map.put("list", list);
+			map.put("order_tot", order_tot);
+			
+			mav.addObject("map",map);
+			mav.setViewName("/mypage/order");
+			
+			return mav;
+			
+		} else { 
+			return new ModelAndView("/member/login", "",null);
+		}
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="order_result_3.do", method = RequestMethod.POST)
+	public int order_result_3(@RequestParam(value="cartnum[]") List<String> list, CartDTO dto) throws Exception  {
+		logger.info("result값 3으로 변경요청");
+		
+		int cartnum = 0;
+		int result = 0;
+		
+		System.out.println("list: "+list);
+		
+		if(dto != null) {
+			for(String i : list) {
+				System.out.println("i2:"+i);
+				cartnum = Integer.parseInt(i);
+				dto.setCartnum(cartnum);
+				cartService.order_result_3(dto);
+			}
+			result=1;
+		}
+		return result;
+	}
+	
+	
+	@RequestMapping("completed.do")
+	public String completed(ModelMap model, @ModelAttribute OrderDTO dto) throws Exception {
+		
+		// 파라메터 셋팅
+        Map param = new HashMap();
+        param.put("email", dto.getEmail());
+        param.put("usereserves", dto.getUsereserves());
+         
+        // 프로시져 호출
+        mysql.selectOne("mysqlCart.order_result_add", param);
+ 
+        System.out.println("param: "+param);
+        
+        orderService.order_insert(dto);
+		
+		return "mypage/completed";
 	}
 	
 	@RequestMapping("myReview.do")
