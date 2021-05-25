@@ -9,7 +9,7 @@
 	INSERT INTO `order` 
 	(detailnum, email, name, phone, totalprice, sale, saleprice, usereserves, payprice, addreserves, address, pay, request)
 	VALUES
-	(#{detailnem}, #{email}, #{name}, #{phone}, #{totalprice} , #{sale}, #{saleprice},
+	((SELECT MAX(detailnum) FROM order_detail), #{email}, #{name}, #{phone}, #{totalprice} , #{sale}, #{saleprice},
 	 #{usereserves}, #{payprice}, #{addreserves}, #{address}, #{pay}, #{request})
    </insert>
 

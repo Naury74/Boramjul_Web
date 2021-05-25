@@ -3,16 +3,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mysqlOrderDetail">
-   <!-- 주문 상세 내역 추가  -->
-   <!-- 주문완료(result = 3) 인 데이터 삽입   -->
-   <insert id="detail_insert">
-      INSERT INTO order_detail
-      (detailnum, cartnum, prodnum, NAME, image, quantity, price, totalprice) 
-      SELECT 
-      (SELECT MAX(detailnum)+1 FROM order_detail), 
-      cartnum, prodnum, NAME, image, quantity, price, totalprice 
-      FROM cart where result = 3 and email = #{email}
-   </insert>
 
    <!-- 주문 내역 조회 -->
    <select id="detail_list" resultType="orderDetailDTO">

@@ -98,7 +98,12 @@
    <!-- 총결제금액, 적립금, 랭크변환 실행 주문추가 insert 후 실행 --!>
    <resultMap id = "order_result_add" type = "hashmap"> </ resultMap>
    <select id = "order_result_add" statementType = "CALLABLE">
-	{	call orderresultadd(#{email}, #{result}, #{usereserves})	}
+	{	call orderresultadd(#{email}, #{usereserves})	}
    </select>
+
+   <!-- result 값 처리 -->
+   <update id="order_result_3">
+     UPDATE cart SET result = 3 WHERE cartnum = #{cartnum}
+   </update>
 
 </mapper>

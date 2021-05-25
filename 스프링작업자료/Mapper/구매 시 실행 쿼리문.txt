@@ -1,0 +1,12 @@
+구매시 실행
+1. order_result_3 (cartMapper)
+   실행하여 구매할 cartnum 의 result 값 3으로 변경 (조건문 cartnum)
+2. order_result_add (cartMapper)
+   프로시저 실행 -> 매개변수 -> email, usereserves(사용한적립금)
+3. order_insert 
+   detailnum 은 프로시저 실행 시 최대값으로 자동 적용 
+   나머지는 컨트롤러에서 받아온 값 
+
+
+
+

@@ -1,0 +1,57 @@
+1. 프로시저 수정
+mysqlOrderDetail -> detail_insert -> 안에 내용 프로시저에 추가
+BEGIN
+
+DECLARE resultpay INT;
+DECLARE payprice INT;
+DECLARE advanresult VARCHAR(50) CHARSET UTF8;
+
+INSERT INTO order_detail (detailnum, cartnum, prodnum, NAME, image, quantity, price, totalprice) 
+SELECT (SELECT MAX(detailnum)+1 FROM order_detail), cartnum, prodnum, NAME, image, quantity, price, totalprice 
+FROM cart where result = 3 and email = f_email;
+
+set resultpay = (SELECT m.reserves-f_usereserves+(SELECT TRUNCATE((ifnull(sum(price*quantity),0)-salefunction(f_email)-f_usereserves)*0.01,0)) 
+		  FROM member m, cart c WHERE m.email = f_email AND c.result = 3);
+
+set payprice = (SELECT m.totalprice+(ifnull(sum(price*quantity),0)-salefunction(f_email)-f_usereserves) FROM member m, cart c WHERE m.email = f_email AND c.result = 3);
+
+UPDATE member SET totalprice = payprice WHERE email = f_email;
+
+SET advanresult = (SELECT case when totalprice < 200000 then "브론즈"
+	                            when totalprice >= 200000 AND totalprice < 500000 then "실버"
+                               when totalprice >= 500000 then "골드"
+                               END FROM member WHERE email = f_email);
+
+UPDATE member SET RANK = advanresult, reserves = resultpay WHERE email = f_email;
+
+END
+
+2. cartMapper 변경
+order_result_3 추가함( cartnum 검색하여 result 값 3으로 변경)
+   <!-- result 값 처리 -->
+   <!-- 삭제해도 장바구니에는 존재함 -->
+   <update id="order_result_3">
+     UPDATE cart SET result = 3 WHERE cartnum = #{cartnum}
+   </update>
+
+3. 함수와 프로시저에 매개변수 result 다 빼고 3으로 넣기
+
+
+
+
+수정내용
+orderDetailMapper - insert 삭제함( 프로시저에서 처리)
+cartMapper - order_result_3 추가함( cartnum 검색하여 result 값 3으로 변경)
+
+구매시 실행
+1. order_result_3 (cartMapper)
+   실행하여 구매할 cartnum 의 result 값 3으로 변경 (조건문 cartnum)
+2. order_result_add (cartMapper)
+   프로시저 실행 -> 매개변수 -> email, usereserves(사용한적립금)
+3. order_insert 
+   detailnum 은 프로시저 실행 시 최대값으로 자동 적용 
+   나머지는 컨트롤러에서 받아온 값 
+
+
+
+
