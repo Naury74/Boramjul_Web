@@ -4,6 +4,7 @@
 id - kskang.brj@gmail.com
 pw - Boramjul1!
 
+만료기간 2021-04-12 ~ 2021-07-31
 
 포트포워딩 106.10.50.197  port 3389
 
