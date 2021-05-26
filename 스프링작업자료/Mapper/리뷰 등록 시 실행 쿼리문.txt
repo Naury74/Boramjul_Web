@@ -1,0 +1,13 @@
+리뷰 등록 시 실행
+1. review_insert (reviewMapper)
+필수 항목 체크 후 DB 저장
+
+2. review_count (reviewMapper)
+리뷰 등록 시 실행 -> 리뷰 수 반환 product 테이블에 추가
+
+3. review_score (reviewMapper)
+리뷰 등록 시 실행 -> 리뷰 점수 평균 반환 product 테이블에 추가
+
+
+
+

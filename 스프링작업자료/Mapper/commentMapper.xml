@@ -1,0 +1,39 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mysqlComment">
+
+   <!-- 댓글 등록 -->
+   <insert id="comment_insert">
+      INSERT INTO 
+      `comment` (email, renum, comnum, content) 
+      VALUES 
+      (#{email}, #{renum}, 
+      (SELECT IFNULL((SELECT max(comnum)+1 FROM `comment` AS comment_as WHERE renum = #{renum}),1)
+       FROM `comment` AS comment_as WHERE renum = #{renum}), #{content})
+   </insert>
+
+   <!-- renum 별 댓글 조회 -->
+   <select id="comment_list" resultType="commentDTO">
+      SELECT * from `comment` renum = #{renum} order BY comnum
+   </select>
+
+   <!-- 댓글 삭제 - 둘중 하나 사용-->
+   <delete id="comment_delete">
+      delete from `comment` where comidx = #{comidx}
+      delete from `comment` where renum = #{renum} and comnum = #{comnum}
+   </delete>
+   
+   <!-- 댓글 수정 - 둘중 하나 사용 -->
+   <update id="comment_update">
+      UPDATE `comment` SET content = #{content} where comidx = #{comidx}
+      UPDATE `comment` SET content = #{content} where renum = #{renum} and comnum = #{comnum}
+   </update>
+
+   <!-- 댓글 수 review 테이블에 업데이트 - 댓글 작성 시 실행 -->
+   <update id="comscore_update">
+      UPDATE review SET comscore = (SELECT COUNT(*) FROM `comment` WHERE renum = renum = #{renum}) WHERE renum = #{renum} 
+   </update>
+
+</mapper>

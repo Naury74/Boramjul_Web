@@ -1,0 +1,11 @@
+댓글 등록 시 실행
+1. comment_insert (commentMapper)
+댓글 추가 
+
+2. comscore_update (commentMapper)
+댓글 등록시 review 테이블에 comscore(댓글 수) 증가
+
+
+
+
+
