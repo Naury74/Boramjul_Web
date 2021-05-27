@@ -229,20 +229,24 @@ a{
     background-color: #664B8E;
     height: 195px;
 }
-.table{
+.table, .list_table{
     margin-left: 25%;
 }
-.table table{
+.table table, .list_table table{
     border-collapse: collapse;
     width: 90%;
     border-spacing: 0;
 }
-.table tr {
+.table tr, .list_table tr {
     border: solid 2px #A1A1A1;
     text-align:center;
     height: 190px;
     border-left: 0;
     border-right: 0;
+}
+.list_table tr td{
+	width:14%;
+	font-size:17px;
 }
 .table tr td{
     width: 15%;

@@ -23,19 +23,19 @@
                         <tbody>
                             <tr>
                                 <th>주문번호</th>
-                                <td>20210605</td>
+                                <td>${dto.detailnum}</td>
                             </tr>
                             <tr>
                                 <th>주문 접수일</th>
-                                <td>2021년12월25일</td>
+                                <td>${dto.orderdate}</td>
                             </tr>
                             <tr>
                                 <th>수령 예정일</th>
-                                <td>2021년12월31일</td>
+                                <td>${dto.deliverydate}</td>
                             </tr>
                             <tr>
                                 <th>결제수단</th>
-                                <td>신용카드</td>
+                                <td>${dto.pay }</td>
                             </tr>                                
                         </tbody>
                     </table>   

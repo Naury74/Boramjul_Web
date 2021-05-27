@@ -132,6 +132,8 @@ $(function(){
 	var saleprice = ''; //할인받는 금액
 	var point = $('input[name="usereserves"]').val();;
 	var payprice = '';//할인 후 최종금액
+	var addreserves = '';
+	
 	console.log(rank);
 	
 	//랭크별 할인금액
@@ -139,20 +141,26 @@ $(function(){
 		sale = 0.05;
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
+		addreserves = payprice * 0.01;
 		$('input[name="saleprice"]').val(saleprice);
 		$('input[name="payprice"]').val(payprice);
+		$('input[name="addreserves"]').val(addreserves);
 	}else if(rank == '실버'){
 		sale = 0.1;
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
+		addreserves = payprice * 0.01;
 		$('input[name="saleprice"]').val(saleprice);
 		$('input[name="payprice"]').val(payprice);
+		$('input[name="addreserves"]').val(addreserves);
 	}else{
 		sele = 0.15;
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
+		addreserves = payprice * 0.01;
 		$('input[name="saleprice"]').val(saleprice);
 		$('input[name="payprice"]').val(payprice);
+		$('input[name="addreserves"]').val(addreserves);
 	}
 	
 	//포인트 전체 차감
@@ -225,7 +233,7 @@ $(function(){
                     <tr>
                         <td>주문인</td>
                         <td class="add_radio">
-                        	<input type="text" id="name" placeholder="이름" value="${memberdto.name}" readonly>
+                        	<input type="text" id="name" placeholder="이름" name="name" value="${memberdto.name}" readonly>
                         	<input type="radio" id="original" name="info_radio" onclick="javascript:getInfo(event)" required/>
                             <label for='original_address'>기존 정보 사용</label>
                             <input type="radio" id="new" name="info_radio" onclick="javascript:getInfo(event)"/>
@@ -316,6 +324,7 @@ $(function(){
                                         </dt>
                                         <dd><span><input type="number" name="usereserves" id="usereserves" class="usereserves" min="0" max="${memberdto.reserves }" 
                                         			 onchange="javascript:changePoint()" value="0" style="width:55px; padding:0;"/>
+                                       			 <input type="hidden" name="addreserves" value=""/>
                                     		</span>P</dd>
                                     </dl>
                                 </div><!-- price -->

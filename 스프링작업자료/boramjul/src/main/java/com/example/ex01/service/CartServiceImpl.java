@@ -61,11 +61,6 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public List<CartDTO> listOrder(String email) {
-		return cartDao.listOrder(email);
-	}
-
-	@Override
 	public void order_insert(CartDTO dto) {
 		cartDao.order_insert(dto);
 	}
@@ -83,6 +78,12 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public void order_result_3(CartDTO dto) {
 		cartDao.order_result_3(dto);
+	}
+
+	@Override
+	public void cart_redelete(String email) {
+		cartDao.cart_redelete(email);
+		
 	}
 
 }

@@ -8,6 +8,7 @@
 		select * from member where email = #{email}
 	</select>
 	
+	<!-- 회원가입 / 완료 -->
    <select id="insert">   
       INSERT INTO member 
       (email, passwd, name, phone, sns, birth) 
@@ -15,23 +16,28 @@
       (#{email}, #{passwd}, #{name}, #{phone}, #{sns}, #{birth})
     </select>
 		
+	<!-- 회원 삭제 -->
 	<delete id="delete">
 		delete from member where email = #{email}
 	</delete>
 	
+	<!-- 회원정보 수정 / 완료 -->
 	<update id="update">
 		update member set 
       	name = #{name}, passwd = #{passwd}, birth = #{birth}, phone = #{phone}, address = #{address}  where email = #{email}
 	</update> 
 	
+	<!-- 로그인 / 완료 -->
 	<select id="check_passwd" resultType="int">
 		select count(*) from member where email = #{email} and passwd = #{passwd}
 	</select>
 	
+	<!-- api로그인  -->
 	<select id="check_api" resultType="int">
 		select count(*) from member where email = #{email} and name = #{name}
 	</select>
 	
+	<!-- 로그인 세션 / 완료 -->
 	<select id="loginCheck" resultType="String">
 	 	select name 
 	 	from 
@@ -40,6 +46,7 @@
 	 		email = #{email} and passwd = #{passwd}
 	 </select>	
 	 
+	 <!-- api로그인 세션 -->
 	 <select id="apiloginCheck" resultType="String">
 	 	select name 
 	 	from 
@@ -49,15 +56,17 @@
 
 	 </select>	
 	 
+	 <!-- 이메일 찾기 / 완료 -->
 	 <select id="findemail" resultType="MemberDTO">
      	select * from member where phone = #{phone}
      </select>
      
+     <!-- 비밀번호 찾기 / 완료 -->
      <select id="findpwd" resultType="MemberDTO">
      	select * from member where email = #{email}
      </select>
      
-     <!-- 안드로이드 json 전용체크 -->
+     <!-- 안드로이드 json 전용체크 / 완료? -->
      <select id="list" resultType="MemberDTO">
         select * from member order by email
   	 </select>

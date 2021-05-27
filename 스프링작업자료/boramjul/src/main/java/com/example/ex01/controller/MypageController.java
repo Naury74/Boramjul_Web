@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.ex01.model.dto.CartDTO;
 import com.example.ex01.model.dto.MemberDTO;
 import com.example.ex01.model.dto.OrderDTO;
+import com.example.ex01.model.dto.OrderDetailDTO;
 import com.example.ex01.service.MemberService;
 import com.example.ex01.service.OrderService;
 import com.example.ex01.service.CartService;
@@ -46,7 +47,7 @@ public class MypageController {
 
 	
 	@RequestMapping("myList.do")
-	public ModelAndView myList(HttpSession session, ModelAndView mav, CartDTO dto) {
+	public ModelAndView myList(HttpSession session, ModelAndView mav, OrderDetailDTO dto) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -54,7 +55,7 @@ public class MypageController {
 		
 		if (email != null) {
 			
-			List<CartDTO> list = cartService.listOrder(email);
+			List<OrderDetailDTO> list = orderService.detail_list(email);
 			logger.info("이메일: "+email);
 			logger.info("주문내역: "+list.toString());
 			
@@ -86,6 +87,7 @@ public class MypageController {
 			logger.info("이메일: "+email);
 			logger.info("장바구니 목록: "+list.toString());
 			
+			cartService.cart_redelete(email);
 			cartService.cart_reset(dto);
 			
 			// 2. 장바구니 총 금액
@@ -220,7 +222,6 @@ public class MypageController {
 		
 		System.out.println("list: "+list);
 		
-		if(dto != null) {
 			for(String i : list) {
 				System.out.println("i2:"+i);
 				cartnum = Integer.parseInt(i);
@@ -228,26 +229,29 @@ public class MypageController {
 				cartService.order_result_3(dto);
 			}
 			result=1;
-		}
+		
 		return result;
 	}
 	
 	
 	@RequestMapping("completed.do")
-	public String completed(ModelMap model, @ModelAttribute OrderDTO dto) throws Exception {
+	public String completed(ModelMap modelmap, Model model, @ModelAttribute OrderDTO dto, @RequestParam String email) throws Exception {
+		
+        orderService.order_insert(dto);
 		
 		// 파라메터 셋팅
         Map param = new HashMap();
         param.put("email", dto.getEmail());
-        param.put("usereserves", dto.getUsereserves());
          
         // 프로시져 호출
         mysql.selectOne("mysqlCart.order_result_add", param);
  
         System.out.println("param: "+param);
         
-        orderService.order_insert(dto);
+		model.addAttribute("dto", orderService.order_detail_list(dto));
 		
+		System.out.println("주문 상세 dto: "+dto);
+        
 		return "mypage/completed";
 	}
 	

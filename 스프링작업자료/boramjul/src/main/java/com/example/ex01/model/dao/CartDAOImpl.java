@@ -60,11 +60,6 @@ public class CartDAOImpl implements CartDAO{
 	}
 
 	@Override
-	public List<CartDTO> listOrder(String email) {
-		return sqlSession.selectList("mysqlCart.listOrder", email);
-	}
-
-	@Override
 	public void order_insert(CartDTO dto) {
 		sqlSession.update("mysqlCart.cart_order", dto);
 	}
@@ -82,6 +77,12 @@ public class CartDAOImpl implements CartDAO{
 	@Override
 	public int order_tot(String email) {
 		return sqlSession.selectOne("mysqlCart.order_tot",email);
+	}
+
+	@Override
+	public void cart_redelete(String email) {
+		sqlSession.delete("mysqlCart.cart_redelete", email);
+		
 	}
 
 

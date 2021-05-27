@@ -4,17 +4,13 @@
 
 <mapper namespace="mysqlOrderDetail">
 
-   <!-- 주문 내역 조회 -->
+   <!-- 주문 내역 조회 / 완료-->
    <select id="detail_list" resultType="orderDetailDTO">
-      SELECT * FROM order_detail WHERE detailnum = #{detailnum} 
+      SELECT * FROM order_detail WHERE email = #{email} order by indate
    </select>
    
-   <!-- 주문 금액 조회 / 어느 페이지에 쓰면 좋을까요?-->
-   <select id="detail_price" resultType="int">
-      SELECT SUM(totalprice) FROM order_detail WHERE detailnum = #{detailnum} 
-   </select>
 
-   <!-- 주문 내역 삭제 / 회원용인지?-->
+   <!-- 주문 내역 삭제 / (관리자용)-->
    <delete id="detail_delete">   
        delete from order_detail where detailnum = #{detailnum}
    </delete>

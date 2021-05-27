@@ -25,10 +25,10 @@ public interface CartDAO {
 	
 	//장바구니 result값 3으로 변경
 	void order_result_3(CartDTO dto);
+	
+	//장바구니 result값 3 삭제
+	void cart_redelete(String email);
 
-//	// 장바구니 비우기
-//	void deleteAll(String email);
-//	
 	// 장바구니 금액 합산
 	int cart_tot(String email);
 	
@@ -44,6 +44,5 @@ public interface CartDAO {
 	//장바구니 초기화
 	void cart_reset(CartDTO dto);
 	
-	//주문내역 조회
-	List<CartDTO> listOrder(String email);
+
 }

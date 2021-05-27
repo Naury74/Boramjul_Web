@@ -27,7 +27,7 @@
             <p>SHOPPING LIST</p>
         </div>
 
-        <div class="table">
+        <div class="list_table">
             <table>
                 <tr style="height: 40px;">
                     <td></td>
@@ -52,10 +52,10 @@
 			                    <td>${row.name }</td>
 			                    <td><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원<br>
 			                    	<fmt:formatNumber value="${row.quantity }"/>권</td>
-			                    <td><fmt:formatNumber value="${row.ordernum }"/></td>
-			                    <td><fmt:formatDate value="${row.regdate }" pattern="yyyy.MM.dd"/></td>
-			                    <td>상품 준비중</td>
-			                    <td><img src="${path}/images/별점4h.svg" alt="별점" class="star"></td>
+			                    <td><fmt:formatNumber value="${row.detailnum }"/></td>
+			                    <td><fmt:formatDate value="${row.indate }" pattern="yyyy.MM.dd"/></td>
+			                    <td><fmt:formatNumber value="${row.delivery }"/></td>
+			                    <td><fmt:formatNumber value="${row.review }"/></td>
 			                </tr>
 		                </c:forEach>
 					</c:otherwise>

@@ -26,7 +26,7 @@
        delete from cart where cartnum = #{cartnum}
    </delete>
    
-   <!-- 장바구니에서 구매완료 품목 삭제 / 장바구니 조회 시점에 실행시키면 될까요?-->
+   <!-- 장바구니에서 구매완료 품목 삭제 / 완료-->
    <delete id="cart_redelete">   
        delete from cart where email = #{email} AND result = 3
    </delete>
@@ -38,7 +38,7 @@
   		where cartnum = #{cartnum}
    </update>
 
-	<!-- 주문 대기 상태로 변경 (1개 이상의 cartnum 선택시 배열으로 받아서 for문 이용하여 1개이상 수정/구매하면 3이되고 취소하면 1이됨 / 완료-->
+	<!-- 주문 대기 상태로 변경 / 완료-->
 	<update id="cart_order">
 		UPDATE cart SET result = 2 WHERE cartnum = #{cartnum}
 	</update>
@@ -64,12 +64,6 @@
 	<select id="order_list" resultType="cartDTO">
 		SELECT * FROM cart WHERE result = 2 AND email = #{email}
 	</select>
-
-	<!-- 주문 품목 삭제 -->
-	<!-- 삭제해도 장바구니에는 존재함 / 뭐할때 쓰는 기능인지 다시 물어보기 -->
-	<update id="order_delete">
-		UPDATE cart SET result = 1 WHERE cartnum = #{cartnum}
-	</update>
 	
 	<!-- 바로 구매  -->
 	<insert id="order_now">
@@ -88,20 +82,11 @@
 		select ifnull(sum(price*quantity),0) from cart where email = #{email} AND result = 2
 	</select> 
     
-	<!-- 조회 시 필요한 데이터 / 없애도 될까요? -->
-	<select id="order_list_date" resultType="cartDTO">
-		select ifnull(sum(price*quantity),0) AS totalprice, <!-- 총금액 -->
-		rankfunction(#{email}) AS sale, <!-- 할인율 -->
-		salefunction(#{email}, #{result}) AS saleprice, <!-- 할인금액 -->
-		payfunction(#{email}, #{result}, #{usereserves}) AS payprice, <!-- 결제금액 -->
-		reservesfunction(#{email}, #{result}, #{usereserves}) AS reserves <!-- 적립금 -->
-		from cart where email = #{email} AND result = #{result}
-	</select> 
     
-	<!-- 총결제금액, 적립금, 랭크변환 실행 주문추가 insert 후 실행 / 5/26 수정예정 -->
+	<!-- 총결제금액, 적립금, 랭크변환 실행 주문추가 insert 후 실행 / 완료 -->
 	<resultMap id = "order_result_add" type = "hashmap"></resultMap>
 	<select id = "order_result_add" statementType = "CALLABLE">
-		{	call orderresultadd(#{email}, #{usereserves})	}
+		{	call orderresultadd(#{email})	}
 	</select>
 
 </mapper>
