@@ -27,5 +27,9 @@ public class EtcServiceImpl implements EtcService {
 		// TODO Auto-generated method stub
 		return etcDao.QnAlist();
 	}
+	@Override
+	public QnADTO detailProduct(String name) {
+		return etcDao.detailProduct(name);
+	}
 
 }

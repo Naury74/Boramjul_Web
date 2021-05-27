@@ -31,7 +31,7 @@
 		            href="${path }/admin/QnA_write.do">글 작성</a></button><br><br> 
 		  </c:if>
 
-		<button style="position: absolute; width: 100px; height: 50px; left:85%; top: 34%; background-color: #434CA5; " type="button"><a style="color: white;
+		<button style="position: absolute; width: 100px; height: 50px; left:85%; top: 29%; background-color: #434CA5; " type="button"><a style="color: white;
 		            font-family: gmarket;
 		            font-style: normal;
 		            font-weight: bold;

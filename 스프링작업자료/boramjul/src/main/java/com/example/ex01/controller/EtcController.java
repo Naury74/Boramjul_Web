@@ -61,6 +61,14 @@ public class EtcController {
 
 		return "etc/faqbutton";
 	}
+	// 상품 정보 상세조회
+		@RequestMapping("/detail/{name}")  //  Pathvariable방식으로 인자를 전달 받음
+		public ModelAndView detail(@PathVariable("name")String name, ModelAndView mav) {
+			
+			mav.setViewName("/etc/notice");
+			mav.addObject("dto", etcService.detailProduct(name));
+			return mav;
+		}
 	
 	
 	

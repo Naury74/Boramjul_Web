@@ -16,4 +16,12 @@
     	select * from qna
     </select>
 
+ <!--공지글 확인  -->
+<select id="detailProduct" resultType="QnADTO">
+		select * 
+		from 
+			qna
+		where name = #{name}
+	</select>
+
 </mapper>

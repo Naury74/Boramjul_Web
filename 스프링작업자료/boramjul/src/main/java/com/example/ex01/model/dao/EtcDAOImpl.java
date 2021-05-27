@@ -24,5 +24,9 @@ public class EtcDAOImpl implements EtcDAO {
 	public List<QnADTO> QnAlist() {
 		return sqlSession.selectList("mysqlEtc.QnAlist");
 	}
+	@Override
+	public QnADTO detailProduct(String name) {
+		return sqlSession.selectOne("mysqlEtc.detailProduct", name);
+	}
 
 }
