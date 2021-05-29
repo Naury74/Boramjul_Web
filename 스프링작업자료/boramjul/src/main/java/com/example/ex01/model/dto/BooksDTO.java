@@ -7,6 +7,7 @@ public class BooksDTO {
 	private String search;
 	private String name;
 	private int price;
+	private String kind;
 	private String content;
 	private String image;
 	private String category;

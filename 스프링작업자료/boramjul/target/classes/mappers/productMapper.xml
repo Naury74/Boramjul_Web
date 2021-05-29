@@ -27,9 +27,9 @@
    <!-- 상품 등록 -->
    <insert id="prod_insert">
       INSERT INTO product 
-      (name, kind, price, content, detail, image) 
+      (prodnum, name, kind, price, content, detail, image) 
       VALUES 
-      (#{name}, #{kind}, #{price}, #{content}, #{detail}, #{image})	
+      (#{prodnum}, #{name}, #{kind}, #{price}, #{content}, #{detail}, #{image})	
    </insert>
    
    <!-- 상품 수정 -->

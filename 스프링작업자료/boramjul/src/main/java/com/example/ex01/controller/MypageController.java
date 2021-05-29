@@ -28,6 +28,7 @@ import com.example.ex01.model.dto.OrderDTO;
 import com.example.ex01.model.dto.OrderDetailDTO;
 import com.example.ex01.service.MemberService;
 import com.example.ex01.service.OrderService;
+import com.example.ex01.service.AdminService;
 import com.example.ex01.service.CartService;
 
 @RequestMapping("/mypage/*")
@@ -43,6 +44,9 @@ public class MypageController {
 	
 	@Inject
 	OrderService orderService;
+	
+	@Inject
+	AdminService adminService;
 	
 	@Autowired SqlSessionTemplate mysql;
 
@@ -213,12 +217,21 @@ public class MypageController {
 	}
 	
 	@RequestMapping("order_now.do")
-	public String order_now(Model model, @ModelAttribute BooksDTO dto, @RequestParam String email) {
+	public String order_now(Model model, @ModelAttribute BooksDTO dto, CartDTO cartdto, @RequestParam String email) {
 		
-		model.addAttribute("memberdto", memberService.myInfo(email));
-		model.addAttribute("booksdto", dto);
-		
-		return "mypage/order_now";
+		if (email != null) {
+			System.out.println("바로구매 dto: "+dto);
+			System.out.println("카트 dto: "+cartdto);
+			adminService.prod_insert(dto);
+			adminService.order_now(cartdto);
+			
+			model.addAttribute("memberdto", memberService.myInfo(email));
+			model.addAttribute("booksdto", dto);
+			
+			return "mypage/order_now";
+		}else { 
+			return "/member/login";
+		}
 		
 	}
 	
@@ -265,6 +278,30 @@ public class MypageController {
         
 		return "mypage/completed";
 	}
+	
+	@RequestMapping("now_completed.do")
+	public String now_completed(ModelMap modelmap, Model model, @ModelAttribute OrderDTO dto, CartDTO cartdto ,@RequestParam String email) throws Exception {
+		System.out.println("now_completed.do");
+		System.out.println("cartdto: "+cartdto);
+		cartService.order_result_3(cartdto);
+		orderService.order_insert(dto);
+		
+		// 파라메터 셋팅
+        Map param = new HashMap();
+        param.put("email", dto.getEmail());
+         
+        // 프로시져 호출
+        mysql.selectOne("mysqlCart.order_result_add", param);
+ 
+        System.out.println("param: "+param);
+        
+		model.addAttribute("dto", orderService.order_detail_list(dto));
+		
+		System.out.println("주문 상세 dto: "+dto);
+	
+		return "mypage/completed";
+	}
+	
 	
 	@RequestMapping("myReview.do")
 	public String myReview() {

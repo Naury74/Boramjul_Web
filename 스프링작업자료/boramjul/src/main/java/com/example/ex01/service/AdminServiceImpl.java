@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.ex01.model.dao.AdminDAO;
 import com.example.ex01.model.dto.AdminDTO;
+import com.example.ex01.model.dto.BooksDTO;
+import com.example.ex01.model.dto.CartDTO;
 import com.example.ex01.model.dto.QnADTO;
 
 @Service
@@ -56,6 +58,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void QnA_update(QnADTO dto) {
 		adminDao.QnA_update(dto);
+	}
+
+	@Override
+	public void prod_insert(BooksDTO dto) {
+		adminDao.prod_insert(dto);
+	}
+
+	@Override
+	public void order_now(CartDTO dto) {
+		adminDao.order_now(dto);
 	}
 
 }

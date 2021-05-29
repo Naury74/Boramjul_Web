@@ -142,25 +142,28 @@ $(function(){
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
+		var floor = Math.floor(addreserves);
 		$('input[name="saleprice"]').val(saleprice);
 		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(addreserves);
+		$('input[name="addreserves"]').val(floor);
 	}else if(rank == '실버'){
 		sale = 0.1;
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
+		var floor = Math.floor(addreserves);
 		$('input[name="saleprice"]').val(saleprice);
 		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(addreserves);
+		$('input[name="addreserves"]').val(floor);
 	}else{
 		sele = 0.15;
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
+		var floor = Math.floor(addreserves);
 		$('input[name="saleprice"]').val(saleprice);
 		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(addreserves);
+		$('input[name="addreserves"]').val(floor);
 	}
 	
 	//포인트 전체 차감

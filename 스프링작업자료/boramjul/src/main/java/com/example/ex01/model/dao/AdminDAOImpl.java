@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.example.ex01.model.dto.AdminDTO;
+import com.example.ex01.model.dto.BooksDTO;
+import com.example.ex01.model.dto.CartDTO;
 import com.example.ex01.model.dto.QnADTO;
 
 @Repository
@@ -47,6 +49,16 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void QnA_update(QnADTO dto) {
 		sqlSession.update("mysqlAdmin.QnA_update", dto);
+	}
+
+	@Override
+	public void prod_insert(BooksDTO dto) {
+		sqlSession.insert("mysqlProduct.prod_insert", dto);
+	}
+
+	@Override
+	public void order_now(CartDTO dto) {
+		sqlSession.insert("mysqlCart.order_now", dto);
 	}
 
 

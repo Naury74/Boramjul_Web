@@ -93,26 +93,10 @@ $(function(){
 		var confirm_val = confirm("구매하시겠습니까?");
 		
 		if(confirm_val){
-			var cartarr = new Array();
-			
-			$("input[name='cartnum']").each(function(){
-			cartarr.push($(this).attr("data-cartnum"));
-			});
-			
-			$.ajax({
-				url:"/mypage/order_result_3.do",
-				type:"post",
-				data:{cartnum:cartarr},
-				success: function(result){
-					if(result == 1){
-						document.order.action ="${path}/mypage/completed.do?email=${sessionScope.email}";
-						document.order.submit();
-					} else{
-						arlet('구매 실패');
-					}
-				}
-			});//ajax
-		}//if
+			document.order.action ="${path}/mypage/now_completed.do?email=${sessionScope.email}";
+			document.order.submit();
+		}
+		
 	});//function()
 	
 	//기타버튼 클릭시 기타입력창 생성
@@ -133,6 +117,7 @@ $(function(){
 	var point = $('input[name="usereserves"]').val();;
 	var payprice = '';//할인 후 최종금액
 	var addreserves = '';
+
 	
 	console.log(rank);
 	
@@ -142,6 +127,7 @@ $(function(){
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
+		var floor = Math.floor(addreserves);
 		$('input[name="saleprice"]').val(saleprice);
 		$('input[name="payprice"]').val(payprice);
 		$('input[name="addreserves"]').val(addreserves);
@@ -150,17 +136,19 @@ $(function(){
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
+		var floor = Math.floor(addreserves);
 		$('input[name="saleprice"]').val(saleprice);
 		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(addreserves);
+		$('input[name="addreserves"]').val(floor);
 	}else{
 		sele = 0.15;
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
+		var floor = Math.floor(addreserves);
 		$('input[name="saleprice"]').val(saleprice);
 		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(addreserves);
+		$('input[name="addreserves"]').val(floor);
 	}
 	
 	//포인트 전체 차감
@@ -215,9 +203,9 @@ $(function(){
                     </tr>
                     <tr>
                         <td><img src="${booksdto.image}" alt="책 이미지" class="bookimg">
-                        	<input type="hidden" name="cartnum" value="${row.cartnum }" data-cartnum="${row.cartnum }">
                         </td>
-                        <td>${booksdto.name }</td>
+                        <td>${booksdto.name }<input type="hidden" name="name" value="${booksdto.name }">
+                        </td>
                         <td><fmt:formatNumber value="${booksdto.price }" pattern="#,###,###"/>원</td>
                         <td>${memberdto.rank }등급 할인<br></td>
                         <td>1권</td>
