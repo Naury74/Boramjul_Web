@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>도서 정보</title>
-<link rel="stylesheet" href="${path}/css/PagesForBooks.css">
+	<%@ include file="../include/include.jsp" %>
+	<link rel="stylesheet" href="${path}/css/PagesForBooks.css">
 </head>
 <body>
 	<div class=wrap>
+	<%@ include file="../include/header.jsp" %>
   <div class="dividing_line">
       <h1 id="BP-h1">도서 정보</h1>
   </div>
@@ -54,11 +52,7 @@
       <div class="book_details">
         <h3 id="BP-h3">책 소개</h3>
           <div class="about_book">  
-          <p>‘세상을 탓하기 전에 방부터 정리하라’ ‘어깨를 펴고 똑바로 서라’ 등 명징한 조언을 담은 『12가지 인생의 법칙』 으로 전 세계 500만 부 판매고를 올린 전 하버드대 심리학 교수 조던 피터슨이 3년 만에 신작 『질서 너머』로  돌아왔다.
- 
-            왜 '질서 너머' 인가? 당신은 자신이 누구일 수 있는지, 최고의 모습을 상상하고 추구해야 마땅하다(법칙2).  그것이 진짜 인생이니까. 질서는 혼돈의 해독제가 될 수 있지만 완벽하지 않다. 끝없이 변화하는 세상에서 자신이  이미 아는 것 얻은 것에 안주한다면 아무리 어렵게 얻었던들 그 질서는 딱딱하게 굳어버린다. 본래 질서와 혼돈은  어느 것이 더 좋다 말할 수 없고, 만물은 그 사이를 끝없이 오간다. 당신은 한 발을 질서의 영역에 두고, 다른 한  발로 그 밖에 있는 미지의 세계를 디뎌야 한다. 혼돈 속에는 위험이 도사리지만, 더 나아질 기회와 가능성도 거기에  있다.
-         
-          『질서 너머』는 혼돈을 잠재우는 것에서 한발 나아가 혼돈과 그 안의 가능성을 기꺼이 껴안도록, 냉소와 두려움의  껍질을 깨는 더 강력한 12가지 법칙을 제시함으로써 독자들의 가슴을 다시 한번 뜨겁게 달군다.</p>
+          <p>${row.detail}</p>
           </div>
         <h3 id="BP-h3">저자 소개</h3>
           <div class="about_author">
@@ -247,4 +241,5 @@
   </div>
 </div>
 </body>
+    <%@ include file="../include/footer.jsp" %>
 </html>

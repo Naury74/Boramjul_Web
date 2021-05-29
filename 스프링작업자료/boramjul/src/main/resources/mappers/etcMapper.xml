@@ -6,9 +6,9 @@
 	<!-- 공지사항 작성 / 완료 -->
    <select id="QnA_insert">   
       INSERT INTO qna 
-      (qnanum, id, name, content) 
+      (qnanum, id, name, kind, content) 
       VALUES 
-      (#{qnanum}, #{id}, #{name}, #{content})
+      (#{qnanum}, #{id}, #{name}, #{kind}, #{content})
     </select>
     
     <!-- 공지글 리스트 / 완료 -->
@@ -16,12 +16,12 @@
     	select * from qna
     </select>
 
- <!--공지글 확인  -->
-<select id="detailProduct" resultType="QnADTO">
+ 	<!--공지글 확인 / 완료 -->
+	<select id="detailProduct" resultType="QnADTO">
 		select * 
 		from 
 			qna
-		where name = #{name}
+		where qnanum = #{qnanum}
 	</select>
 
 </mapper>

@@ -28,8 +28,8 @@ public class EtcServiceImpl implements EtcService {
 		return etcDao.QnAlist();
 	}
 	@Override
-	public QnADTO detailProduct(String name) {
-		return etcDao.detailProduct(name);
+	public QnADTO detailProduct(int qnanum) {
+		return etcDao.detailProduct(qnanum);
 	}
 
 }

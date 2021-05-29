@@ -14,7 +14,15 @@
 	 		adminmember
 	 	where 
 	 		id = #{id} and passwd = #{passwd}
-	 </select>	
+	 </select>
+	 
+	 <delete id="QnA_delete">
+	 	delete from qna where qnanum = #{qnanum}
+	 </delete>
+	 
+	 <update id = "QnA_update">
+	 	update qna set name = #{name}, kind = #{kind}, content = #{content} where qnanum = #{qnanum}
+	 </update>
   
   
   </mapper>

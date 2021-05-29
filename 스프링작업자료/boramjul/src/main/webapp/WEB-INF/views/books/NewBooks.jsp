@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>New Books</title>
-<%@ include file="../include/include.jsp" %>
-<link rel="stylesheet" href="${path}/css/PagesForBooks.css">
+	<%@ include file="../include/include.jsp" %>
+	<link rel="stylesheet" href="${path}/css/PagesForBooks.css">
 </head>
 <body>
 <div class=wrap>
@@ -23,7 +21,9 @@
         <c:forEach var="row" items="${nblist}" varStatus="status"> 
         <!-- 책1 -->
         <div id="searched_books_margin">   
-          <div><img src=${row.image } alt="책 이미지" class="searched_bookimg"></div> 
+          <div>
+            <a href="/books/BookDetail.do?prodnum=${row.prodnum }"><img src=${row.image } alt="책 이미지" class="searched_bookimg"></a>
+          </div> 
           <div id="searched_books_info">
             <div class="searched_books_title">${row.name }</div>
             <div class="searched_books_info_d">

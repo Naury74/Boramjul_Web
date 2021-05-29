@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,14 +62,15 @@ public class EtcController {
 
 		return "etc/faqbutton";
 	}
+	
 	// 상품 정보 상세조회
-		@RequestMapping("/detail/{name}")  //  Pathvariable방식으로 인자를 전달 받음
-		public ModelAndView detail(@PathVariable("name")String name, ModelAndView mav) {
-			
-			mav.setViewName("/etc/notice");
-			mav.addObject("dto", etcService.detailProduct(name));
-			return mav;
-		}
+	@RequestMapping("/detail.do/{qnanum}")  //  Pathvariable방식으로 인자를 전달 받음
+	public ModelAndView detail(@PathVariable("qnanum")int qnanum, ModelAndView mav) {
+		
+		mav.setViewName("/etc/notice");
+		mav.addObject("dto", etcService.detailProduct(qnanum));
+		return mav;
+	}
 	
 	
 	

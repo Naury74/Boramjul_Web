@@ -7,6 +7,21 @@
 <title>Best Sellers</title>
 	<%@ include file="../include/include.jsp" %>
 	<link rel="stylesheet" href="${path}/css/PagesForBooks.css">
+<script type="text/javascript">
+
+$(function(){
+	$('.buy_btn').click(function(){
+		document.form.submit();
+		//location.href="${path}/mypage/order.do?email=${sessionScope.email}";
+	})
+	
+	
+	
+})
+
+
+
+</script>
 </head>
 <body>
 <div class=wrap>
@@ -21,9 +36,11 @@
         <c:forEach var="row" items="${bslist}" varStatus="status"> 
         <!-- 책1 -->
         <div id="searched_books_margin">   
-          <div><img src=${row.image } alt="책 이미지" class="searched_bookimg"></div> 
+          <div>
+          	<a href="/books/BookDetail.do?prodnum=${row.prodnum }"><img src=${row.image } alt="책 이미지" class="searched_bookimg"></a>
+          </div> 
           <div id="searched_books_info">
-            <div class="searched_books_title">${row.name }</div>
+            <a href="${row.link }"><div class="searched_books_title">${row.name }</div></a>
             <div class="searched_books_info_d">
               <span class="book_author">${row.content }</span>
             </div>
@@ -42,32 +59,25 @@
             <input class="num_input" type="text" name="num" value="0" readonly="readonly" size="1"/>
             <button class="num_btn" type ="button" onclick="Count('p',this);">+</button> 
           </div>
-          <div>
-            <button class="cart_btn" type="button" onclick=>장바구니 추가</button>
-          </div>
-          <div>
-            <button class="buy_btn" type="button" onclick=>바로 구매</button>
-          </div>
+          
+          <form name="form" id = "form" method="post" action="${path}/mypage/order_now.do?email=${sessionScope.email}">
+	          <div>
+	          	<input type="hidden" name="name" value="${row.name }">
+	          	<input type="hidden" name="content" value="${row.content }">
+	          	<input type="hidden" name="price" value="${row.price }">
+	          	<input type="hidden" name="image" value="${row.image }">
+	            <button class="cart_btn" >장바구니 추가</button>
+	          </div>
+	          <div>
+	            <button class="buy_btn" >바로 구매</button>
+	          </div>
+          </form>
+          
           </div>
           <div class="clearBoth"></div>     
  		</div>  
         </c:forEach>
-        <div class="clearBoth"></div>
-        <div class="page-move">
-          <a href="javascript:;" onclick="searchList(1)" class="prev"><span></span>이전</a>
-          <a href="javascript:;" onclick="searchList(1)" class="page-on">1</a>
-          <a href="javascript:;" onclick="searchList(2)">2</a>
-          <a href="javascript:;" onclick="searchList(3)">3</a>
-          <a href="javascript:;" onclick="searchList(4)">4</a>
-          <a href="javascript:;" onclick="searchList(5)">5</a>
-          <a href="javascript:;" onclick="searchList(6)">6</a>
-          <a href="javascript:;" onclick="searchList(7)">7</a>
-          <a href="javascript:;" onclick="searchList(8)">8</a>
-          <a href="javascript:;" onclick="searchList(9)">9</a>
-          <a href="javascript:;" onclick="searchList(10)">10</a>
-          <a href="javascript:;" onclick="searchList(11)" class="next">다음<span></span></a>
-          <a href="javascript:;" style="display:none;" onclick="searchList(2)" class="accesskey_118" accesskey="v"></a>
-        </div>
+
       </div>
     
     </div>  

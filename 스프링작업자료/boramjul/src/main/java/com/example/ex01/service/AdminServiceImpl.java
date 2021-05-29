@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.ex01.model.dao.AdminDAO;
 import com.example.ex01.model.dto.AdminDTO;
+import com.example.ex01.model.dto.QnADTO;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -31,8 +32,8 @@ public class AdminServiceImpl implements AdminService{
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("name", name);
 			
-			 logger.info("session : "+session.getAttribute("id"));
-			 logger.info("session : " + session.getAttribute("name"));
+			 logger.info("관리자 로그인 session : "+session.getAttribute("id"));
+			 logger.info("관리자 로그인 session : " + session.getAttribute("name"));
 		} 
 		return name;
 	}
@@ -42,6 +43,19 @@ public class AdminServiceImpl implements AdminService{
 		session.removeAttribute("id");
 		session.removeAttribute("name");
 		
+		 logger.info("관리자 로그아웃 session : "+session.getAttribute("id"));
+		 logger.info("관리자 로그아웃 session : " + session.getAttribute("name"));
+		
+	}
+
+	@Override
+	public void QnA_delete(int cartnum) {
+		adminDao.QnA_delete(cartnum);
+	}
+
+	@Override
+	public void QnA_update(QnADTO dto) {
+		adminDao.QnA_update(dto);
 	}
 
 }

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.example.ex01.model.dto.AdminDTO;
+import com.example.ex01.model.dto.QnADTO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -36,6 +37,16 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String loginCheck(AdminDTO dto) {
 		return sqlSession.selectOne("mysqlAdmin.loginCheck",dto);
+	}
+
+	@Override
+	public void QnA_delete(int cartnum) {
+		sqlSession.delete("mysqlAdmin.QnA_delete", cartnum);
+	}
+
+	@Override
+	public void QnA_update(QnADTO dto) {
+		sqlSession.update("mysqlAdmin.QnA_update", dto);
 	}
 
 

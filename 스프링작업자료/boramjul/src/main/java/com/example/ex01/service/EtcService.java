@@ -7,5 +7,5 @@ import com.example.ex01.model.dto.QnADTO;
 public interface EtcService {
 	public void QnA_insert(QnADTO dto);
 	public List<QnADTO> QnAlist();
-	public QnADTO detailProduct(String name);
+	public QnADTO detailProduct(int qnanum);
 }

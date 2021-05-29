@@ -270,11 +270,15 @@
             			<li><a href="${path }/member/login.do" class="topmenu">로그인</a></li>
                 		<li><a href="${path }/member/join1.do" class="topmenu">회원가입</a></li>
             		</c:when>
-            		<c:otherwise>
+            		<c:when test = "${sessionScope.name != '보람관리자' }">
             			<li><p>${sessionScope.name}님</p></li>
             			<li><a href="/member/logout.do">로그아웃</a>
             			<li><a href="${path}/mypage/myCart.do?email=${sessionScope.email}" class="topmenu">카트</a></li>
-            		</c:otherwise>
+            		</c:when>
+            		<c:when test="${sessionScope.name == '보람관리자' }">
+     		            <li><p>${sessionScope.name}님</p></li>
+     		            <li><a href="${path}/admin/logout.do">로그아웃</a>
+            		</c:when>
             	</c:choose>
                 <li><a href="${path}/etc/event.do" class="topmenu">이벤트</a></li>
                 <li><a href="${path}/etc/QnA.do" class="topmenu">고객센터</a></li>
@@ -283,7 +287,7 @@
 
         <div id="mid_menu">
             <div id="logo_box">
-                <img id="logo" src="../images/logo.png" alt="보람줄 로고" >
+                <img id="logo" src="${path }/images/logo.png" alt="보람줄 로고" >
                 <a id="logo_text" href="/">Boramjul</a>
             </div>  
 			

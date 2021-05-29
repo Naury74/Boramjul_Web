@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.ex01.model.dto.BooksDTO;
 import com.example.ex01.model.dto.CartDTO;
 import com.example.ex01.model.dto.MemberDTO;
 import com.example.ex01.model.dto.OrderDTO;
@@ -209,6 +210,16 @@ public class MypageController {
 		} else { 
 			return new ModelAndView("/member/login", "",null);
 		}
+	}
+	
+	@RequestMapping("order_now.do")
+	public String order_now(Model model, @ModelAttribute BooksDTO dto, @RequestParam String email) {
+		
+		model.addAttribute("memberdto", memberService.myInfo(email));
+		model.addAttribute("booksdto", dto);
+		
+		return "mypage/order_now";
+		
 	}
 	
 	
