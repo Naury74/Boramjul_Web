@@ -37,17 +37,14 @@ function Count(type, ths){
 			<div id="related_books">
 				<c:forEach var="row" items="${searchedlist}" varStatus="status"> 
 					<!-- 책1 -->
+					<form name="form" id="form1" method="post">
 					<div id="searched_books_margin">   
 						<div>
-							<a href="${path}/books/BookDetail.do?prodnum=${row.prodnum }">
-								<img src=${row.image } alt="책 이미지" class="searched_bookimg">
-							</a>
+							<img src=${row.image } alt="책 이미지" class="searched_bookimg">
 						</div>
 						
 						<div id="searched_books_info">
-							<div class="searched_books_title">
-								<a href="${path}/books/BookDetail.do?prodnum=${row.prodnum }">${row.name }</a>
-							</div><!-- searched_books_title -->
+							<div class="searched_books_title">${row.prodname }</div>
 							
 							<div class="searched_books_info_d">
 								<span class="book_author">${row.content }</span>
@@ -73,24 +70,27 @@ function Count(type, ths){
 								<input class="num_input" type="text" name="quantity" value="1" readonly="readonly" size="1"/>
 								<button class="num_btn" type ="button" onclick="Count('p',this);">+</button> 
 							</div>
-							
+
 							<div>
-								<button class="cart_btn" type="button" onclick=>장바구니 추가</button>
+								<input type="hidden" name="prodname" value="${row.prodname }">
+								<input type="hidden" name="content" value="${row.content }">
+								<input type="hidden" name="price" value="${row.price }">
+								<input type="hidden" name="image" value="${row.image }">
+								
+								<button class="cart_btn" type="submit" formaction="">장바구니 추가</button>
 							</div>
 							
 							<div>
-								<button class="buy_btn" type="button" onclick=>바로 구매</button>
+								<button class="buy_btn" type="submit" formaction="${path}/mypage/order_now.do?email=${sessionScope.email}">바로 구매</button>
+								<button class="buy_btn" type="submit" formaction="${path}/books/BookDetail.do">상세 보기</button>
 							</div>
 						</div><!-- btn_searched -->
-						
+						</form>
 						<div class="clearBoth"></div>     
 					</div><!-- searched_books_margin -->
 				</c:forEach>
-					
 			<div class="clearBoth"></div>
-
 			</div><!-- related_books -->
-  
 		</div><!-- List-right -->
 	</div><!-- List-wrapper -->
 </div><!-- wrap -->

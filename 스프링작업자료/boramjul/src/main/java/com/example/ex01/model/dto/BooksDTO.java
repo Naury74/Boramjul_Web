@@ -5,14 +5,11 @@ import lombok.Data;
 @Data
 public class BooksDTO {
 	private String search;
-	private String name;
+	private String prodname;
 	private int price;
-	private String kind;
+	private int quantity;
 	private String content;
 	private String image;
 	private String category;
-	private String link;
-	private String prodnum;
-	private String url_detail;
-	private String detail;
+	private int prodnum;
 }

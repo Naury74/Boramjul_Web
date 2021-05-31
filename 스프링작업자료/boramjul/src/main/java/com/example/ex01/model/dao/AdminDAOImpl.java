@@ -61,6 +61,23 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.insert("mysqlCart.order_now", dto);
 	}
 
+	@Override
+	public boolean prodname_list(String prodname) {
+		boolean result = false;
+		
+		int count = sqlSession.selectOne("mysqlProduct.prodname_list", prodname);
+		// 1이면 true, 0이면 false	
+		if (count == 1) 
+			result =  true;
+		
+		return result;
+	}
+
+	@Override
+	public BooksDTO prodnum_list(int prodnum) {
+		return sqlSession.selectOne("mysqlProduct.prodnum_list",prodnum);
+	}
+
 
 
 }

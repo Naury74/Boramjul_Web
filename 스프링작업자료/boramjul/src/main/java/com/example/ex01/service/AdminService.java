@@ -13,9 +13,12 @@ public interface AdminService {
 	public boolean check_passwd(String id, String passwd);
 	public String loginCheck(AdminDTO dto, HttpSession session);
 	public void logout(HttpSession session);
+	
 	void QnA_delete(int cartnum);
 	void QnA_update(QnADTO dto);
 	
+	public BooksDTO prodnum_list(int prodnum);
+	public boolean prodname_list(String prodname);
 	public void prod_insert(BooksDTO dto);
 	public void order_now(CartDTO dto);
 }

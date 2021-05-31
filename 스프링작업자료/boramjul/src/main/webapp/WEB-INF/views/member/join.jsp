@@ -10,6 +10,71 @@
 <%@ include file="../include/include.jsp" %>
 <title>회원 가입</title>
 
+<script type="text/javascript">
+
+$(function(){
+	$('#infoBtn').click(function(){
+        var pwReg = /^[a-zA-Z0-9]{4,12}$/;
+        var phReg = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
+        var emailReg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+        var email = $('#email').val();
+		var passwd = $('#passwd').val();
+		var name = $('#name').val();
+		var phone = $('#phone').val();
+		var birth = $('#birth').val();
+	    
+		if (email == ""){
+			alert('이메일을 입력하세요.');
+			$('#email').focus();
+			return false;
+		}
+		if (passwd == ""){
+			alert('비밀번호를 입력하세요.');
+			$('#passwd').focus();
+			return false;
+		}
+		if (name == ""){
+			alert('이름을 입력하세요.');
+			$('#name').focus();
+			return false;
+		}
+		if (phone == ""){
+			alert('전화번호를 입력하세요.');
+			$('#phone').focus();
+			return false;
+		}
+		if (birth == ""){
+			alert('생년월일을 입력하세요.');
+			$('#birth').focus();
+			return false;
+		}
+	
+        if(!emailReg.test(email)) {
+			alert("올바른 이메일 형식이 아닙니다.");
+			$('#email').focus();
+          	return false;
+        }
+        if(!phReg.test(phone)) {
+			alert("010-0000-0000와 같은 형식으로 입력하여 주세요");
+			$('#phone').focus();
+          	return false;
+        }
+        if(!pwReg.test(passwd)) {
+			alert("비밀번호는 4~12자의 영문 혹은 숫자로만 입력하여주세요");
+			$('#passwd').focus();
+          	return false;
+        }
+        
+        alert("가입이 완료되었습니다.");
+    	
+		document.join.action = "/member/insert.do";
+		document.join.submit();
+	})
+})
+
+</script>
+
 </head>
 <body>
 <form name="join" method="post"  accept-charset="UTF-8">
@@ -75,72 +140,7 @@
                 text-decoration:none;">가입하기</a></button></td>
         </tr>
     </table>
-    </div>
-    </form>
-    
-    <script type="text/javascript">
-    
-    $(function(){
-		$('#infoBtn').click(function(){
-	        var pwReg = /^[a-zA-Z0-9]{4,12}$/;
-	        var phReg = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
-	        var emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	        
-	        var email = $('#email').val();
-			var passwd = $('#passwd').val();
-			var name = $('#name').val();
-			var phone = $('#phone').val();
-			var birth = $('#birth').val();
-			
-			if (email == ""){
-				alert('이메일을 입력하세요.');
-				$('#email').focus();
-				return false;
-			}
-			if (passwd == ""){
-				alert('비밀번호를 입력하세요.');
-				$('#passwd').focus();
-				return false;
-			}
-			if (name == ""){
-				alert('이름을 입력하세요.');
-				$('#name').focus();
-				return false;
-			}
-			if (phone == ""){
-				alert('전화번호를 입력하세요.');
-				$('#phone').focus();
-				return false;
-			}
-			if (birth == ""){
-				alert('생년월일을 입력하세요.');
-				$('#birth').focus();
-				return false;
-			}
-  
-	        if(!emailReg.test(email)) {
-				alert("이메일 형식이 맞지 않습니다");
-				$('#email').focus();
-	          	return false;
-	        }
-	        if(!phReg.test(phone)) {
-				alert("010-0000-0000와 같은 형식으로 입력하여 주세요");
-				$('#phone').focus();
-	          	return false;
-	        }
-	        if(!pwReg.test(passwd)) {   
-				alert("패스워드는 4~12자의 영문 대소문자와 숫자로만 입력하여주세요");
-				$('#passwd').focus();
-	          	return false;
-	        }
-		
-	        alert("가입이 완료되었습니다.");
-	
-			document.join.action = "/member/insert.do";
-			document.join.submit();
-		});
-	});
-    
-    </script>
+</div>
+</form>
 </body>
 </html>

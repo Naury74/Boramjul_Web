@@ -32,6 +32,11 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<OrderDetailDTO> detail_list(String email) {
 		return sqlSession.selectList("mysqlOrderDetail.detail_list", email);
 	}
+
+	@Override
+	public void order_detail_insert(OrderDetailDTO dto) {
+		sqlSession.insert("mysqlOrderDetail.order_detail_insert", dto);
+	}
 	
 
 

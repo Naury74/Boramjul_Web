@@ -65,8 +65,8 @@
 				$('#phone').focus();
 	          	return false;
 	        }
-	        if(!pwReg.test(passwd)) {    
-				alert("패스워드는 4~12자의 영문 대소문자와 숫자로만 입력하여주세요");
+	        if(!pwReg.test(passwd)) {
+				alert("비밀번호는 4~12자의 영문 혹은 숫자로만 입력하여주세요");
 				$('#passwd').focus();
 	          	return false;
 	        }

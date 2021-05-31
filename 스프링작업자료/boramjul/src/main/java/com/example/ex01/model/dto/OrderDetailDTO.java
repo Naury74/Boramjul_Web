@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 public class OrderDetailDTO {
-	
+	private String email;
 	private int detailnum;
 	private int cartnum;
-	private String prodnum;
-	private String name;
+	private int prodnum;
+	private String prodname;
 	private String image;
 	private int quantity;
 	private int price;

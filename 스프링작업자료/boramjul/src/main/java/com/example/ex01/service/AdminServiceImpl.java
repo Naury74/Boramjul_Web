@@ -70,4 +70,14 @@ public class AdminServiceImpl implements AdminService{
 		adminDao.order_now(dto);
 	}
 
+	@Override
+	public boolean prodname_list(String prodname) {
+		return adminDao.prodname_list(prodname);
+	}
+
+	@Override
+	public BooksDTO prodnum_list(int prodnum) {
+		return adminDao.prodnum_list(prodnum);
+	}
+
 }

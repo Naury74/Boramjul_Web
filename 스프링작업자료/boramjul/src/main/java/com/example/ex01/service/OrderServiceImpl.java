@@ -32,6 +32,11 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderDetailDTO> detail_list(String email) {
 		return orderDao.detail_list(email);
 	}
+
+	@Override
+	public void order_detail_insert(OrderDetailDTO dto) {
+		orderDao.order_detail_insert(dto);
+	}
 	
 
 

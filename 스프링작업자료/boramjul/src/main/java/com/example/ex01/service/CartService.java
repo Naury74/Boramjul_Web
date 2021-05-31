@@ -29,14 +29,14 @@ public interface CartService {
 	//장바구니 result값 3 삭제
 	void cart_redelete(String email);
 	
-//	// 장바구니 비우기
-//	void deleteAll(String email);
-//	
 	// 장바구니 금액 합산
 	int cart_tot(String email);
 	
 	// 주문진행 페이지 장바구니 금액 합산
 	int order_tot(String email);
+	
+	//장바구니 추가
+	void cart_insert(CartDTO dto);
 
 	// 장바구니 수정
 	void cart_update(CartDTO dto);

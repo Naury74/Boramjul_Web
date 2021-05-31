@@ -11,9 +11,9 @@
 	<!-- 회원가입 / 완료 -->
    <select id="insert">   
       INSERT INTO member 
-      (email, passwd, name, phone, sns, birth) 
+    	  (email, passwd, name, phone, sns, birth) 
       VALUES 
-      (#{email}, #{passwd}, #{name}, #{phone}, #{sns}, #{birth})
+    	  (#{email}, #{passwd}, #{name}, #{phone}, #{sns}, #{birth})
     </select>
 		
 	<!-- 회원 삭제 -->
@@ -39,21 +39,14 @@
 	
 	<!-- 로그인 세션 / 완료 -->
 	<select id="loginCheck" resultType="String">
-	 	select name 
-	 	from 
-	 		member
-	 	where 
-	 		email = #{email} and passwd = #{passwd}
+	 	select name from member 
+ 		where email = #{email} and passwd = #{passwd}
 	 </select>	
 	 
 	 <!-- api로그인 세션 -->
 	 <select id="apiloginCheck" resultType="String">
-	 	select name 
-	 	from 
-	 		member
-	 	where 
-	 		email = #{email} and passwd = #{passwd}
-
+	 	select name from member
+	 	where email = #{email} and passwd = #{passwd}
 	 </select>	
 	 
 	 <!-- 이메일 찾기 / 완료 -->

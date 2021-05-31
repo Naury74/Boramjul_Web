@@ -4,11 +4,20 @@
 
 <mapper namespace="mysqlOrderDetail">
 
-   <!-- 주문 내역 조회 / 완료-->
-   <select id="detail_list" resultType="orderDetailDTO">
-      SELECT * FROM order_detail WHERE email = #{email} order by indate
-   </select>
+	<!-- 주문 내역 조회 / 완료-->
+	<select id="detail_list" resultType="orderDetailDTO">
+	   SELECT * FROM order_detail WHERE email = #{email} order by indate
+	</select>
    
+   <!-- 오더 디테일 추가 / 완료 -->
+	<insert id="order_detail_insert">
+		INSERT INTO order_detail 
+			(detailnum, prodnum, email, prodname, image, quantity, price, totalprice) 
+		values
+			(IFNULL((SELECT MAX(detailnum) FROM `order` where email = #{email}),1), (SELECT `prodnum` FROM product WHERE prodname = #{prodname}), #{email}, #{prodname}, (SELECT `image` FROM product WHERE prodname = #{prodname}), #{quantity}, #{price}, #{totalprice})
+
+	</insert> 
+ 
 
    <!-- 주문 내역 삭제 / (관리자용)-->
    <delete id="detail_delete">   

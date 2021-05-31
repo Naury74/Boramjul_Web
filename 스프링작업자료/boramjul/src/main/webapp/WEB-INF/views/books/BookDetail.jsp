@@ -29,13 +29,13 @@ function Count(type, ths){
   
 	<div class=wrap>
 		<div class="BP-wrapper">
-			<c:forEach var="row" items="${detaillist}" varStatus="status"> 
+			
 				<div class="BP-top_left">
-    				<img src="${row.image }" alt="책 이미지" class="bookimg">
+    				<img src="${booksdto.image }" alt="책 이미지" class="bookimg">
 				</div><!-- BP-top_left -->
 
 				<div class="BP-top_right">
-					<h2 id="BP-h2">${row.name }</h2>
+					<h2 id="BP-h2">${booksdto.prodname }</h2>
     
 					<div class="book_reviews">
 						<span class="book_scores"><img src="../images/별점5.svg" alt="별점" class="star"> 9.9</span>
@@ -43,10 +43,10 @@ function Count(type, ths){
 						<img src="${path}/images/리뷰.svg" alt="리뷰" class="review-img">
 						<span class="number_of_reviews">회원리뷰: 1000건</span>
 					</div><!-- book_reviews -->
-					
+					<form name="form" id="form1" method="post">
 					<div class="book_details">
 						<div class="price">판매가: 
-							<span class="price-of-book"><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원</span>
+							<span class="price-of-book"><fmt:formatNumber value="${booksdto.price }" pattern="#,###,###"/>원</span>
 						</div>
 						
 						<div class="shipping">배송비: 
@@ -60,14 +60,20 @@ function Count(type, ths){
 						</div>
 
 						<div>
-							<button class="cart_btn" type="button" onclick=>장바구니 추가</button>
+							<input type="hidden" name="prodname" value="${booksdto.prodname}">
+							<input type="hidden" name="content" value="${booksdto.content}">
+							<input type="hidden" name="price" value="${booksdto.price}">
+							<input type="hidden" name="image" value="${booksdto.image}">
+							
+							<button class="cart_btn" type="submit" formaction="${path}/mypage/cart_insert.do?email=${sessionScope.email}">장바구니 추가</button>
 						</div>
 						<div>
-							<button class="buy_btn" type="button" onclick=>바로 구매</button>
+							<button class="buy_btn" type="submit" formaction="${path}/mypage/order_now.do?email=${sessionScope.email}">바로 구매</button>
 						</div>  
 					</div><!-- book_details -->
+					</form>
 				</div><!-- BP-top_right -->
-			</c:forEach>
+				
 		</div><!-- BP-wrapper -->
   
 		<!-- 리뷰 -->	

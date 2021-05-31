@@ -90,6 +90,7 @@ $(function(){
 
 	//구매버튼 클릭시
 	$('.btn_pay').click(function(){
+		
 		var confirm_val = confirm("구매하시겠습니까?");
 		
 		if(confirm_val){
@@ -106,7 +107,6 @@ $(function(){
 				success: function(result){
 					if(result == 1){
 						document.order.action ="${path}/mypage/completed.do?email=${sessionScope.email}";
-						document.order.submit();
 					} else{
 						arlet('구매 실패');
 					}
@@ -142,54 +142,60 @@ $(function(){
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
-		var floor = Math.floor(addreserves);
-		$('input[name="saleprice"]').val(saleprice);
-		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(floor);
+		var addreserves_floor = Math.floor(addreserves);
+		var payprice_floor = Math.floor(payprice);
+		var saleprice_floor = Math.floor(saleprice);
+		$('input[name="saleprice"]').val(saleprice_floor);
+		$('input[name="payprice"]').val(payprice_floor);
+		$('input[name="addreserves"]').val(addreserves_floor);
 	}else if(rank == '실버'){
 		sale = 0.1;
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
-		var floor = Math.floor(addreserves);
-		$('input[name="saleprice"]').val(saleprice);
-		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(floor);
-	}else{
-		sele = 0.15;
+		var addreserves_floor = Math.floor(addreserves);
+		var payprice_floor = Math.floor(payprice);
+		var saleprice_floor = Math.floor(saleprice);
+		$('input[name="saleprice"]').val(saleprice_floor);
+		$('input[name="payprice"]').val(payprice_floor);
+		$('input[name="addreserves"]').val(addreserves_floor);
+	}else if(rank == '골드'){
+		sale = 0.15;
 		saleprice = order_tot*sale;
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
-		var floor = Math.floor(addreserves);
-		$('input[name="saleprice"]').val(saleprice);
-		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(floor);
+		var addreserves_floor = Math.floor(addreserves);
+		var payprice_floor = Math.floor(payprice);
+		var saleprice_floor = Math.floor(saleprice);
+		$('input[name="saleprice"]').val(saleprice_floor);
+		$('input[name="payprice"]').val(payprice_floor);
+		$('input[name="addreserves"]').val(addreserves_floor);
 	}
 	
 	//포인트 전체 차감
 	$('input[type="checkbox"][id="pointChk"]').on('click', function(){
 		console.log('포인트 전체 차감');
 		var chkValue = $('input[type=checkbox][id="pointChk"]:checked').val();
-		var saleprice = $('input[name="saleprice"]').val();
-		var mypoint = '${memberdto.reserves }';
+		var saleprice = $('input[name="saleprice"]').val(); //할인받는 금액
+		var mypoint = '${memberdto.reserves }'; //나의 원래 포인트
+		var mid_price = order_tot-saleprice;
 		
 		if(chkValue){
-			if(mypoint>saleprice){
-				mypoint = payprice;
-				payprice = order_tot-saleprice-mypoint;
+			if(mypoint>mid_price){
+				mypoint = mid_price;
+			
+				$('input[name="usereserves"]').val(mypoint);
+				$('input[name="payprice"]').val(0);
+			}else if(mypoint<mid_price){
+				payprice = mid_price-mypoint;
+				$('input[name="usereserves"]').val(mypoint);
+				$('input[name="payprice"]').val(payprice);
 			}
-			payprice = order_tot-saleprice-mypoint;
-			$('input[name="usereserves"]').val(mypoint);
-			$('input[name="payprice"]').val(payprice);
 		}else{
-			payprice = order_tot-saleprice-point;
-			$('input[name="usereserves"]').val('0');
-			$('input[name="payprice"]').val(payprice);
-		}
+			$('input[name="usereserves"]').val(0);
+			$('input[name="payprice"]').val(mid_price);
+		};//if
 	});
-
-	
-
 	
 });
 
@@ -221,9 +227,9 @@ $(function(){
                         <td><img src="${row.image}" alt="책 이미지" class="bookimg">
                         	<input type="hidden" name="cartnum" value="${row.cartnum }" data-cartnum="${row.cartnum }">
                         </td>
-                        <td>${row.name }</td>
+                        <td>${row.prodname }</td>
                         <td><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원</td>
-                        <td>${memberdto.rank }등급 할인<br></td>
+                        <td>${memberdto.rank }등급 할인</td>
                         <td>${row.quantity }권</td>
                     </tr>
                     </c:forEach>
@@ -347,7 +353,7 @@ $(function(){
                                 </div><!-- agree -->
                             </li>
                             <li>
-                                <button class="btn_pay">결제하기</button>
+                                <button class="btn_pay" type="submit">결제하기</button>
                             </li>
                         </ul>
                     </div><!-- payment -->

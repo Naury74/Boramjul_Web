@@ -211,7 +211,7 @@
         }
 
     </style>
-    
+    <!-- 
     <script>
     
         var giMenuDuration = 700;
@@ -244,13 +244,21 @@
                 $('.menu_2' ).hide();
         });
         
-    </script>
+    </script> -->
 
 
 	<script type="text/javascript">
 	
 	$(function(){
 		$("#searchBtn").click(function(){
+			var search = $('#search_text').val();
+			
+			if(search == ""){
+				alert('검색어를 입력하여 주세요');
+				$('#search_text').focus();
+				return false;
+			}
+			
 			document.searchform.action="/books/search.do";
 			document.searchform.submit();
 		});

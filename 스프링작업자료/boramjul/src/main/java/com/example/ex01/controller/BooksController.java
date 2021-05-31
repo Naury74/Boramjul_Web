@@ -2,6 +2,9 @@ package com.example.ex01.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -14,18 +17,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.ex01.model.dto.BooksDTO;
+import com.example.ex01.model.dto.ReviewDTO;
 import com.example.ex01.service.AdminService;
+import com.example.ex01.service.ReviewService;
 
 @RequestMapping("/books/*")
 @Controller
 public class BooksController {
 	
+	@Inject
+	ReviewService reviewService;
+	
+	@Inject
+	AdminService adminService;
+	
+	
 	
 	@RequestMapping("BestSellers.do")
-	public String BestSellers( Model model, @ModelAttribute BooksDTO dto) throws IOException {
+	public String BestSellers( Model model) throws IOException {
 		
 		String URL = "http://www.kyobobook.co.kr/bestSellerNew/bestseller.laf?mallGb=KOR&linkClass=A&range=1&kind=0&orderClick=DAa";
 		
@@ -35,11 +49,10 @@ public class BooksController {
 		
 		Document doc = Jsoup.connect(URL).get();		
 		
-		Elements name = doc.select(".title a strong");
+		Elements prodname = doc.select(".title a strong");
         Elements content = doc.select(".author");
         Elements price = doc.select(".book_price");
         Elements image = doc.select(".cover a");
-        Elements link = doc.select(".cover");
         
         for (int i = 0;i<image.size();i++){
         	String url = image.get(i).select("img").attr("src");
@@ -49,35 +62,29 @@ public class BooksController {
         }
         
         for (int i=0; i<20; i++) {
-        	BooksDTO dto1 = new BooksDTO();
-        	dto1.setName(name.get(i).text());
-        	dto1.setContent(content.get(i).text());
-        	dto1.setImage(imgUrl.get(i));
+        	BooksDTO dto = new BooksDTO();
+        	
+        	dto.setProdname(prodname.get(i).text());
+        	dto.setContent(content.get(i).text());
+        	dto.setImage(imgUrl.get(i));
         	
         	String price1 = (price.get(i).text());
         	String price2 = price1.replaceAll("원", "");
         	String price3 = price2.replaceAll(",", "");
         	int price4 = Integer.parseInt(price3);
-        	dto1.setPrice(price4);
+        	dto.setPrice(price4);
         	
-        	String LinkList = link.get(i+1).select("a").attr("href");
-        	String prodnum = LinkList.replaceAll("http://www.kyobobook.co.kr/product/detailViewKor.laf\\?mallGb=KOR&ejkGb=KOR&barcode=", "");
-	    	//System.out.println("링크리스트: "+LinkList+"proudnum: "+prodnum);
-        	dto1.setProdnum(prodnum);
-        	
-        	bs_list.add(dto1);
+        	bs_list.add(dto);
         	        	
         	model.addAttribute("bslist",bs_list);
-        	//System.out.println("dto: "+dto);
         }
         	return "books/BestSellers";
 	}
 
 	@RequestMapping("NewBooks.do")
-	public String NewBooks( Model model)throws IOException  {
+	public String NewBooks( Model model) throws IOException  {
 
-		//String URL = "http://www.kyobobook.co.kr/newproduct/newProductList.laf?orderClick=Ca1";
-		String URL = "http://digital.kyobobook.co.kr/digital/publicview/publicViewNew.ink?tabType=EBOOK&tabSrnb=12";
+		String URL = "http://www.kyobobook.co.kr/newproduct/newProductList.laf?orderClick=Ca1";
 		
 		ArrayList<BooksDTO> nb_list = new ArrayList<BooksDTO>();
 		
@@ -85,11 +92,10 @@ public class BooksController {
 		
 		Document doc = Jsoup.connect(URL).get();		
 		
-		Elements name = doc.select(".title strong");
-	    Elements content = doc.select(".n1, co1, n2");
-	    Elements price = doc.select(".cost span");
-	    Elements image = doc.select(".pic_area img");
-	    Elements link = doc.select(".pic_area a");
+		Elements prodname = doc.select(".title strong");
+	    Elements content = doc.select(".author");
+	    Elements price = doc.select(".sell_price");
+	    Elements image = doc.select(".cover a");
 	    
 	    for (int i = 0;i<image.size();i++){
 	    	String url = image.get(i).select("img").attr("src");
@@ -100,7 +106,7 @@ public class BooksController {
 	    
 	    for (int i=0; i<20; i++) {
 	    	BooksDTO dto = new BooksDTO();
-	    	dto.setName(name.get(i).text());
+	    	dto.setProdname(prodname.get(i).text());
 	    	dto.setContent(content.get(i).text());
 	    	dto.setImage(imgUrl.get(i));
 	    	
@@ -109,13 +115,6 @@ public class BooksController {
         	String price3 = price2.replaceAll(",", "");
         	int price4 = Integer.parseInt(price3);
         	dto.setPrice(price4);
-	    	
-	    	String LinkList = link.get(i+1).select("a").attr("href");
-        	//String prodnum = LinkList.replaceAll(" javascript:goDetailView('KOR','090911', ", "");
-  	        String prodnum = LinkList.substring(LinkList.indexOf("barcode=")+8);
-	    	System.out.println("링크리스트: "+LinkList+"proudnum: "+prodnum);
-        	
-        	dto.setProdnum(prodnum);
         	
 	    	nb_list.add(dto);
 	    	
@@ -126,39 +125,11 @@ public class BooksController {
 	}
 	
 	@RequestMapping("BookDetail.do")
-	public String BookDetail( Model model, HttpServletRequest request) throws IOException {
+	public String BookDetail(Model model, @ModelAttribute BooksDTO dto, @RequestParam String prodname) {
 		
-		String page = request.getParameter("prodnum");
-		
-		String URL = "http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode="+page; //크롤링할 url지정
-		
-		ArrayList<BooksDTO> detail_list = new ArrayList<BooksDTO>();
-		
-		Document doc = Jsoup.connect(URL).get();		
-		
-		Elements name = doc.select(".box_detail_point h1 strong");
-        Elements content = doc.select(".author");
-        Elements price = doc.select(".sell_price");
-        Elements image = doc.select(".cover a");
-        
-        String url_detail = image.get(0).select("img").attr("src");
-        
-        BooksDTO dto = new BooksDTO();
-        dto.setName(name.get(0).text());
-    	dto.setContent(content.get(0).text());
-    	dto.setImage(url_detail);
-    	
-    	String price1 = (price.get(0).text());
-    	String price2 = price1.replaceAll("원", "");
-    	String price3 = price2.replaceAll(",", "");
-    	int price4 = Integer.parseInt(price3);
-    	dto.setPrice(price4);
-    	
-    	detail_list.add(dto);
-    	
-    	model.addAttribute("detaillist",detail_list);    
-    	
-    	System.out.println("크롤링된 데이터: "+dto);
+		System.out.println(prodname);
+		model.addAttribute("booksdto", dto);
+    	System.out.println("땡겨온 데이터: "+dto);
        
         return "books/BookDetail";
 	}
@@ -272,11 +243,10 @@ public class BooksController {
 	
 		Document doc = Jsoup.connect(URL).get();		
 	
-		Elements name = doc.select(".title a strong");
+		Elements prodname = doc.select(".title a strong");
 		Elements content = doc.select(".author");
 		Elements price = doc.select(".sell_price");
 		Elements image = doc.select(".cover a");
-       // Elements link = doc.select(".cover");
 	
 		for (int i = 0;i<image.size();i++){
 			String url = image.get(i).select("img").attr("src");
@@ -287,7 +257,7 @@ public class BooksController {
 	
 		for (int i=0; i<20; i+=2) {
 			BooksDTO dto = new BooksDTO();
-			dto.setName(name.get(i).text());
+			dto.setProdname(prodname.get(i).text());
 			dto.setContent(content.get(i).text());
 			dto.setImage(imgUrl.get(i));
 			
@@ -297,15 +267,9 @@ public class BooksController {
         	int price4 = Integer.parseInt(price3);
         	dto.setPrice(price4);
         	
-//        	String LinkList = link.get(i+0).select("a").attr("href");
-//        	String prodnum = LinkList.substring(LinkList.indexOf("barcode=")+8);
-//	    	System.out.println("링크리스트: "+LinkList+"proudnum: "+prodnum);
-//        	dto.setProdnum(prodnum);
-	
 			list.add(dto);
 			
 			model.addAttribute("list", list);
-	
 		}
 		return "books/category";
 	}
@@ -324,11 +288,10 @@ public class BooksController {
 		
 		Document doc = Jsoup.connect(URL).get();
 		
-		Elements name = doc.select(".title a strong");
+		Elements prodname = doc.select(".title a strong");
         Elements content = doc.select(".author");
         Elements price = doc.select(".org_price");
         Elements image = doc.select(".cover a");
-        Elements link = doc.select(".cover");
         Elements score_review_contents = doc.select(".rating");
         
         for (int i = 0;i<image.size();i++){
@@ -340,7 +303,7 @@ public class BooksController {
         
         for (int i=0; i<score_review_contents.size(); i++) {
         	BooksDTO dtoSR = new BooksDTO();
-        	dtoSR.setName(name.get(i).text());
+        	dtoSR.setProdname(prodname.get(i).text());
         	dtoSR.setContent(content.get(i).text());
         	
         	String price1 = (price.get(i).text());
@@ -348,11 +311,6 @@ public class BooksController {
         	String price3 = price2.replaceAll(",", "");
         	int price4 = Integer.parseInt(price3);
         	dtoSR.setPrice(price4);
-        	
-        	String LinkList = link.get(i+0).select("a").attr("href");
-        	String prodnum = LinkList.substring(LinkList.indexOf("barcode=")+8);
-	    	System.out.println("링크리스트: "+LinkList+"proudnum: "+prodnum);
-        	dtoSR.setProdnum(prodnum);
         	
         	dtoSR.setImage(imgUrl.get(i));
         	
@@ -364,9 +322,20 @@ public class BooksController {
 	}
 
 	@RequestMapping("ReviewsList.do")
-	public String ReviewsList( Model model) {
+	public ModelAndView ReviewsList(ModelAndView mav, ReviewDTO dto, BooksDTO dto2) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<ReviewDTO> list = reviewService.review_list();
+		
+		map.put("list", list);
+		System.out.println("reviewdto: "+ dto+", booksdto: "+dto2);
+		//map.put("bookdto", adminService.prodnum_list(prodnum));
+		
+		mav.addObject("map", map);
+		mav.setViewName("/books/ReviewsList");
 
-		return "books/ReviewsList";
+		return mav;
 	}
 	
 	@RequestMapping("ReviewWrite.do")
@@ -374,9 +343,13 @@ public class BooksController {
 
 		return "books/ReviewWrite";
 	}
-	@RequestMapping("ReviewView.do")
-	public String ReviewView( Model model) {
+	
+	@RequestMapping("review_detail.do/{renum}")
+	public ModelAndView review_detail(@PathVariable("renum")int renum, ModelAndView mav) {
 
-		return "books/ReviewView";
+		mav.setViewName("/books/ReviewView");
+		mav.addObject("dto", reviewService.review_detail(renum));
+
+		return mav;
 	}
 }

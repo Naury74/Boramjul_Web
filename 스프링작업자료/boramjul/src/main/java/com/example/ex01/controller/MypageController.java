@@ -49,7 +49,7 @@ public class MypageController {
 	AdminService adminService;
 	
 	@Autowired SqlSessionTemplate mysql;
-
+	
 	
 	@RequestMapping("myList.do")
 	public ModelAndView myList(HttpSession session, ModelAndView mav, OrderDetailDTO dto) {
@@ -110,14 +110,26 @@ public class MypageController {
 			return mav;
 			
 		} else { // 로그인 상태가 아님
-			/*
-			mav.addObject("key","값");
-			mav.setViewName("/member/login");
-			return mav;
-			*/
 			return new ModelAndView("/member/login", "",null);
 		}
 
+	}
+	
+	@RequestMapping("cart_insert.do")
+	public String cart_insert(Model model, @ModelAttribute BooksDTO dto, CartDTO dto1, @RequestParam String email, String prodname) {
+		
+		System.out.println("bookdto: "+dto+" / cartdto: "+dto1);
+
+		boolean result=adminService.prodname_list(prodname);
+		if(result) {
+			cartService.cart_insert(dto1);
+		}else {
+			adminService.prod_insert(dto);
+			cartService.cart_insert(dto1);
+		}
+		
+		return "redirect:/mypage/myCart.do";
+		
 	}
 	
 	@ResponseBody
@@ -217,18 +229,25 @@ public class MypageController {
 	}
 	
 	@RequestMapping("order_now.do")
-	public String order_now(Model model, @ModelAttribute BooksDTO dto, CartDTO cartdto, @RequestParam String email) {
+	public String order_now(Model model, @ModelAttribute BooksDTO dto, @RequestParam String email, String prodname) {
 		
 		if (email != null) {
+			
+			boolean result=adminService.prodname_list(prodname);
+			
+			if(result) {
+				model.addAttribute("memberdto", memberService.myInfo(email));
+				model.addAttribute("booksdto", dto);
+			}else {
+				adminService.prod_insert(dto);
+				model.addAttribute("memberdto", memberService.myInfo(email));
+				model.addAttribute("booksdto", dto);
+			}
+			
 			System.out.println("바로구매 dto: "+dto);
-			System.out.println("카트 dto: "+cartdto);
-			adminService.prod_insert(dto);
-			adminService.order_now(cartdto);
-			
-			model.addAttribute("memberdto", memberService.myInfo(email));
-			model.addAttribute("booksdto", dto);
-			
+
 			return "mypage/order_now";
+			
 		}else { 
 			return "/member/login";
 		}
@@ -280,24 +299,21 @@ public class MypageController {
 	}
 	
 	@RequestMapping("now_completed.do")
-	public String now_completed(ModelMap modelmap, Model model, @ModelAttribute OrderDTO dto, CartDTO cartdto ,@RequestParam String email) throws Exception {
+	public String now_completed(ModelMap modelmap, Model model, @ModelAttribute OrderDTO dto, OrderDetailDTO dto2 ,@RequestParam String email) throws Exception {
 		System.out.println("now_completed.do");
-		System.out.println("cartdto: "+cartdto);
-		cartService.order_result_3(cartdto);
+		System.out.println("orderdto: "+dto);
+		System.out.println("orderdetaildto: "+dto2);
 		orderService.order_insert(dto);
+		orderService.order_detail_insert(dto2);
 		
 		// 파라메터 셋팅
         Map param = new HashMap();
         param.put("email", dto.getEmail());
          
         // 프로시져 호출
-        mysql.selectOne("mysqlCart.order_result_add", param);
- 
-        System.out.println("param: "+param);
+        mysql.selectOne("mysqlCart.order_now_result_add", param);
         
 		model.addAttribute("dto", orderService.order_detail_list(dto));
-		
-		System.out.println("주문 상세 dto: "+dto);
 	
 		return "mypage/completed";
 	}

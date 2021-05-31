@@ -38,7 +38,7 @@
 		SELECT * FROM `order` WHERE email = #{email} AND detailnum = (select max(detailnum) from `order` where email = #{email})
 	</select>
 
-	<!-- 회원주문내역조회 / ??-->
+	<!-- 회원주문내역조회 / 관리자-->
 	<!-- result 값에 따라 1: 배송전, 2: 배송중, 3: 배송완료 -->
 	<update id="order_email_list">
 		SELECT * FROM order_detail WHERE detailnum = (deliveryfunction(#{email},#{result} ))

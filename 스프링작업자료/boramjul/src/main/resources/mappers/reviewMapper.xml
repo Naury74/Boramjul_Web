@@ -4,49 +4,64 @@
 
 <mapper namespace="mysqlReview">
 
-   <!-- 상품별 리뷰 목록 -->
-   <select id="prod_review_list" resultType="ReviewDTO">
-      SELECT p.name, r.email, r.rename, r.comscore, r.lookup, r.recom, r.grade FROM review r, product p WHERE p.prodnum = #{prodnum}
-   </select>
+	<!-- 상품별 리뷰 목록 -->
+	<select id="prod_review_list" resultType="ReviewDTO">
+	SELECT p.name, r.email, r.rename, r.comscore, r.lookup, r.recom, r.grade FROM review r, product p WHERE p.prodnum = #{prodnum}
+	</select>
 
-   <!-- 회원별 리뷰 목록 -->
-   <select id="email_review_list" resultType="ReviewDTO">
-      SELECT p.name, r.email, r.rename, r.comscore, r.lookup, r.recom, r.grade FROM review r, product p WHERE r.email = #{email}
-   </select>
+	<!-- 회원별 리뷰 목록 -->
+	<select id="email_review_list" resultType="ReviewDTO">
+		SELECT p.name, r.email, r.rename, r.comscore, r.lookup, r.recom, r.grade FROM review r, product p WHERE r.email = #{email}
+	</select>
 
-   <!-- 리뷰 조회 -->
-   <!-- renum, rename(대부분 제목클릭) 검색 -> 둘중하나만 매칭되어도 해당 리뷰 조회 -->
-   <select id="review_list" resultType="ReviewDTO">
-      SELECT * FROM review WHERE renum = #{renum} OR `RENAME` = #{rename}
-   </select>
-
-   <!-- 리뷰 삭제 -->
-   <delete id="review_delete">
-      delete from review WHERE renum = #{renum}
-   </delete>
-
-   <!-- 리뷰 수정 -->
-   <!-- rename, content, grade 수정  -->
-   <update id="review_update">
-      UPDATE review SET `rename` = #{rename}, content = #{content}, grade = #{grade} where email = #{email} and renum = #{renum}
-   </update>
-
-   <!-- 리뷰 등록 -->
-   <insert id="review_insert">
-      INSERT INTO 
-      review (email, prodnum, `rename`, content, grade) 
-      VALUES 
-      (#{email}, #{prodnum}, #{rename}, #{content}, #{grade})
-   </insert>
-   
-   <!-- 리뷰 수
-   <update id="review_count" resultType="int">
-      UPDATE product SET reviewscore = (SELECT COUNT(*) FROM review WHERE prodnum = #{prodnum})
-   </update> -->
-   
-   <!-- 리뷰 점수 
-   <update id="review_score" resultType="int">
-      update product set review = (SELECT TRUNCATE(AVG(grade),0) FROM review WHERE prodnum = #{prodnum})
-   </update>-->
+	<!-- 리뷰 상세 보기 -->
+	<!-- renum, rename(대부분 제목클릭) 검색 -> 둘중하나만 매칭되어도 해당 리뷰 조회 -->
+	<select id="review_detail" resultType="ReviewDTO">
+		SELECT * FROM review WHERE renum = #{renum} OR `RENAME` = #{rename}
+	</select>
+	
+	<!-- 리뷰 메인페이지 조회 / 완료 -->   
+	<select id="review_list" resultType="ReviewDTO">
+		select * from review
+	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="review_delete">
+		delete from review WHERE renum = #{renum}
+	</delete>
+	
+	<!-- 리뷰 수정 -->
+	<!-- rename, content, grade 수정  -->
+	<update id="review_update">
+		UPDATE review SET `rename` = #{rename}, content = #{content}, grade = #{grade} where email = #{email} and renum = #{renum}
+	</update>
+	
+	<!-- 리뷰 등록 -->
+	<insert id="review_insert">
+		INSERT INTO 
+		review (email, prodnum, `rename`, content, grade) 
+		VALUES 
+		(#{email}, #{prodnum}, #{rename}, #{content}, #{grade})
+	</insert>
+	
+	<!-- 리뷰 조회 수 증가 - 리뷰 조회 시 실행 -->
+	<update id="review_lookup">
+		UPDATE review SET lookup = (SELECT * FROM (SELECT (lookup+1) FROM review WHERE renum = #{renum}) AS t) WHERE renum = #{renum}
+	</update>
+	
+	<!-- 리뷰 추천 수 증가 - 리뷰 추천 수 버튼 클릭 시 실행-->
+	<update id="review_recom">
+		UPDATE review SET recom = (SELECT * FROM (SELECT (recom+1) FROM review WHERE renum = 7) AS t) WHERE renum = 7
+	</update>
+	   
+	<!-- 리뷰 수 - 상품 테이블에 추가 - 리뷰 작성 시 실행-->
+	<update id="review_count">
+		UPDATE product SET reviewscore = (SELECT COUNT(*) FROM review WHERE prodnum = #{prodnum})
+	</update>
+	   
+	<!-- 리뷰 점수 - 상품테이블에 추가 - 리뷰 작성 시 실행-->
+	<update id="review_score">
+		update product set review = (SELECT TRUNCATE(AVG(grade),0) FROM review WHERE prodnum = #{prodnum})
+	</update>
 
 </mapper>

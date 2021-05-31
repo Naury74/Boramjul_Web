@@ -7,6 +7,28 @@
 <title>나의 주문 내역</title>
     <link rel="stylesheet" href="${path}/css/mypage.css">
     <%@ include file="../include/include.jsp" %>
+<script type="text/javascript">
+$(function(){
+	var delivery = document.getElementById("delivery").value;
+	console.log('배송상태: '+delivery);
+	
+	if(delivery == '1'){
+		delivery = '배송전';
+		$('input[name="delivery"]').val(delivery);
+	}
+	if(delivery == '2'){
+		delivery = '배송중';
+		$('input[name="delivery"]').val(delivery);
+	}
+	if(delivery == '3'){
+		delivery = '배송 완료';
+		$('input[name="delivery"]').val(delivery);
+	}
+	
+	
+	
+})
+</script>
 </head>
 <body>
 
@@ -49,13 +71,14 @@
 	                	<c:forEach var="row" items="${map.list }">
 			                <tr>
 			                    <td><img src="${row.image}" alt="책 이미지" class="bookimg"></td>
-			                    <td>${row.name }</td>
+			                    <td>${row.prodname }</td>
 			                    <td><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원<br>
 			                    	<fmt:formatNumber value="${row.quantity }"/>권</td>
 			                    <td><fmt:formatNumber value="${row.detailnum }"/></td>
 			                    <td><fmt:formatDate value="${row.indate }" pattern="yyyy.MM.dd"/></td>
-			                    <td><fmt:formatNumber value="${row.delivery }"/></td>
-			                    <td><fmt:formatNumber value="${row.review }"/></td>
+			                    <td><input name="delivery" id="delivery" value="<fmt:formatNumber value="${row.delivery }"/>"
+			                    	style="border:none;" readonly></td>
+			                    <td><fmt:formatNumber value="${row.review }"/>개</td>
 			                </tr>
 		                </c:forEach>
 					</c:otherwise>

@@ -21,11 +21,11 @@ public class CartDAOImpl implements CartDAO{
 //	public List<CartDTO> cartMoney() {
 //		return sqlSession.selectList("mysqlCart.listAllCart");
 //	}
-//
-//	@Override
-//	public void insert(CartDTO dto) {
-//		sqlSession.insert("mysqlCart.insertCart",dto);
-//	}
+
+	@Override
+	public void cart_insert(CartDTO dto) {
+		sqlSession.insert("mysqlCart.cart_insert",dto);
+	}
 
 	@Override
 	public List<CartDTO> listCart(String email) {

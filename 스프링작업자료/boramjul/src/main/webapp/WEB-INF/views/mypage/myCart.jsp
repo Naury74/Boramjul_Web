@@ -134,7 +134,7 @@
 	                	<c:forEach var="row" items="${map.list }">
 		                	<tr>
 			                    <td><img src="${row.image}" alt="책 이미지" class="bookimg"></td>
-			                    <td>${row.name }</td>
+			                    <td>${row.prodname }</td>
 			                    <td><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원
 			                    	<input type="hidden" name="price" value="${row.price }"/>
 			                    </td>

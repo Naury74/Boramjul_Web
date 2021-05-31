@@ -27,11 +27,11 @@
                             </tr>
                             <tr>
                                 <th>주문 접수일</th>
-                                <td>${dto.orderdate}</td>
+                                <td><fmt:formatDate value="${dto.orderdate}" pattern="yyyy.MM.dd"/></td>
                             </tr>
                             <tr>
                                 <th>수령 예정일</th>
-                                <td>${dto.deliverydate}</td>
+                                <td><fmt:formatDate value="${dto.deliverydate}" pattern="yyyy.MM.dd"/></td>
                             </tr>
                             <tr>
                                 <th>결제수단</th>
@@ -40,8 +40,8 @@
                         </tbody>
                     </table>   
                     <div class="btnset">
-                        <button type="submit" class="order_search">메인페이지</button>
-                        <button type="submit" class="order_search">주문 내역 조회 </button>
+                        <button type="button" class="order_search" onclick="location.href='/'">메인페이지</button>
+                        <button type="button" class="order_search" onclick="location.href='${path }/mypage/myList.do'">주문 내역 조회 </button>
                     </div>                     
                 </div>
         </div>

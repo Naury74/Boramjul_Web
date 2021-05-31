@@ -19,11 +19,11 @@ public class CartServiceImpl implements CartService{
 //	public List<CartDTO> cartMoney() {
 //		return cartDao.cartMoney();
 //	}
-//
-//	@Override
-//	public void insert(CartDTO dto) {
-//		cartDao.insert(dto);
-//	}
+
+	@Override
+	public void cart_insert(CartDTO dto) {
+		cartDao.cart_insert(dto);
+	}
 
 	@Override
 	public List<CartDTO> listCart(String email) {
@@ -34,22 +34,12 @@ public class CartServiceImpl implements CartService{
 	public void cart_delete(CartDTO dto) {
 		cartDao.cart_delete(dto);
 	}
-//
-//	@Override
-//	public void deleteAll(String userid) {
-//		cartDao.deleteAll(userid);
-//	}
 
 	@Override
 	public int cart_tot(String email) {
 		return cartDao.cart_tot(email);
 	}
 
-//	@Override
-//	public int coutCart(String userid, int product_id) {
-//		return cartDao.coutCart(userid, product_id);
-//	}
-//
 	@Override
 	public void cart_update(CartDTO dto) {
 		cartDao.cart_update(dto);

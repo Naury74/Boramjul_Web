@@ -21,18 +21,6 @@ function Count(type, ths){
     }
 }
 
-$(function(){
-	$('.buy_btn').click(function(){
-		document.form.submit();
-		//location.href="${path}/mypage/order.do?email=${sessionScope.email}";
-	})
-	
-	
-	
-})
-
-
-
 </script>
 </head>
 <body>
@@ -49,17 +37,15 @@ $(function(){
 			<div id="related_books">
 				<c:forEach var="row" items="${bslist}" varStatus="status"> 
 					<!-- 책1 -->
+					<form name="form" id="form1" method="post">
 					<div id="searched_books_margin">   
 						<div>
-							<a href="${path}/books/BookDetail.do?prodnum=${row.prodnum }">
-								<img src=${row.image } alt="책 이미지" class="searched_bookimg">
-							</a>
+							<img src=${row.image } alt="책 이미지" class="searched_bookimg">
 						</div> 
 						
 						<div id="searched_books_info">
-							<a href="${path}/books/BookDetail.do?prodnum=${row.prodnum }">
-								<div class="searched_books_title">${row.name }</div>
-							</a>
+							<div class="searched_books_title">${row.prodname }</div>
+							
 							<div class="searched_books_info_d">
 								<span class="book_author">${row.content }</span>
 							</div><!-- searched_books_info_d -->
@@ -77,7 +63,7 @@ $(function(){
 								<span class="number_of_reviews">회원리뷰: 5555건</span>
 							</div><!-- searched_book_reviews -->
 						</div><!-- searched_books_info -->
-						<form name="form" id = "form" method="post" action="${path}/mypage/order_now.do?email=${sessionScope.email}">
+					
 						<div class="btn_searched"> 
 							<div class="num">
 								<button  class="num_btn" type="button" onclick="Count('m', this);">-</button>
@@ -86,22 +72,22 @@ $(function(){
 							</div>
 
 							<div>
-								<input type="hidden" name="name" value="${row.name }">
+								<input type="hidden" name="prodname" value="${row.prodname }">
 								<input type="hidden" name="content" value="${row.content }">
 								<input type="hidden" name="price" value="${row.price }">
 								<input type="hidden" name="image" value="${row.image }">
-								<input type="hidden" name="prodnum" value="${row.prodnum }">
 								
-								<button class="cart_btn" >장바구니 추가</button>
+								<button class="cart_btn" type="submit" formaction="${path}/mypage/cart_insert.do?email=${sessionScope.email}">장바구니 추가</button>
 							</div>
-								<div>
-									<button class="buy_btn" >바로 구매</button>
-								</div>
-							</form>
+							
+							<div>
+								<button class="buy_btn" type="submit" formaction="${path}/mypage/order_now.do?email=${sessionScope.email}">바로 구매</button>
+								<button class="buy_btn" type="submit" formaction="${path}/books/BookDetail.do">상세 보기</button>
+							</div>
 						</div><!-- btn_searched -->
-						
-						<div class="clearBoth"></div>     
-					</div><!-- searched_books_margin -->
+						</form>
+					<div class="clearBoth"></div>     
+				</div><!-- searched_books_margin -->
 				</c:forEach>
 			</div><!-- related_books -->
 		</div><!-- List-right -->

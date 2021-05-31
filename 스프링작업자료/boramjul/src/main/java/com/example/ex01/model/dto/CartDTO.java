@@ -8,8 +8,8 @@ import lombok.Data;
 public class CartDTO {
 	private int cartnum;
 	private String email;
-	private String prodnum;
-	private String name;
+	private int prodnum;
+	private String prodname;
 	private String image;
 	private int quantity;
 	private int result;

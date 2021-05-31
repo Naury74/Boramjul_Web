@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>공지사항</title>
+<title>공지사항</title>
     <%@ include file="../include/include.jsp" %>
     <link rel="stylesheet" href="${path }/css/mypage2.css">
 </head>

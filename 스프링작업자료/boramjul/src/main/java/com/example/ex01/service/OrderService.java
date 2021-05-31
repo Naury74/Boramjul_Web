@@ -12,5 +12,7 @@ public interface OrderService {
 	public OrderDTO order_detail_list(OrderDTO dto);
 	
 	List<OrderDetailDTO> detail_list(String email);
+	
+	public void order_detail_insert(OrderDetailDTO dto);
 
 }

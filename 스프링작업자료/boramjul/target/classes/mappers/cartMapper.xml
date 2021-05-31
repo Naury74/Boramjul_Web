@@ -4,39 +4,39 @@
 
 <mapper namespace="mysqlCart">
    
-   <!-- 장바구니 조회 / 완료-->
-   <select id="listCart" resultType="CartDTO">
-      select * from cart WHERE email = #{email} AND result &lt; 3
-   </select>
-   
-   <!-- 장바구니 추가  -->
-   <insert id="cart_insert">
-      INSERT INTO cart 
-      (email, prodnum, name, image, quantity, price, totalprice) 
-      VALUES 
-      (#{email}, #{prodnum},
-      (SELECT `NAME` FROM product WHERE prodnum = #{prodnum}),
-      (SELECT `image` FROM product WHERE prodnum = #{prodnum}), #{quantity},
-      (SELECT `price` FROM product WHERE prodnum = #{prodnum}), 
-      #{quantity}*(SELECT price FROM product WHERE prodnum = #{prodnum}))
-   </insert>
+	<!-- 장바구니 조회 / 완료-->
+	<select id="listCart" resultType="CartDTO">
+		select * from cart WHERE email = #{email} AND result &lt; 3
+	</select>
+	   
+	<!-- 장바구니 추가 / 완료 -->
+	<insert id="cart_insert">
+		INSERT INTO cart 
+			(email, prodnum, prodname, image, quantity, price, totalprice) 
+		VALUES 
+			(#{email}, 
+			(SELECT `prodnum` FROM product WHERE prodname = #{prodname}),#{prodname},
+			(SELECT `image` FROM product WHERE prodname = #{prodname}), #{quantity},
+			(SELECT `price` FROM product WHERE prodname = #{prodname}), 
+			#{quantity}*(SELECT price FROM product WHERE prodname = #{prodname}))
+	</insert>
 
-   <!-- 장바구니 품목 삭제 / 완료-->
-   <delete id="cart_delete">   
-       delete from cart where cartnum = #{cartnum}
-   </delete>
+	<!-- 장바구니 품목 삭제 / 완료-->
+	<delete id="cart_delete">   
+		delete from cart where cartnum = #{cartnum}
+	</delete>
    
-   <!-- 장바구니에서 구매완료 품목 삭제 / 완료-->
-   <delete id="cart_redelete">   
-       delete from cart where email = #{email} AND result = 3
-   </delete>
+	<!-- 장바구니에서 구매완료 품목 삭제 / 완료-->
+	<delete id="cart_redelete">   
+		delete from cart where email = #{email} AND result = 3
+	</delete>
 
-  <!-- 장바구니 수량 변경 /완료 -->
-   <update id="cart_update">
-   		update cart 
-   		set quantity = #{quantity}, totalprice = #{totalprice}
-  		where cartnum = #{cartnum}
-   </update>
+	<!-- 장바구니 수량 변경 /완료 -->
+	<update id="cart_update">
+		update cart 
+		set quantity = #{quantity}, totalprice = #{totalprice}
+		where cartnum = #{cartnum}
+	</update>
 
 	<!-- 주문 대기 상태로 변경 / 완료-->
 	<update id="cart_order">
@@ -53,19 +53,19 @@
 		UPDATE cart SET result = 1 WHERE result = 2 AND email = #{email}
 	</update>
    
-    <!-- 장바구니 합계 / 완료-->
-  	<select id="cart_tot" resultType="int">
-  		select ifnull(sum(price*quantity),0)
-  		from cart
-  		where email = #{email} AND result = 1
-  	</select>
+	<!-- 장바구니 합계 / 완료-->
+	<select id="cart_tot" resultType="int">
+		select ifnull(sum(price*quantity),0)
+		from cart
+		where email = #{email} AND result = 1
+	</select>
   	
 	<!-- 주문 대기 목록 / 완료 -->
 	<select id="order_list" resultType="cartDTO">
 		SELECT * FROM cart WHERE result = 2 AND email = #{email}
 	</select>
 	
-	<!-- 바로 구매  -->
+	<!-- 바로 구매 / 삭제 -->
 	<insert id="order_now">
 		INSERT INTO cart 
 		(email, prodnum, name, image, price, quantity, totalprice, result) 
@@ -82,11 +82,16 @@
 		select ifnull(sum(price*quantity),0) from cart where email = #{email} AND result = 2
 	</select> 
     
-    
 	<!-- 총결제금액, 적립금, 랭크변환 실행 주문추가 insert 후 실행 / 완료 -->
 	<resultMap id = "order_result_add" type = "hashmap"></resultMap>
 	<select id = "order_result_add" statementType = "CALLABLE">
 		{	call orderresultadd(#{email})	}
+	</select>
+	
+	<!-- 바로결제시 총결제금액, 적립금, 랭크변환 실행 주문추가 insert 후 실행 / 완료 -->
+	<resultMap id = "order_now_result_add" type = "hashmap"></resultMap>
+	<select id = "order_now_result_add" statementType = "CALLABLE">
+		{	call orderresultandroid(#{email})	}
 	</select>
 
 </mapper>

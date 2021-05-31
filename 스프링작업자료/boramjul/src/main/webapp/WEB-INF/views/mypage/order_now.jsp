@@ -61,8 +61,8 @@ function changePoint(){
 		v_point = amt; //사용할 포인트는 결제금액과 동일하게 설정
 		document.getElementById("usereserves").value = v_point; //input 값 재설정
 	}
+	
 	$('input[name="payprice"]').val(amt - v_point);
-
 }
 	
 
@@ -94,7 +94,6 @@ $(function(){
 		
 		if(confirm_val){
 			document.order.action ="${path}/mypage/now_completed.do?email=${sessionScope.email}";
-			document.order.submit();
 		}
 		
 	});//function()
@@ -119,36 +118,45 @@ $(function(){
 	var addreserves = '';
 
 	
-	console.log(rank);
+	console.log('랭크: '+rank);
 	
 	//랭크별 할인금액
 	if(rank == '브론즈'){
 		sale = 0.05;
 		saleprice = order_tot*sale;
+		console.log('할인금액 : '+saleprice);
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
-		var floor = Math.floor(addreserves);
-		$('input[name="saleprice"]').val(saleprice);
-		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(addreserves);
+		var addreserves_floor = Math.floor(addreserves);
+		var payprice_floor = Math.floor(payprice);
+		var saleprice_floor = Math.floor(saleprice);
+		$('input[name="saleprice"]').val(saleprice_floor);
+		$('input[name="payprice"]').val(payprice_floor);
+		$('input[name="addreserves"]').val(addreserves_floor);
 	}else if(rank == '실버'){
 		sale = 0.1;
 		saleprice = order_tot*sale;
+		console.log('할인금액 : '+saleprice);
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
-		var floor = Math.floor(addreserves);
-		$('input[name="saleprice"]').val(saleprice);
-		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(floor);
-	}else{
-		sele = 0.15;
+		var addreserves_floor = Math.floor(addreserves);
+		var payprice_floor = Math.floor(payprice);
+		var saleprice_floor = Math.floor(saleprice);
+		$('input[name="saleprice"]').val(saleprice_floor);
+		$('input[name="payprice"]').val(payprice_floor);
+		$('input[name="addreserves"]').val(addreserves_floor);
+	}else if(rank == '골드'){
+		sale = 0.15;
 		saleprice = order_tot*sale;
+		console.log('할인금액 : '+saleprice);
 		payprice = order_tot-saleprice-point;
 		addreserves = payprice * 0.01;
-		var floor = Math.floor(addreserves);
-		$('input[name="saleprice"]').val(saleprice);
-		$('input[name="payprice"]').val(payprice);
-		$('input[name="addreserves"]').val(floor);
+		var addreserves_floor = Math.floor(addreserves);
+		var payprice_floor = Math.floor(payprice);
+		var saleprice_floor = Math.floor(saleprice);
+		$('input[name="saleprice"]').val(saleprice_floor);
+		$('input[name="payprice"]').val(payprice_floor);
+		$('input[name="addreserves"]').val(addreserves_floor);
 	}
 	
 	//포인트 전체 차감
@@ -202,13 +210,13 @@ $(function(){
                         <td>수량</td>
                     </tr>
                     <tr>
-                        <td><img src="${booksdto.image}" alt="책 이미지" class="bookimg">
-                        </td>
-                        <td>${booksdto.name }<input type="hidden" name="name" value="${booksdto.name }">
-                        </td>
-                        <td><fmt:formatNumber value="${booksdto.price }" pattern="#,###,###"/>원</td>
-                        <td>${memberdto.rank }등급 할인<br></td>
-                        <td>1권</td>
+                        <td><img src="${booksdto.image}" alt="책 이미지" name="image" class="bookimg"></td>
+                        <td>${booksdto.prodname }
+                        	<input type="hidden" name="prodname" value="${booksdto.prodname }"></td>
+                        <td><fmt:formatNumber value="${booksdto.price }" pattern="#,###,###"/>원
+                        	<input type="hidden" name="price" value="${booksdto.price }"></td>
+                        <td>${memberdto.rank }등급 할인</td>
+                        <td>${booksdto.quantity }권<input type="hidden" name="quantity" value="${booksdto.quantity }"></td>
                     </tr>
                 </table>
             </div> <!--order_list-->
@@ -330,7 +338,7 @@ $(function(){
                                 </div><!-- agree -->
                             </li>
                             <li>
-                                <button class="btn_pay">결제하기</button>
+                                <button class="btn_pay" type="submit">결제하기</button>
                             </li>
                         </ul>
                     </div><!-- payment -->

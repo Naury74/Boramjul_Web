@@ -119,7 +119,7 @@
             <ul>
                 <li><a class="topmenu" href="${path }/mypage/myList.do?email=${sessionScope.email}">주문내역 조회</a></li>
                 <li><a class="topmenu" href="${path }/mypage/myCart.do?email=${sessionScope.email}">장바구니</a></li>
-                <li><a class="topmenu" href="membership.do?email=${sessionScope.email}">나의 등급</a></li>
+                <li><a class="topmenu" href="${path }membership.do?email=${sessionScope.email}">나의 등급</a></li>
                 <li><a class="topmenu" href="${path }/mypage/myReview.do?email=${sessionScope.email}">나의 후기</a></li>
                 <li><a class="topmenu" href="${path }/mypage/myInfo.do?email=${sessionScope.email}">회원정보 변경</a></li>
             </ul>

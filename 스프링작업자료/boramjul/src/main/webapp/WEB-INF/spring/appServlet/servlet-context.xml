@@ -59,6 +59,7 @@
     	
     	<mvc:interceptor>
             <mvc:mapping path="/mypage/*"/><!--  적용할 범위 -->
+            <mvc:mapping path="/books/*"/><!--  적용할 범위 -->
             <beans:ref bean="loggerInterceptor"/>
     	</mvc:interceptor>
 

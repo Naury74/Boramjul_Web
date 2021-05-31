@@ -18,9 +18,6 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter{
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-
-        //logger.info("\n==================== LoggerInterceptor START ====================\n");
-       // logger.info(" URI [{}]," + request.getRequestURI());
  
         Enumeration paramNames = request.getParameterNames();
         while (paramNames.hasMoreElements()) {
