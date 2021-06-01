@@ -1,0 +1,22 @@
+
+해당 회원정보 조회 json 요청 주소 
+http://boramjul.kro.kr/member/requestmember/{email}
+
+해당 회원정보 json 내보내기 주소
+http://boramjul.kro.kr/member/memberrespondjson.do
+
+앱 -> 웹 회원가입  insert json 요청 주소
+http://boramjul.kro.kr/member/androidsignup.do
+
+
+해당 회원 구매 정보 json 요청 주소 
+http://boramjul.kro.kr/mypage/requestorderinfo/{email}
+
+해당 회원 구매 정보 json 내보내기 주소
+http://boramjul.kro.kr/mypage/orderrespondjson.do
+
+앱 -> 웹 구매 정보 insert json 요청 주소
+http://boramjul.kro.kr/mypage/androidorder.do
+
+
+
