@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------------------------------
+1. ordermapper 아래 내용 수정
+	
+	<!-- 적립금사용 (회원 욕설등 제제로 인한 포인트 차감 등등) / 관리자 -->
+	<update id="reserves_use">
+		UPDATE member SET reserves = reserves-#{reserves} WHERE email = #{email}
+	</update>
+
+
+	<!-- 적립금사용 (회원 욕설등 제제로 인한 포인트 차감 등등) / 관리자 -->
+	<update id="reserves_use">
+		UPDATE member SET reserves = reserves-#{reserves} WHERE email = #{email}
+	</update>
+
+	<!-- 회원주문내역조회 / 관리자-->
+	<!-- result 값에 따라 1: 배송전, 2: 배송중, 3: 배송완료 -->
+	<update id="order_email_list">
+		SELECT * FROM order_detail WHERE detailnum = (deliveryfunction(#{email},#{delivery} ))
+	</update> 
