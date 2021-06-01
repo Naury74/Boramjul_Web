@@ -8,6 +8,7 @@
 	<%@ include file="../include/include.jsp" %>
     <link rel="stylesheet" href="${path}/css/mypage.css">
 </head>
+
 <body>
 
 <div class="wrap">
@@ -36,7 +37,7 @@
        
             <section id="content1">
                 <div class="table">
-                    <table>
+                    <table id="table_list">
                         <tr style="height: 40px;">
                             <td colspan="2"></td>
                             <td>책 제목</td>
@@ -44,23 +45,50 @@
                             <td>별점</td>
                             <td>작성일시</td>
                         </tr>
+                        <c:forEach var="row" items="${map.list }">
+                    	<c:set var="i" value="${i+1 }"/>
+                    	<div id="list">
                         <tr>
-                            <td>1</td>
-                            <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-                            <td>아몬드</td>
-                            <td>ㄹㅇ후기 미쳤다 이 책 다들 사라</td>
-                            <td><img src="${path}/images/별점5.svg" alt="별점" class="star"></td>
-                            <td>2020.12.29</td>
+                            <td>${i }<input type="hidden" value="${row.renum }" name="renum"></td>
+                            <td><img src="${row.image }" alt="책 이미지" class="bookimg"></td>
+                            <td><a href="${path }/books/BookDetail_review.do?prodnum=${row.prodnum}">${row.prodname }</a></td>
+                            <td><a href="${path }/books/review_detail.do?renum=${row.renum}&prodnum=${row.prodnum}">${row.rename }</a> </td>
+                            <c:choose>
+                            <c:when test="${row.grade == '1'}">
+                            <td>
+                           		<img src="${path}/images/star1.svg" alt="별점" id="gradeimg" class="star">
+                           		<input type="text" value="${row.grade }" id="grade" name="grade">
+                            </td>
+                            </c:when>
+                            <c:when test="${row.grade == '2'}">
+                            <td>
+                           		<img src="${path}/images/star2.svg" alt="별점" id="gradeimg" class="star">
+                           		<input type="text" value="${row.grade }" id="grade" name="grade">
+                            </td>
+                            </c:when>
+                             <c:when test="${row.grade == '3'}">
+                            <td>
+                           		<img src="${path}/images/star3.svg" alt="별점" id="gradeimg" class="star">
+                           		<input type="text" value="${row.grade }" id="grade" name="grade">
+                            </td>
+                            </c:when>
+                            <c:when test="${row.grade == '4'}">
+                            <td>
+                           		<img src="${path}/images/star4.svg" alt="별점" id="gradeimg" class="star">
+                           		<input type="text" value="${row.grade }" id="grade" name="grade">
+                            </td>
+                            </c:when>
+                            <c:when test="${row.grade == '5'}">
+                            <td>
+                           		<img src="${path}/images/star5.svg" alt="별점" id="gradeimg" class="star">
+                           		<input type="text" value="${row.grade }" id="grade" name="grade">
+                            </td>
+                            </c:when>
+                            </c:choose>
+                            <td><fmt:formatDate value="${row.redate }" pattern="yyyy.MM.dd"/></td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><img src="${path}/images/아몬드.jpg" alt="책 이미지" class="bookimg"></td>
-                            <td>아몬드</td>
-                            <td>아몬드 먹으면서 아몬드 읽은 썰 푼다.</td>
-                            <td><img src="${path}/images/별점1.svg" alt="별점" class="star"></td>
-                            <td>2018.08.18</td>
-                        </tr>
-                        
+                        </div>
+                        </c:forEach>
                     </table>
                 </div><!--table-->
             </section>

@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mysqlProduct">
-   
+
 	<!-- 상품 목록 -->
 	<select id="prod_list" resultType="BooksDTO">
 		select * from product
@@ -14,7 +14,7 @@
 		select * from product WHERE NAME LIKE "%#{prodname}%"
 	</select>
 	
-	<!-- 상품 조회(key) / 진행 중-->
+	<!-- 상품 조회(key) / 완료 -->
 	<select id="prodnum_list" resultType="BooksDTO">   
 		select * from product WHERE prodnum = #{prodnum}
 	</select>

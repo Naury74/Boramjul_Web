@@ -15,6 +15,10 @@ public interface OrderService {
 	
 	public void order_detail_insert(OrderDetailDTO dto);
 	
+	public void review_result(int prodnum);
+	
+	public void review_result_delete(int prodnum);
+	
 	public int prod_duplication(String prodname);
 	
 	public void prod_insert(OrderDetailDTO dto);

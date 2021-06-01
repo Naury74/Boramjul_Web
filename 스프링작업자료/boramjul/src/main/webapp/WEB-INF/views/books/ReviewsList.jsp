@@ -10,50 +10,31 @@
 	<%@ include file="../include/include.jsp" %>
 <script type="text/javascript">
 
-
 $(function(){
 	
-	var grade = $('input[name="grade"]').val();
-	var sel_index = 0;
-	$('input[name="grade"]').click(function() {
-		alert($(this).parent().parent().parent().parent().index()  );
-		sel_index = $(this).parent().parent().parent().parent().index();
+	$('#related_books > #searched_review_margin').each(function(){
+
+		var div = $(this);
+		var grade = div.find('#grade').val();
 		
-		console.log('index... : '+ sel_index);
-		console.log('item... : '+ $('#related_books>div').eq(sel_index).attr('id')  );
-		sel_item =  $('#related_books>div').eq(sel_index).attr('id');
+		console.log('index: '+div.index()+' / grade: '+grade);
 		
-	});
-	
-	console.log('index: '+sel_index);
-	//console.log('name: '+  $('#searched_review_margin').eq(sel_index).attr('id').index()  );
-	
-	//var grade = '';
-	console.log('grade: '+grade);
-	
-	if(grade == 1){
-		$("#grade").attr("src", "${path}/images/star1.svg");
-	}
-	if(grade == 2){
-		$("#grade").attr("src", "${path}/images/star2.svg");
-	}
-	if(grade == 3){
-		$("#grade").attr("src", "${path}/images/star3.svg");
-	}
-	if(grade == 4){
-		$("#grade").attr("src", "${path}/images/star4.svg");
-	}
-	if(grade == 5){
-		$("#grade").attr("src","${path}/images/star5.svg");
-	}
-	
-	
-	
-	
-	
-	
-	
-	
+		if(grade == 1){
+			$(div.find("#gradeimg")).attr("src", "${path}/images/star1.svg");
+		}
+		if(grade == 2){
+			$(div.find("#gradeimg")).attr("src", "${path}/images/star2.svg");
+		}
+		if(grade == 3){
+			$(div.find("#gradeimg")).attr("src", "${path}/images/star3.svg");
+		}
+		if(grade == 4){
+			$(div.find("#gradeimg")).attr("src", "${path}/images/star4.svg");
+		}
+		if(grade == 5){
+			$(div.find("#gradeimg")).attr("src", "${path}/images/star5.svg");
+		}
+	})
 })
 
 </script>
@@ -79,7 +60,7 @@ $(function(){
 					
 					<div id="searched_books_review">
 						<div id="searched_books_review_title">
-							<a href="${path }/books/review_detail.do/${row.renum}/${row.prodnum}">${row.rename }</a>
+							<a href="${path }/books/review_detail.do?renum=${row.renum}&prodnum=${row.prodnum}">${row.rename }</a>
 						</div><!-- searched_books_review_title -->
 						<div class="searched_reviewer_info">
 							<div id="searched_books_title_for_review">${row.content }</div>
@@ -88,14 +69,14 @@ $(function(){
 							<span class="review_date"><fmt:formatDate value="${row.redate }" pattern="yyyy.MM.dd"/></span>
 							<span class="divi">|</span>
 							<span>
-								<img src="" alt="평점 이미지" id="grade">
-								<input type="text" name="grade" id='grade' value="${row.grade }">
+								<img src="" alt="평점 이미지" id="gradeimg">
+								<input type="hidden" name="grade" id='grade' value="${row.grade }">
 							</span>
 							<span class="divi">|</span>          
-							<img src="../images/comment.svg" alt="댓글" class="comment-img">
+							<img src="${path }/images/comment.svg" alt="댓글" class="comment-img">
 							<span>${row.comscore }</span>
 							<span class="divi">|</span>
-							<img src="../images/heart.svg" alt="좋아요" class="heart-img">
+							<img src="${path }/images/heart.svg" alt="좋아요" class="heart-img">
 							<span>${row.recom }</span>
 						</div><!-- searched_reviewer_info -->
 						     

@@ -70,6 +70,6 @@
        (prodnum, prodname, price, image) 
        VALUES 
        ((select ifnull((select max(prodnum)+1 from product AS p), 1)), #{prodname}, #{price}, #{image})	
-    </insert>	
+    </insert>
 
 </mapper>

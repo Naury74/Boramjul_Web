@@ -313,7 +313,6 @@ public class MemberController {
 		return list;
 	}	
 	
-	//안드로이드 >> json 형식 데이터 전송 >> 서블릿으로 처리 >> db에 insert
 	@RequestMapping(value = "androidsignup.do", method = {RequestMethod.POST, RequestMethod.GET}, headers="Accept=application/json" )	
 	public void androidsignup(@RequestBody String resultSet) throws Exception {//RequestBody이용하여 resultset 변수에 전송된값 저장
 		System.out.println("androidsignup 서블릿");
@@ -341,6 +340,8 @@ public class MemberController {
 		memberService.insert(dto);
 		System.out.println("insert 실행됨");
 	}	
+
+	
 
 }
 

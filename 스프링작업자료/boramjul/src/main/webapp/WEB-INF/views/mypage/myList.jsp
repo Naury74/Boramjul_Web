@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="${path}/css/mypage.css">
     <%@ include file="../include/include.jsp" %>
 <script type="text/javascript">
+
 $(function(){
 	var delivery = document.getElementById("delivery").value;
+	
 	console.log('배송상태: '+delivery);
 	
 	if(delivery == '1'){
@@ -24,8 +26,6 @@ $(function(){
 		delivery = '배송 완료';
 		$('input[name="delivery"]').val(delivery);
 	}
-	
-	
 	
 })
 </script>
@@ -72,13 +72,25 @@ $(function(){
 			                <tr>
 			                    <td><img src="${row.image}" alt="책 이미지" class="bookimg"></td>
 			                    <td>${row.prodname }</td>
-			                    <td><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원<br>
-			                    	<fmt:formatNumber value="${row.quantity }"/>권</td>
+			                    <td>
+			                    	<fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원<br>
+			                    	<fmt:formatNumber value="${row.quantity }"/>권
+		                    	</td>
 			                    <td><fmt:formatNumber value="${row.detailnum }"/></td>
 			                    <td><fmt:formatDate value="${row.indate }" pattern="yyyy.MM.dd"/></td>
 			                    <td><input name="delivery" id="delivery" value="<fmt:formatNumber value="${row.delivery }"/>"
-			                    	style="border:none;" readonly></td>
-			                    <td><fmt:formatNumber value="${row.review }"/>개</td>
+			                    	style="border:none;" readonly>
+		                    	</td>
+			                    <c:if test="${row.review == 1}">	
+				                    <td>
+					                    <span id="review"><button class="reviewBtn" name="reviewBtn" type="button" onclick='location.href="${path }/books/ReviewWrite.do?prodnum=${row.prodnum}"'>후기작성</button></span>
+				                    </td>
+			                    </c:if>
+			                    <c:if test="${row.review == 2}">
+	            		            <td>
+					                    <span id="review">후기 작성 완료</span>
+				                    </td>
+			                    </c:if>
 			                </tr>
 		                </c:forEach>
 					</c:otherwise>

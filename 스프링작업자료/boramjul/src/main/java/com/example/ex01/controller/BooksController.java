@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.ex01.model.dto.BooksDTO;
 import com.example.ex01.model.dto.ReviewDTO;
 import com.example.ex01.service.AdminService;
+import com.example.ex01.service.OrderService;
 import com.example.ex01.service.ReviewService;
 
 @RequestMapping("/books/*")
@@ -35,6 +37,9 @@ public class BooksController {
 	
 	@Inject
 	AdminService adminService;
+	
+	@Inject
+	OrderService orderService;
 	
 	
 	
@@ -132,6 +137,27 @@ public class BooksController {
     	System.out.println("땡겨온 데이터: "+dto);
        
         return "books/BookDetail";
+	}
+	
+	@RequestMapping("BookDetail_review.do")
+	public ModelAndView BookDetail_review(Model model, ModelAndView mav, ReviewDTO dto, BooksDTO dto1, @RequestParam("prodnum") int prodnum) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<ReviewDTO> list = reviewService.prod_review_list(prodnum);
+
+		map.put("list", list);
+		
+		model.addAttribute("dto", adminService.prodnum_list(prodnum));
+		System.out.println(dto1);
+		
+		System.out.println(list);
+		mav.addObject("map",map);
+		mav.addObject("score", reviewService.review_score(prodnum));
+		mav.setViewName("/books/BookDetail_review");
+		
+		return mav;
+		
 	}
 	
 	
@@ -241,7 +267,7 @@ public class BooksController {
 	
 		ArrayList<String> imgUrl = new ArrayList<String>();
 	
-		Document doc = Jsoup.connect(URL).get();		
+		Document doc = Jsoup.connect(URL).get();
 	
 		Elements prodname = doc.select(".title a strong");
 		Elements content = doc.select(".author");
@@ -337,14 +363,28 @@ public class BooksController {
 	}
 	
 	@RequestMapping("ReviewWrite.do")
-	public String ReviewWrite( Model model) {
-
+	public String ReviewWrite( Model model, BooksDTO dto, @RequestParam("prodnum") int prodnum) {
+		model.addAttribute("dto", adminService.prodnum_list(prodnum));
+		
 		return "books/ReviewWrite";
 	}
 	
-	@RequestMapping("review_detail.do/{renum}/{prodnum}")
-	public ModelAndView review_detail(@PathVariable("renum")int renum, @PathVariable("prodnum")int prodnum, ModelAndView mav) {
+	@RequestMapping("review_insert.do")
+	public String review_insert(ReviewDTO dto, @RequestParam("prodnum") int prodnum) {
+	
+		reviewService.review_insert(dto); //리뷰 등록
+		reviewService.review_count(prodnum); //상품의 리뷰 갯수 추가
+		reviewService.review_score_insert(prodnum); //상품의 리뷰 점수 추가
+		orderService.review_result(prodnum);//작성 유무
+		
+		return "redirect:/books/ReviewsList.do";
+	}
+	
+	@RequestMapping("review_detail.do")
+	public ModelAndView review_detail(@RequestParam("renum") int renum, @RequestParam("prodnum") int prodnum, ModelAndView mav) {
 		reviewService.review_lookup(renum);
+		
+		System.out.println("renum: "+renum+", prodnum: "+prodnum);
 		
 		mav.setViewName("/books/ReviewView");
 		mav.addObject("dto", reviewService.review_detail(renum));
@@ -352,4 +392,47 @@ public class BooksController {
 
 		return mav;
 	}
+	
+	@RequestMapping("recom_update.do")
+	public String review_com(@RequestParam("renum") int renum, @RequestParam("prodnum") int prodnum) {
+		reviewService.review_recom(renum);
+		
+		return "redirect:/books/review_detail.do";
+	}
+	
+	@RequestMapping("Review_update.do")
+	public String Review_update(@RequestParam("renum") int renum, ReviewDTO dto, Model model) {
+		
+		model.addAttribute("dto", reviewService.review_detail(renum));
+
+		return "books/ReviewUpdate";
+	}
+	
+	@RequestMapping("Review_update_end.do")
+	public String Review_update_end(@RequestParam("renum") int renum, @RequestParam("prodnum") int prodnum, ReviewDTO dto, RedirectAttributes redirect) {
+		System.out.println("resum: "+renum+", prodnum: "+prodnum);
+		
+		reviewService.review_update(dto);
+		
+		redirect.addAttribute("renum", renum);
+		redirect.addAttribute("prodnum", prodnum);
+		
+		return "redirect:/books/review_detail.do";
+		
+	}
+	
+	@RequestMapping("Review_delete.do")
+	public String Review_delete (@RequestParam("renum") int renum, @RequestParam("prodnum") int prodnum) {
+		
+		reviewService.review_delete(renum);
+		reviewService.review_count_delete(prodnum); //상품의 리뷰 갯수 삭제
+		reviewService.review_score_delete(prodnum); //상품의 리뷰 점수 삭제
+		orderService.review_result_delete(prodnum);//작성 유무 삭제
+		
+		return "redirect:/books/ReviewsList.do";
+	}
+		
+	
+	
+	
 }

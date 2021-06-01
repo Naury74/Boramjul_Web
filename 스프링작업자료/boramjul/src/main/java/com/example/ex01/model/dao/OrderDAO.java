@@ -16,6 +16,12 @@ public interface OrderDAO {
 	//주문완료 후 상세페이지 조회
 	public OrderDTO order_detail_list(OrderDTO dto);
 	
+	//리뷰 작성 이후 리뷰작성 유무 업데이트
+	public void review_result(int prodnum);
+	
+	//리뷰작성 삭제시
+	public void review_result_delete(int prodnum);
+	
 	//주문내역 조회
 	List<OrderDetailDTO> detail_list(String email);
 	

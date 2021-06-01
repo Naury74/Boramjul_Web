@@ -10,19 +10,56 @@
 	
 <script type="text/javascript">
 
-function QnA_write() {
-	console.log('등록 click');
-	var name = document.form.name.value;
-	var content = document.form.content.value;
+$(function(){
+	$('#post_btn').click(function(){
+		var confirm_val = confirm('등록하시겠습니까?');
+		
+		if(confirm_val){
+			var rename = $('input[name="rename"]').val();
+			var recontent = $('textarea[name="recontent"]').val();
+			var grade = $('input[name="grade"]').val();
+			
+			if(rename == ""){
+				alert('제목을 입력하세요.');
+				$('.write-review-boxT').focus();
+				return false;
+			}
+			if(recontent == ""){
+				alert('내용을 입력하세요.');
+				$('.write-review-boxC').focus();
+				return false;
+			}
+			if(grade == ""){
+				alert('별점을 선택하세요.');
+				return false;
+			}
+			document.form.action = "/books/review_insert.do?prodnum=${dto.prodnum}";
+		}else {
+			return false;
+		}
 
-	if (name.length == 0) {
-		alert("제목을 입력하세요.");
-		document.form.name.focus();
-		return false;	
-	}
+	})
+	
+	$('#star1').click(function(){
+		$('input[name="grade"]').val(1);
+	})
+	$('#star2').click(function(){
+		$('input[name="grade"]').val(2);
+	})
+	$('#star3').click(function(){
+		$('input[name="grade"]').val(3);
+	})
+	$('#star4').click(function(){
+		$('input[name="grade"]').val(4);
+	})
+	$('#star5').click(function(){
+		$('input[name="grade"]').val(5);
+	})
+	
+	
+	
+})
 
-	document.form.action = "${path}/books/ReivewWrite.do";
-}
 
 </script>
 
@@ -40,24 +77,20 @@ function QnA_write() {
 		<div id="searched_reviewing_book">
 			<div class="searched-reviewing-book">   
 				<div class="searched_books_info">
-					<div class="searched_books_title">질서 너머</div>
+					<div class="searched_books_title">${dto.prodname }</div>
 					
 					<div class="searched_books_info_d">
-						<span class="book_author">조던 B. 피터슨</span>
+						<span class="book_author">${dto.content }</span>
 					</div><!-- searched_books_info_d -->
 					
 					<div class="searched_books_price">판매가:
-						<span class="price-of-searched-books">14,400원</span>
+						<span class="price-of-searched-books"><fmt:formatNumber value="${dto.price }" pattern="#,###,###"/>원</span>
 					</div><!-- searched_books_price -->
 					
 					<div class="searched_book_reviews">
-						<div class="searched_book_scores">
-							<img src="${path }/images/별점3.svg" alt="별점" class="star"> 6.0
-						</div>         
-						 
-						<img src="${path }/images/리뷰.svg" alt="리뷰" class="review-img">
-						<span class="number_of_reviews">회원리뷰: 2222건</span>
+						<img src="${dto.image }" alt="책 이미지" class="review-img">
 					</div><!-- searched_book_reviews -->
+					
 				</div><!-- searched_books_info -->
 			</div><!-- searched-reviewing-book -->
 			
@@ -67,28 +100,37 @@ function QnA_write() {
 		<table class="myrating" cellpadding="0" cellspacing="0">
 			<tr>
 				<th>
-					<span style="padding-right: 5px;">별점:</span> 
+					<span style="padding-right: 5px;">별점:</span>
+
 				</th>
 				<td>
-					<img class="star"  src="${path }/images/별점1.svg" style="cursor: pointer;" score="1">
-					<img class="star"  src="${path }/images/별점1.svg" style="cursor: pointer;" score="2">
-					<img class="star"  src="${path }/images/별점1.svg" style="cursor: pointer;" score="3">
-					<img class="star"  src="${path }/images/별점1.svg" style="cursor: pointer;" score="4">
-					<img class="star"  src="${path }/images/별점1.svg" style="cursor: pointer;" score="5">
+					<img class="star"  src="${path }/images/star1.svg" style="cursor: pointer;" id="star1" >
+					<img class="star"  src="${path }/images/star1.svg" style="cursor: pointer;" id="star2">
+					<img class="star"  src="${path }/images/star1.svg" style="cursor: pointer;" id="star3">
+					<img class="star"  src="${path }/images/star1.svg" style="cursor: pointer;" id="star4">
+					<img class="star"  src="${path }/images/star1.svg" style="cursor: pointer;" id="star5">
+					/ <input type="text" value="" name="grade" style="border:none; readonly">점
 				</td>
 			</tr>
 		</table><!-- myrating -->
         
 		<tbody>
 			<tr>
-				<td><input type="text" class="write-review-boxT" placeholder="Enter your review title" name="write-review-title" maxlength="50" style="display: block; height: 20px;"></td>
+				<td><input type="text" class="write-review-boxT" placeholder="Enter your review title" name="rename" maxlength="50" style="display: block; height: 20px;"></td>
 			</tr>
 			<tr>
-				<td><textarea class="write-review-boxC" placeholder="Enter your review" name="write-review-content" maxlength="10000" style="display: block; height: 800px;"></textarea></td>            
+				<td><textarea class="write-review-boxC" placeholder="Enter your review" name="recontent" maxlength="10000" style="display: block; height: 800px;"></textarea></td>            
 			</tr>
 		</tbody>
 		
 	<div class="clearBoth"></div>
+	
+	<input type="hidden" name="email" value="${sessionScope.email}">
+	<input type="hidden" name="prodnum" value="${dto.prodnum }">
+	<input type="hidden" name="image" value="${dto.image }">
+	<input type="hidden" name="prodname" value="${dto.prodname }">
+	<input type="hidden" name="content" value="${dto.content }">
+	<input type="hidden" name="price" value="${dto.price }">
 	
 	<div><input type="submit" id="post_btn" value="리뷰 등록"></div>
 	<div class="clearBoth"></div>

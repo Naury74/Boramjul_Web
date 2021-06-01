@@ -18,5 +18,6 @@ public class OrderDetailDTO {
 	private int review;
 	private int delivery;
 	private Date indate;
+	private int grade;
 
 }

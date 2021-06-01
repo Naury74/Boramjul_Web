@@ -37,7 +37,16 @@ public class OrderServiceImpl implements OrderService {
 	public void order_detail_insert(OrderDetailDTO dto) {
 		orderDao.order_detail_insert(dto);
 	}
-	
+
+	@Override
+	public void review_result(int prodnum) {
+		orderDao.review_result(prodnum);
+	}
+
+	@Override
+	public void review_result_delete(int prodnum) {
+		orderDao.review_result_delete(prodnum);
+	}
 	
 	@Override
 	public int prod_duplication(String prodname) {
@@ -48,5 +57,7 @@ public class OrderServiceImpl implements OrderService {
 	public void prod_insert(OrderDetailDTO dto) {
 		orderDao.prod_insert(dto);
 	}
+	
+
 
 }

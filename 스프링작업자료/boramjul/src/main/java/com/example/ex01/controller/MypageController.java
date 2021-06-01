@@ -33,8 +33,10 @@ import com.example.ex01.model.dto.CartDTO;
 import com.example.ex01.model.dto.MemberDTO;
 import com.example.ex01.model.dto.OrderDTO;
 import com.example.ex01.model.dto.OrderDetailDTO;
+import com.example.ex01.model.dto.ReviewDTO;
 import com.example.ex01.service.MemberService;
 import com.example.ex01.service.OrderService;
+import com.example.ex01.service.ReviewService;
 import com.example.ex01.service.AdminService;
 import com.example.ex01.service.CartService;
 
@@ -42,6 +44,8 @@ import com.example.ex01.service.CartService;
 @Controller
 public class MypageController {
 	private static  final Logger logger = LoggerFactory.getLogger(MypageController.class);
+	
+	String safe;
 	
 	@Inject
 	MemberService memberService;
@@ -55,9 +59,11 @@ public class MypageController {
 	@Inject
 	AdminService adminService;
 	
+	@Inject
+	ReviewService reviewService;
+	
 	@Autowired SqlSessionTemplate mysql;
 	
-	String safe;
 	
 	@RequestMapping("myList.do")
 	public ModelAndView myList(HttpSession session, ModelAndView mav, OrderDetailDTO dto) {
@@ -67,11 +73,8 @@ public class MypageController {
 		String email = (String) session.getAttribute("email");
 		
 		if (email != null) {
-			
 			List<OrderDetailDTO> list = orderService.detail_list(email);
-			logger.info("이메일: "+email);
-			logger.info("주문내역: "+list.toString());
-			
+
 			map.put("list", list);
 			map.put("count", list.size());
 			
@@ -328,8 +331,17 @@ public class MypageController {
 	
 	
 	@RequestMapping("myReview.do")
-	public String myReview() {
-		return "mypage/myReview";
+	public ModelAndView myReview(ModelAndView mav, String email) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<ReviewDTO> list = reviewService.email_review_list(email);
+		
+		map.put("list", list);
+		
+		mav.addObject("map", map);
+		mav.setViewName("mypage/myReview");
+		
+		return mav;
 	}
 	
 	@RequestMapping("myInfo.do")
@@ -344,7 +356,7 @@ public class MypageController {
 		
 		return "mypage/membership";
 	}
-
+	
 	@RequestMapping("requrestorderinfo/{id}")
 	public String androidtest(@PathVariable String id) {
 		safe = id;        
@@ -484,4 +496,6 @@ public class MypageController {
 
 		
 	}
+	
+
 }
