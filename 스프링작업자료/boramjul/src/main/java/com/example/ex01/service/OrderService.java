@@ -14,5 +14,9 @@ public interface OrderService {
 	List<OrderDetailDTO> detail_list(String email);
 	
 	public void order_detail_insert(OrderDetailDTO dto);
+	
+	public int prod_duplication(String prodname);
+	
+	public void prod_insert(OrderDetailDTO dto);
 
 }

@@ -1,5 +1,6 @@
 package com.example.ex01.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,10 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,6 +57,7 @@ public class MypageController {
 	
 	@Autowired SqlSessionTemplate mysql;
 	
+	String safe;
 	
 	@RequestMapping("myList.do")
 	public ModelAndView myList(HttpSession session, ModelAndView mav, OrderDetailDTO dto) {
@@ -337,4 +345,143 @@ public class MypageController {
 		return "mypage/membership";
 	}
 
+	@RequestMapping("requrestorderinfo/{id}")
+	public String androidtest(@PathVariable String id) {
+		safe = id;        
+		return "redirect:/mypage/orderrespondjson.do";
+	}
+	
+	// http://localhost:8090/mypage/requrestorderinfo/hongtest@gmail.com
+	@RequestMapping(value = "orderrespondjson.do", method = {RequestMethod.POST, RequestMethod.GET}, headers="Accept=application/json" )
+	public @ResponseBody String orderrespondjson() {		
+		logger.info("전송 받은 이메일: "+safe);
+		OrderDTO email = new OrderDTO();
+		email.setEmail(safe);		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		OrderDTO dto = orderService.order_detail_list(email);
+		List<OrderDetailDTO> list = orderService.detail_list(safe);				
+				
+		JSONArray obj = new JSONArray();
+		JSONArray orderinfo = new JSONArray();
+		JSONObject data_o = new JSONObject();		
+		JSONArray product = new JSONArray();
+		
+		data_o.put("email", dto.getEmail().toString());
+		data_o.put("name", dto.getName().toString());
+		data_o.put("phone", dto.getPhone().toString());
+		data_o.put("totalprice", dto.getTotalprice());
+		data_o.put("saleprice", dto.getSaleprice());
+		data_o.put("usereserves", dto.getUsereserves());
+		data_o.put("payprice", dto.getPayprice());
+		data_o.put("addreserves", dto.getAddreserves());
+		data_o.put("pay", dto.getPay().toString());
+		data_o.put("address", dto.getAddress().toString());
+		data_o.put("request", dto.getRequest().toString());
+					
+		for(int i = 0; i < list.size(); i++){ 
+			JSONObject data_p = new JSONObject();
+			data_p.put("name", list.get(i).getProdname().toString());
+			data_p.put("image", list.get(i).getImage().toString());
+			data_p.put("quantity", list.get(i).getQuantity());
+			data_p.put("price", list.get(i).getPrice());
+			data_p.put("totalprice", list.get(i).getTotalprice());
+			product.add(data_p);
+			System.out.println(data_p);
+		}
+		data_o.put("list", product);
+		obj.add(data_o);
+		
+		return obj.toString();
+	}
+	
+
+	@RequestMapping(value = "androidorder.do", method = {RequestMethod.POST, RequestMethod.GET}, headers="Accept=application/json" )	
+	public void androidorder(@RequestBody String resultSet) throws Exception {//RequestBody이용하여 resultset 변수에 전송된값 저장
+		System.out.println("androidorder 서블릿");
+		
+		String result = resultSet.replace("\\", "");
+		String result1 = result.replace("\"{", "{");
+		String result2 = result1.replace("}\"", "}");
+		System.out.println("-----------------------------");
+		System.out.println(result2);	
+		
+		OrderDTO dto = new OrderDTO();
+		List<OrderDetailDTO> dto_d = new ArrayList<OrderDetailDTO>();
+
+		try {
+			
+			JSONParser jsonParser = new JSONParser();
+			JSONObject orderinfo = (JSONObject) jsonParser.parse(result2);
+			System.out.println("-----------------------------");
+			System.out.println(orderinfo);
+			
+			int totalpricejson =  Integer.parseInt(String.valueOf(orderinfo.get("totalprice")));
+			int salepricejson =  Integer.parseInt(String.valueOf(orderinfo.get("saleprice")));
+			int usereservesjson =  Integer.parseInt(String.valueOf(orderinfo.get("usereserves")));
+			int paypricejson =  Integer.parseInt(String.valueOf(orderinfo.get("payprice")));
+			int addreservesjson =  Integer.parseInt(String.valueOf(orderinfo.get("addreserves")));
+			
+			dto.setEmail(orderinfo.get("email").toString());
+			dto.setName(orderinfo.get("name").toString());
+			dto.setPhone(orderinfo.get("phone").toString());
+			dto.setTotalprice(totalpricejson);
+			dto.setSaleprice(salepricejson);
+			dto.setUsereserves(usereservesjson);
+			dto.setPayprice(paypricejson);
+			dto.setAddreserves(addreservesjson);
+			dto.setPay(orderinfo.get("pay").toString());
+			dto.setAddress(orderinfo.get("address").toString());
+			dto.setRequest(orderinfo.get("request").toString());
+			System.out.println("------------------------------------------");
+			System.out.println("받은 결제 정보 :  " + dto);
+			System.out.println("------------------------------------------");
+			
+			orderService.order_insert(dto);
+						
+			JSONArray product = (JSONArray) orderinfo.get("list"); 
+			
+			System.out.println("------------------------------------------");
+			System.out.println("받은 상품 정보  :  " + product);
+			System.out.println("------------------------------------------");
+			
+			for(int i = 0; i< product.size(); i++){
+				JSONObject list = (JSONObject) product.get(i);	
+				
+				OrderDetailDTO detail = new OrderDetailDTO();
+								
+				int pricedetail =  Integer.parseInt(String.valueOf(list.get("price")));
+				int quantitydetail =  Integer.parseInt(String.valueOf(list.get("quantity")));
+				int totalpricedetail =  (pricedetail*quantitydetail);
+				
+				detail.setProdname(list.get("name").toString());
+				detail.setImage(list.get("image").toString());
+				detail.setQuantity(quantitydetail);
+				detail.setPrice(pricedetail);
+				detail.setTotalprice(totalpricedetail);
+				
+				detail.setEmail(dto.getEmail());				
+				dto_d.add(detail);
+				int duplication = orderService.prod_duplication(detail.getProdname());
+				if(duplication == 1) {
+					// 같은 이름을 가진 상품목록이 있음
+				} else {
+					// 같은 이름을 가진 상품목록이 없음
+					//orderService.prod_insert(detail);
+				}	
+				System.out.println(duplication);
+				orderService.order_detail_insert(dto_d.get(i));
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        // 프로시져 호출
+        mysql.selectOne("mysqlOrder.order_result_android", (dto.getEmail()));
+		System.out.println("------------------------------------------");
+		System.out.println("받은 이메일  :  " + dto.getEmail());
+		System.out.println("------------------------------------------");
+
+		
+	}
 }

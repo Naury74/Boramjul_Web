@@ -43,5 +43,33 @@
 	<update id="order_email_list">
 		SELECT * FROM order_detail WHERE detailnum = (deliveryfunction(#{email},#{result} ))
 	</update> 
+	
+	<!-- 안드로이드 통신에 사용 -->
+	<!-- order_detail_insert 안드로이드에서 받은 데이터 저장-->
+	<insert id="order_detail_insert">
+		INSERT INTO order_detail (detailnum, prodnum, email, prodname, image, quantity, price, totalprice) 
+        values
+        (IFNULL((SELECT MAX(detailnum) FROM `order` where email = #{email}),1), 
+        (select ifnull((select prodnum from product where prodname = #{prodname}), (MAX(prodnum)+1)) FROM product ), 
+        #{email}, #{prodname}, #{image}, #{quantity}, #{price}, #{totalprice})
+	</insert> 
+	
+	<resultMap id = "order_result_android" type = "hashmap"></resultMap>
+	<select id = "order_result_android" statementType = "CALLABLE">
+		{	call orderresultandroid(#{email})	}
+	</select>
+	
+	<!-- 상품 중복 -->
+	<select id="prod_duplication" resultType="int">
+		SELECT count(*) FROM product WHERE prodname = #{prodname}
+	</select>	
+	
+	<!-- 상품 등록 -->
+	<insert id="prod_insert">
+       INSERT INTO product 
+       (prodnum, prodname, price, image) 
+       VALUES 
+       ((select ifnull((select max(prodnum)+1 from product AS p), 1)), #{prodname}, #{price}, #{image})	
+    </insert>	
 
 </mapper>

@@ -322,15 +322,13 @@ public class BooksController {
 	}
 
 	@RequestMapping("ReviewsList.do")
-	public ModelAndView ReviewsList(ModelAndView mav, ReviewDTO dto, BooksDTO dto2) {
+	public ModelAndView ReviewsList(ModelAndView mav) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		List<ReviewDTO> list = reviewService.review_list();
+		List<ReviewDTO> review = reviewService.review_list();
 		
-		map.put("list", list);
-		System.out.println("reviewdto: "+ dto+", booksdto: "+dto2);
-		//map.put("bookdto", adminService.prodnum_list(prodnum));
+		map.put("review", review);
 		
 		mav.addObject("map", map);
 		mav.setViewName("/books/ReviewsList");
@@ -344,11 +342,13 @@ public class BooksController {
 		return "books/ReviewWrite";
 	}
 	
-	@RequestMapping("review_detail.do/{renum}")
-	public ModelAndView review_detail(@PathVariable("renum")int renum, ModelAndView mav) {
-
+	@RequestMapping("review_detail.do/{renum}/{prodnum}")
+	public ModelAndView review_detail(@PathVariable("renum")int renum, @PathVariable("prodnum")int prodnum, ModelAndView mav) {
+		reviewService.review_lookup(renum);
+		
 		mav.setViewName("/books/ReviewView");
 		mav.addObject("dto", reviewService.review_detail(renum));
+		mav.addObject("score", reviewService.review_score(prodnum));
 
 		return mav;
 	}

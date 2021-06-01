@@ -21,6 +21,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public List<ReviewDTO> review_list(){
 		return sqlSession.selectList("mysqlReview.review_list");
 	}
+	
+	@Override
+	public List<ReviewDTO> product_list() {
+		return sqlSession.selectList("mysqlReview.product_list");
+	}
 
 	@Override
 	public ReviewDTO review_detail(int renum) {
@@ -31,6 +36,18 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public void Review_insert(ReviewDTO dto) {
 		sqlSession.insert("mysqlReview.review_insert",dto);
 	}
+
+	@Override
+	public void review_lookup(int renum) {
+		sqlSession.update("mysqlReview.review_lookup", renum);
+	}
+
+	@Override
+	public int review_score(int prodnum) {
+		return sqlSession.selectOne("mysqlReview.review_score", prodnum);
+	}
+
+
 
 
 

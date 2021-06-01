@@ -8,6 +8,47 @@
 <title>리뷰 상세 페이지</title>
 	<%@ include file="../include/include.jsp" %>
 	<link rel="stylesheet" href="${path}/css/PagesForBooks.css">
+<script type="text/javascript">
+	//넘버박스 함수
+	function Count(type, ths){
+	    var $quantity = $(ths).parents("div").find("input[name='quantity']");
+	    var count = Number($quantity.val());
+	
+	    if(type=='p'){
+	        if(count >=0) $quantity.val(Number(count)+1);
+	    }else{
+	        if(count >1) $quantity.val(Number(count)-1);    
+	    }
+	}
+	
+	$(".like_btn").click(function(){
+		console.log('좋아요 버튼 클릭');
+		$.ajax({
+			url: "/books/recon_update.do",
+            type: "POST",
+            data: {
+                recom: ${dto.recom },
+            },
+            success: function () {
+		        recCount();
+            },
+		})
+	})
+	
+	function recCount() {
+			$.ajax({
+				url: "/books/recon_update.do",
+                type: "POST",
+                data: {
+                    recom: ${dto.recom }
+                },
+                success: function (count) {
+                	$(".btn__txt").html(count);
+                },
+			})
+	    };
+	
+</script>
 </head>
 <body>
 <%@ include file="../include/header.jsp" %>
@@ -39,22 +80,22 @@
 		<div class="clearBoth"></div>
 
 		<div class="reviewed_books_margin">   
-			<div><img src="${path }/images/rules.jpg" alt="책 이미지" class="searched_bookimg"></div> 
+			<div><img src="${dto.image }" alt="책 이미지" class="searched_bookimg"></div> 
 			<div class="searched_books_info">
-				<div class="searched_books_title">질서 너머</div>
+				<div class="searched_books_title">${dto.prodname }</div>
 				
 				<div class="searched_books_info_d">
-					<span class="book_author">조던 B. 피터슨</span>
+					<span class="book_author">${dto.content }</span>
 				</div><!-- searched_books_info_d -->
 				
 				<div class="searched_books_price">판매가:
-					<span class="price-of-searched-books">14,400원</span>
+					<span class="price-of-searched-books"><fmt:formatNumber value="${dto.price }" pattern="#,###,###"/>원</span>
 				</div><!-- searched_books_price -->
 				
 				<div class="searched_book_reviews">
-					<div class="searched_book_scores"><img src="${path }/images/별점4h.svg" alt="별점" class="star"> 9.1</div>          
+					<div class="searched_book_scores">별점 이미지+${dto.grade }</div>          
 					<img src="${path }/images/리뷰.svg" alt="리뷰" class="review-img">
-					<span class="number_of_reviews">회원리뷰: 5555건</span>
+					<span class="number_of_reviews">회원리뷰: ${score }건</span>
 				</div><!-- searched_book_reviews -->
 			</div><!-- searched_books_info -->  
 				 
@@ -85,9 +126,9 @@
 		<div class="clearBoth"></div>
 		
 		<div class="post-content">
-			리뷰내용 주르륵
+			${dto.recontent }
 			<div id="like_btn_wrap">
-				<button id="like_btn"><img src="${path }/images/heart.svg" alt="좋아요" class="like-img"><span class="btn__txt"> 좋아요 606</span></button>
+				<button id="like_btn"><img src="${path }/images/heart.svg" alt="좋아요" class="like-img"><span class="btn__txt">${dto.recom }</span></button>
 			</div><!-- like_btn_wrap -->
 		</div><!-- post-content -->
 		

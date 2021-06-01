@@ -38,6 +38,14 @@ public class OrderDAOImpl implements OrderDAO {
 		sqlSession.insert("mysqlOrderDetail.order_detail_insert", dto);
 	}
 	
-
+	@Override
+	public int prod_duplication(String prodname) {
+		return sqlSession.selectOne("mysqlOrder.prod_duplication", prodname);
+	}
+	
+	@Override
+	public void prod_insert(OrderDetailDTO dto) {
+		sqlSession.insert("mysqlOrder.prod_insert", dto);
+	}
 
 }

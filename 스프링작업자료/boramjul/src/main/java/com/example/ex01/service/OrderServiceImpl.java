@@ -38,6 +38,15 @@ public class OrderServiceImpl implements OrderService {
 		orderDao.order_detail_insert(dto);
 	}
 	
-
+	
+	@Override
+	public int prod_duplication(String prodname) {
+		return orderDao.prod_duplication(prodname);
+	}
+	
+	@Override
+	public void prod_insert(OrderDetailDTO dto) {
+		orderDao.prod_insert(dto);
+	}
 
 }

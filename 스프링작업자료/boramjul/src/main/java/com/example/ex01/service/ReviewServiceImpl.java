@@ -21,6 +21,11 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
+	public List<ReviewDTO> product_list() {
+		return reviewDao.product_list();
+	}
+	
+	@Override
 	public ReviewDTO review_detail(int renum) {
 		return reviewDao.review_detail(renum);
 	}
@@ -29,6 +34,18 @@ public class ReviewServiceImpl implements ReviewService {
 	public void Review_insert(ReviewDTO dto) {
 		reviewDao.Review_insert(dto);
 	}
+
+	@Override
+	public void review_lookup(int renum) {
+		reviewDao.review_lookup(renum);
+	}
+
+	@Override
+	public int review_score(int prodnum) {
+		return reviewDao.review_score(prodnum);
+	}
+
+
 
 
 
