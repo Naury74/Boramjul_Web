@@ -1,0 +1,325 @@
+---------------------------------------------------------------------------------------------------
+1. membercontroller 아래 내용 추가
+
+해당 회원정보 조회 json 요청 주소 
+http://boramjul.kro.kr/member/requestmember/{email}
+
+해당 회원정보 json 내보내기 주소
+http://boramjul.kro.kr/member/memberrespondjson.do
+
+앱 -> 웹 회원가입  insert json 요청 주소
+http://boramjul.kro.kr/member/androidsignup.do
+
+	
+	String safe;
+	
+	@RequestMapping("requestmember/{id}")
+	public String androidtest(@PathVariable String id) {
+		safe = id;        
+		return "redirect:/member/memberrespondjson.do";
+	}
+	
+	//안드로이드 데이터 통신을 위한 회원정보 리스트 json 형식으로 변환 서블릿 
+	@RequestMapping("memberrespondjson.do")
+	public @ResponseBody MemberDTO memberrespondjson() { //@ResponseBody를 통해 json형식으로 반환
+		System.out.println("회워정보 json 2서블릿");
+		MemberDTO list = dao.findpwd(safe);
+		return list;
+	}	
+	
+	//안드로이드 >> json 형식 데이터 전송 >> 서블릿으로 처리 >> db에 insert
+	@RequestMapping(value = "androidsignup.do", method = {RequestMethod.POST, RequestMethod.GET}, headers="Accept=application/json" )	
+	public void androidsignup(@RequestBody String resultSet) throws Exception {//RequestBody이용하여 resultset 변수에 전송된값 저장
+		System.out.println("androidsignup 서블릿");
+		
+		JSONParser jsonParser = new JSONParser();
+		//jsonparser 이용 하여 json 데이터 파싱
+		JSONObject obj = (JSONObject) jsonParser.parse(resultSet);		
+				
+		MemberDTO dto = new MemberDTO();
+		
+		//데이터 값 int 형으로 파싱
+		int snsjson = Integer.parseInt(String.valueOf(obj.get("sns")));
+		
+		//데이터 형에 맞추어 MemberDTO에 담기
+		dto.setPasswd(obj.get("passwd").toString());
+		dto.setName(obj.get("name").toString());
+		dto.setEmail(obj.get("email").toString());
+		dto.setPhone(obj.get("phone").toString());
+		dto.setSns(snsjson);		
+		dto.setBirth(obj.get("birth").toString());
+		dto.setAddress(obj.get("address").toString());
+		
+		System.out.println("전송 받은 값 : "+dto);
+		//MemberrDAO 에 있는 insert 함수 실행
+		dao.insert(dto);
+		System.out.println("insert 실행됨");
+	}	
+
+
+
+
+---------------------------------------------------------------------------------------------------
+2. mypageController
+
+해당 회원 구매 정보 json 요청 주소 
+http://boramjul.kro.kr/mypage/requestorderinfo/{email}
+
+해당 회원 구매 정보 json 내보내기 주소
+http://boramjul.kro.kr/mypage/orderrespondjson.do
+
+앱 -> 웹 구매 정보 insert json 요청 주소
+http://boramjul.kro.kr/mypage/androidorder.do
+
+
+
+	String safe;
+		
+	@RequestMapping("requrestorderinfo/{id}")
+	public String androidtest(@PathVariable String id) {
+		safe = id;        
+		return "redirect:/mypage/orderrespondjson.do";
+	}
+	
+	// http://localhost:8090/mypage/requrestorderinfo/hongtest@gmail.com
+	@RequestMapping(value = "orderrespondjson.do", method = {RequestMethod.POST, RequestMethod.GET}, headers="Accept=application/json" )
+	public @ResponseBody String orderrespondjson() {		
+		logger.info("전송 받은 이메일: "+safe);
+		OrderDTO email = new OrderDTO();
+		email.setEmail(safe);		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		OrderDTO dto = orderService.order_detail_list(email);
+		List<OrderDetailDTO> list = orderService.detail_list(safe);				
+				
+		JSONArray obj = new JSONArray();
+		JSONArray orderinfo = new JSONArray();
+		JSONObject data_o = new JSONObject();		
+		JSONArray product = new JSONArray();
+		
+		data_o.put("email", dto.getEmail().toString());
+		data_o.put("name", dto.getName().toString());
+		data_o.put("phone", dto.getPhone().toString());
+		data_o.put("totalprice", dto.getTotalprice());
+		data_o.put("saleprice", dto.getSaleprice());
+		data_o.put("usereserves", dto.getUsereserves());
+		data_o.put("payprice", dto.getPayprice());
+		data_o.put("addreserves", dto.getAddreserves());
+		data_o.put("pay", dto.getPay().toString());
+		data_o.put("address", dto.getAddress().toString());
+		data_o.put("request", dto.getRequest().toString());
+					
+		for(int i = 0; i < list.size(); i++){ 
+			JSONObject data_p = new JSONObject();
+			data_p.put("name", list.get(i).getProdname().toString());
+			data_p.put("image", list.get(i).getImage().toString());
+			data_p.put("quantity", list.get(i).getQuantity());
+			data_p.put("price", list.get(i).getPrice());
+			data_p.put("totalprice", list.get(i).getTotalprice());
+			product.add(data_p);
+			System.out.println(data_p);
+		}
+		data_o.put("list", product);
+		obj.add(data_o);
+		
+		return obj.toString();
+	}
+	
+
+	@RequestMapping(value = "androidorder.do", method = {RequestMethod.POST, RequestMethod.GET}, headers="Accept=application/json" )	
+	public void androidorder(@RequestBody String resultSet) throws Exception {//RequestBody이용하여 resultset 변수에 전송된값 저장
+		System.out.println("androidorder 서블릿");
+		
+		String result = resultSet.replace("\\", "");
+		String result1 = result.replace("\"{", "{");
+		String result2 = result1.replace("}\"", "}");
+		System.out.println("-----------------------------");
+		System.out.println(result2);	
+		
+		OrderDTO dto = new OrderDTO();
+		List<OrderDetailDTO> dto_d = new ArrayList<OrderDetailDTO>();
+
+		try {
+			
+			JSONParser jsonParser = new JSONParser();
+			JSONObject orderinfo = (JSONObject) jsonParser.parse(result2);
+			System.out.println("-----------------------------");
+			System.out.println(orderinfo);
+			
+			int totalpricejson =  Integer.parseInt(String.valueOf(orderinfo.get("totalprice")));
+			int salepricejson =  Integer.parseInt(String.valueOf(orderinfo.get("saleprice")));
+			int usereservesjson =  Integer.parseInt(String.valueOf(orderinfo.get("usereserves")));
+			int paypricejson =  Integer.parseInt(String.valueOf(orderinfo.get("payprice")));
+			int addreservesjson =  Integer.parseInt(String.valueOf(orderinfo.get("addreserves")));
+			
+			dto.setEmail(orderinfo.get("email").toString());
+			dto.setName(orderinfo.get("name").toString());
+			dto.setPhone(orderinfo.get("phone").toString());
+			dto.setTotalprice(totalpricejson);
+			dto.setSaleprice(salepricejson);
+			dto.setUsereserves(usereservesjson);
+			dto.setPayprice(paypricejson);
+			dto.setAddreserves(addreservesjson);
+			dto.setPay(orderinfo.get("pay").toString());
+			dto.setAddress(orderinfo.get("address").toString());
+			dto.setRequest(orderinfo.get("request").toString());
+			System.out.println("------------------------------------------");
+			System.out.println("받은 결제 정보 :  " + dto);
+			System.out.println("------------------------------------------");
+			
+			orderService.order_insert(dto);
+						
+			JSONArray product = (JSONArray) orderinfo.get("list"); 
+			
+			System.out.println("------------------------------------------");
+			System.out.println("받은 상품 정보  :  " + product);
+			System.out.println("------------------------------------------");
+			
+			for(int i = 0; i< product.size(); i++){
+				JSONObject list = (JSONObject) product.get(i);	
+				
+				OrderDetailDTO detail = new OrderDetailDTO();
+								
+				int pricedetail =  Integer.parseInt(String.valueOf(list.get("price")));
+				int quantitydetail =  Integer.parseInt(String.valueOf(list.get("quantity")));
+				int totalpricedetail =  (pricedetail*quantitydetail);
+				
+				detail.setProdname(list.get("name").toString());
+				detail.setImage(list.get("image").toString());
+				detail.setQuantity(quantitydetail);
+				detail.setPrice(pricedetail);
+				detail.setTotalprice(totalpricedetail);
+				
+				detail.setEmail(dto.getEmail());				
+				dto_d.add(detail);
+				int duplication = orderService.prod_duplication(detail.getProdname());
+				if(duplication == 1) {
+					// 같은 이름을 가진 상품목록이 있음
+				} else {
+					// 같은 이름을 가진 상품목록이 없음
+					//orderService.prod_insert(detail);
+				}	
+				System.out.println(duplication);
+				orderService.order_detail_insert(dto_d.get(i));
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 프로시져 호출
+		mysql.selectOne("mysqlOrder.order_result_android", (dto.getEmail()));
+		System.out.println("------------------------------------------");
+		System.out.println("받은 이메일  :  " + dto.getEmail());
+		System.out.println("------------------------------------------");
+	
+	}
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+3. OrderServiceImpl 추가
+
+
+	@Override
+	public void order_detail_insert(OrderDetailDTO dto) {
+		orderDao.order_detail_insert(dto);
+	}
+	
+	@Override
+	public int prod_duplication(String prodname) {
+		return orderDao.prod_duplication(prodname);
+	}
+	
+	@Override
+	public void prod_insert(OrderDetailDTO dto) {
+		orderDao.prod_insert(dto);
+	}
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+4. OrderService 추가
+
+	public void order_detail_insert(OrderDetailDTO dto);
+	
+	public int prod_duplication(String prodname);
+	
+	public void prod_insert(OrderDetailDTO dto);
+
+---------------------------------------------------------------------------------------------------
+5. OrderDAOImpl 추가
+
+
+	@Override
+	public void order_detail_insert(OrderDetailDTO dto) {
+		sqlSession.insert("mysqlOrder.order_detail_insert", dto);
+	}
+	
+	@Override
+	public int prod_duplication(String prodname) {
+		return sqlSession.selectOne("mysqlOrder.prod_duplication", prodname);
+	};
+	
+	@Override
+	public void prod_insert(OrderDetailDTO dto) {
+		sqlSession.insert("mysqlOrder.prod_insert", dto);
+	};
+
+
+---------------------------------------------------------------------------------------------------
+6. OrderDAO 추가
+
+	public void order_detail_insert(OrderDetailDTO dto);
+	
+	public int prod_duplication(String prodname);
+	
+	public void prod_insert(OrderDetailDTO dto);
+
+
+
+---------------------------------------------------------------------------------------------------
+7. ordermapper 추가
+
+	<!-- 안드로이드 통신에 사용 -->
+	<!-- order_detail_insert 안드로이드에서 받은 데이터 저장-->
+	<insert id="order_detail_insert">
+		INSERT INTO order_detail (detailnum, prodnum, email, prodname, image, quantity, price, totalprice) 
+		values
+		(IFNULL((SELECT MAX(detailnum) FROM `order` where email = #{email}),1), 
+		(select ifnull((select prodnum from product where prodname = #{prodname}), (MAX(prodnum)+1)) FROM product ), 
+		#{email}, #{prodname}, #{image}, #{quantity}, #{price}, #{totalprice})
+	</insert> 
+	
+	<resultMap id = "order_result_android" type = "hashmap"></resultMap>
+	<select id = "order_result_android" statementType = "CALLABLE">
+		{	call orderresultandroid(#{email})	}
+	</select>
+	
+	<!-- 상품 중복 -->
+	<select id="prod_duplication" resultType="int">
+		SELECT count(*) FROM product WHERE prodname = #{prodname}
+	</select>	
+	
+	<!-- 상품 등록 -->
+	<insert id="prod_insert">
+		INSERT INTO product 
+		(prodnum, prodname, price, image) 
+		VALUES 
+		((select ifnull((select max(prodnum)+1 from product AS p), 1)), #{prodname}, #{price}, #{image})	
+	</insert>	
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+4. OrderServiceImpl 추가
+---------------------------------------------------------------------------------------------------
+4. OrderServiceImpl 추가
+---------------------------------------------------------------------------------------------------
+4. OrderServiceImpl 추가
+
