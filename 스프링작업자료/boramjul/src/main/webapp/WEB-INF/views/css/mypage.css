@@ -342,28 +342,6 @@ a{
 .star{
     height: 20px;
 }
-.tabs section {
-    display: none;
-}
-.tabs input {
-    display: none;
-}
-.tabs label {
-    display: inline-block;
-    font-weight: 600;
-}
-.tabs label:hover {
-    cursor: pointer;
-    transform:scale(1.1);
-}
-.tabs input:checked + label {
-    font-weight: bolder;
-    color: #2040B5;
-}
-#myReview:checked ~ #content1,
-#myReply:checked ~ #content2{
-    display: block;
-}
 .menu_line{
     margin: 1% 3%;
     border-top: solid 2px #A1A1A1;

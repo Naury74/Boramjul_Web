@@ -102,48 +102,11 @@ public class MemberController {
 		return "redirect:/member/joinok.do";
 	}
 	
-	////////////////////////////////////////////아래부터 조성현 작업 부분 입니다
-	
 	@RequestMapping("login.do")
 	public String login( Model model) {
 		
 		model.addAttribute("message","nologin");
 		return "member/login";
-	}
-	
-	@RequestMapping("kakao_request.do" )
-	public String kakao_request(@ModelAttribute MemberDTO dto, Model model) {
-		model.addAttribute("dto",dto);
-		System.out.println("dto1: "+dto);
-		System.out.println("test kakao request ");
-			
-		return "redirect:api_login_check.do";
-	}
-	
-	@RequestMapping("naver_request.do" )
-	public String naver_request() {
-		System.out.println("test naver request ");
-			
-		return "member/naver_login";
-	}
-	
-	@RequestMapping("api_login_check.do" ) //api용
-	public ModelAndView login_api(@ModelAttribute MemberDTO dto, HttpSession session) {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		System.out.println("dto2: "+dto);
-		String name = memberService.apiloginCheck(dto, session);
-		logger.info("name: "+name);
-		if (name != null) {// 로그인 성공시  session값을 생성해서 home페이지로 이동
-			mav.setViewName("main");
-		} else {
-			// 로그인 실패시 에러 메시지와 함께 로그인 페이지로 이동
-			mav.setViewName("member/join");
-			mav.addObject("message","error");
-		}
-		return mav;
-
 	}
 	
 	@RequestMapping("login_check.do")

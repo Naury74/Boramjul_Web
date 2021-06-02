@@ -4,22 +4,18 @@
 
 <mapper namespace="mysqlMember">
 
+	<!-- 내 정보 조회 / 완료-->
 	<select id="myInfo" resultType="MemberDTO">
 		select * from member where email = #{email}
 	</select>
 	
 	<!-- 회원가입 / 완료 -->
-   <select id="insert">   
-      INSERT INTO member 
-    	  (email, passwd, name, phone, sns, birth) 
-      VALUES 
-    	  (#{email}, #{passwd}, #{name}, #{phone}, #{sns}, #{birth})
-    </select>
-		
-	<!-- 회원 삭제 -->
-	<delete id="delete">
-		delete from member where email = #{email}
-	</delete>
+	<select id="insert">   
+	   INSERT INTO member 
+	 	  (email, passwd, name, phone, sns, birth) 
+	   VALUES 
+	 	  (#{email}, #{passwd}, #{name}, #{phone}, #{sns}, #{birth})
+	 </select>
 	
 	<!-- 회원정보 수정 / 완료 -->
 	<update id="update">
@@ -32,21 +28,10 @@
 		select count(*) from member where email = #{email} and passwd = #{passwd}
 	</select>
 	
-	<!-- api로그인  -->
-	<select id="check_api" resultType="int">
-		select count(*) from member where email = #{email} and name = #{name}
-	</select>
-	
 	<!-- 로그인 세션 / 완료 -->
 	<select id="loginCheck" resultType="String">
 	 	select name from member 
  		where email = #{email} and passwd = #{passwd}
-	 </select>	
-	 
-	 <!-- api로그인 세션 -->
-	 <select id="apiloginCheck" resultType="String">
-	 	select name from member
-	 	where email = #{email} and passwd = #{passwd}
 	 </select>	
 	 
 	 <!-- 이메일 찾기 / 완료 -->

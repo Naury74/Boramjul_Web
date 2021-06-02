@@ -58,7 +58,7 @@
 					line-height: 21px;
 					font-family: mainfont;
 					text-decoration:none;"
-					href="${path }/admin/QnA_edit.do/${dto.qnanum}">수정
+					href="${path }/admin/QnA_edit.do?qnanum=${dto.qnanum}">수정
 			</a>
 		</button>
 		

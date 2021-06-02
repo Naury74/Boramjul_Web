@@ -18,7 +18,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("email")==null) {//request.getContextPath()+
+		if (session.getAttribute("name")==null) {//request.getContextPath()+
 			response.sendRedirect("/member/login.do?message=nologin");
 			return false;  // 진행 중지
 		} else {

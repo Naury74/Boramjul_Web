@@ -53,7 +53,7 @@
                     <c:set var="i" value="${i+1 }"/>
                     <tr>
                         <td>${i }<input type="hidden" value="${row.qnanum }" name="qnanum"></td>
-                        <td><a href="${path }/etc/detail.do/${row.qnanum}">${row.name }</a></td>
+                        <td><a href="${path }/etc/detail.do?qnanum=${row.qnanum}">${row.name }</a></td>
                         <td>${row.kind}</td>
                         <td><fmt:formatDate value="${row.qnadate }" pattern="yyyy.MM.dd"/></td>
                     </tr>

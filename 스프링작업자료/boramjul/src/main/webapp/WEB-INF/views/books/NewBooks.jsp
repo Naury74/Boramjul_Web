@@ -56,15 +56,6 @@ function Count(type, ths){
 						<div class="searched_books_price">
 							<span class="price-of-searched-books"><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원</span>
 						</div><!-- searched_books_price -->
-						
-						<div class="searched_book_reviews">
-							<div class="searched_book_scores">
-								<img src="${path}/images/별점4h.svg" alt="별점" class="star"> 9.1
-							</div><!-- searched_book_scores -->
-							
-							<img src="${path}/images/review.svg" alt="리뷰" class="review-img">
-							<span class="number_of_reviews">회원리뷰: 5555건</span>
-						</div><!-- searched_book_reviews -->
 					</div><!-- searched_books_info -->
 					
 					<div class="btn_searched"> 

@@ -16,11 +16,6 @@ public class EtcDAOImpl implements EtcDAO {
 	SqlSession sqlSession;
 
 	@Override
-	public void QnA_insert(QnADTO dto) {
-		sqlSession.insert("mysqlEtc.QnA_insert",dto);
-	}
-
-	@Override
 	public List<QnADTO> QnAlist() {
 		return sqlSession.selectList("mysqlEtc.QnAlist");
 	}

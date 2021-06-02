@@ -20,6 +20,9 @@ public interface ReviewDAO {
 	//상품별 리뷰 조회
 	List<ReviewDTO> prod_review_list(int prodnum);
 	
+	//상품별 리뷰 조회2
+	List<ReviewDTO> prod_review_list2(String prodname);
+	
 	//리뷰 추가
 	public void review_insert(ReviewDTO dto);
 	
@@ -28,6 +31,9 @@ public interface ReviewDAO {
 	
 	//리뷰 삭제
 	public void review_delete(int renum);
+	
+	//후기 작성시 포인트 추가
+	public void reserves_add(String email);
 	
 	//리뷰 수 product 테이블에 추가
 	public void review_count(int prodnum);

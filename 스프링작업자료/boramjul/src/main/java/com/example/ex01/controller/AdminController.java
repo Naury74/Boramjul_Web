@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.ex01.model.dto.AdminDTO;
 import com.example.ex01.model.dto.QnADTO;
@@ -80,7 +81,7 @@ public class AdminController {
 	public String insert(@ModelAttribute QnADTO dto, HttpSession session) {
 		System.out.println("insert  받아온 내용: "+dto);
 
-		etcService.QnA_insert(dto);
+		adminService.QnA_insert(dto);
 		
 		System.out.println(dto);
 
@@ -93,18 +94,18 @@ public class AdminController {
 		return "redirect:/etc/QnA.do";
 	}
 	
-	@RequestMapping("QnA_edit.do/{qnanum}" )
-	public ModelAndView QnA_edit(@PathVariable("qnanum")int qnanum, ModelAndView mav) {
+	@RequestMapping("QnA_edit.do" )
+	public ModelAndView QnA_edit(@RequestParam("qnanum")int qnanum, ModelAndView mav) {
 		mav.setViewName("/admin/QnA_edit");
 		mav.addObject("dto", etcService.detailProduct(qnanum));
 		return mav;
 	}
 	
 	@RequestMapping("QnA_update.do")
-	public String QnA_update(QnADTO dto) {
+	public String QnA_update(@RequestParam("qnanum") int qnanum, QnADTO dto, RedirectAttributes redirect) {
 		adminService.QnA_update(dto);
-		logger.info("수정 받아온 내용: "+dto);
-		return "redirect:/etc/QnA.do";
+		redirect.addAttribute("qnanum", qnanum);
+		return "redirect:/etc/detail.do";
 		
 	}
 

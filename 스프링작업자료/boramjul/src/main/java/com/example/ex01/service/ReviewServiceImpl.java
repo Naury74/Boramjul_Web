@@ -50,6 +50,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewDTO> prod_review_list(int prodnum) {
 		return reviewDao.prod_review_list(prodnum);
 	}
+	
+	@Override
+	public List<ReviewDTO> prod_review_list2(String prodname) {
+		return reviewDao.prod_review_list2(prodname);
+	}
 
 	@Override
 	public List<ReviewDTO> email_review_list(String email) {
@@ -85,6 +90,13 @@ public class ReviewServiceImpl implements ReviewService {
 	public void review_score_delete(int prodnum) {
 		reviewDao.review_score_delete(prodnum);
 	}
+
+	@Override
+	public void reserves_add(String email) {
+		reviewDao.reserves_add(email);
+	}
+
+
 
 
 	

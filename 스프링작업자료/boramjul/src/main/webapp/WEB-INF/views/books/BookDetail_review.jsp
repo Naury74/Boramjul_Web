@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도서 정보</title>
+<title>도서 정보 리뷰포함</title>
 	<%@ include file="../include/include.jsp" %>
 	<link rel="stylesheet" href="${path}/css/PagesForBooks.css">
 <script type="text/javascript">

@@ -58,11 +58,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public boolean check_api(String email, String name) { //api용
-		return memberDao.check_api(email, name);
-	}
-
-	@Override
 	public String loginCheck(MemberDTO dto, HttpSession session) {
 		String name = memberDao.loginCheck(dto);
 		
@@ -79,23 +74,6 @@ public class MemberServiceImpl implements MemberService {
 		return name;
 	}
 	
-	@Override
-	public String apiloginCheck(MemberDTO dto, HttpSession session) {//api용
-		String name = memberDao.apiloginCheck(dto);
-		
-		if (name != null) {
-			
-			//로그인이 성공이면 세션값 생성
-			session.setAttribute("email", dto.getEmail());
-			session.setAttribute("name", name);
-		
-			 logger.info("session : "+session.getAttribute("email"));
-			 logger.info("session : " + session.getAttribute("name"));
-			
-		} 
-		return name;
-	}
-
 	@Override
 	public void logout(HttpSession session) {
 		session.removeAttribute("email");

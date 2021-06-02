@@ -10,7 +10,7 @@
 <script type="text/javascript">
 
 function QnA_update(){
-	document.form.action = "${path}/admin/QnA_update.do";
+	document.form.action = "${path}/admin/QnA_update.do?qnanum=${dto.qnanum}";
 	document.form.submit();
 }
 

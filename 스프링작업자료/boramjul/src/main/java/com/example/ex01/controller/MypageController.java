@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.ex01.model.dto.BooksDTO;
 import com.example.ex01.model.dto.CartDTO;
+import com.example.ex01.model.dto.CommentDTO;
 import com.example.ex01.model.dto.MemberDTO;
 import com.example.ex01.model.dto.OrderDTO;
 import com.example.ex01.model.dto.OrderDetailDTO;
@@ -39,6 +40,7 @@ import com.example.ex01.service.OrderService;
 import com.example.ex01.service.ReviewService;
 import com.example.ex01.service.AdminService;
 import com.example.ex01.service.CartService;
+import com.example.ex01.service.CommentService;
 
 @RequestMapping("/mypage/*")
 @Controller
@@ -61,6 +63,9 @@ public class MypageController {
 	
 	@Inject
 	ReviewService reviewService;
+	
+	@Inject
+	CommentService commentService;
 	
 	@Autowired SqlSessionTemplate mysql;
 	
@@ -333,12 +338,16 @@ public class MypageController {
 	@RequestMapping("myReview.do")
 	public ModelAndView myReview(ModelAndView mav, String email) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map2 = new HashMap<String, Object>();
 		
 		List<ReviewDTO> list = reviewService.email_review_list(email);
+		List<CommentDTO> list2 = commentService.comment_list2(email);
 		
 		map.put("list", list);
+		map2.put("list2", list2);
 		
 		mav.addObject("map", map);
+		mav.addObject("map2", map2);
 		mav.setViewName("mypage/myReview");
 		
 		return mav;

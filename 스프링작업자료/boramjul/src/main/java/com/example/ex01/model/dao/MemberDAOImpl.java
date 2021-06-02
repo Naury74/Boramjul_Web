@@ -73,28 +73,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public boolean check_api(String email, String name) {
-		boolean result = false;
-		
-		// mybatis에 2개이상 인자를 사용 할 수 없으므로 이경우는 dto or Map활용
-		Map<String,String> map = new HashMap<String, String>();
-		map.put("email", email);
-		map.put("name", name);
-		
-		int count = sqlSession.selectOne("mysqlMember.check_api", map);
-		// 1이면 true, 0이면 false	
-		if (count == 1) 
-			result =  true;
-		
-		return result;
-	}
-	
-	@Override
-	public String apiloginCheck(MemberDTO dto) {
-		return sqlSession.selectOne("mysqlMember.apiloginCheck",dto);
-	}
-
-	@Override
 	public String loginCheck(MemberDTO dto) {
 		return sqlSession.selectOne("mysqlMember.loginCheck",dto);
 	}

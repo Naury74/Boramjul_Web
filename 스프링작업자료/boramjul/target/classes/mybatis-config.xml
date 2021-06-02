@@ -13,6 +13,7 @@
 		<typeAlias type="com.example.ex01.model.dto.OrderDTO" alias="OrderDTO"/>
 		<typeAlias type="com.example.ex01.model.dto.OrderDetailDTO" alias="OrderDetailDTO"/>
 		<typeAlias type="com.example.ex01.model.dto.ReviewDTO" alias="ReviewDTO"/>
+		<typeAlias type="com.example.ex01.model.dto.CommentDTO" alias="CommentDTO"/>
 	</typeAliases>
 	
 

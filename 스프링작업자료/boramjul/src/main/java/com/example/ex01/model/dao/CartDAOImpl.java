@@ -1,8 +1,6 @@
 package com.example.ex01.model.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,11 +15,6 @@ public class CartDAOImpl implements CartDAO{
 	@Inject
 	SqlSession sqlSession;
 	
-//	@Override
-//	public List<CartDTO> cartMoney() {
-//		return sqlSession.selectList("mysqlCart.listAllCart");
-//	}
-
 	@Override
 	public void cart_insert(CartDTO dto) {
 		sqlSession.insert("mysqlCart.cart_insert",dto);
@@ -37,12 +30,7 @@ public class CartDAOImpl implements CartDAO{
 	public void cart_delete(CartDTO dto) {
 		sqlSession.delete("mysqlCart.cart_delete", dto);
 	}
-//
-//	// 특정 아이디 장바구니 비우기
-//	@Override
-//	public void deleteAll(String userid) {
-//		sqlSession.delete("mysqlCart.deleteAllCart", userid);
-//	}
+	
 	@Override
 	public void cart_update(CartDTO dto) {
 		sqlSession.update("mysqlCart.cart_update", dto);
@@ -85,16 +73,5 @@ public class CartDAOImpl implements CartDAO{
 		
 	}
 
-
-
-//	@Override
-//	public int coutCart(String userid, int product_id) {
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("userid", userid);
-//		map.put("product_id", product_id);
-//		
-//		return sqlSession.selectOne("mysqlCart.countCart", map);
-//	}
 
 }

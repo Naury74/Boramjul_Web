@@ -49,6 +49,11 @@ public class AdminServiceImpl implements AdminService{
 		 logger.info("관리자 로그아웃 session : " + session.getAttribute("name"));
 		
 	}
+	
+	@Override
+	public void QnA_insert(QnADTO dto) {
+		adminDao.QnA_insert(dto);
+	}
 
 	@Override
 	public void QnA_delete(int cartnum) {
@@ -78,6 +83,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public BooksDTO prodnum_list(int prodnum) {
 		return adminDao.prodnum_list(prodnum);
+	}
+
+	@Override
+	public int name_list(String prodname) {
+		return adminDao.name_list(prodname);
 	}
 
 }

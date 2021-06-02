@@ -64,8 +64,10 @@
     	</mvc:interceptor>
 
         <mvc:interceptor>
-            <mvc:mapping path="/mypage/myCart.do"/>
-             <mvc:mapping path="/mypage/myList.do"/>
+             <mvc:mapping path="/mypage/*"/>
+             <mvc:mapping path="/admin/*"/>
+             <mvc:mapping path="/books/ReviewsList.do"/>
+     
             <beans:ref bean="loginInterceptor"/>
         </mvc:interceptor>
 

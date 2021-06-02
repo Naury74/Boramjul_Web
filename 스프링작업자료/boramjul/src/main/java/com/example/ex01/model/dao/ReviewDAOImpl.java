@@ -51,6 +51,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public List<ReviewDTO> prod_review_list(int prodnum) {
 		return sqlSession.selectList("mysqlReview.prod_review_list", prodnum);
 	}
+	
+	@Override
+	public List<ReviewDTO> prod_review_list2(String prodname) {
+		return sqlSession.selectList("mysqlReview.prod_review_list2", prodname);
+	}
 
 	@Override
 	public List<ReviewDTO> email_review_list(String email) {
@@ -87,8 +92,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 		sqlSession.update("mysqlReview.review_score_delete", prodnum);
 	}
 
+	@Override
+	public void reserves_add(String email) {
+		sqlSession.update("mysqlReview.reserves_add", email);
+	}
 
-	
 	
 	
 }

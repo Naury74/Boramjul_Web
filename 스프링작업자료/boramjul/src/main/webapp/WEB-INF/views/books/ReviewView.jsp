@@ -128,7 +128,7 @@
 		<div class="post-content">
 			${dto.recontent }
 			<div id="like_btn_wrap">
-				<button id="like_btn" onClick="location.href='${path}/books/recom_update.do/${dto.renum }/${dto.prodnum }'"><img src="${path }/images/heart.svg" alt="좋아요" class="like-img"><span class="btn__txt">${dto.recom }</span></button>
+				<button id="like_btn" onClick="location.href='${path}/books/recom_update.do?renum=${dto.renum }&prodnum=${dto.prodnum }'"><img src="${path }/images/heart.svg" alt="좋아요" class="like-img"><span class="btn__txt">${dto.recom }</span></button>
 			</div><!-- like_btn_wrap -->
 		</div><!-- post-content -->
 		
@@ -136,61 +136,42 @@
 		
 		<div class="post-comment-wrap">
 			<div class="comment-group">
+				
+				<c:forEach var="row" items="${map.list }">
 				<div id="cmt_1" class="comment-item depth0  head_1" data-depth="0" data-head="1" data-arrange="1">
 					<div class="comment-box">
 						<div class="comment-top-box">
-							<span class="">아이디1</span>
+							<span class="">${row.email }</span>
 							<span class="divi"> | </span>
-							<span class="date-line">2021.04.28 17:13:19</span>
+							<span class="date-line"><fmt:formatDate value="${row.notidate }" type="both" dateStyle="medium"/></span>
 							<span class="divi"></span>    
-							<span class="btnset_for_comment">
-								<span class="divi"></span>
-								<button class="reply-comment_btn" onclick=""><img src="${path }/images/reply.svg" alt="댓글달기" class="reply-img"></button>
-							</span><!-- btnset_for_comment -->
 						</div><!-- comment-top-box -->	
 									
 						<div class="comment-content">
 							<span class="comment-box">
-								<span class="cmt" style="word-break: break-word;">댓글 내용 주르륵</span>
+								<span class="cmt" style="word-break: break-word;">${row.comcontent }</span>
 							</span><!-- comment-box -->		
 						</div><!-- comment-content -->
 					</div><!-- comment-box -->
 				</div><!-- comment-item depth0  head_1 -->
-				
-				<div id="cmt_2" class="comment-item reply-item depth1  head_2" data-depth="1" data-head="2" data-arrange="2">
-					<div class="comment-box" style="margin-left:15px">
-						<div class="comment-top-box">
-							<img src="${path }/images/replyed.svg" alt="댓글달기" class="reply-img">
-							<span class="">아이디2</span>
-							<span class="divi"> | </span>
-							<span class="date-line">2021.04.28 17:13:19</span>
-							<span class="divi"></span>    
-							<span class="btnset_for_comment">
-								<span class="divi"></span>
-								<button class="reply-comment_btn" onclick=""><img src="${path }/images/reply.svg" alt="댓글달기" class="reply-img"></button>
-							</span><!-- btnset_for_comment -->
-						</div><!-- comment-top-box -->
-
-						<div class="reply-comment-content">
-							<span class="comment-box">
-							<span style="color: rgb(150, 170, 102); margin-right: 5px;">@아이디1</span>
-							<span class="cmt" style="word-break: break-word;"> 대댓글</span>
-							</span>
-						</div><!-- reply-comment-content -->
-					</div><!-- comment-box -->
-				</div><!-- comment-item reply-item depth1  head_2 -->
-
+				</c:forEach>
 				<!-- 댓글 작성 -->
+				<form name="comment" method="post" action="${path }/books/comment_insert.do">
 				<div id="comment_write_wrap">
-					<textarea name="comment" id="comment-write-box" maxlength="2000" placeholder="Enter your reply" style="display: block; height: 150px;"></textarea>
+					<textarea name="comcontent" id="comment-write-box" maxlength="2000" placeholder="Enter your reply" style="display: block; height: 150px;"></textarea>
+					<input type="hidden" name="email" value="${dto.email}">
+					<input type="hidden" name="renum" value="${dto.renum }">
+					<input type="hidden" name="prodnum" value="${dto.prodnum }">
 					<div id="btn-comment-wrap">
 						<button id="list-btn" type="button" onClick="location.href='${path}/books/ReviewsList.do'">목록</button>
+						<c:if test="${sessionScope.email == dto.email}">
 						<button id="list-btn" type="button" onClick="location.href='${path}/books/Review_update.do?renum=${dto.renum }&prodnum=${dto.prodnum }'">수정</button>
 						<button id="list-btn" type="button" onClick="location.href='${path}/books/Review_delete.do?renum=${dto.renum }&prodnum=${dto.prodnum }'">삭제</button>
-						<button id="comment-btn" type="submit" accesskey="s" onfocus="$(this).find('span')" onfocusout="$(this).find('span')">댓글 등록</button>
+						</c:if>
+						<button id="comment-btn" type="submit">댓글 등록</button>
 					</div><!-- btn-comment-wrap -->
 				</div><!-- comment_write_wrap -->
-				
+				</form>
 				<div class="clearBoth"></div>
 			</div><!-- comment-group -->
 		</div><!-- post-comment-wrap -->

@@ -11,6 +11,7 @@ public interface ReviewService {
 	public void review_insert(ReviewDTO dto);
 	public ReviewDTO review_detail(int renum);
 	List<ReviewDTO> prod_review_list(int prodnum);
+	List<ReviewDTO> prod_review_list2(String prodname);
 	List<ReviewDTO> email_review_list(String email);
 	public void review_lookup(int renum);
 	public int review_score (int prodnum);
@@ -21,5 +22,6 @@ public interface ReviewService {
 	public void review_delete(int renum);
 	public void review_count_delete(int prodnum);
 	public void review_score_delete(int prodnum);
+	public void reserves_add(String email);
 	
 }

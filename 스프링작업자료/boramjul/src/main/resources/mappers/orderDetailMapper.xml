@@ -27,16 +27,6 @@
 		UPDATE order_detail SET review = 1 WHERE prodnum = #{prodnum}
 	</update>
 
-   <!-- 주문 내역 삭제 / (관리자용)-->
-   <delete id="detail_delete">   
-       delete from order_detail where detailnum = #{detailnum}
-   </delete>
 
-   <!-- 주문 내역 수정 (관리자전용) -->
-   <update id="detail_update">
-      update order_detail set 
-      quantity = #{quantity}, totalprice = #{quantity}*price 
-      where detailnum = #{detailnum} and cartnum = #{cartnum}
-   </update>
 
 </mapper>

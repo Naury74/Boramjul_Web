@@ -40,6 +40,11 @@ public class AdminDAOImpl implements AdminDAO {
 	public String loginCheck(AdminDTO dto) {
 		return sqlSession.selectOne("mysqlAdmin.loginCheck",dto);
 	}
+	
+	@Override
+	public void QnA_insert(QnADTO dto) {
+		sqlSession.insert("mysqlAdmin.QnA_insert",dto);
+	}
 
 	@Override
 	public void QnA_delete(int cartnum) {
@@ -76,6 +81,11 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public BooksDTO prodnum_list(int prodnum) {
 		return sqlSession.selectOne("mysqlProduct.prodnum_list",prodnum);
+	}
+
+	@Override
+	public int name_list(String prodname) {
+		return sqlSession.selectOne("mysqlProduct.name_list", prodname);
 	}
 
 

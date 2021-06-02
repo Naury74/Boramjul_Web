@@ -4,14 +4,22 @@
 
 <mapper namespace="mysqlProduct">
 
-	<!-- 상품 목록 -->
+	<!-- 상품 등록 / 완료 -->
+	<insert id="prod_insert">
+		INSERT INTO product 
+			(prodnum, prodname, price, content, image) 
+		VALUES 
+			((select MAX(p.prodnum)+1  FROM product p), #{prodname}, #{price}, #{content}, #{image})	
+	</insert>
+
+	<!-- 상품 목록 / 완료 -->
 	<select id="prod_list" resultType="BooksDTO">
 		select * from product
 	</select>
 	
-	<!-- 상품 조회(이름) / ?? -->
-	<select id="name_list" resultType="BooksDTO">   
-		select * from product WHERE NAME LIKE "%#{prodname}%"
+	<!-- 상품 조회(이름) / 완료 -->
+	<select id="name_list" resultType="int">   
+		SELECT prodnum FROM product WHERE prodname = #{prodname}
 	</select>
 	
 	<!-- 상품 조회(key) / 완료 -->
@@ -19,28 +27,9 @@
 		select * from product WHERE prodnum = #{prodnum}
 	</select>
    
-	<!-- 상품 등록시 중복 조회 -->
+	<!-- 상품 등록시 중복 조회 / 완료 -->
 	<select id="prodname_list" resultType="int">
 		select COUNT(*) FROM product WHERE prodname = #{prodname}
 	</select>
-   
-	<!-- 상품 등록 -->
-	<insert id="prod_insert">
-		INSERT INTO product 
-			(prodnum, prodname, price, content, image) 
-		VALUES 
-			((select MAX(p.prodnum)+1  FROM product p), #{prodname}, #{price}, #{content}, #{image})	
-	</insert>
-   
-	<!-- 상품 수정 -->
-	<update id="prod_update">
-		update product set 
-		prodname = #{prodname}, price = #{price}, content = #{content}, image = #{image} where prodnum = #{prodnum}
-	</update>
-	
-	<!-- 상품 삭제 -->
-	<delete id="prod_delete">
-		delete from product where prodnum = #{prodnum}
-	</delete>
 
 </mapper>

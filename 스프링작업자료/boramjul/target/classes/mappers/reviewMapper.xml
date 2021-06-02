@@ -8,11 +8,21 @@
 	<select id="prod_review_list" resultType="ReviewDTO">
 		SELECT * FROM review WHERE prodnum = #{prodnum}
 	</select>
+	
+	<!-- 상품별 리뷰 목록2 / 완료 -->
+	<select id="prod_review_list2" resultType="ReviewDTO">
+		SELECT * FROM review WHERE prodname = #{prodname}
+	</select>
 
 	<!-- 회원별 리뷰 목록 / 완료 -->
 	<select id="email_review_list" resultType="ReviewDTO">
 		SELECT * FROM review WHERE email = #{email}
 	</select>
+	
+	<!-- 후기 작성시 적립금추가  / 관리자 -->
+	<update id="reserves_add">
+		UPDATE member SET reserves = reserves+100 WHERE email = #{email}
+	</update>
 
 	<!-- 리뷰 상세 보기 / 완료 -->
 	<!-- renum, rename(대부분 제목클릭) 검색 -> 둘중하나만 매칭되어도 해당 리뷰 조회 -->
@@ -63,22 +73,16 @@
 	<update id="review_count">
 		UPDATE product SET reviewscore = reviewscore +1 WHERE prodnum = #{prodnum}
 	</update>
-	   
-	<!-- 리뷰 점수 - 상품테이블에 추가 - 리뷰 작성 시 실행 / 수정해야함-->
-	<update id="review_score_insert">
-		update product set review = (SELECT TRUNCATE(AVG(grade),0) FROM review WHERE prodnum = #{prodnum})
-	</update>
 	
 	<!-- 리뷰 수 상품 테이블에서 차감 - 리뷰 삭제 시 실행 / 완료-->
 	<update id="review_count_delete">
 		UPDATE product SET reviewscore = reviewscore -1 WHERE prodnum = #{prodnum}
 	</update>
-	   
-	<!-- 리뷰 점수 - 상품테이블에 차감 - 리뷰 삭제 시 실행 / 수정해야함-->
-	<update id="review_score_delete">
-		update product set review = (SELECT TRUNCATE(AVG(grade),0) FROM review WHERE prodnum = #{prodnum})
-	</update>
 	
+	<!-- 리뷰 점수 - 상품테이블에 추가 - 리뷰 작성 시 실행 / 완료 -->
+	<update id="review_score_insert">
+		update product set review = (SELECT TRUNCATE(AVG(grade),0) FROM review WHERE prodnum = #{prodnum}) WHERE prodnum = #{prodnum}
+	</update>   
 	
 
 </mapper>

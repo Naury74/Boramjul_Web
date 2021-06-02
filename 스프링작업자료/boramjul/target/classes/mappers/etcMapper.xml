@@ -3,13 +3,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mysqlEtc">
-	<!-- 공지사항 작성 / 완료 -->
-   <select id="QnA_insert">   
-      INSERT INTO qna 
-      (qnanum, id, name, kind, content) 
-      VALUES 
-      (#{qnanum}, #{id}, #{name}, #{kind}, #{content})
-    </select>
     
     <!-- 공지글 리스트 / 완료 -->
     <select id="QnAlist" resultType="QnADTO">
@@ -18,10 +11,7 @@
 
  	<!--공지글 확인 / 완료 -->
 	<select id="detailProduct" resultType="QnADTO">
-		select * 
-		from 
-			qna
-		where qnanum = #{qnanum}
+		select * from qna where qnanum = #{qnanum}
 	</select>
 
 </mapper>

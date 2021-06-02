@@ -4,25 +4,98 @@
   
   <mapper namespace="mysqlAdmin">
   
+  	<!-- 로그인 / 완료 -->
   	<select id="check_passwd" resultType="int">
 		select count(*) from adminmember where id = #{id} and passwd = #{passwd}
 	</select>
 	
+	<!-- 로그인 / 완료 -->
 	<select id="loginCheck" resultType="String">
-	 	select name 
-	 	from 
-	 		adminmember
-	 	where 
-	 		id = #{id} and passwd = #{passwd}
+	 	select name from adminmember
+	 	where id = #{id} and passwd = #{passwd}
 	 </select>
 	 
+ 	<!-- 회원 삭제 -->
+	<delete id="delete">
+		delete from member where email = #{email}
+	</delete>
+	 
+ 	<!-- qna 추가 / 완료 -->
+	<select id="QnA_insert">   
+		INSERT INTO qna 
+			(qnanum, id, name, kind, content) 
+		VALUES 
+			(#{qnanum}, #{id}, #{name}, #{kind}, #{content})
+	 </select>
+	 
+	 <!-- qna 삭제 -->
 	 <delete id="QnA_delete">
 	 	delete from qna where qnanum = #{qnanum}
 	 </delete>
 	 
+	 <!-- qna 수정 -->
 	 <update id = "QnA_update">
 	 	update qna set name = #{name}, kind = #{kind}, content = #{content} where qnanum = #{qnanum}
 	 </update>
+	 
+	<!-- 주문 내역 삭제 / -->
+	<delete id="detail_delete">   
+	    delete from order_detail where detailnum = #{detailnum}
+	</delete>
+	
+ 	<!-- 주문내역관리자수정 / -->
+	<update id="order_update_admin">
+		UPDATE `order` SET result = #{result}, delivery = #{delivery} WHERE email = #{email} AND detailnum = #{detailnum}
+	</update>
+	
+	<!-- 주문 내역 수정 / -->
+	<update id="detail_update">
+	   update order_detail set 
+	   quantity = #{quantity}, totalprice = #{quantity}*price 
+	   where detailnum = #{detailnum} and cartnum = #{cartnum}
+	</update>
+	
+	<!-- 적립금추가 (이벤트시 적립금 선물 등등) / 관리자 -->
+	<update id="reserves_add">
+		UPDATE member SET reserves = (addreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
+	</update>
+	
+	<!-- 적립금사용 (회원 욕설등 제제로 인한 포인트 차감 등등) / 관리자 -->
+	<update id="reserves_use">
+		UPDATE member SET reserves = (subreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
+	</update>
+	
+	<!-- 회원주문내역조회 / -->
+	<!-- result 값에 따라 1: 배송전, 2: 배송중, 3: 배송완료 -->
+	<update id="order_email_list">
+		SELECT * FROM order_detail WHERE detailnum = (deliveryfunction(#{email},#{result} ))
+	</update>
+	
+	<!-- 상품 목록 / 완료 -->
+	<select id="prod_list" resultType="BooksDTO">
+		select * from product
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="prod_insert">
+		INSERT INTO product 
+			(prodnum, prodname, price, content, image) 
+		VALUES 
+			((select MAX(p.prodnum)+1  FROM product p), #{prodname}, #{price}, #{content}, #{image})	
+	</insert>
+   
+	<!-- 상품 수정 -->
+	<update id="prod_update">
+		update product set 
+		prodname = #{prodname}, price = #{price}, content = #{content}, image = #{image} where prodnum = #{prodnum}
+	</update>
+	
+	<!-- 상품 삭제 -->
+	<delete id="prod_delete">
+		delete from product where prodnum = #{prodnum}
+	</delete>
+	
+
   
   
   </mapper>

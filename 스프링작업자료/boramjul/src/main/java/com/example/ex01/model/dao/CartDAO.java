@@ -5,11 +5,6 @@ import java.util.List;
 import com.example.ex01.model.dto.CartDTO;
 
 public interface CartDAO {
-//	// 상품별 금액
-//	List<CartDTO> cartMoney();
-//	
-//	// 장바구니 추가
-//	void insert(CartDTO dto);
 	
 	// 개별 장바구니 목록
 	List<CartDTO> listCart(String email);
