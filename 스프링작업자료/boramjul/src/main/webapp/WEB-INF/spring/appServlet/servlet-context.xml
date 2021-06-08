@@ -65,7 +65,10 @@
 
         <mvc:interceptor>
              <mvc:mapping path="/mypage/*"/>
-             <mvc:mapping path="/admin/*"/>
+             <mvc:mapping path="/admin/QnA_insert.do"/>
+             <mvc:mapping path="/admin/QnA_edit.do"/>
+             <mvc:mapping path="/admin/QnA_delete.do"/>
+             <mvc:mapping path="/admin/QnA_update.do"/>
              <mvc:mapping path="/books/ReviewsList.do"/>
      
             <beans:ref bean="loginInterceptor"/>

@@ -281,6 +281,7 @@ public class MypageController {
 		
 		System.out.println("list: "+list);
 		
+		if(dto != null) {
 			for(String i : list) {
 				System.out.println("i2:"+i);
 				cartnum = Integer.parseInt(i);
@@ -288,7 +289,7 @@ public class MypageController {
 				cartService.order_result_3(dto);
 			}
 			result=1;
-		
+		}
 		return result;
 	}
 	

@@ -36,6 +36,10 @@ function Count(type, ths){
 
 				<div class="BP-top_right">
 					<h2 id="BP-h2">${booksdto.prodname }</h2>
+					
+					<div class="book_info">
+						<span class="book_author">${booksdto.content }</span>
+					</div>
     
 					<form name="form" id="form1" method="post">
 					<div class="book_details">
@@ -59,7 +63,7 @@ function Count(type, ths){
 							<input type="hidden" name="price" value="${booksdto.price}">
 							<input type="hidden" name="image" value="${booksdto.image}">
 							
-							<button class="cart_btn" type="submit" formaction="${path}/mypage/cart_insert.do?email=${sessionScope.email}">장바구니 추가</button>
+							<button class="cart_btn" type="submit" formaction="${path}/mypage/cart_insert.do?email=${sessionScope.email}">장바구니</button>
 						</div>
 						<div>
 							<button class="buy_btn" type="submit" formaction="${path}/mypage/order_now.do?email=${sessionScope.email}">바로 구매</button>

@@ -130,6 +130,10 @@
 			<div id="like_btn_wrap">
 				<button id="like_btn" onClick="location.href='${path}/books/recom_update.do?renum=${dto.renum }&prodnum=${dto.prodnum }'"><img src="${path }/images/heart.svg" alt="좋아요" class="like-img"><span class="btn__txt">${dto.recom }</span></button>
 			</div><!-- like_btn_wrap -->
+			<c:if test="${sessionScope.email == dto.email}">
+				<button id="edit-btn" type="button" onClick="location.href='${path}/books/Review_update.do?renum=${dto.renum }&prodnum=${dto.prodnum }'">수정</button>
+				<button id="delete-btn" type="button" onClick="location.href='${path}/books/Review_delete.do?renum=${dto.renum }&prodnum=${dto.prodnum }'">삭제</button>
+			</c:if>
 		</div><!-- post-content -->
 		
 		<div class="clearBoth"></div>
@@ -164,10 +168,6 @@
 					<input type="hidden" name="prodnum" value="${dto.prodnum }">
 					<div id="btn-comment-wrap">
 						<button id="list-btn" type="button" onClick="location.href='${path}/books/ReviewsList.do'">목록</button>
-						<c:if test="${sessionScope.email == dto.email}">
-						<button id="list-btn" type="button" onClick="location.href='${path}/books/Review_update.do?renum=${dto.renum }&prodnum=${dto.prodnum }'">수정</button>
-						<button id="list-btn" type="button" onClick="location.href='${path}/books/Review_delete.do?renum=${dto.renum }&prodnum=${dto.prodnum }'">삭제</button>
-						</c:if>
 						<button id="comment-btn" type="submit">댓글 등록</button>
 					</div><!-- btn-comment-wrap -->
 				</div><!-- comment_write_wrap -->

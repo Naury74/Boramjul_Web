@@ -91,6 +91,10 @@ $(function(){
 
 			<div class="BP-top_right">
 				<h2 id="BP-h2">${dto.prodname }</h2>
+				
+				<div class="book_info">
+					<span class="book_author">${dto.content }</span>
+				</div>
    
 				<div class="book_reviews">
 					<span class="book_scores"><img src="" alt="별점" class="star" id="review_img"></span>

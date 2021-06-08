@@ -11,13 +11,14 @@
 	<link rel="stylesheet" href="${path}/css/PagesForBooks.css">
 </head>
 <body>
+<%@ include file="../include/header.jsp" %>
+<div class="dividing_line">
+    <h1 id="BP-h1">공지사항</h1>
+</div>
+
 <div class=wrap>
-	<%@ include file="../include/header.jsp" %>
-    <div class="dividing_line">
-        <h1 id="BP-h1">공지사항</h1>
-    </div>
     <form name="form" method="post" >
-    <div class="review-view-wrapper">
+    <div class="review-view-wrapper" style="margin-bottom:400px;">
         <h3 id="review-h3">${dto.name}</h3>
         <input type="hidden" name="qnanum" value="${dto.qnanum }">
         <div class="clearBoth"></div>
@@ -79,5 +80,6 @@
 	</div>
 	</form>
 </div>   
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

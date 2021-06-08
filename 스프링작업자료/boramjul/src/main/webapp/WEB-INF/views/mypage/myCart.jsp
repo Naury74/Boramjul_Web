@@ -54,7 +54,7 @@
 							if(result == 1){
 								location.href="${path}/mypage/order.do?email=${sessionScope.email}";
 							} else{
-								arlet('구매 실패');
+								alert('구매 실패');
 							}
 						}//ajax
 					})
@@ -83,7 +83,7 @@
 							if(result == 1){
 								location.href="${path}/mypage/myCart.do";
 							} else{
-								arlet('삭제 실패');
+								alert('삭제 실패');
 							}
 
 						}//ajax

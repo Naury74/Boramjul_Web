@@ -99,7 +99,7 @@ ul{
   text-align: left;        
 }
 .cart_btn {
-  font-size: 25px;
+  font-size: 20px;
   font-family: "gmarketM";
   color: aliceblue;
   background: #664B8E;
@@ -108,20 +108,16 @@ ul{
   text-align: center;
   text-decoration: none;
   margin-top: 18px;
-  border-radius: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 65px;
-  padding-left: 65px;
+  border-radius: 15px;
   transition: 0.5s;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: static;
-  width: 320px;
-  height: 60px;
+  width: 175px;
+  height: 45px;
   justify-content: center;                    
 }
 .buy_btn {
-  font-size: 25px;
+  font-size: 20px;
   font-family: "gmarketM";
   color: aliceblue;
   background: #434CA5;
@@ -130,16 +126,30 @@ ul{
   text-align: center;
   text-decoration: none;
   margin-top: 18px;
-  border-radius: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 92px;
-  padding-left: 92px;
+  border-radius: 15px;
   transition: 0.5s;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: static;
-  width: 320px;
-  height: 60px;
+  width: 175px;
+  height: 45px;
+  justify-content: center;
+}
+.detail_btn {
+  font-size: 20px;
+  font-family: "gmarketM";
+  color: aliceblue;
+  background: #1e522d;
+  cursor: pointer;
+  appearance: none;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 18px;
+  border-radius: 15px;
+  transition: 0.5s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: static;
+  width: 175px;
+  height: 45px;
   justify-content: center;
 }
 .btn_searched {
@@ -147,7 +157,7 @@ ul{
   width: 320px;
   margin-left: 0px;
   margin-right: 0px;
-  margin-top:14px;
+  margin-top:40px;
   margin-bottom:14px;
   text-align: center;
   box-sizing: border-box; 
@@ -303,8 +313,8 @@ ul{
   appearance: none;
   text-decoration: none;
   border: none;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   font-size: 26px;
   float: left;
@@ -314,13 +324,14 @@ ul{
   outline: none;
 }
 .num_input{
-  height: 40px;
+  height: 30px;
   text-align: center;
   float: left; 
   border: 0;
 }
 .num{
-  margin-top: 18px;    border: solid 1px rgb(231, 231, 231);
+  margin-top: 18px;    
+  border: solid 1px rgb(231, 231, 231);
   border-right: 0;
   display: inline-block;
 }
@@ -465,6 +476,7 @@ ul{
       margin:20px;
       position: relative;
     }
+    /*
 #search_text{
   width: 550px;
   height: 60px;
@@ -484,7 +496,7 @@ ul{
   vertical-align: middle;
   border: 0;
   box-shadow: none;
-}
+}*/
 .searched_bookimg{
   width: 175px;
   height: 250px;

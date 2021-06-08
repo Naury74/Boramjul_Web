@@ -106,9 +106,9 @@ $(function(){
 				data:{cartnum:cartarr},
 				success: function(result){
 					if(result == 1){
-						document.order.action ="${path}/mypage/completed.do?email=${sessionScope.email}";
+						alert('구매 성공');
 					} else{
-						arlet('구매 실패');
+						alert('구매 실패');
 					}
 				}
 			});//ajax
@@ -212,7 +212,7 @@ $(function(){
             <div class="menu_name_box">
                 <p class="menu_name">Order</p>
             </div>
-			<form method="post" name="order" accept-charset="UTF-8">
+			<form method="post" name="order" accept-charset="UTF-8" action="${path}/mypage/completed.do?email=${sessionScope.email}">
             <div class="order_list">
                 <table>
                     <tr style="height: 40px;">

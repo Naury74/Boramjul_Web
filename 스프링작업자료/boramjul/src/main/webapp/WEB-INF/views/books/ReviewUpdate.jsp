@@ -75,6 +75,10 @@ $(function(){
 	<div class="write-review-wrapper">
 		<div id="searched_reviewing_book">
 			<div class="searched-reviewing-book">   
+				<div class="searched_book_reviews">
+					<img src="${dto.image }" alt="책 이미지" class="searched_bookimg">
+				</div><!-- searched_book_reviews -->
+				
 				<div class="searched_books_info">
 					<div class="searched_books_title">${dto.prodname }</div>
 					
@@ -85,11 +89,6 @@ $(function(){
 					<div class="searched_books_price">판매가:
 						<span class="price-of-searched-books"><fmt:formatNumber value="${dto.price }" pattern="#,###,###"/>원</span>
 					</div><!-- searched_books_price -->
-					
-					<div class="searched_book_reviews">
-						<img src="${dto.image }" alt="책 이미지" class="review-img">
-					</div><!-- searched_book_reviews -->
-					
 				</div><!-- searched_books_info -->
 			</div><!-- searched-reviewing-book -->
 			
@@ -108,7 +107,7 @@ $(function(){
 					<img class="star"  src="${path }/images/star1.svg" style="cursor: pointer;" id="star3">
 					<img class="star"  src="${path }/images/star1.svg" style="cursor: pointer;" id="star4">
 					<img class="star"  src="${path }/images/star1.svg" style="cursor: pointer;" id="star5">
-					/ <input type="text" value="" name="grade" style="border:none; readonly">점
+					/ <input type="text" value="" name="grade" style="border:none; font-size:30px; width:20px;" readonly>점
 				</td>
 			</tr>
 		</table><!-- myrating -->

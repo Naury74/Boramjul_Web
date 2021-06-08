@@ -125,29 +125,7 @@
     </div>
     <div class="List-right">
       <div id="related_books"> 
-        <!-- 책1 -->
-        <div id="searched_books_margin">   
-          <div><img src="../images/rules.jpg" alt="책 이미지" class="searched_bookimg"></div> 
-          <div id="searched_books_info">
-            <div class="searched_books_title">질서 너머</div>
-            <div class="searched_books_info_d">
-              <span class="book_author">조던 B. 피터슨</span><span> 저</span>
-              <span class="divi">|</span>
-              <span class="book_publisher">웅진지식하우스</span>
-              <span class="divi">|</span>
-              <span class="book_author">Beyond Order : 12 More Rules for Life</span>          
-            </div>
-            <div class="searched_books_price">
-              <span class="price-of-searched-books">품절</span>
-            </div>
-            <div class="searched_book_reviews">
-              <div class="searched_book_scores"><img src="../images/별점4h.svg" alt="별점" class="star"> 9.1</div>          
-              <img src="../images/리뷰.svg" alt="리뷰" class="review-img">
-              <span class="number_of_reviews">회원리뷰: 5555건</span>
-            </div>
-          </div>     
-          <div class="clearBoth"></div>
-        </div>  
+
         <!-- 책 2 -->
         <div id="searched_books_margin">   
           <div><img src="../images/rules.jpg" alt="책 이미지" class="searched_bookimg"></div> 
@@ -163,133 +141,28 @@
             <div class="searched_books_price">판매가:
               <span class="price-of-searched-books">14,400원</span>
             </div>
-            <div class="searched_book_reviews">
-              <div class="searched_book_scores"><img src="../images/별점1h.svg" alt="별점" class="star"> 0.8</div>          
-              <img src="../images/리뷰.svg" alt="리뷰" class="review-img">
-              <span class="number_of_reviews">회원리뷰: 4444건</span>
+            <div class="num">
+              <button  class="num_btn" type="button" onclick="Count('m', this);">-</button>
+              <input class="num_input" type="text" name="num" value="0" readonly="readonly" size="1"/>
+              <button class="num_btn" type ="button" onclick="Count('p',this);">+</button> 
             </div>
+
           </div>     
           <div class="btn_searched"> 
-          <div class="num">
-            <button  class="num_btn" type="button" onclick="Count('m', this);">-</button>
-            <input class="num_input" type="text" name="num" value="0" readonly="readonly" size="1"/>
-            <button class="num_btn" type ="button" onclick="Count('p',this);">+</button> 
-          </div>
+
           <div>
-            <button class="cart_btn" type="button" onclick=>장바구니 추가</button>
+            <button class="cart_btn" type="button" onclick=>장바구니</button>
           </div>
           <div>
             <button class="buy_btn" type="button" onclick=>바로 구매</button>
+          </div>
+          <div>
+            <button class="detail_btn" type="button" onclick=>상세보기</button>
           </div>
           </div>
           <div class="clearBoth"></div>
         </div>
-        <!-- 책3 -->
-        <div id="searched_books_margin">   
-          <div><img src="../images/rules.jpg" alt="책 이미지" class="searched_bookimg"></div> 
-          <div id="searched_books_info">
-            <div class="searched_books_title">질서 너머</div>
-            <div class="searched_books_info_d">
-              <span class="book_author">조던 B. 피터슨</span><span> 저</span>
-              <span class="divi">|</span>
-              <span class="book_publisher">웅진지식하우스</span>
-              <span class="divi">|</span>
-              <span class="book_author">Beyond Order : 12 More Rules for Life</span>          
-            </div>
-            <div class="searched_books_price">판매가:
-              <span class="price-of-searched-books">14,400원</span>
-            </div>
-            <div class="searched_book_reviews">
-              <div class="searched_book_scores"><img src="../images/별점3h.svg" alt="별점" class="star"> 7.7</div>          
-              <img src="../images/리뷰.svg" alt="리뷰" class="review-img">
-              <span class="number_of_reviews">회원리뷰: 7777건</span>
-            </div>
-          </div>     
-          <div class="btn_searched"> 
-          <div class="num">
-            <button  class="num_btn" type="button" onclick="Count('m', this);">-</button>
-            <input class="num_input" type="text" name="num" value="0" readonly="readonly" size="1"/>
-            <button class="num_btn" type ="button" onclick="Count('p',this);">+</button> 
-          </div>
-          <div>
-            <button class="cart_btn" type="button" onclick=>장바구니 추가</button>
-          </div>
-          <div>
-            <button class="buy_btn" type="button" onclick=>바로 구매</button>
-          </div>
-          </div>
-          <div class="clearBoth"></div>
-        </div>
-        <!-- 책1 -->
-        <div id="searched_books_margin">   
-          <div><img src="../images/rules.jpg" alt="책 이미지" class="searched_bookimg"></div> 
-          <div id="searched_books_info">
-            <div class="searched_books_title">질서 너머</div>
-            <div class="searched_books_info_d">
-              <span class="book_author">조던 B. 피터슨</span><span> 저</span>
-              <span class="divi">|</span>
-              <span class="book_publisher">웅진지식하우스</span>
-              <span class="divi">|</span>
-              <span class="book_author">Beyond Order : 12 More Rules for Life</span>          
-            </div>
-            <div class="searched_books_price">판매가:
-              <span class="price-of-searched-books">14,400원</span>
-            </div>
-            <div class="searched_book_reviews">
-              <div class="searched_book_scores"><img src="../images/별점4h.svg" alt="별점" class="star"> 9.1</div>          
-              <img src="../images/리뷰.svg" alt="리뷰" class="review-img">
-              <span class="number_of_reviews">회원리뷰: 5555건</span>
-            </div>
-          </div>     
-          <div class="btn_searched"> 
-          <div class="num">
-            <button  class="num_btn" type="button" onclick="Count('m', this);">-</button>
-            <input class="num_input" type="text" name="num" value="0" readonly="readonly" size="1"/>
-            <button class="num_btn" type ="button" onclick="Count('p',this);">+</button> 
-          </div>
-          <div>
-            <button class="cart_btn" type="button" onclick=>장바구니 추가</button>
-          </div>
-          <div>
-            <button class="buy_btn" type="button" onclick=>바로 구매</button>
-          </div>
-          </div>
-          <div class="clearBoth"></div>
-        </div>  
-        <!-- 책 2 -->
-        <div id="searched_books_margin">   
-          <div><img src="../images/rules.jpg" alt="책 이미지" class="searched_bookimg"></div> 
-          <div id="searched_books_info">
-            <div class="searched_books_title">질서 너머</div>
-            <div class="searched_books_info_d">
-              <span class="book_author">조던 B. 피터슨</span><span> 저</span>
-              <span class="divi">|</span>
-              <span class="book_publisher">웅진지식하우스</span>
-              <span class="divi">|</span>
-              <span class="book_author">Beyond Order : 12 More Rules for Life</span>          
-            </div>
-            <div class="searched_books_price">판매가:
-              <span class="price-of-searched-books">14,400원</span>
-            </div>
-            <div class="searched_book_reviews">
-              <div class="searched_book_scores"><img src="../images/별점1h.svg" alt="별점" class="star"> 0.8</div>          
-              <img src="../images/리뷰.svg" alt="리뷰" class="review-img">
-              <span class="number_of_reviews">회원리뷰: 4444건</span>
-            </div>
-          </div>     
-          <div class="btn_searched"> 
-          <div class="num">
-            <button  class="num_btn" type="button" onclick="Count('m', this);">-</button>
-            <input class="num_input" type="text" name="num" value="0" readonly="readonly" size="1"/>
-            <button class="num_btn" type ="button" onclick="Count('p',this);">+</button> 
-          </div>
-          <div>
-            <button class="cart_btn" type="button" onclick=>장바구니 추가</button>
-          </div>
-          <div>
-            <button class="buy_btn" type="button" onclick=>바로 구매</button>
-          </div>
-          </div>
+        
           <div class="clearBoth"></div>
         </div>
         <div class="clearBoth"></div>

@@ -40,7 +40,7 @@ function Count(type, ths){
 					<form name="form" id="form1" method="post">
 					<div id="searched_books_margin">   
 						<div>
-							<img src=${row.image } alt="책 이미지" class="searched_bookimg">
+							<img src="${row.image }" alt="책 이미지" class="searched_bookimg">
 						</div> 
 						
 						<div id="searched_books_info">
@@ -53,32 +53,34 @@ function Count(type, ths){
 							<div class="searched_books_price">
 								<span class="price-of-searched-books"><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원</span>
 							</div><!-- searched_books_price -->
-						</div><!-- searched_books_info -->
-					
-						<div class="btn_searched"> 
+							
 							<div class="num">
 								<button  class="num_btn" type="button" onclick="Count('m', this);">-</button>
 								<input class="num_input" type="text" name="quantity" value="1" readonly="readonly" size="1"/>
 								<button class="num_btn" type ="button" onclick="Count('p',this);">+</button> 
 							</div>
-
+						</div><!-- searched_books_info -->
+					
+						<div class="btn_searched"> 
+							<div>
+								<button class="detail_btn" type="submit" formaction="${path}/books/BookDetail.do">상세 보기</button>
+							</div>
+							
 							<div>
 								<input type="hidden" name="prodname" value="${row.prodname }">
 								<input type="hidden" name="content" value="${row.content }">
 								<input type="hidden" name="price" value="${row.price }">
 								<input type="hidden" name="image" value="${row.image }">
-								
-								<button class="cart_btn" type="submit" formaction="${path}/mypage/cart_insert.do?email=${sessionScope.email}">장바구니 추가</button>
+								<button class="cart_btn" type="submit" formaction="${path}/mypage/cart_insert.do?email=${sessionScope.email}">장바구니</button>
 							</div>
 							
 							<div>
 								<button class="buy_btn" type="submit" formaction="${path}/mypage/order_now.do?email=${sessionScope.email}">바로 구매</button>
-								<button class="buy_btn" type="submit" formaction="${path}/books/BookDetail.do">상세 보기</button>
 							</div>
 						</div><!-- btn_searched -->
-						</form>
 					<div class="clearBoth"></div>     
 				</div><!-- searched_books_margin -->
+				</form>
 				</c:forEach>
 			</div><!-- related_books -->
 		</div><!-- List-right -->

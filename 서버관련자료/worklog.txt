@@ -97,9 +97,9 @@ sudo vi /usr/local/apache-tomcat-8.0.53/conf/server.xml
 port="8080" -> port="80"
 esc를 누른 후 : 를 누르고 wq
 /usr/local/apache-tomcat-8.5.65/bin/ 폴더로 이동 
-./shutdow.sh
+./shutdown.sh
 ./startup.sh
-firewall-cmd --permanent --zone=public --add-port=8080/tcp
+firewall-cmd --permanent --zone=public --add-port=80/tcp
 firewall-cmd --reload
 
 내도메인.한국

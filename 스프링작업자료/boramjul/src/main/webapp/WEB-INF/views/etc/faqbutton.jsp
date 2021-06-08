@@ -38,7 +38,7 @@
                             로 연락주시기 바랍니다.</td>
                     </tr>
                     <tr>
-                        <td><button id="infoBtn" name="infoBtn" type="submit" onclick="location.href='${path }/QnA.do'">뒤로가기</button></td>
+                        <td><button id="infoBtn" name="infoBtn" type="submit" onclick="location.href='${path }/etc/QnA.do'">뒤로가기</button></td>
                     </tr>
                 </table>
             </div><!--info_box-->
