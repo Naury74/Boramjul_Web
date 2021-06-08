@@ -66,7 +66,7 @@ function Count(type, ths){
 					
 					<div class="btn_searched"> 
 						<div>
-							<button class="buy_btn" type="submit" formaction="${path}/books/BookDetail.do">상세 보기</button>
+							<button class="detail_btn" type="submit" formaction="${path}/books/BookDetail.do">상세 보기</button>
 						</div>
 						
 						<div>

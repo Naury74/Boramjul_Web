@@ -69,8 +69,6 @@
 				<span class="divi"> | </span>
 				<span class="review_date"><fmt:formatDate value="${dto.redate }" pattern="yyyy.MM.dd"/></span>
 			</div><!-- review_data_left -->
-			
-			<div id="review_data_right">URL:http://www.boramjul.co.kr/review/146982731</div>
 		</div><!-- review-header -->
 		
 		<div class="clearBoth"></div>

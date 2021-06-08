@@ -51,13 +51,16 @@ function Count(type, ths){
 							<div class="searched_books_price">
 								<span class="price-of-searched-books"><fmt:formatNumber value="${row.price }" pattern="#,###,###"/>원</span>
 							</div>
-						</div><!-- searched_books_info -->
 						
-						<div class="btn_searched"> 
 							<div class="num">
 								<button  class="num_btn" type="button" onclick="Count('m', this);">-</button>
 								<input class="num_input" type="text" name="quantity" value="1" readonly="readonly" size="1"/>
 								<button class="num_btn" type ="button" onclick="Count('p',this);">+</button> 
+							</div>
+						</div><!-- searched_books_info -->
+						<div class="btn_searched"> 
+							<div>
+								<button class="detail_btn" type="submit" formaction="${path}/books/BookDetail.do">상세 보기</button>
 							</div>
 
 							<div>
@@ -71,12 +74,11 @@ function Count(type, ths){
 							
 							<div>
 								<button class="buy_btn" type="submit" formaction="${path}/mypage/order_now.do?email=${sessionScope.email}">바로 구매</button>
-								<button class="buy_btn" type="submit" formaction="${path}/books/BookDetail.do">상세 보기</button>
 							</div>
 						</div><!-- btn_searched -->
-						</form>
 						<div class="clearBoth"></div>     
 					</div><!-- searched_books_margin -->
+					</form>
 				</c:forEach>
 			</div><!-- related_books -->
 		</div><!-- List-right -->
