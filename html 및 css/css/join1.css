@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "logofont";
+    src: url("../fonts/parisienne_regular.ttf");
+}
+@font-face{
+    font-family: "mainfont";
+    src: url("../fonts/GmarketSansMedium.otf");
+}
+@font-face {
+    font-family: "detailfont";
+    src: url("../fonts/GmarketSansLight.otf");
+}
+@font-face{
+    font-family: "btn";
+    src:url("../fonts/GmarketSansMedium.otf")
+}
+
+
+#logohead1{
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    left: 230px;
+    top: 80px;
+
+}
+#logohead2{
+    position: absolute;
+    width: 254px;
+    height: 70px;
+    left: 260px;
+    top: 80px;
+
+    font-family: "logofont";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 56px;
+    text-align: center;
+
+    color: #000000;
+}
+#box1{
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+   
+    border: 1px solid #A1A1A1;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+#name{
+    position: absolute;
+    width: 205px;
+    height: 21px;
+    top: 250px;
+    left: 80px;
+    text-align: center;
+
+    font-family: "detailfont";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+    color: #000000;
+}
+#email{
+    position: absolute;
+    width: 205px;
+    height: 21px;
+    left: 130px;
+    top: 370px;
+    text-align: center;
+
+    font-family: "detailfont";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+    color: #000000;
+}
+#main{
+    position: absolute;
+    width: 350px;
+    height: 21px;
+    top: 180px;
+    text-align: center;
+    left: 180px;
+
+    font-family: "mainfont";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 21px;
+    /* identical to box height */
+    color: #000000;
+}
+#btn{
+    
+    position: absolute;
+    width: 500px;
+    height: 64px;
+    left: 110px;
+    top: 550px;
+    font-family: "btn";
+
+    background: #664B8E;
+    border-radius: 10px;
+}
+#detailbtn{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 110px;
+    top: 300px;
+    font-family: "btn";
+
+    background: #664B8E;
+    border-radius: 10px;
+}
+

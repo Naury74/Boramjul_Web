@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "logofont";
+    src: url("../fonts/parisienne_regular.ttf");
+}
+@font-face{
+    font-family: "mainfont";
+    src: url("../fonts/GmarketSansMedium.otf");
+}
+@font-face {
+    font-family: "detailfont";
+    src: url("../fonts/GmarketSansLight.otf");
+}
+@font-face{
+    font-family: "btn";
+    src:url("../fonts/GmarketSansMedium.otf")
+}
+
+
+#logohead1{
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    left: 280px;
+    top: 80px;
+
+}
+#logohead2{
+    position: absolute;
+    width: 254px;
+    height: 70px;
+    left: 310px;
+    top: 80px;
+
+    font-family: "logofont";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 56px;
+    text-align: center;
+
+    color: #000000;
+}
+#box1{
+    position: absolute;
+    width: 800px;
+    height: 900px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+   
+    border: 1px solid #A1A1A1;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+#main{
+    position: absolute;
+    width: 350px;
+    height: 21px;
+    top: 180px;
+    text-align: center;
+    left: 230px;
+
+    font-family: "mainfont";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 21px;
+    /* identical to box height */
+    color: #000000;
+}
+#btn{
+    
+    position: absolute;
+    width: 500px;
+    height: 64px;
+    left: 160px;
+    top: 800px;
+    font-family: "btn";
+
+    background: #664B8E;
+    border-radius: 10px;
+}
+#box2{
+    position: absolute;
+    left: 100px;
+    top: 260px;
+    overflow:scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width:600px; 
+    height:400px; 
+    padding:10px; 
+    background-color:white;
+    font-family: "detailfont";
+}
+#box2::-webkit-scrollbar{
+    width: 10px; /*스크롤바의 너비*/
+}
+#box2::-webkit-scrollbar-thumb {
+    background-color:#664B8E; /*스크롤바의 색상*/
+}
+
+#box2::-webkit-scrollbar-track {
+    background-color: #bbafcd; /*스크롤바 트랙 색상*/
+    border-radius: 10px;
+}
