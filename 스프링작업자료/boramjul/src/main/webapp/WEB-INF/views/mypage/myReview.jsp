@@ -42,45 +42,45 @@
                         <c:forEach var="row" items="${map.list }">
                     	<c:set var="i" value="${i+1 }"/>
                     	<div id="list">
-                        <tr>
-                            <td>${i }<input type="hidden" value="${row.renum }" name="renum"></td>
-                            <td><img src="${row.image }" alt="책 이미지" class="bookimg"></td>
-                            <td><a href="${path }/books/BookDetail_review.do?prodnum=${row.prodnum}">${row.prodname }</a></td>
-                            <td><a href="${path }/books/review_detail.do?renum=${row.renum}&prodnum=${row.prodnum}">${row.rename }</a> </td>
-                            <c:choose>
-                            <c:when test="${row.grade == '1'}">
-                            <td>
-                           		<img src="${path}/images/star1.svg" alt="별점" id="gradeimg" class="star">
-                           		<input type="text" value="${row.grade }" id="grade" name="grade">
-                            </td>
-                            </c:when>
-                            <c:when test="${row.grade == '2'}">
-                            <td>
-                           		<img src="${path}/images/star2.svg" alt="별점" id="gradeimg" class="star">
-                           		<input type="text" value="${row.grade }" id="grade" name="grade">
-                            </td>
-                            </c:when>
-                             <c:when test="${row.grade == '3'}">
-                            <td>
-                           		<img src="${path}/images/star3.svg" alt="별점" id="gradeimg" class="star">
-                           		<input type="text" value="${row.grade }" id="grade" name="grade">
-                            </td>
-                            </c:when>
-                            <c:when test="${row.grade == '4'}">
-                            <td>
-                           		<img src="${path}/images/star4.svg" alt="별점" id="gradeimg" class="star">
-                           		<input type="text" value="${row.grade }" id="grade" name="grade">
-                            </td>
-                            </c:when>
-                            <c:when test="${row.grade == '5'}">
-                            <td>
-                           		<img src="${path}/images/star5.svg" alt="별점" id="gradeimg" class="star">
-                           		<input type="text" value="${row.grade }" id="grade" name="grade">
-                            </td>
-                            </c:when>
-                            </c:choose>
-                            <td><fmt:formatDate value="${row.redate }" pattern="yyyy.MM.dd"/></td>
-                        </tr>
+	                        <tr>
+	                            <td>${i }<input type="hidden" value="${row.renum }" name="renum"></td>
+	                            <td><img src="${row.image }" alt="책 이미지" class="bookimg"></td>
+	                            <td><a href="${path }/books/BookDetail_review.do?prodnum=${row.prodnum}">${row.prodname }</a></td>
+	                            <td><a href="${path }/books/review_detail.do?renum=${row.renum}&prodnum=${row.prodnum}">${row.rename }</a> </td>
+	                            <c:choose>
+	                            <c:when test="${row.grade == '1'}">
+	                            <td>
+	                           		<img src="${path}/images/star1.svg" alt="별점" id="gradeimg" class="star">
+	                           		<input type="hidden" value="${row.grade }" id="grade" name="grade">
+	                            </td>
+	                            </c:when>
+	                            <c:when test="${row.grade == '2'}">
+	                            <td>
+	                           		<img src="${path}/images/star2.svg" alt="별점" id="gradeimg" class="star">
+	                           		<input type="hidden" value="${row.grade }" id="grade" name="grade">
+	                            </td>
+	                            </c:when>
+	                             <c:when test="${row.grade == '3'}">
+	                            <td>
+	                           		<img src="${path}/images/star3.svg" alt="별점" id="gradeimg" class="star">
+	                           		<input type="hidden" value="${row.grade }" id="grade" name="grade">
+	                            </td>
+	                            </c:when>
+	                            <c:when test="${row.grade == '4'}">
+	                            <td>
+	                           		<img src="${path}/images/star4.svg" alt="별점" id="gradeimg" class="star">
+	                           		<input type="hidden" value="${row.grade }" id="grade" name="grade">
+	                            </td>
+	                            </c:when>
+	                            <c:when test="${row.grade == '5'}">
+	                            <td>
+	                           		<img src="${path}/images/star5.svg" alt="별점" id="gradeimg" class="star">
+	                           		<input type="hidden" value="${row.grade }" id="grade" name="grade">
+	                            </td>
+	                            </c:when>
+	                            </c:choose>
+	                            <td><fmt:formatDate value="${row.redate }" pattern="yyyy.MM.dd"/></td>
+	                        </tr>
                         </div>
                         </c:forEach>
                     </table>

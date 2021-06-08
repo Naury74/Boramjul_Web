@@ -161,7 +161,7 @@
 				<form name="comment" method="post" action="${path }/books/comment_insert.do">
 				<div id="comment_write_wrap">
 					<textarea name="comcontent" id="comment-write-box" maxlength="2000" placeholder="Enter your reply" style="display: block; height: 150px;"></textarea>
-					<input type="hidden" name="email" value="${dto.email}">
+					<input type="hidden" name="email" value="${sessionScope.email}">
 					<input type="hidden" name="renum" value="${dto.renum }">
 					<input type="hidden" name="prodnum" value="${dto.prodnum }">
 					<div id="btn-comment-wrap">
