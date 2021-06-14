@@ -78,7 +78,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("QnA_insert.do")
-	public String insert(@ModelAttribute QnADTO dto, HttpSession session) {
+	public String insert(@ModelAttribute QnADTO dto) {
 		System.out.println("insert  받아온 내용: "+dto);
 
 		adminService.QnA_insert(dto);
@@ -90,21 +90,28 @@ public class AdminController {
 	
 	@RequestMapping("QnA_delete.do")
 	public String QnA_delete(@RequestParam int qnanum) {
+		
 		adminService.QnA_delete(qnanum);
+		
 		return "redirect:/etc/QnA.do";
 	}
 	
 	@RequestMapping("QnA_edit.do" )
 	public ModelAndView QnA_edit(@RequestParam("qnanum")int qnanum, ModelAndView mav) {
+		
 		mav.setViewName("/admin/QnA_edit");
 		mav.addObject("dto", etcService.detailProduct(qnanum));
+		
 		return mav;
 	}
 	
 	@RequestMapping("QnA_update.do")
 	public String QnA_update(@RequestParam("qnanum") int qnanum, QnADTO dto, RedirectAttributes redirect) {
+		
 		adminService.QnA_update(dto);
+		
 		redirect.addAttribute("qnanum", qnanum);
+		
 		return "redirect:/etc/detail.do";
 		
 	}

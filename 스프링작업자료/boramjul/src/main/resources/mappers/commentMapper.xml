@@ -17,17 +17,17 @@
 		SELECT * from `comment` where renum = #{renum} order BY comidx
 	</select>
 	
-	<!-- 회원 별 댓글 조회 / 진행 -->
+	<!-- 회원 별 댓글 조회 / 완료-->
 	<select id="comment_list2" resultType="CommentDTO">
 		SELECT * from `comment` where email = #{email} order BY comidx
 	</select>
 
-	<!-- 댓글 삭제 -->
+	<!-- 댓글 삭제 / 미구현 -->
 	<delete id="comment_delete">
 		delete from `comment` where comidx = #{comidx}
 	</delete>
 
-	<!-- 댓글 수정  -->
+	<!-- 댓글 수정 / 미구현-->
 	<update id="comment_update">
 		UPDATE `comment` SET content = #{content} where comidx = #{comidx}
 	</update>

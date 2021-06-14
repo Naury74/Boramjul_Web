@@ -15,7 +15,7 @@
 	 	where id = #{id} and passwd = #{passwd}
 	 </select>
 	 
- 	<!-- 회원 삭제 -->
+ 	<!-- 회원 삭제 / 미구현-->
 	<delete id="delete">
 		delete from member where email = #{email}
 	</delete>
@@ -28,44 +28,44 @@
 			(#{qnanum}, #{id}, #{name}, #{kind}, #{content})
 	 </select>
 	 
-	 <!-- qna 삭제 -->
+	 <!-- qna 삭제 / 완료 -->
 	 <delete id="QnA_delete">
 	 	delete from qna where qnanum = #{qnanum}
 	 </delete>
 	 
-	 <!-- qna 수정 -->
+	 <!-- qna 수정 / 완료 -->
 	 <update id = "QnA_update">
 	 	update qna set name = #{name}, kind = #{kind}, content = #{content} where qnanum = #{qnanum}
 	 </update>
 	 
-	<!-- 주문 내역 삭제 / -->
+	<!-- 주문 내역 삭제 / 미구현-->
 	<delete id="detail_delete">   
 	    delete from order_detail where detailnum = #{detailnum}
 	</delete>
 	
- 	<!-- 주문내역관리자수정 / -->
+ 	<!-- 주문내역 관리자 수정 / 미구현 -->
 	<update id="order_update_admin">
 		UPDATE `order` SET result = #{result}, delivery = #{delivery} WHERE email = #{email} AND detailnum = #{detailnum}
 	</update>
 	
-	<!-- 주문 내역 수정 / -->
+	<!-- 주문 내역 수정 / 미구현-->
 	<update id="detail_update">
 	   update order_detail set 
 	   quantity = #{quantity}, totalprice = #{quantity}*price 
 	   where detailnum = #{detailnum} and cartnum = #{cartnum}
 	</update>
 	
-	<!-- 적립금추가 (이벤트시 적립금 선물 등등) / 관리자 -->
+	<!-- 적립금추가 (이벤트시 적립금 선물 등등) / 완료 -->
 	<update id="reserves_add">
 		UPDATE member SET reserves = (addreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
 	</update>
 	
-	<!-- 적립금사용 (회원 욕설등 제제로 인한 포인트 차감 등등) / 관리자 -->
+	<!-- 적립금사용 (회원 욕설등 제제로 인한 포인트 차감 등등) / 미구현 -->
 	<update id="reserves_use">
 		UPDATE member SET reserves = (subreservesfunction(#{email}, #{detailnum})) WHERE email = #{email}
 	</update>
 	
-	<!-- 회원주문내역조회 / -->
+	<!-- 회원주문내역조회 / 미구현 -->
 	<!-- result 값에 따라 1: 배송전, 2: 배송중, 3: 배송완료 -->
 	<update id="order_email_list">
 		SELECT * FROM order_detail WHERE detailnum = (deliveryfunction(#{email},#{result} ))
@@ -76,7 +76,7 @@
 		select * from product
 	</select>
 	
-	<!-- 상품 등록 -->
+	<!-- 상품 등록 / 완료-->
 	<insert id="prod_insert">
 		INSERT INTO product 
 			(prodnum, prodname, price, content, image) 
@@ -84,13 +84,13 @@
 			((select MAX(p.prodnum)+1  FROM product p), #{prodname}, #{price}, #{content}, #{image})	
 	</insert>
    
-	<!-- 상품 수정 -->
+	<!-- 상품 수정 / 미구현-->
 	<update id="prod_update">
 		update product set 
 		prodname = #{prodname}, price = #{price}, content = #{content}, image = #{image} where prodnum = #{prodnum}
 	</update>
 	
-	<!-- 상품 삭제 -->
+	<!-- 상품 삭제 / 미구현-->
 	<delete id="prod_delete">
 		delete from product where prodnum = #{prodnum}
 	</delete>

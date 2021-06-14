@@ -44,7 +44,7 @@
      	select * from member where email = #{email}
      </select>
      
-     <!-- 안드로이드 json 전용체크 / 완료? -->
+     <!-- 안드로이드 json 전용체크 / 완료 -->
      <select id="list" resultType="MemberDTO">
         select * from member order by email
   	 </select>

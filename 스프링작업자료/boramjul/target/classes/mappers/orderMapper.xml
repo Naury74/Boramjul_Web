@@ -18,6 +18,14 @@
 		SELECT * FROM `order` WHERE email = #{email} AND detailnum = (select max(detailnum) from `order` where email = #{email})
 	</select>
 	
+	<!-- 상품 등록 / 완료 -->
+	<insert id="prod_insert">
+		INSERT INTO product 
+			(prodnum, prodname, price, image) 
+		VALUES 
+			((select ifnull((select max(prodnum)+1 from product AS p), 1)), #{prodname}, #{price}, #{image})	
+	</insert>
+	
 	<!-- 안드로이드 통신에 사용 -->
 	<!-- order_detail_insert 안드로이드에서 받은 데이터 저장-->
 	<insert id="order_detail_insert">
@@ -38,12 +46,6 @@
 		SELECT count(*) FROM product WHERE prodname = #{prodname}
 	</select>	
 	
-	<!-- 상품 등록 -->
-	<insert id="prod_insert">
-       INSERT INTO product 
-       (prodnum, prodname, price, image) 
-       VALUES 
-       ((select ifnull((select max(prodnum)+1 from product AS p), 1)), #{prodname}, #{price}, #{image})	
-    </insert>
+
 
 </mapper>

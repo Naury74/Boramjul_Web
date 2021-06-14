@@ -14,6 +14,7 @@ public class EtcServiceImpl implements EtcService {
 	
 	@Inject
 	EtcDAO etcDao;
+	
 
 	@Override
 	public List<QnADTO> QnAlist() {

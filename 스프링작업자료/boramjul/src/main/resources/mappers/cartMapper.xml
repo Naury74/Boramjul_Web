@@ -64,18 +64,6 @@
 	<select id="order_list" resultType="cartDTO">
 		SELECT * FROM cart WHERE result = 2 AND email = #{email}
 	</select>
-	
-	<!-- 바로 구매 / 삭제 -->
-	<insert id="order_now">
-		INSERT INTO cart 
-			(email, prodnum, name, image, price, quantity, totalprice, result) 
-		VALUES 
-			(#{email}, #{prodnum},
-			(SELECT `NAME` FROM product WHERE prodnum = #{prodnum}),
-			(SELECT `image` FROM product WHERE prodnum = #{prodnum}),
-			(SELECT `price` FROM product WHERE prodnum = #{prodnum}), #{quantity},
-			#{quantity}*(SELECT price FROM product WHERE prodnum = #{prodnum}), 2)
-	</insert>
 
 	<!-- 구매 페이지 합계 / 완료-->
 	<select id="order_tot" resultType="int">

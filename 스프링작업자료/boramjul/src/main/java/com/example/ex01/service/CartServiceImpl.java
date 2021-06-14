@@ -15,10 +15,6 @@ public class CartServiceImpl implements CartService{
 	@Inject
 	CartDAO cartDao;
 	
-//	@Override
-//	public List<CartDTO> cartMoney() {
-//		return cartDao.cartMoney();
-//	}
 
 	@Override
 	public void cart_insert(CartDTO dto) {

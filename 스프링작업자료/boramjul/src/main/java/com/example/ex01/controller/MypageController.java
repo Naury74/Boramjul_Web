@@ -132,11 +132,10 @@ public class MypageController {
 	}
 	
 	@RequestMapping("cart_insert.do")
-	public String cart_insert(Model model, @ModelAttribute BooksDTO dto, CartDTO dto1, @RequestParam String email, String prodname) {
-		
-		System.out.println("bookdto: "+dto+" / cartdto: "+dto1);
+	public String cart_insert(@ModelAttribute BooksDTO dto, CartDTO dto1, @RequestParam String email, String prodname) {
 
 		boolean result=adminService.prodname_list(prodname);
+		
 		if(result) {
 			cartService.cart_insert(dto1);
 		}else {
@@ -145,23 +144,21 @@ public class MypageController {
 		}
 		
 		return "redirect:/mypage/myCart.do";
-		
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="cart_delete.do", method = RequestMethod.POST)
-	public int cart_delete(HttpSession session, @RequestParam(value="check[]") List<String> checkArr, CartDTO dto) throws Exception {
-		logger.info("장바구니 개별상품 삭제을 요청했습니다.");
+	@RequestMapping("cart_delete.do")
+	public int cart_delete(@RequestParam(value="check[]") List<String> checkArr, CartDTO dto) throws Exception {
 		
 		int cartnum = 0;
 		int result = 0;
-		System.out.println(checkArr);
 		
 		if(dto != null) {
 			for(String i : checkArr) {
-				System.out.println("i:"+i);
 				cartnum = Integer.parseInt(i);
+				
 				dto.setCartnum(cartnum);
+				
 				cartService.cart_delete(dto);
 			}
 			result = 1;
@@ -171,7 +168,6 @@ public class MypageController {
 	
 	@RequestMapping("cart_update.do")
 	public String cart_update(int[] quantity, int[] cartnum , int[] price, HttpSession session ) {
-		logger.info("장바구니 수정을 요청했습니다.");
 		
 		String email = (String) session.getAttribute("email");
 		
@@ -185,29 +181,26 @@ public class MypageController {
 				dto.setPrice(price[i]);
 				dto.setTotalprice(quantity[i]*price[i]);
 				dto.setCart_tot( (quantity[i]*price[i])*i );
-				System.out.println(dto);
 
 				cartService.cart_update(dto);
 			}
 		}
-		
 		return "redirect:/mypage/myCart.do";
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="order_insert.do", method = RequestMethod.POST)
-	public int order_insert(HttpSession session, @RequestParam(value="check[]") List<String> checkArr, CartDTO dto) throws Exception  {
-		logger.info("result값 2로 변경");
+	@RequestMapping("order_insert.do")
+	public int order_insert(@RequestParam(value="check[]") List<String> checkArr, CartDTO dto) throws Exception  {
 		
 		int cartnum = 0;
 		int result = 0;
-		System.out.println("checkArr: "+checkArr);
 		
 		if(dto != null) {
 			for(String i : checkArr) {
-				System.out.println("i:"+i);
 				cartnum = Integer.parseInt(i);
+				
 				dto.setCartnum(cartnum);
+				
 				cartService.order_insert(dto);
 			}
 			result = 1;
@@ -225,7 +218,6 @@ public class MypageController {
 		if (email != null) {
 			
 			List<CartDTO> list = cartService.orderCart(email);
-			logger.info("이메일: "+email);
 			logger.info("주문요청 들어온 목록: "+list.toString());
 			
 			int order_tot = cartService.order_tot(email);
@@ -254,14 +246,12 @@ public class MypageController {
 			if(result) {
 				model.addAttribute("memberdto", memberService.myInfo(email));
 				model.addAttribute("booksdto", dto);
+				
 			}else {
 				adminService.prod_insert(dto);
 				model.addAttribute("memberdto", memberService.myInfo(email));
 				model.addAttribute("booksdto", dto);
 			}
-			
-			System.out.println("바로구매 dto: "+dto);
-
 			return "mypage/order_now";
 			
 		}else { 
@@ -272,20 +262,18 @@ public class MypageController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value="order_result_3.do", method = RequestMethod.POST)
+	@RequestMapping("order_result_3.do")
 	public int order_result_3(@RequestParam(value="cartnum[]") List<String> list, CartDTO dto) throws Exception  {
-		logger.info("result값 3으로 변경요청");
 		
 		int cartnum = 0;
 		int result = 0;
 		
-		System.out.println("list: "+list);
-		
 		if(dto != null) {
 			for(String i : list) {
-				System.out.println("i2:"+i);
 				cartnum = Integer.parseInt(i);
+				
 				dto.setCartnum(cartnum);
+				
 				cartService.order_result_3(dto);
 			}
 			result=1;
@@ -305,21 +293,15 @@ public class MypageController {
          
         // 프로시져 호출
         mysql.selectOne("mysqlCart.order_result_add", param);
- 
-        System.out.println("param: "+param);
         
 		model.addAttribute("dto", orderService.order_detail_list(dto));
-		
-		System.out.println("주문 상세 dto: "+dto);
         
 		return "mypage/completed";
 	}
 	
 	@RequestMapping("now_completed.do")
 	public String now_completed(ModelMap modelmap, Model model, @ModelAttribute OrderDTO dto, OrderDetailDTO dto2 ,@RequestParam String email) throws Exception {
-		System.out.println("now_completed.do");
-		System.out.println("orderdto: "+dto);
-		System.out.println("orderdetaildto: "+dto2);
+
 		orderService.order_insert(dto);
 		orderService.order_detail_insert(dto2);
 		
@@ -338,17 +320,14 @@ public class MypageController {
 	
 	@RequestMapping("myReview.do")
 	public ModelAndView myReview(ModelAndView mav, String email) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		Map<String, Object> map2 = new HashMap<String, Object>();
 		
 		List<ReviewDTO> list = reviewService.email_review_list(email);
-		List<CommentDTO> list2 = commentService.comment_list2(email);
 		
 		map.put("list", list);
-		map2.put("list2", list2);
 		
 		mav.addObject("map", map);
-		mav.addObject("map2", map2);
 		mav.setViewName("mypage/myReview");
 		
 		return mav;
@@ -356,29 +335,40 @@ public class MypageController {
 	
 	@RequestMapping("myInfo.do")
 	public String myInfo(@RequestParam String email, Model model) {
+		
 		model.addAttribute("dto", memberService.myInfo(email));
+		
 		return "mypage/myInfo";
 	}
 	
 	@RequestMapping("membership.do")
 	public String membership(@RequestParam String email, Model model) {
+		
 		model.addAttribute("dto", memberService.myInfo(email));
 		
 		return "mypage/membership";
 	}
 	
+	//아래부터 안드로이드 통신
+	
 	@RequestMapping("requrestorderinfo/{id}")
 	public String androidtest(@PathVariable String id) {
+		
 		safe = id;        
+		
 		return "redirect:/mypage/orderrespondjson.do";
 	}
 	
 	// http://localhost:8090/mypage/requrestorderinfo/hongtest@gmail.com
 	@RequestMapping(value = "orderrespondjson.do", method = {RequestMethod.POST, RequestMethod.GET}, headers="Accept=application/json" )
-	public @ResponseBody String orderrespondjson() {		
+	public @ResponseBody String orderrespondjson() {	
+		
 		logger.info("전송 받은 이메일: "+safe);
+		
 		OrderDTO email = new OrderDTO();
+		
 		email.setEmail(safe);		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		OrderDTO dto = orderService.order_detail_list(email);

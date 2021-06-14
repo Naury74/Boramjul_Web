@@ -24,9 +24,10 @@ public interface OrderDAO {
 	
 	//주문내역 조회
 	List<OrderDetailDTO> detail_list(String email);
+
+	//상품 등록
+	public void prod_insert(OrderDetailDTO dto);
 	
 	public int prod_duplication(String prodname);
-	
-	public void prod_insert(OrderDetailDTO dto);
  
 }

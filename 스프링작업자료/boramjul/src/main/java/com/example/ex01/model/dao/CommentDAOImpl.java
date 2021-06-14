@@ -14,6 +14,7 @@ public class CommentDAOImpl implements CommentDAO {
 	
 	@Inject
 	SqlSession sqlSession;
+	
 
 	@Override
 	public List<CommentDTO> comment_list(int renum) {
@@ -34,7 +35,6 @@ public class CommentDAOImpl implements CommentDAO {
 	public void comscore_update(int renum) {
 		sqlSession.update("mysqlComment.comscore_update", renum);
 	}
-
 
 
 }

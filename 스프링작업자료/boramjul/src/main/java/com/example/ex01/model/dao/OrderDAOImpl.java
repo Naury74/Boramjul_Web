@@ -16,11 +16,11 @@ public class OrderDAOImpl implements OrderDAO {
 	
 	@Inject
 	SqlSession sqlSession;
+	
 
 	@Override
 	public void order_insert(OrderDTO dto) {
 		sqlSession.insert("mysqlOrder.order_insert",dto);
-		
 	}
 
 	@Override
@@ -58,6 +58,5 @@ public class OrderDAOImpl implements OrderDAO {
 		sqlSession.insert("mysqlOrder.prod_insert", dto);
 	}
 	
-
 
 }

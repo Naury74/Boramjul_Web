@@ -14,11 +14,13 @@ public class EtcDAOImpl implements EtcDAO {
 	
 	@Inject
 	SqlSession sqlSession;
+	
 
 	@Override
 	public List<QnADTO> QnAlist() {
 		return sqlSession.selectList("mysqlEtc.QnAlist");
 	}
+	
 	@Override
 	public QnADTO detailProduct(int qnanum) {
 		return sqlSession.selectOne("mysqlEtc.detailProduct", qnanum);

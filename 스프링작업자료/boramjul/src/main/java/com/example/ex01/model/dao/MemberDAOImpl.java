@@ -17,6 +17,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Inject
 	SqlSession sqlSession;
 	
+	
 	@Override
 	public List<MemberDAO> list() {
 		return sqlSession.selectList("mysqlMember.list");
@@ -25,7 +26,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void insert(MemberDTO dto) {
 		sqlSession.insert("mysqlMember.insert",dto);
-
 	}
 
 	@Override
@@ -47,6 +47,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDTO findemail(String phone) {
 		return sqlSession.selectOne("mysqlMember.findemail",phone);
 	}
+	
 	@Override
 	public MemberDTO findpwd(String email) {
 		return sqlSession.selectOne("mysqlMember.findpwd",email);
@@ -54,6 +55,7 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public boolean check_passwd(String email, String passwd) {
+		
 		boolean result = false;
 		
 		// mybatis에 2개이상 인자를 사용 할 수 없으므로 이경우는 dto or Map활용

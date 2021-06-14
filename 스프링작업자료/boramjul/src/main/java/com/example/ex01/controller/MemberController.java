@@ -44,50 +44,62 @@ public class MemberController {
 	String safe;
 	
 	@RequestMapping("join.do")
-	public String join() {	
+	public String join() {
+		
 		return "member/join";
 	}
 	
 	@RequestMapping("join1.do")
-	public String join1() {	
+	public String join1() {
+		
 		return "member/join1";
 	}
 	
 	@RequestMapping("join1_1.do")
-	public String join1_1() {	
+	public String join1_1() {
+		
 		return "member/join1_1";
 	}
 	
 	@RequestMapping("join1_2.do")
-	public String join1_2() {	
+	public String join1_2() {
+		
 		return "member/join1_2";
 	}
 	
 	@RequestMapping("joinok.do")
-	public String joinok(@ModelAttribute MemberDTO dto, Model model) {	
+	public String joinok(@ModelAttribute MemberDTO dto, Model model) {
+		
 		model.addAttribute("dto",dto);
+		
 		return "member/joinok";
 	}
 	
 	@RequestMapping("findemail.do")
-	public String findemail() {	
+	public String findemail() {
+		
 		return "member/findemail";
 	}
 	
 	@RequestMapping("findemailok.do")
     public String findemailok(@RequestParam String phone, Model model) {
+		
         model.addAttribute("dto", memberService.findemail(phone));
+        
         return "member/findemailok";
     }
 	
 	@RequestMapping("findpwd.do")
-	public String findpwd() {	
+	public String findpwd() {
+		
 		return "member/findpwd";
 	}
 	
 	@RequestMapping("findpwdok.do")
-	public String findpwdok(@RequestParam String email, Model model) {	
+	public String findpwdok(@RequestParam String email, Model model) {
+		
 		model.addAttribute("dto", memberService.findpwd(email));
+		
 		return "member/findpwdok";
 	}	
 		
@@ -95,7 +107,6 @@ public class MemberController {
 	public String insert(@ModelAttribute MemberDTO dto) {
 		
 		dto.setSns(1);
-		System.out.println("insert 받아온 내용"+dto);
 		
 		memberService.insert(dto);
 		
@@ -106,11 +117,13 @@ public class MemberController {
 	public String login( Model model) {
 		
 		model.addAttribute("message","nologin");
+		
 		return "member/login";
 	}
 	
 	@RequestMapping("login_check.do")
 	public ModelAndView login_check(	@ModelAttribute MemberDTO dto, HttpSession session, Model model) throws IOException {
+		
 		ModelAndView mav = new ModelAndView();
 		
 		// 로그인 체크 처리하는 서비스 요청(세션값을 생성 시킴)
@@ -175,6 +188,7 @@ public class MemberController {
 		    	
 		    	model.addAttribute("mainnblist",mainnb_list);
 		    }
+		    
 			mav.setViewName("main");
 
 		} else {
@@ -182,6 +196,7 @@ public class MemberController {
 			mav.setViewName("member/login");
 			mav.addObject("message","error");
 		}
+		
 		return mav;
 	}
 	
@@ -248,6 +263,7 @@ public class MemberController {
 	    	model.addAttribute("mainnblist",mainnb_list);
 
 	    }
+	    
 		logger.info("로그아웃");
 
 		return "main";
@@ -255,30 +271,35 @@ public class MemberController {
 
 	@RequestMapping("update.do")
 	public String update(@ModelAttribute MemberDTO dto, Model model) {
-		System.out.println("update 내용: "+dto);
+		
 		memberService.update(dto);
+		
 		model.addAttribute("email",dto.getEmail());
+		
 		return "redirect:/mypage/myInfo.do";
-
 	}
+	
+	//아래부터 안드로이드 통신
 	
 	@RequestMapping("requestmember/{id}")
 	public String androidtest(@PathVariable String id) {
-		safe = id;        
+		
+		safe = id;
+		
 		return "redirect:/member/memberrespondjson.do";
 	}
 	
 	//안드로이드 데이터 통신을 위한 회원정보 리스트 json 형식으로 변환 서블릿 
 	@RequestMapping("memberrespondjson.do")
 	public @ResponseBody MemberDTO memberrespondjson() { //@ResponseBody를 통해 json형식으로 반환
-		System.out.println("회워정보 json 2서블릿");
+		
 		MemberDTO list = memberService.findpwd(safe);
+		
 		return list;
 	}	
 	
 	@RequestMapping(value = "androidsignup.do", method = {RequestMethod.POST, RequestMethod.GET}, headers="Accept=application/json" )	
 	public void androidsignup(@RequestBody String resultSet) throws Exception {//RequestBody이용하여 resultset 변수에 전송된값 저장
-		System.out.println("androidsignup 서블릿");
 		
 		JSONParser jsonParser = new JSONParser();
 		//jsonparser 이용 하여 json 데이터 파싱
@@ -298,10 +319,7 @@ public class MemberController {
 		dto.setBirth(obj.get("birth").toString());
 		dto.setAddress(obj.get("address").toString());
 		
-		System.out.println("전송 받은 값 : "+dto);
-		//MemberrDAO 에 있는 insert 함수 실행
 		memberService.insert(dto);
-		System.out.println("insert 실행됨");
 	}	
 
 	

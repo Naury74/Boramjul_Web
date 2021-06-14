@@ -174,7 +174,6 @@ public class BooksController {
 	public String category(@PathVariable("category") String category, Model model) throws IOException{
 		
 		String URL = "";
-		System.out.println(category);
 		
 		switch (category) {
 		case "Novel":
@@ -313,7 +312,6 @@ public class BooksController {
 	public String search(@ModelAttribute BooksDTO dto, String search,  Model model) throws IOException {
 		
 		model.addAttribute("dto",dto);
-		System.out.println("검색어:"+search);
 
 		String URL = "https://search.kyobobook.co.kr/web/search?vPstrKeyWord=" + search;
 
@@ -428,7 +426,6 @@ public class BooksController {
 	
 	@RequestMapping("Review_update_end.do")
 	public String Review_update_end(@RequestParam("renum") int renum, @RequestParam("prodnum") int prodnum, ReviewDTO dto, RedirectAttributes redirect) {
-		System.out.println("resum: "+renum+", prodnum: "+prodnum);
 		
 		reviewService.review_update(dto);
 		reviewService.review_score_insert(prodnum);

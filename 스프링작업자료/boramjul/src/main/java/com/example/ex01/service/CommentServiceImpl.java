@@ -13,6 +13,7 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Inject
 	CommentDAO commentDao;
+	
 
 	@Override
 	public List<CommentDTO> comment_list(int renum) {
@@ -33,7 +34,6 @@ public class CommentServiceImpl implements CommentService {
 	public void comscore_update(int renum) {
 		commentDao.comscore_update(renum);
 	}
-
 
 
 }

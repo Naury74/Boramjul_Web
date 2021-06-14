@@ -59,29 +59,26 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public String loginCheck(MemberDTO dto, HttpSession session) {
+		
 		String name = memberDao.loginCheck(dto);
 		
 		if (name != null) {
-			
 			//로그인이 성공이면 세션값 생성
 			session.setAttribute("email", dto.getEmail());
 			session.setAttribute("name", name);
-		
-			// logger.info("session : "+session.getAttribute("id"));
-			// logger.info("session : " + session.getAttribute("name"));
-			
 		} 
+		
 		return name;
 	}
 	
 	@Override
 	public void logout(HttpSession session) {
+		
 		session.removeAttribute("email");
 		session.removeAttribute("name");
 		
 		 logger.info("로그아웃 했을 경우 email값 : "+session.getAttribute("email"));
 		 logger.info("로그아웃 했을 경우 name값 : "+session.getAttribute("name"));
-
 	}
 
 	@Override

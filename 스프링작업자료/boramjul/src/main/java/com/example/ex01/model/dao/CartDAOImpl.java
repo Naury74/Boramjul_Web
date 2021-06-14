@@ -15,6 +15,7 @@ public class CartDAOImpl implements CartDAO{
 	@Inject
 	SqlSession sqlSession;
 	
+	
 	@Override
 	public void cart_insert(CartDTO dto) {
 		sqlSession.insert("mysqlCart.cart_insert",dto);
@@ -25,7 +26,6 @@ public class CartDAOImpl implements CartDAO{
 		return sqlSession.selectList("mysqlCart.listCart", email);
 	}
 
-	// 장바구니 개별 상품 삭제
 	@Override
 	public void cart_delete(CartDTO dto) {
 		sqlSession.delete("mysqlCart.cart_delete", dto);
@@ -35,13 +35,12 @@ public class CartDAOImpl implements CartDAO{
 	public void cart_update(CartDTO dto) {
 		sqlSession.update("mysqlCart.cart_update", dto);
 	}	
-	 //장바구니 합계
+
 	@Override
 	public int cart_tot(String email) {
 		return sqlSession.selectOne("mysqlCart.cart_tot",email);
 	}
 	
-	//장바구니 초기화
 	@Override
 	public void cart_reset(CartDTO dto) {
 		sqlSession.update("mysqlCart.cart_reset", dto);

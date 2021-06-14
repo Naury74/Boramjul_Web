@@ -11,11 +11,12 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 @SuppressWarnings("deprecation")
 public class LoginInterceptor extends HandlerInterceptorAdapter {
+	
 	protected final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		
 		HttpSession session = request.getSession();
 		
 		if (session.getAttribute("name")==null) {//request.getContextPath()+
@@ -24,20 +25,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		} else {
 			return true; // 계속 진행
 		}
-		
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+		
 		super.postHandle(request, response, handler, modelAndView);
 	}
 
 	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+		
 		super.afterCompletion(request, response, handler, ex);
 	}
-
 	
 }

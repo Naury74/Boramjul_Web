@@ -23,6 +23,7 @@ import com.example.ex01.service.EtcService;
 @RequestMapping("/etc/*")
 @Controller
 public class EtcController {
+	
 	private static  final Logger logger = LoggerFactory.getLogger(EtcController.class);
 	
 	@Inject
@@ -31,19 +32,19 @@ public class EtcController {
 
 	
 	@RequestMapping("map.do")
-	public String map( Model model) {
+	public String map() {
 
 		return "etc/map";
 	}
 	
 	@RequestMapping("event.do")
-	public String event( Model model) {
+	public String event() {
 
 		return "etc/event";
 	}
 	
 	@RequestMapping("QnA.do")
-	public ModelAndView QnA(HttpSession session, ModelAndView mav, QnADTO dto) {
+	public ModelAndView QnA(ModelAndView mav, QnADTO dto) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -58,7 +59,7 @@ public class EtcController {
 	}
 
 	@RequestMapping("faqbutton.do")
-	public String faqbutton( Model model) {
+	public String faqbutton() {
 
 		return "etc/faqbutton";
 	}
@@ -71,8 +72,6 @@ public class EtcController {
 		
 		return mav;
 	}
-	
-	
 	
 
 }

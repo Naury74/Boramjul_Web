@@ -20,10 +20,15 @@ public interface AdminService {
 	void QnA_delete(int cartnum);
 	void QnA_update(QnADTO dto);
 	
-	//상품 관련
+	//책 번호로 상품 조회
 	public BooksDTO prodnum_list(int prodnum);
+	
+	//상품 목록에 등록되어있는지 책 이름으로 조회
 	public boolean prodname_list(String prodname);
+	
+	//상품 목록에 추가
 	public void prod_insert(BooksDTO dto);
-	public void order_now(CartDTO dto);
+	
+	//책 이름으로 책 번호 조회
 	public int name_list(String prodname);
 }

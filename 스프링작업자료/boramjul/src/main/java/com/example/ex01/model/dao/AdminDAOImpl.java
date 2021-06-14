@@ -18,9 +18,11 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	@Inject
 	SqlSession sqlSession;
+	
 
 	@Override
 	public boolean check_passwd(String id, String passwd) {
+		
 		boolean result = false;
 		
 		// mybatis에 2개이상 인자를 사용 할 수 없으므로 이경우는 dto or Map활용
@@ -29,6 +31,7 @@ public class AdminDAOImpl implements AdminDAO {
 		map.put("passwd", passwd);
 		
 		int count = sqlSession.selectOne("mysqlAdmin.check_passwd", map);
+		
 		// 1이면 true, 0이면 false	
 		if (count == 1) 
 			result =  true;
@@ -62,12 +65,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public void order_now(CartDTO dto) {
-		sqlSession.insert("mysqlCart.order_now", dto);
-	}
-
-	@Override
 	public boolean prodname_list(String prodname) {
+		
 		boolean result = false;
 		
 		int count = sqlSession.selectOne("mysqlProduct.prodname_list", prodname);

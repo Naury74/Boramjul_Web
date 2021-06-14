@@ -163,22 +163,25 @@ $(function(){
 	$('input[type="checkbox"][id="pointChk"]').on('click', function(){
 		console.log('포인트 전체 차감');
 		var chkValue = $('input[type=checkbox][id="pointChk"]:checked').val();
-		var saleprice = $('input[name="saleprice"]').val();
-		var mypoint = '${memberdto.reserves }';
+		var saleprice = $('input[name="saleprice"]').val(); //할인받는 금액
+		var mypoint = '${memberdto.reserves }'; //나의 원래 포인트
+		var mid_price = order_tot-saleprice;
 		
 		if(chkValue){
-			if(mypoint>saleprice){
-				mypoint = payprice;
-				payprice = order_tot-saleprice-mypoint;
+			if(mypoint>mid_price){
+				mypoint = mid_price;
+			
+				$('input[name="usereserves"]').val(mypoint);
+				$('input[name="payprice"]').val(0);
+			}else if(mypoint<mid_price){
+				payprice = mid_price-mypoint;
+				$('input[name="usereserves"]').val(mypoint);
+				$('input[name="payprice"]').val(payprice);
 			}
-			payprice = order_tot-saleprice-mypoint;
-			$('input[name="usereserves"]').val(mypoint);
-			$('input[name="payprice"]').val(payprice);
 		}else{
-			payprice = order_tot-saleprice-point;
-			$('input[name="usereserves"]').val('0');
-			$('input[name="payprice"]').val(payprice);
-		}
+			$('input[name="usereserves"]').val(0);
+			$('input[name="payprice"]').val(mid_price);
+		};//if
 	});
 
 	

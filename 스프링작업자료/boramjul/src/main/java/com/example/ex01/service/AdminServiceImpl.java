@@ -21,6 +21,7 @@ public class AdminServiceImpl implements AdminService{
 	@Inject
 	AdminDAO adminDao;
 	
+	
 	@Override
 	public boolean check_passwd(String id, String passwd) {
 		return adminDao.check_passwd(id, passwd);
@@ -28,6 +29,7 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public String loginCheck(AdminDTO dto, HttpSession session) {
+		
 		String name = adminDao.loginCheck(dto);
 		
 		if (name != null) {
@@ -42,6 +44,7 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public void logout(HttpSession session) {
+		
 		session.removeAttribute("id");
 		session.removeAttribute("name");
 		
@@ -68,11 +71,6 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void prod_insert(BooksDTO dto) {
 		adminDao.prod_insert(dto);
-	}
-
-	@Override
-	public void order_now(CartDTO dto) {
-		adminDao.order_now(dto);
 	}
 
 	@Override

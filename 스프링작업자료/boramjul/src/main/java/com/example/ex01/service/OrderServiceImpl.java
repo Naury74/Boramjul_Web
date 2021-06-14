@@ -16,11 +16,11 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Inject
 	OrderDAO orderDao;
+	
 
 	@Override
 	public void order_insert(OrderDTO dto) {
 		orderDao.order_insert(dto);
-		
 	}
 
 	@Override
@@ -57,7 +57,6 @@ public class OrderServiceImpl implements OrderService {
 	public void prod_insert(OrderDetailDTO dto) {
 		orderDao.prod_insert(dto);
 	}
-	
 
 
 }
